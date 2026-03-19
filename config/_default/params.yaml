@@ -1,13 +1,12 @@
 hugoblox:
   schema: "2.0"
   identity:
-    name: Dr. Yasutomi Tatetsu (Associate Professor)
+    name: Assoc. Prof. Yasutomi Tatetsu
     type: person
     tagline: Material Research, EdTech
     description: |-
-      Dr. Yasutomi Tatetsu is a senior associate professor at Meio University, Okinawa, Japan.
-      -Google for Education Certified Innovator
-      -Apple Distinguished Educator
+      Yasutomi Tatetsu is a senior associate professor at Meio University, Okinawa, Japan. -Google for Education Certified Innovator -Apple Distinguished Educator
+    organization: Meio University
   theme:
     mode: system
     pack: marine
