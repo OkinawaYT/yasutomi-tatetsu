@@ -1,0 +1,26 @@
+{
+  "surveyTitle": "NotebookLM App - Research Survey v1",
+  "apiEndpoint": "https://script.google.com/macros/s/AKfycbwS8fGIdcVzAiBEvKTRg82-mxkp56weGK7HkaBV6v63rtscJHSHVyeNSsQJW6HTiYDo8A/exec",
+  "description": "AIと人間のインタラクションに関する調査です。",
+  "questions": [
+    {
+      "id": "sus_score",
+      "type": "range",
+      "label": "1. アプリの使い勝手はいかがですか？",
+      "min": 1, "max": 5, "step": 1,
+      "help": "1: 非常に悪い 〜 5: 非常に良い"
+    },
+    {
+      "id": "task_value",
+      "type": "textarea",
+      "label": "2. 今回の作業で最も価値を感じた点は？",
+      "placeholder": "例：文献の要約、スライド構成の自動化など"
+    },
+    {
+      "id": "ai_role",
+      "type": "radio",
+      "label": "3. あなたにとってこのアプリはどのような存在ですか？",
+      "options": ["秘書・アシスタント", "共創パートナー", "単なるツール", "その他"]
+    }
+  ]
+}
