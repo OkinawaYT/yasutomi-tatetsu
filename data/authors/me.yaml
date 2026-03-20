@@ -5,22 +5,16 @@ name:
   display: "Dr. Yasutomi Tatetsu (Associate Professor)"
   given: "Yasutomi"
   family: "Tatetsu"
-  alternate: ""
+  alternate: "立津 慶幸"
   pronunciation: ""
   pronouns: "he/him"
 postnominals:
   - "PhD"
   - "MIEEE"
 status:
-  icon: "☕️"
+  icon: "👨‍💻"
 role: "Senior Associate Professor at Meio University"
-bio: "Yasutomi Tatetsu is a Senior Associate Professor at Meio University, specializing in material science research. With a PhD in Physics from the University of the Ryukyus, Yasutomi has made significant contributions to the field of artificial intelligence, particularly in the areas of machine learning and natural language processing. His work
-
-  has been published in top conferences like NeurIPS and ICML, with over
-
-  10,000 citations. Yasutomi is passionate about pushing the boundaries of AI
-
-  while ensuring ethical development.\n"
+bio: "Yasutomi Tatetsu is a Senior Associate Professor at Meio University, specializing in material science research. "
 affiliations:
   - name: "Meio University"
     url: "https://www.meio-u.ac.jp/"
@@ -104,3 +98,5 @@ awards:
     date: "2022-12-01"
     summary: "Awarded for groundbreaking work on efficient training of large models."
     icon: "hero/trophy"
+ids:
+  orcid: "0000-0002-8977-0487"
