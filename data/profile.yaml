@@ -1,14 +1,16 @@
+brand: "Tatetsu Lab."
+
 name:
   en: Yasutomi Tatetsu
   ja: 立津 慶幸
 
 role:
   en: Senior Associate Professor
-  ja: 准教授
+  ja: 上級准教授
 
 organization:
   en: Meio University, Okinawa, Japan
-  ja: 名桜大学（沖縄県）
+  ja: 公立大学法人 名桜大学 (沖縄県)
 
 bio:
   en: >
@@ -36,8 +38,8 @@ certifications:
     url: https://www.apple.com/education/k12/apple-distinguished-educator/
 
 links:
-  researchmap: https://researchmap.jp/yasutomi_tatetsu
-  github: https://github.com/OkinawaYT
-  email: mailto:y.tatetsu@meio-u.ac.jp
-
-cv: uploads/resume.pdf
+  github:         https://github.com/OkinawaYT
+  email:          mailto:y.tatetsu@meio-u.ac.jp
+  orcid:          https://orcid.org/0000-0002-8977-0487
+  linkedin:       https://www.linkedin.com/in/yasutomi-tatetsu-24245796
+  google-scholar: https://scholar.google.com/citations?user=XGSSmUgAAAAJ&hl=en
