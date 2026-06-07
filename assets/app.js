@@ -225,54 +225,50 @@ function renderPublications(data) {
     </a>`;
 }
 
-// ── Talks（地図 + テーブル）────────────────────────────────────────────────
-let _talkMap = null; // Leaflet map instance
+// ── Talks 地図（座標は JSON に事前格納済み）──────────────────────────────
+let _talkMap = null;
 
-async function geocodeLocation(place) {
-  if (!place) return null;
-  try {
-    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(place)}&format=json&limit=1&accept-language=${lang},en`;
-    const r = await fetch(url, { headers: { 'User-Agent': 'TatetsuLab/1.0' } });
-    const data = await r.json();
-    return data[0] ? { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon), name: data[0].display_name } : null;
-  } catch { return null; }
-}
-
-async function renderTalksMap(pres) {
+function renderTalksMap(pres) {
   const mapEl = document.getElementById('talks-map');
   if (!mapEl || !window.L) return;
-
-  // 地図初期化（再初期化防止）
   if (_talkMap) { _talkMap.remove(); _talkMap = null; }
-  _talkMap = L.map('talks-map').setView([35.68, 139.69], 4); // 日本中心
+
+  // 座標付きの発表のみ絞り込み
+  const withCoords = pres.filter(p => p.lat && p.lon);
+  if (!withCoords.length) { mapEl.style.display = 'none'; return; }
+
+  // 場所でグループ化
+  const locMap = {};
+  withCoords.forEach(p => {
+    const key = `${p.lat},${p.lon}`;
+    if (!locMap[key]) locMap[key] = { lat: p.lat, lon: p.lon, name: p.location, items: [] };
+    locMap[key].items.push(p);
+  });
+
+  // 全座標の中心を計算して地図の初期表示を決定
+  const lats = Object.values(locMap).map(v => v.lat);
+  const lons = Object.values(locMap).map(v => v.lon);
+  const centerLat = (Math.min(...lats) + Math.max(...lats)) / 2;
+  const centerLon = (Math.min(...lons) + Math.max(...lons)) / 2;
+
+  _talkMap = L.map('talks-map').setView([centerLat, centerLon], 3);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 18,
   }).addTo(_talkMap);
 
-  // 場所でグループ化（ユニーク）
-  const locMap = {};
-  pres.forEach(p => {
-    if (!p.location) return;
-    if (!locMap[p.location]) locMap[p.location] = [];
-    locMap[p.location].push(p);
-  });
-
-  const locations = Object.keys(locMap);
-  for (let i = 0; i < locations.length; i++) {
-    const loc = locations[i];
-    // Nominatim rate limit: 1 req/s
-    if (i > 0) await new Promise(r => setTimeout(r, 1100));
-    const coords = await geocodeLocation(loc);
-    if (!coords) continue;
-    const items = locMap[loc];
-    const popupHtml = `<strong>${esc(loc)}</strong><br>${items.length} ${lang === 'ja' ? '件の発表' : 'presentation(s)'}`;
-    L.circleMarker([coords.lat, coords.lon], {
+  Object.values(locMap).forEach(({ lat, lon, name, items }) => {
+    const popup = `<strong>${esc(name)}</strong><br>${items.length} ${lang === 'ja' ? '件の発表' : 'presentation(s)'}`;
+    L.circleMarker([lat, lon], {
       radius: 6 + Math.min(items.length, 10),
       fillColor: '#2563eb', color: '#fff',
       weight: 2, opacity: 1, fillOpacity: 0.8,
-    }).bindPopup(popupHtml).addTo(_talkMap);
-  }
+    }).bindPopup(popup).addTo(_talkMap);
+  });
+
+  // 全マーカーが見えるようにズーム調整
+  const bounds = L.latLngBounds(Object.values(locMap).map(v => [v.lat, v.lon]));
+  _talkMap.fitBounds(bounds, { padding: [20, 20] });
 }
 
 function renderTalks(presData, mediaData) {
@@ -466,6 +462,25 @@ function renderProjects(data) {
     </div>`;
 }
 
+// ── Geocoding（Nominatim）────────────────────────────────────────────────────
+const _geoCache = {};
+async function geocodeLocation(name) {
+  if (_geoCache[name] !== undefined) return _geoCache[name];
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(name)}&format=json&limit=1`;
+    const r = await fetch(url, { headers: { 'Accept-Language': 'en' } });
+    const data = await r.json();
+    const result = (data && data[0])
+      ? { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) }
+      : null;
+    _geoCache[name] = result;
+    return result;
+  } catch {
+    _geoCache[name] = null;
+    return null;
+  }
+}
+
 // ── Activities（地図 + テーブル）────────────────────────────────────────────
 let _actMap = null;
 
@@ -555,7 +570,7 @@ function renderOthers(data) {
     <div class="card-grid">
       ${items.map(o => {
         const title = (lang === 'ja' && o.title_ja) ? o.title_ja : o.title;
-        const desc  = (lang === 'ja' && o.description_ja) ? o.description_ja : (o.description || '');
+//        const desc  = (lang === 'ja' && o.description_ja) ? o.description_ja : (o.description || '');
         return `<div class="exp-card"><div class="exp-card-title">${esc(title)}</div>${desc ? `<div class="exp-card-sub">${esc(desc)}</div>` : ''}<div class="exp-card-date">${dateYM(o.date)}</div></div>`;
       }).join('')}
     </div>`;
@@ -740,6 +755,17 @@ async function main() {
   const matsData = materialsYaml ? jsyaml.load(materialsYaml) : {};
 
   document.documentElement.lang = lang;
+
+  // title / meta を profile.yaml から動的に設定
+  if (profile) {
+    const brand = profile.brand || t(profile.name);
+    document.title = brand;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content',
+        `${t(profile.name)} — ${t(profile.role)}, ${t(profile.organization)}`);
+    }
+  }
 
   renderNav(profile);
   renderBio(profile);

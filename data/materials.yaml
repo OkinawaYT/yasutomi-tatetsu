@@ -16,7 +16,7 @@ items:
         いいね・共有・リクエスト機能付き。
     icon: "🤖"
     url: academic-ai-prompts/
-    github: https://github.com/OkinawaYT/academic-ai-prompts
+#    github: https://github.com/OkinawaYT/academic-ai-prompts
     draft: false
 
   - title:
@@ -42,4 +42,4 @@ items:
       ja: Google Apps Script連携の匿名フィードバック収集フォーム。
     icon: "📝"
     url: feedback/
-    draft: false
+    draft: true

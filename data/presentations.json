@@ -8,6 +8,8 @@
       "date": "2026-04-30",
       "event": "The 24th Annual Meeting of the Society of Nano Science and Technology",
       "location": "Yamaguchi University",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Dingchen WEN, Kenshi MATSUMOTO, Yasutomi TATETSU, Toshiharu TERANISHI"
     },
@@ -18,6 +20,8 @@
       "date": "2026-04-26",
       "event": "九州・沖縄・山口磁気セミナー",
       "location": "波照間島(沖縄県)",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸"
     },
@@ -28,6 +32,8 @@
       "date": "2025-11-26",
       "event": "The Korean Magnetic Society 2025 Winter Conference",
       "location": "Busan, Korea",
+      "lat": null,
+      "lon": null,
       "type": "invited_oral_presentation",
       "authors": "Yasutomi Tatetsu"
     },
@@ -38,6 +44,8 @@
       "date": "2025-11-07",
       "event": null,
       "location": "虎ノ門ヒルズフォーラム",
+      "lat": null,
+      "lon": null,
       "type": "nominated_symposium",
       "authors": null
     },
@@ -48,6 +56,8 @@
       "date": "2025-10-28",
       "event": "The 70th Annual Conference on Magnetism and Magnetic Materials",
       "location": "Palm Beach, Florida",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu"
     },
@@ -58,6 +68,8 @@
       "date": "2025-10-20",
       "event": "12th International Conference on Fine Particle Magnetism",
       "location": "Bariloche, Patagonia",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Kenshi Matsumoto, Ryota Sato, Toshiharu Teranishi"
     },
@@ -68,6 +80,8 @@
       "date": "2025-09-11",
       "event": "沖縄県立看護大学FD研修会",
       "location": "オンライン",
+      "lat": null,
+      "lon": null,
       "type": "public_discourse",
       "authors": "立津 慶幸"
     },
@@ -78,6 +92,8 @@
       "date": "2025-08-09",
       "event": "京都府立医科大学 令和７年度夏季課題集中検討会",
       "location": "京都府立医科大学",
+      "lat": null,
+      "lon": null,
       "type": "keynote_oral_presentation",
       "authors": "立津 慶幸"
     },
@@ -88,6 +104,8 @@
       "date": "2025-07-01",
       "event": "ISTE LIVE 25",
       "location": "サンアントニオ",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu"
     },
@@ -98,6 +116,8 @@
       "date": "2025-06-11",
       "event": "Interop25",
       "location": "幕張メッセ",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 有賀 啓之"
     },
@@ -108,6 +128,8 @@
       "date": "2025-05-23",
       "event": "北海道ビジネス ITフェス'25",
       "location": "札幌",
+      "lat": null,
+      "lon": null,
       "type": "public_discourse",
       "authors": "立津 慶幸"
     },
@@ -118,6 +140,8 @@
       "date": "2025-03-19",
       "event": "「Google Cloud と目指す、大学 DX の未来」",
       "location": "オンライン",
+      "lat": null,
+      "lon": null,
       "type": "public_discourse",
       "authors": "立津 慶幸"
     },
@@ -128,6 +152,8 @@
       "date": "2024-10-18",
       "event": "沖縄ビジネスIT フェス'24",
       "location": "沖縄",
+      "lat": null,
+      "lon": null,
       "type": "public_discourse",
       "authors": "立津 慶幸"
     },
@@ -138,6 +164,8 @@
       "date": "2024-09-25",
       "event": "第48回日本磁気学会学術講演会",
       "location": "秋田大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Kenshi Matsumoto, Ryota Sato, Toshiharu Teranishi"
     },
@@ -148,6 +176,8 @@
       "date": "2024-09-19",
       "event": "日本金属学会2024年秋季講演(第175回)大会",
       "location": "大阪大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Kenshi Matsumoto, Ryota Sato, Toshiharu Teranishi"
     },
@@ -158,6 +188,8 @@
       "date": "2024-09-16",
       "event": "The 85th JSAP Autumn Meeting2024",
       "location": "TOKI MESSE",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Kenshi Matsumoto, Ryota Sato, Yasutomi Tatetsu, Masaki Kudo, Toshiharu Teranishi"
     },
@@ -168,6 +200,8 @@
       "date": "2024-08-28",
       "event": "日本電気学会産業応用部門大会",
       "location": "水戸",
+      "lat": null,
+      "lon": null,
       "type": "nominated_symposium",
       "authors": "立津 慶幸"
     },
@@ -178,6 +212,8 @@
       "date": "2024-07-05",
       "event": "International Conference on Magnetism 2024",
       "location": "ボローニャ",
+      "lat": null,
+      "lon": null,
       "type": "invited_oral_presentation",
       "authors": "Yasutomi Tatetsu, Kenshi Matsumoto, Ryota Sato, Toshiharu Teranishi"
     },
@@ -188,6 +224,8 @@
       "date": "2024-05-25",
       "event": "フロンティアーズカンファレンス2024",
       "location": "北海道",
+      "lat": null,
+      "lon": null,
       "type": "invited_oral_presentation",
       "authors": "立津 慶幸"
     },
@@ -198,6 +236,8 @@
       "date": "2024-05-22",
       "event": "ナノ学会第22回大会",
       "location": "東北大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "松本 憲志, 佐藤 良太, 立津 慶幸, 工藤 昌輝, 寺西 利治"
     },
@@ -208,6 +248,8 @@
       "date": "2023-11-08",
       "event": "Claris Engage Japan 2023",
       "location": "東京",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 有賀 啓之"
     },
@@ -218,6 +260,8 @@
       "date": "2023-11-08",
       "event": "Claris Engage Japan 2023",
       "location": "東京",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 有賀 啓之"
     },
@@ -228,6 +272,8 @@
       "date": "2023-08-30",
       "event": "Teach with Chrome 2023〜クラウド時代を生き抜くための Google for Education 講座〜",
       "location": "オンライン",
+      "lat": null,
+      "lon": null,
       "type": "invited_oral_presentation",
       "authors": "立津 慶幸"
     },
@@ -238,6 +284,8 @@
       "date": "2023-08-22",
       "event": "第18回日本リメディアル教育学会全国大会",
       "location": "江戸川大学",
+      "lat": null,
+      "lon": null,
       "type": "invited_oral_presentation",
       "authors": "立津 慶幸"
     },
@@ -248,6 +296,8 @@
       "date": "2023-07-18",
       "event": "沖縄県データ利活用ワークショップ",
       "location": "沖縄市青少年センター",
+      "lat": null,
+      "lon": null,
       "type": "invited_oral_presentation",
       "authors": "Yasutomi Tatetsu"
     },
@@ -258,6 +308,8 @@
       "date": "2023-06-15",
       "event": "EDIX関西2023",
       "location": "インテックス大阪",
+      "lat": null,
+      "lon": null,
       "type": "invited_oral_presentation",
       "authors": "Yasutomi Tatetsu"
     },
@@ -268,6 +320,8 @@
       "date": "2023-04-11",
       "event": "Google Workspace Japan Users Group",
       "location": "オンライン",
+      "lat": null,
+      "lon": null,
       "type": "others",
       "authors": "Yasutomi Tatetsu"
     },
@@ -278,6 +332,8 @@
       "date": "2022-10-01",
       "event": "第60回全国大学保健管理研究集会",
       "location": "神奈川",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "大城 真理子, 古波津 香織, 永嶺 弓子, 壬生 えみり, 垣花 啓太, 中里 収 et al."
     },
@@ -288,6 +344,8 @@
       "date": "2022-08-17",
       "event": "教学IRスタートアッププログラム",
       "location": "オンライン",
+      "lat": null,
+      "lon": null,
       "type": "public_discourse",
       "authors": "Yasutomi Tatetsu"
     },
@@ -298,6 +356,8 @@
       "date": "2022-07-29",
       "event": "教学IRスタートアッププログラム",
       "location": "オンライン",
+      "lat": null,
+      "lon": null,
       "type": "invited_oral_presentation",
       "authors": "Yasutomi Tatetsu"
     },
@@ -308,6 +368,8 @@
       "date": "2021-12-08",
       "event": "Google Workspace Japan Users Group",
       "location": "オンライン",
+      "lat": null,
+      "lon": null,
       "type": "others",
       "authors": "立津 慶幸"
     },
@@ -318,6 +380,8 @@
       "date": "2021-07-24",
       "event": "第44回若い経営者の主張発表県大会",
       "location": "沖縄",
+      "lat": null,
+      "lon": null,
       "type": "invited_oral_presentation",
       "authors": "Yasutomi Tatetsu"
     },
@@ -328,6 +392,8 @@
       "date": "2021-05-22",
       "event": "ナノ学会第19回大会",
       "location": "名古屋工業大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "松本 憲志, 佐藤 良太, 立津 慶幸, 寺西 利治"
     },
@@ -338,6 +404,8 @@
       "date": "2021-05-14",
       "event": "大学の DX（デジタルトランスフォーメーション）をスマートに実現する Google Workspace for Education ご紹介セミナー",
       "location": "オンライン",
+      "lat": null,
+      "lon": null,
       "type": "invited_oral_presentation",
       "authors": "Yasutomi Tatetsu"
     },
@@ -348,6 +416,8 @@
       "date": "2020-12-17",
       "event": "Google Workspace Japan Users Group",
       "location": "オンライン",
+      "lat": null,
+      "lon": null,
       "type": "public_discourse",
       "authors": "Yasutomi Tatetsu"
     },
@@ -358,6 +428,8 @@
       "date": "2020-12-01",
       "event": "第20回琉球物性研究会",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "土田 龍太郎, 山川 結衣, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -368,6 +440,8 @@
       "date": "2020-11-01",
       "event": "第58回全国大学保健管理研究集会",
       "location": "オンライン",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "大城真理子, 長嶺育史, 島袋ちあき, 新里利香, 立津慶幸"
     },
@@ -378,6 +452,8 @@
       "date": "2020-09-01",
       "event": "日本物理学会2020年秋季大会",
       "location": "オンライン",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "土田 龍太郎, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -388,6 +464,8 @@
       "date": "2020-03-22",
       "event": "The 3rd Univ. Ryukyus International Symposium of Theoretical and Computational Science (RIS-TCS 2020) -Frontier of Physics and Chemistry-",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "R. Tsuchida, Y. Yamakawa, Y. Tatetsu, T. Maehira"
     },
@@ -398,6 +476,8 @@
       "date": "2020-03-22",
       "event": "日本化学会第100春季年会",
       "location": "東京理科大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "金子 諒太, 佐藤 良太, 立津 慶幸, 寺西 利治"
     },
@@ -408,6 +488,8 @@
       "date": "2020-03-17",
       "event": "日本物理学会第75回年次大会",
       "location": "名古屋大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "土田 龍太郎, 山川 結衣, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -418,6 +500,8 @@
       "date": "2020-03-01",
       "event": "2020年春季(第166回)日本金属学会",
       "location": "東工大",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "塩沢 知春, 相内 優太, 立津 慶幸, 合田 義弘"
     },
@@ -428,6 +512,8 @@
       "date": "2020-03-01",
       "event": "2020年春季(第166回)日本金属学会",
       "location": "東工大",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "相内 優太, 立津 慶幸, 寺澤 麻子, 合田 義弘"
     },
@@ -438,6 +524,8 @@
       "date": "2020-03-01",
       "event": "OISTセミナー",
       "location": "OIST",
+      "lat": null,
+      "lon": null,
       "type": "invited_oral_presentation",
       "authors": "立津 慶幸"
     },
@@ -448,6 +536,8 @@
       "date": "2019-11-06",
       "event": "OKINAWA COLLOIDS 2019",
       "location": "万国津梁館",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Kenshi Matsumoto, Ryota Sato, Yasutomi Tatetsu, Toshiharu Teranishi"
     },
@@ -458,6 +548,8 @@
       "date": "2019-11-01",
       "event": "第19回琉球大学物性研究会",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 松本 憲志, 佐藤 良太, 寺西 利治"
     },
@@ -468,6 +560,8 @@
       "date": "2019-11-01",
       "event": "第19回琉球大学物性研究会",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "土田 龍太郎, 山川 結衣, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -478,6 +572,8 @@
       "date": "2019-05-09",
       "event": "ナノ学会第17回大会",
       "location": "鹿児島県",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "松本 憲志, 佐藤 良太, 立津 慶幸, 寺西 利治"
     },
@@ -488,6 +584,8 @@
       "date": "2019-05-01",
       "event": "第20回九州・山口・沖縄磁気セミナー",
       "location": "上天草市",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 松本 憲志, 佐藤 良太, 寺西 利治"
     },
@@ -498,6 +596,8 @@
       "date": "2019-03-01",
       "event": "平成31年電気学会全国大会",
       "location": "北海道科学大学",
+      "lat": null,
+      "lon": null,
       "type": "invited_oral_presentation",
       "authors": "立津 慶幸"
     },
@@ -508,6 +608,8 @@
       "date": "2019-03-01",
       "event": "日本物理学会2019春季大会",
       "location": "九州大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "宮里 隼人, 山川 結衣, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -518,6 +620,8 @@
       "date": "2019-03-01",
       "event": "日本物理学会2019春季大会",
       "location": "九州大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "山川 結衣, 宮里 隼人, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -528,6 +632,8 @@
       "date": "2018-11-01",
       "event": "第18回琉球大学物性研究会",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸"
     },
@@ -538,6 +644,8 @@
       "date": "2018-10-01",
       "event": "NIMS Week 2018",
       "location": "茨城",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Yoshihiro Gohda"
     },
@@ -548,6 +656,8 @@
       "date": "2018-10-01",
       "event": "NIMS Week 2018",
       "location": "茨城",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Yosuke Harashima, Takashi Miyake, Yoshihiro Gohda"
     },
@@ -558,6 +668,8 @@
       "date": "2018-09-01",
       "event": "日本物理学会2018年秋季大会",
       "location": "同志社大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "仲井間 憲李, 川勝 祥矢, 垣花 将司, 宮里 隼人, 山川 結衣, 立津 慶幸 et al."
     },
@@ -568,6 +680,8 @@
       "date": "2018-09-01",
       "event": "Meeting Abstracts of the Physical Society of Japan",
       "location": "同志社大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Kawakatsu S., Hagiwara M., Takeuchi T., Aoki D., Nakamura A., Hedo M. et al."
     },
@@ -578,6 +692,8 @@
       "date": "2018-09-01",
       "event": "Meeting Abstracts of the Physical Society of Japan",
       "location": "同志社大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Miyazato H., Yamakawa Y., Tatetsu Y., Maehira T."
     },
@@ -588,6 +704,8 @@
       "date": "2018-09-01",
       "event": "Meeting Abstracts of the Physical Society of Japan",
       "location": "同志社大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yamakawa Y., Miyazato H., Kawakatsu S., Nakaima K., Tatetsu Y., Hedo M. et al."
     },
@@ -598,6 +716,8 @@
       "date": "2018-08-01",
       "event": "REPM 2018",
       "location": "北京",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Yoshihiro Gohda"
     },
@@ -608,6 +728,8 @@
       "date": "2018-07-01",
       "event": "ICM 2018",
       "location": "サンフランシスコ",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Yosuke Harashima, Takashi Miyake, Yoshihiro Gohda"
     },
@@ -618,6 +740,8 @@
       "date": "2018-06-01",
       "event": "IcAUMS 2018",
       "location": "チェジュ",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Yoshihiro Gohda"
     },
@@ -628,6 +752,8 @@
       "date": "2018-04-01",
       "event": "Intermag 2018",
       "location": "シンガポール",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Yoshihiro Gohda"
     },
@@ -638,6 +764,8 @@
       "date": "2018-04-01",
       "event": "物性研究所スパコン共同利用・CCMS合同研究会",
       "location": "東大物性研",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 合田 義弘"
     },
@@ -648,6 +776,8 @@
       "date": "2018-03-18",
       "event": "第65回応用物理学会春季学術講演会",
       "location": "早稲田大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "相内 優太, 立津 慶幸, 合田 義弘"
     },
@@ -658,6 +788,8 @@
       "date": "2018-03-01",
       "event": "TMS 2018",
       "location": "フェニックス",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -668,6 +800,8 @@
       "date": "2018-03-01",
       "event": "APS March Meeting 2018",
       "location": "ロサンゼルス",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Yosuke Harashima, Takashi Miyake, Yoshihiro Gohda"
     },
@@ -678,6 +812,8 @@
       "date": "2018-03-01",
       "event": "第3回元素戦略プロジェクト <研究拠点形成型>/大型研究施設連携シンポジウム〜局所構造制御で物質から材料へ〜",
       "location": "東京大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "合田 義弘, 立津 慶幸, 常行 真司"
     },
@@ -688,6 +824,8 @@
       "date": "2018-03-01",
       "event": "日本物理学会2018年春季大会",
       "location": "東京理科大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "山川 結衣, 宮里 隼人, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -698,6 +836,8 @@
       "date": "2018-03-01",
       "event": "Meeting Abstracts of the Physical Society of Japan",
       "location": "東京理科大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Miyazato Hayato, Yamakawa Yui, Tatetsu Yasutomi, Maehira Takahiro"
     },
@@ -708,6 +848,8 @@
       "date": "2017-12-01",
       "event": "ISAMMA 2017",
       "location": "フーコック",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -718,6 +860,8 @@
       "date": "2017-11-01",
       "event": "MMM 2017",
       "location": "ピッツバーグ",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -728,6 +872,8 @@
       "date": "2017-09-22",
       "event": "Meeting Abstracts of the Physical Society of Japan",
       "location": "岩手大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Tatetsu Yasutomi, Tsuneyuki Shinji, Gohda Yoshihiro"
     },
@@ -738,6 +884,8 @@
       "date": "2017-09-01",
       "event": "Junjiro Kanamori Memorial International Symposium",
       "location": "東京大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -748,6 +896,8 @@
       "date": "2017-09-01",
       "event": "Frontiers In Materials Science 2017",
       "location": "グライフスヴァルト",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -758,6 +908,8 @@
       "date": "2017-07-01",
       "event": "第2回CDMSI(ポスト「京」重点課題（7）)研究会",
       "location": "東京大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 常行 真司, 合田 義弘"
     },
@@ -768,6 +920,8 @@
       "date": "2017-05-01",
       "event": "第75回ナノマグネティクス専門研究会",
       "location": "東京大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 常行 真司, 合田 義弘"
     },
@@ -778,6 +932,8 @@
       "date": "2017-04-01",
       "event": "Intermag 2017",
       "location": "ダブリン",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -788,6 +944,8 @@
       "date": "2017-03-17",
       "event": "Meeting Abstracts of the Physical Society of Japan",
       "location": "大阪大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Tatetsu Yasutomi, Tsuneyuki Shinji, Gohda Yoshihiro"
     },
@@ -798,6 +956,8 @@
       "date": "2017-02-01",
       "event": "TMS 2017 146th Annual Meeting & Exhibition",
       "location": "サンディエゴ",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -808,6 +968,8 @@
       "date": "2016-12-01",
       "event": "第2回ポスト「京」重点課題（7）研究会 「次世代の産業を支える新機能デバイス・高性能材料の創成」",
       "location": "東京大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 常行 真司, 合田 義弘"
     },
@@ -818,6 +980,8 @@
       "date": "2016-11-01",
       "event": "第16回 琉球大学物性研究会",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 常行 真司, 合田 義弘"
     },
@@ -828,6 +992,8 @@
       "date": "2016-10-01",
       "event": "第3回「京」を中核とするHPCIシステム利用研究課題 成果報告会",
       "location": "東京",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 常行 真司, 合田 義弘"
     },
@@ -838,6 +1004,8 @@
       "date": "2016-09-01",
       "event": "Meeting Abstracts of the Physical Society of Japan",
       "location": "金沢大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Tatetsu Yasutomi, Tsuneyuki Shinji, Gohda Yoshihiro"
     },
@@ -848,6 +1016,8 @@
       "date": "2016-08-01",
       "event": "The 24th International Workshop on Rare-Earth and Future Permanent Magnets and Their Applications",
       "location": "ダルムシュタット",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -858,6 +1028,8 @@
       "date": "2016-08-01",
       "event": "8th joint European Magnetics Symposia",
       "location": "グラスゴー",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -868,6 +1040,8 @@
       "date": "2016-07-01",
       "event": "第１回ポスト「京」重点課題(7)研究会",
       "location": "東京大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 常行 真司, 合田 義弘"
     },
@@ -878,6 +1052,8 @@
       "date": "2016-06-01",
       "event": "International Symposium on New Horizons in Condensed Matter Physics",
       "location": "東京大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -888,6 +1064,8 @@
       "date": "2016-05-01",
       "event": "E-MRS 2016 Spring Meeting",
       "location": "リール",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yoshihiro Gohda, Yasutomi Tatetsu, Shinji Tsuneyuki"
     },
@@ -898,6 +1076,8 @@
       "date": "2016-03-01",
       "event": "2016 MRS Spring Meeting",
       "location": "フェニックス",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -908,6 +1088,8 @@
       "date": "2016-03-01",
       "event": "日本金属学会2016年春季講演大会",
       "location": "東京理科大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 常行 真司, 合田 義弘"
     },
@@ -918,6 +1100,8 @@
       "date": "2016-01-01",
       "event": "MMM-Intermag 2016",
       "location": "サンディエゴ",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -928,6 +1112,8 @@
       "date": "2016-01-01",
       "event": "第2回元素戦略プロジェクト <研究拠点形成型>/大型研究施設連携シンポジウム",
       "location": "東京大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "合田 義弘, 立津 慶幸, 常行 真司"
     },
@@ -938,6 +1124,8 @@
       "date": "2015-12-01",
       "event": "The 18th Asian Workshop on First-Principles Electronic Structure Calculations",
       "location": "東京大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -948,6 +1136,8 @@
       "date": "2015-09-01",
       "event": "Meeting Abstracts of the Physical Society of Japan",
       "location": "関西大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Tatetsu Yasutomi, Tsuneyuki Shinji, Gohda Yoshihiro"
     },
@@ -958,6 +1148,8 @@
       "date": "2015-07-01",
       "event": "20th International Conference on Magnetism",
       "location": "バルセロナ",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -968,6 +1160,8 @@
       "date": "2015-06-01",
       "event": "ESICMM-G8 Symposium on Next Generation Permanent Magnets",
       "location": "筑波",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Taisuke Ozaki, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -978,6 +1172,8 @@
       "date": "2015-03-01",
       "event": "APS March Meeting 2015",
       "location": "テキサス州",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -988,6 +1184,8 @@
       "date": "2014-12-01",
       "event": "The 2nd International Symposium on Computics: Quantum Simulation and Design",
       "location": "東京",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -998,6 +1196,8 @@
       "date": "2014-11-01",
       "event": "The 7th International Symposium on Surface Science",
       "location": "島根",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -1008,6 +1208,8 @@
       "date": "2014-09-07",
       "event": "日本物理学会2014年秋季大会",
       "location": "中部大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "渡部 紘幸, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -1018,6 +1220,8 @@
       "date": "2014-09-01",
       "event": "日本物理学会2014年秋季大会",
       "location": "中部大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "大貫 惇睦, 仲村 愛, 赤嶺 拡, 竹内 徹也, 立津 慶幸, 眞榮平 孝裕 et al."
     },
@@ -1028,6 +1232,8 @@
       "date": "2014-09-01",
       "event": "第75回応用物理学会秋季学術講演会",
       "location": "北海道大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 常行 真司, 合田 義弘"
     },
@@ -1038,6 +1244,8 @@
       "date": "2014-09-01",
       "event": "Meeting Abstracts of the Physical Society of Japan",
       "location": "中部大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Tatetsu Yasutomi, Tsuneyuki Shinji, Gohda Yoshihiro"
     },
@@ -1048,6 +1256,8 @@
       "date": "2014-06-01",
       "event": "Physics of Magnetism 2014",
       "location": "Poznań",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
     },
@@ -1058,6 +1268,8 @@
       "date": "2014-03-01",
       "event": "文部科学省科学研究費新学術領域研究「コンピューティクスによる物質デザイン：複合相関と非平衡ダイナミクス」",
       "location": "東京大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 合田 義弘, 常行 真司"
     },
@@ -1068,6 +1280,8 @@
       "date": "2014-03-01",
       "event": "元素戦略プロジェクト<研究拠点形成型>・大型研究施設連携シンポジウム",
       "location": "東京大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "平井 大介, 立津 慶幸, 見澤 英樹, 合田 義弘, 常行 真司, 尾崎 泰助"
     },
@@ -1078,6 +1292,8 @@
       "date": "2014-03-01",
       "event": "Meeting Abstracts of the Physical Society of Japan",
       "location": "東海大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Watanabe H., Sato R., Ikeda W., Tatetsu Y., Maehira T."
     },
@@ -1088,6 +1304,8 @@
       "date": "2013-09-01",
       "event": "Meeting Abstracts of the Physical Society of Japan",
       "location": "徳島大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Watanabe H., Tatetsu Y., Maehira T."
     },
@@ -1098,6 +1316,8 @@
       "date": "2013-08-01",
       "event": "元素戦略プロジェクト<研究拠点形成型>研究報告会",
       "location": "東京都",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "見澤 英樹, 平井 大介, 立津 慶幸, 合田 義弘, 土浦 宏紀, 常行真司"
     },
@@ -1108,6 +1328,8 @@
       "date": "2013-08-01",
       "event": "Strongly Correlated Electron Systems 2013",
       "location": "東京大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Takahiro Maehira"
     },
@@ -1118,6 +1340,8 @@
       "date": "2013-06-01",
       "event": "強相関f電子系研究会",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸"
     },
@@ -1128,6 +1352,8 @@
       "date": "2013-03-01",
       "event": "日本物理学会第67回年次大会",
       "location": "横浜国立大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "大貫 惇睦, 仲村 愛, 平仲 裕一, 辺土 正人, 仲間 隆男, 立津 慶幸 et al."
     },
@@ -1138,6 +1364,8 @@
       "date": "2013-03-01",
       "event": "日本物理学会第67回年次大会",
       "location": "広島大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 眞榮平 孝裕"
     },
@@ -1148,6 +1376,8 @@
       "date": "2012-11-01",
       "event": "第53回高圧討論会",
       "location": "大阪大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "仲村 愛, 平仲 裕一, 立津 慶幸, 眞榮平 孝裕, 辺土 正人, 仲間 隆男 et al."
     },
@@ -1158,6 +1388,8 @@
       "date": "2012-09-01",
       "event": "日本物理学会2012年秋季大会",
       "location": "横浜国立大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "眞榮平 孝裕, 立津 慶幸"
     },
@@ -1168,6 +1400,8 @@
       "date": "2012-09-01",
       "event": "日本物理学会2012年秋季大会",
       "location": "横浜国立大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 眞榮平 孝裕"
     },
@@ -1178,6 +1412,8 @@
       "date": "2012-09-01",
       "event": "日本物理学会2012年秋季大会",
       "location": "横浜国立大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "仲村 愛, 平仲 裕一, 立津 慶幸, 眞榮平 孝裕, 辺土 正人, 仲間 隆男 et al."
     },
@@ -1188,6 +1424,8 @@
       "date": "2012-07-01",
       "event": "Pu Futures 2012",
       "location": "ケンブリッジ",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Takahiro Maehira"
     },
@@ -1198,6 +1436,8 @@
       "date": "2012-07-01",
       "event": "The 19th International Conference on Magnetism 2012",
       "location": "釜山",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Takahiro Maehira, Eijiro Sakai, Yasutomi Tatetsu"
     },
@@ -1208,6 +1448,8 @@
       "date": "2012-07-01",
       "event": "The 19th International Conference on Magnetism 2012",
       "location": "釜山",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Eijiro Sakai, Takahiro Maehira"
     },
@@ -1218,6 +1460,8 @@
       "date": "2012-03-01",
       "event": "日本物理学会2012年春季大会",
       "location": "関西学院大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 眞榮平 孝裕"
     },
@@ -1228,6 +1472,8 @@
       "date": "2011-11-01",
       "event": "第11回琉球大学物性研究会",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 眞榮平 孝裕"
     },
@@ -1238,6 +1484,8 @@
       "date": "2011-11-01",
       "event": "TOKIMEKI2011(International workshop on heavy fermions)",
       "location": "大阪大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Hirochika Teruya, Yasutomi Tatetsu, Takahiro Maehira"
     },
@@ -1248,6 +1496,8 @@
       "date": "2011-11-01",
       "event": "TOKIMEKI2011(International workshop on heavy fermions)",
       "location": "大阪大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Takahiro Maehira, Yasutomi Tatetsu"
     },
@@ -1258,6 +1508,8 @@
       "date": "2011-11-01",
       "event": "TOKIMEKI2011(International workshop on heavy fermions)",
       "location": "大阪大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Takahiro Maehira"
     },
@@ -1268,6 +1520,8 @@
       "date": "2011-09-01",
       "event": "日本物理学会2011年秋季大会",
       "location": "富山大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 照屋 寛親, 眞榮平 孝裕"
     },
@@ -1278,6 +1532,8 @@
       "date": "2011-09-01",
       "event": "日本物理学会2011年秋季大会",
       "location": "大阪府大",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "眞榮平 孝裕, 立津 慶幸, 照屋 寛親"
     },
@@ -1288,6 +1544,8 @@
       "date": "2011-09-01",
       "event": "日本物理学会2011年秋季大会",
       "location": "大阪府大",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "照屋 寛親, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -1298,6 +1556,8 @@
       "date": "2011-08-01",
       "event": "Strongly Correlated Electron Systems 2011",
       "location": "ケンブリッジ",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Takahiro Maehira, Yasutomi Tatetsu"
     },
@@ -1308,6 +1568,8 @@
       "date": "2011-08-01",
       "event": "Strongly Correlated Electron Systems 2011",
       "location": "ケンブリッジ",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Takahiro Maehira"
     },
@@ -1318,6 +1580,8 @@
       "date": "2011-08-01",
       "event": "26th International Conference on Low Temperature Physics",
       "location": "北京",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Takahiro Maehira, Yasutomi Tatetsu"
     },
@@ -1328,6 +1592,8 @@
       "date": "2011-08-01",
       "event": "26th International Conference on Low Temperature Physics",
       "location": "北京",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Takahiro Maehira"
     },
@@ -1338,6 +1604,8 @@
       "date": "2011-03-01",
       "event": "日本物理学会2011年春季大会",
       "location": "新潟大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 眞榮平 孝裕"
     },
@@ -1348,6 +1616,8 @@
       "date": "2010-12-01",
       "event": "第10回琉球大学物性研究会",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 眞榮平 孝裕"
     },
@@ -1358,6 +1628,8 @@
       "date": "2010-09-01",
       "event": "International Conference on Heavy Electrons 2010",
       "location": "東京",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Takahiro Maehira, Yasutomi Tatetsu"
     },
@@ -1368,6 +1640,8 @@
       "date": "2010-09-01",
       "event": "International Conference on Heavy Electrons 2010",
       "location": "東京",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "Yasutomi Tatetsu, Hirochika Teruya, Sho Shirono, Takahiro Maehira"
     },
@@ -1378,6 +1652,8 @@
       "date": "2010-09-01",
       "event": "日本物理学会2010年秋季大会",
       "location": "大阪府大",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "城野 将, 照屋 寛親, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -1388,6 +1664,8 @@
       "date": "2010-09-01",
       "event": "日本物理学会2010年秋季大会",
       "location": "大阪府大",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "照屋 寛親, 城野 将, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -1398,6 +1676,8 @@
       "date": "2010-09-01",
       "event": "日本物理学会2010年秋季大会",
       "location": "大阪大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 眞榮平 孝裕"
     },
@@ -1408,6 +1688,8 @@
       "date": "2010-03-01",
       "event": "日本物理学会2010年春季大会",
       "location": "岡山大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平 孝裕"
     },
@@ -1418,6 +1700,8 @@
       "date": "2009-11-01",
       "event": "第9回琉球大学物性研究会",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平 孝裕"
     },
@@ -1428,6 +1712,8 @@
       "date": "2009-11-01",
       "event": "重い電子系若手秋の学校",
       "location": "京都",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平 孝裕"
     },
@@ -1438,6 +1724,8 @@
       "date": "2009-10-01",
       "event": "基盤研究(S)「価数不安定性をもつアクチナイド化合物に特有の新奇量子状態の研究」第2回研究会",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "oral_presentation",
       "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平 孝裕"
     },
@@ -1448,6 +1736,8 @@
       "date": "2009-09-01",
       "event": "日本物理学会2009年秋季大会",
       "location": "熊本大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平 孝裕"
     },
@@ -1458,6 +1748,8 @@
       "date": "2009-03-01",
       "event": "日本物理学会2009年春季大会",
       "location": "立教大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平 孝裕"
     },
@@ -1468,6 +1760,8 @@
       "date": "2009-03-01",
       "event": "日本物理学会2009年春季大会",
       "location": "熊本大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "名嘉眞 英之, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -1478,6 +1772,8 @@
       "date": "2008-11-01",
       "event": "第8回琉球大学物性研究会",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "名嘉眞 英之, 立津 慶幸, 眞榮平 孝裕"
     },
@@ -1488,6 +1784,8 @@
       "date": "2008-11-01",
       "event": "第8回琉球大学物性研究会",
       "location": "琉球大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平孝裕"
     },
@@ -1498,6 +1796,8 @@
       "date": "2008-09-01",
       "event": "日本物理学会2008年秋季大会",
       "location": "岩手大学",
+      "lat": null,
+      "lon": null,
       "type": "poster_presentation",
       "authors": "立津 慶幸, 名嘉眞 英之, 西山 雄一郎, 眞榮平 孝裕"
     }

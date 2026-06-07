@@ -21,6 +21,15 @@
     <p id="error-msg" class="text-red-600 text-sm"></p>
   </div>
 
+  <!-- Session picker (no ?id= given) -->
+  <div id="s-picker" class="hidden space-y-4">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <h1 class="text-xl font-bold text-slate-800 mb-1">セミナー 回答フォーム</h1>
+      <p class="text-sm text-slate-500 mb-6">参加するセミナーを選択してください。</p>
+      <div id="session-list" class="space-y-3"></div>
+    </div>
+  </div>
+
   <!-- Main -->
   <div id="s-main" class="hidden space-y-4">
 
@@ -86,23 +95,39 @@ async function init() {
   const params = new URLSearchParams(location.search);
   seminarId = params.get('id') || '';
 
+  // config.json を先に読み込む
+  let cfg = {};
+  try {
+    const r = await fetch('config.json');
+    if (r.ok) cfg = await r.json();
+  } catch (_) {}
+
+  if (cfg.gas_url && cfg.gas_url !== 'YOUR_GAS_URL_HERE') {
+    GAS_URL = cfg.gas_url;
+  }
+
+  // ?id= がない場合はセッション一覧を表示
   if (!seminarId) {
-    showError('URLに ?id= パラメータが必要です。例：?id=kodaikyo_202607');
+    const sessions = cfg.sessions || [];
+    hide('s-loading');
+    if (!sessions.length) {
+      showError('セッションが登録されていません。URLに ?id= パラメータを指定してください。例：?id=kodaikyo_202607');
+      return;
+    }
+    el('session-list').innerHTML = sessions.map(s => `
+      <a href="?id=${encodeURIComponent(s.id)}"
+         class="flex items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-300 transition-colors group">
+        <div>
+          <p class="text-sm font-semibold text-slate-800 group-hover:text-indigo-800">${s.title}</p>
+          ${s.date ? `<p class="text-xs text-slate-400 mt-0.5">${s.date}</p>` : ''}
+        </div>
+        <span class="text-indigo-400 text-lg">›</span>
+      </a>`).join('');
+    show('s-picker');
     return;
   }
 
-  // GAS URL を config.json から読み込む
-  try {
-    const r = await fetch('config.json');
-    if (r.ok) {
-      const cfg = await r.json();
-      if (cfg.gas_url && cfg.gas_url !== 'YOUR_GAS_URL_HERE') {
-        GAS_URL = cfg.gas_url;
-      }
-    }
-  } catch (_) {}
-
-  if (!GAS_URL) el('gas-warn').classList.remove('hidden');
+  if (!GAS_URL) show('gas-warn');
 
   // セミナーJSONを読み込む
   try {

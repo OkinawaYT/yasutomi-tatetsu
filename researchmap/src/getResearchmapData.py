@@ -1,4 +1,5 @@
 import os
+import time
 import requests
 import json
 from datetime import date
@@ -6,9 +7,76 @@ from datetime import date
 RM_PERMALINK = "yasutomi_tatetsu"
 BASE_API_URL = f"https://api.researchmap.jp/{RM_PERMALINK}"
 
-RAW_ROOT  = "researchmap/data"   # 生JSONキャッシュ（gitignore）
-SITE_DATA = "data"               # サイト表示用クリーンJSON
+RAW_ROOT   = "researchmap/data"       # 生JSONキャッシュ（gitignore）
+SITE_DATA  = "data"                   # サイト表示用クリーンJSON
+GEO_CACHE  = "data/location_cache.json"  # ジオコーディングキャッシュ
 
+
+# ──────────────────────────────────────────────
+# ジオコーディング（Nominatim / OpenStreetMap）
+# ──────────────────────────────────────────────
+
+def load_geo_cache():
+    if os.path.exists(GEO_CACHE):
+        with open(GEO_CACHE, encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+
+def save_geo_cache(cache):
+    with open(GEO_CACHE, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False, indent=2, sort_keys=True)
+
+
+def geocode(place, cache, max_retries=4):
+    """場所名 → {"lat": float, "lon": float} または None。キャッシュを使い回す。"""
+    if not place:
+        return None
+    # キャッシュにあり、かつ null でない（前回の成功結果）は再利用
+    if place in cache and cache[place] is not None:
+        return cache[place]
+    # キャッシュに null がある場合でも再試行（前回の 429 失敗を上書き可能）
+    # ただし "_retry": false のフラグがあればスキップ
+    if cache.get(place) == {"_permanent": True}:
+        return None
+
+    url = (
+        "https://nominatim.openstreetmap.org/search"
+        f"?q={requests.utils.quote(place)}"
+        "&format=json&limit=1&accept-language=ja,en"
+    )
+    headers = {"User-Agent": "TatetsuLab-ResearchmapSync/1.0 (y.tatetsu@meio-u.ac.jp)"}
+
+    for attempt in range(max_retries):
+        try:
+            r = requests.get(url, headers=headers, timeout=15)
+            if r.status_code == 429:
+                wait = 30 * (attempt + 1)
+                print(f"    [geocode] '{place}' → 429 rate limited, waiting {wait}s...")
+                time.sleep(wait)
+                continue
+            r.raise_for_status()
+            data = r.json()
+            result = {"lat": float(data[0]["lat"]), "lon": float(data[0]["lon"])} if data else None
+            cache[place] = result
+            time.sleep(1.5)  # Nominatim ポリシー：1 req/s
+            if result:
+                print(f"    [geocode] '{place}' → {result['lat']:.4f}, {result['lon']:.4f}")
+            else:
+                print(f"    [geocode] '{place}' → not found (no results)")
+            return result
+        except requests.exceptions.RequestException as e:
+            print(f"    [geocode] '{place}' → error ({e}), retrying...")
+            time.sleep(5)
+
+    print(f"    [geocode] '{place}' → gave up after {max_retries} attempts")
+    cache[place] = None  # 失敗をキャッシュ（次回また試みる）
+    return None
+
+
+# ──────────────────────────────────────────────
+# テキスト抽出ユーティリティ
+# ──────────────────────────────────────────────
 
 def mltext(node, key, lang="en"):
     if not node or key not in node:
@@ -52,9 +120,16 @@ def item_id(item):
     return item.get("@id", "").split("/")[-1]
 
 
+# ──────────────────────────────────────────────
+# メイン処理
+# ──────────────────────────────────────────────
+
 def fetch_all():
     os.makedirs(RAW_ROOT, exist_ok=True)
     os.makedirs(SITE_DATA, exist_ok=True)
+
+    geo_cache = load_geo_cache()
+    print(f"Geocoding cache loaded: {len(geo_cache)} entries")
 
     # --- 論文 ---
     pub_items = []
@@ -74,16 +149,21 @@ def fetch_all():
     pub_items.sort(key=lambda x: x["date"], reverse=True)
     _write_json("publications", pub_items)
 
-    # --- 発表 ---
+    # --- 発表（ジオコーディング付き）---
+    print("Geocoding presentation locations…")
     pres_items = []
     for item in _fetch("presentations").get("items", []):
+        loc = mltext(item, "location") or None
+        coords = geocode(loc, geo_cache) if loc else None
         pres_items.append({
             "id": item_id(item),
             "title": mltext(item, "presentation_title", "en") or mltext(item, "presentation_title", "ja"),
             "title_ja": mltext(item, "presentation_title", "ja") or None,
             "date": normalize_date(item.get("publication_date"), "2000-01-01"),
             "event": mltext(item, "event") or None,
-            "location": mltext(item, "location") or None,
+            "location": loc,
+            "lat": coords["lat"] if coords else None,
+            "lon": coords["lon"] if coords else None,
             "type": item.get("presentation_type") or None,
             "authors": extract_authors(item, "presenters") or None,
         })
@@ -93,7 +173,6 @@ def fetch_all():
     # --- メディア掲載 ---
     media_items = []
     for item in _fetch("media_coverage").get("items", []):
-        # URL取得（see_also の label="url" から）
         url = next((l.get("@id") for l in item.get("see_also", []) if l.get("label") == "url"), None)
         media_items.append({
             "id": item_id(item),
@@ -124,7 +203,7 @@ def fetch_all():
     for item in _fetch("research_projects").get("items", []):
         from_d = normalize_date(item.get("from_date"), "")
         to_d   = normalize_date(item.get("to_date"), "")
-        kaken = next((l.get("@id","") for l in item.get("see_also",[]) if l.get("label")=="kaken"), None)
+        kaken  = next((l.get("@id","") for l in item.get("see_also",[]) if l.get("label")=="kaken"), None)
         proj_items.append({
             "id": item_id(item),
             "title": mltext(item, "research_project_title", "en") or mltext(item, "research_project_title", "ja"),
@@ -200,7 +279,7 @@ def fetch_all():
     teach_items.sort(key=lambda x: x["from_date"], reverse=True)
     _write_json("teaching_experience", teach_items)
 
-    # --- 委員会・学会等 ---
+    # --- 委員会 ---
     comm_items = []
     for item in _fetch("committee_memberships").get("items", []):
         comm_items.append({
@@ -210,11 +289,11 @@ def fetch_all():
             "organization": mltext(item, "associated_organization") or None,
             "from_date": normalize_date(item.get("from_date"), ""),
             "to_date": normalize_date(item.get("to_date"), "") or None,
-            "role": mltext(item, "role") or None,
         })
     comm_items.sort(key=lambda x: x["from_date"], reverse=True)
     _write_json("committee_memberships", comm_items)
 
+    # --- 学会 ---
     assoc_items = []
     for item in _fetch("association_memberships").get("items", []):
         assoc_items.append({
@@ -227,9 +306,12 @@ def fetch_all():
     assoc_items.sort(key=lambda x: x["from_date"], reverse=True)
     _write_json("association_memberships", assoc_items)
 
-    # --- 社会貢献 ---
+    # --- 社会貢献（ジオコーディング付き）---
+    print("Geocoding activity locations…")
     soc_items = []
     for item in _fetch("social_contribution").get("items", []):
+        loc = mltext(item, "location") or None
+        coords = geocode(loc, geo_cache) if loc else None
         soc_items.append({
             "id": item_id(item),
             "title": mltext(item, "social_contribution_title", "en") or mltext(item, "social_contribution_title", "ja"),
@@ -237,7 +319,9 @@ def fetch_all():
             "date": normalize_date(item.get("from_event_date"), "2000-01-01"),
             "to_date": normalize_date(item.get("to_event_date"), "") or None,
             "organization": mltext(item, "promoter") or mltext(item, "associated_organization") or None,
-            "location": mltext(item, "location") or None,
+            "location": loc,
+            "lat": coords["lat"] if coords else None,
+            "lon": coords["lon"] if coords else None,
         })
     soc_items.sort(key=lambda x: x["date"], reverse=True)
     _write_json("social_contribution", soc_items)
@@ -256,6 +340,9 @@ def fetch_all():
     others_items.sort(key=lambda x: x["date"], reverse=True)
     _write_json("others", others_items)
 
+    # ジオコーディングキャッシュを保存
+    save_geo_cache(geo_cache)
+    print(f"Geocoding cache saved: {len(geo_cache)} entries total")
     print(f"\nDone — {date.today()}")
 
 

@@ -8,7 +8,9 @@
       "date": "2026-02-14",
       "to_date": "2026-02-14",
       "organization": "全国高校生マイプロジェクト沖縄県実行委員会",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "51559923",
@@ -17,7 +19,9 @@
       "date": "2026-01-21",
       "to_date": "2026-01-21",
       "organization": "那覇高校",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "51559921",
@@ -26,7 +30,9 @@
       "date": "2025-12-11",
       "to_date": "2025-12-11",
       "organization": "宮古高校",
-      "location": "宮古高校"
+      "location": "宮古高校",
+      "lat": null,
+      "lon": null
     },
     {
       "id": "51288538",
@@ -35,7 +41,9 @@
       "date": "2025-10-06",
       "to_date": "2025-10-06",
       "organization": "那覇市立教育研究所",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "51226130",
@@ -44,7 +52,9 @@
       "date": "2025-09-27",
       "to_date": "2025-09-27",
       "organization": "Google Educator Groups Okinawa",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "50476681",
@@ -53,7 +63,9 @@
       "date": "2025-07-05",
       "to_date": "2025-07-05",
       "organization": "Google Educator Groups Fukuoka",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "50138421",
@@ -62,7 +74,9 @@
       "date": "2025-05-01",
       "to_date": "2025-05-01",
       "organization": "Google Educator Groups Okinawa、島尻教育研究所",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "49761941",
@@ -71,7 +85,9 @@
       "date": "2025-04-01",
       "to_date": "2025-09-30",
       "organization": "南部広域行政組合教育委員会",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "49761924",
@@ -80,7 +96,9 @@
       "date": "2025-03-21",
       "to_date": "2025-03-21",
       "organization": "GEG Okinawa",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "49151048",
@@ -89,7 +107,9 @@
       "date": "2025-02-25",
       "to_date": "2025-02-25",
       "organization": "札幌国際大学",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "47021471",
@@ -98,7 +118,9 @@
       "date": "2024-09-16",
       "to_date": "2024-09-16",
       "organization": "Google教育者グループ研究会",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "46692827",
@@ -107,7 +129,9 @@
       "date": "2024-07-16",
       "to_date": null,
       "organization": "名桜大学",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "46692826",
@@ -116,7 +140,9 @@
       "date": "2024-06-07",
       "to_date": null,
       "organization": "興南学園",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "45585208",
@@ -125,7 +151,9 @@
       "date": "2024-02-24",
       "to_date": "2024-02-24",
       "organization": "デジラボおきなわ実行委員会",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "44438576",
@@ -134,7 +162,9 @@
       "date": "2024-01-06",
       "to_date": "2024-01-06",
       "organization": "全国高校生マイプロジェクト沖縄県実行委員会",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "47021452",
@@ -143,7 +173,9 @@
       "date": "2023-10-13",
       "to_date": "2023-10-15",
       "organization": "Google教育者グループ研究会沖縄大会実行委委員会",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "41338212",
@@ -152,7 +184,9 @@
       "date": "2023-02-05",
       "to_date": "2023-02-05",
       "organization": "全国高校生マイプロジェクト沖縄県実行委員会",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "41338204",
@@ -161,7 +195,9 @@
       "date": "2023-01-27",
       "to_date": "2023-01-27",
       "organization": "八重山高等学校",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "41338113",
@@ -170,7 +206,9 @@
       "date": "2022-12-15",
       "to_date": "2022-12-15",
       "organization": "八重山高等学校",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "41664635",
@@ -179,7 +217,9 @@
       "date": "2022-11-04",
       "to_date": "2022-11-06",
       "organization": "the U.S. Embassy Tokyo",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "41338222",
@@ -188,7 +228,9 @@
       "date": "2022-01-30",
       "to_date": "2022-01-30",
       "organization": "全国高校生マイプロジェクト沖縄県実行委員会",
-      "location": null
+      "location": null,
+      "lat": null,
+      "lon": null
     },
     {
       "id": "43006091",
@@ -197,7 +239,9 @@
       "date": "2021-08-02",
       "to_date": null,
       "organization": "興南学園",
-      "location": "興南学園"
+      "location": "興南学園",
+      "lat": null,
+      "lon": null
     }
   ]
 }
