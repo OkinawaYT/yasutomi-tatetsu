@@ -50,8 +50,6 @@ highlights:
         name_ja: 第一原理電子状態計算
       - name: Hard magnets (Nd-Fe-B)
         name_ja: 硬磁石（Nd-Fe-B系）
-      - name: Superconductors
-        name_ja: 超伝導体
       - name: Surfaces & Interfaces
         name_ja: 表面・界面物性
 
@@ -62,6 +60,7 @@ highlights:
       - name: Institutional Research (IR)
         name_ja: インスティテューショナル・リサーチ
       - name: EdTech
+        name_ja: 教育工学
       - name: Higher Education Quality
         name_ja: 高等教育の質向上
 

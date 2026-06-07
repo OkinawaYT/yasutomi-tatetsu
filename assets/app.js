@@ -4,6 +4,43 @@ const params = new URLSearchParams(location.search);
 const lang = params.get('lang') ||
   (navigator.language && navigator.language.startsWith('ja') ? 'ja' : 'en');
 
+// ── Page routing ─────────────────────────────────────────────────────────────
+// ?page=X で表示するセクションを切り替える。デフォルトは 'bio'（About）
+const currentPage = params.get('page') || 'bio';
+
+// ページ名 → 表示するセクション ID のマッピング
+const PAGE_SECTIONS = {
+  bio:          ['bio', 'news'],      // About＋ニュース
+  publications: ['publications'],
+  talks:        ['talks'],
+  experience:   ['experience'],
+  projects:     ['projects'],
+  activities:   ['activities'],
+  materials:    ['materials', 'others'],
+};
+const ALL_SECTION_IDS = ['bio', 'publications', 'talks', 'experience',
+                          'projects', 'activities', 'others', 'news', 'materials'];
+
+// URL を生成（lang と page を保持）
+function makeUrl(page, langCode) {
+  const l = langCode || lang;
+  const p = new URLSearchParams({ lang: l });
+  if (page !== 'bio') p.set('page', page);
+  return `?${p.toString()}`;
+}
+
+// レンダリング後にページルーティングを適用
+function applyPageRouting() {
+  const toShow = PAGE_SECTIONS[currentPage] || PAGE_SECTIONS['bio'];
+  ALL_SECTION_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    // .no-data が付いている = データなしで render 側が非表示にした → page routing は適用しない
+    if (el.classList.contains('no-data')) return;
+    el.style.display = toShow.includes(id) ? '' : 'none';
+  });
+}
+
 function t(val, fallback = '') {
   if (!val) return fallback;
   if (typeof val === 'string') return val;
@@ -65,26 +102,32 @@ async function applyDesign() {
 }
 
 // ── Navigation ──────────────────────────────────────────────────────────────
-const NAV_LINKS = {
-  en: [['#bio','About'],['#publications','Papers'],['#talks','Talks'],
-       ['#experience','Experience'],['#projects','Projects'],
-       ['#activities','Activities'],['#materials','Tools']],
-  ja: [['#bio','About'],['#publications','論文'],['#talks','発表'],
-       ['#experience','経歴'],['#projects','プロジェクト'],
-       ['#activities','社会貢献'],['#materials','ツール']],
-};
+// [page key, English label, Japanese label]
+const NAV_PAGES = [
+  ['bio',          'About',       'About'],
+  ['publications', 'Papers',      '論文'],
+  ['talks',        'Talks',       '発表'],
+  ['experience',   'Experience',  '経歴'],
+  ['projects',     'Projects',    'プロジェクト'],
+  ['activities',   'Activities',  '社会貢献'],
+  ['materials',    'Tools',       'ツール'],
+];
 
 function renderNav(profile) {
-  const brand = profile?.brand || 'Tatetsu Lab.';
-  const otherLang  = lang === 'en' ? 'ja' : 'en';
-  const otherFlag  = lang === 'en' ? '🇯🇵' : '🇬🇧';
+  const brand     = profile?.brand || 'Tatetsu Lab.';
+  const otherLang = lang === 'en' ? 'ja' : 'en';
+  const otherFlag = lang === 'en' ? '🇯🇵' : '🇬🇧';
   document.getElementById('nav').innerHTML = `
     <div class="nav-inner">
-      <a href="?" class="nav-brand">${esc(brand)}</a>
+      <a href="${makeUrl('bio')}" class="nav-brand">${esc(brand)}</a>
       <div class="nav-links">
-        ${NAV_LINKS[lang].map(([href, label]) =>
-          `<a href="${href}">${label}</a>`).join('')}
-        <a href="?lang=${otherLang}" class="nav-lang" title="${otherLang === 'ja' ? '日本語に切り替え' : 'Switch to English'}">${otherFlag}</a>
+        ${NAV_PAGES.map(([page, enLabel, jaLabel]) => {
+          const label  = lang === 'ja' ? jaLabel : enLabel;
+          const active = currentPage === page ? ' class="nav-active"' : '';
+          return `<a href="${makeUrl(page)}"${active}>${label}</a>`;
+        }).join('')}
+        <a href="${makeUrl(currentPage, otherLang)}" class="nav-lang"
+           title="${otherLang === 'ja' ? '日本語に切り替え' : 'Switch to English'}">${otherFlag}</a>
       </div>
     </div>`;
 }
@@ -396,7 +439,7 @@ function renderActivities(data) {
 function renderOthers(data) {
   const el = document.getElementById('others');
   const items = (data.items || []).filter(o => !o.draft);
-  if (!items.length) { el.style.display = 'none'; return; }
+  if (!items.length) { el.classList.add('no-data'); el.style.display = 'none'; return; }
   const label = lang === 'ja';
   el.innerHTML = `
     <h2 class="section-title">${label ? 'その他' : 'Others'}</h2>
@@ -413,7 +456,7 @@ function renderOthers(data) {
 function renderNews(data) {
   const el = document.getElementById('news');
   const items = (data.items || []).filter(n => !n.draft);
-  if (!items.length) { el.style.display = 'none'; return; }
+  if (!items.length) { el.classList.add('no-data'); el.style.display = 'none'; return; }
   const label = lang === 'ja';
   el.innerHTML = `
     <h2 class="section-title">${label ? 'ニュース' : 'News'}</h2>
@@ -434,7 +477,7 @@ function renderNews(data) {
 function renderMaterials(data) {
   const el = document.getElementById('materials');
   const items = (data.items || []).filter(m => !m.draft);
-  if (!items.length) { el.style.display = 'none'; return; }
+  if (!items.length) { el.classList.add('no-data'); el.style.display = 'none'; return; }
   const label = lang === 'ja';
   el.innerHTML = `
     <h2 class="section-title">${label ? '資料・ツール' : 'Materials & Tools'}</h2>
@@ -512,6 +555,9 @@ async function main() {
   renderNews(newsData);
   renderMaterials(matsData);
   renderFooter(profile);
+
+  // ページルーティングを最後に適用（render 後でないと el が存在しない）
+  applyPageRouting();
 }
 
 main().catch(e => {
