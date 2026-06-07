@@ -231,20 +231,37 @@ function setupFilters() {
     daySel.appendChild(opt);
   });
 
+  // Case option の value = caseFieldMap のキー "d{day}_{case_id}"
+  // → Day をまたいで同一 case_id が存在しても一意に特定できる
   seminarData.program.forEach(day => {
     day.cases.forEach(c => {
-      const opt = new Option(c.title.split('：')[0], c.id);
-      caseSel.appendChild(opt);
+      const label = `Day ${day.day}  ${c.title.split('：')[0]}`;
+      const value = `d${day.day}_${c.id}`;
+      caseSel.appendChild(new Option(label, value));
     });
   });
 }
 
-// 選択中の case に属するフィールドのみ返す（未選択時は全フィールド）
+// 選択中の case に属するフィールドのみ返す
 function getActiveFields() {
-  const dayVal  = el('filter-day').value;
-  const caseVal = el('filter-case').value;
-  if (dayVal && caseVal) {
-    const ids = caseFieldMap[`d${dayVal}_${caseVal}`] || [];
+  const caseKey = el('filter-case').value; // "d1_case1" or ""
+  if (caseKey) {
+    const ids = caseFieldMap[caseKey] || [];
+    return ids.map(id => [id, fieldMap[id]]).filter(([, f]) => f);
+  }
+  // Day のみ選択中: そのDayの全caseフィールドを返す
+  const dayVal = el('filter-day').value;
+  if (dayVal) {
+    const ids = [];
+    seminarData.program.forEach(prog => {
+      if (String(prog.day) === String(dayVal)) {
+        prog.cases.forEach(c => {
+          (caseFieldMap[`d${prog.day}_${c.id}`] || []).forEach(id => {
+            if (!ids.includes(id)) ids.push(id);
+          });
+        });
+      }
+    });
     return ids.map(id => [id, fieldMap[id]]).filter(([, f]) => f);
   }
   return Object.entries(fieldMap);
@@ -252,11 +269,16 @@ function getActiveFields() {
 
 function applyFilter() {
   const dayVal  = el('filter-day').value;
-  const caseVal = el('filter-case').value;
+  const caseKey = el('filter-case').value; // "d1_case1" or ""
 
   let rows = allRows;
-  if (dayVal)  rows = rows.filter(r => String(r.day) === String(dayVal));
-  if (caseVal) rows = rows.filter(r => r.case_id === caseVal);
+  if (caseKey) {
+    // Case フィルタは day を内包 → "d1_case1" → day=1, case_id=case1
+    const m = caseKey.match(/^d(\d+)_(.+)$/);
+    if (m) rows = rows.filter(r => String(r.day) === m[1] && r.case_id === m[2]);
+  } else if (dayVal) {
+    rows = rows.filter(r => String(r.day) === String(dayVal));
+  }
 
   el('filter-count').textContent = `${rows.length} 件表示中`;
 
@@ -307,7 +329,8 @@ function renderCharts(rows) {
   radioFields.forEach(([fieldId, field]) => {
     const counts = {};
     rows.forEach(r => {
-      const v = r[fieldId] || '(未回答)';
+      const v = (r[fieldId] || '').trim();
+      if (!v) return; // このcaseに属さない行・未回答はスキップ
       counts[v] = (counts[v] || 0) + 1;
     });
 
