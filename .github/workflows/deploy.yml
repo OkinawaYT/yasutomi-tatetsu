@@ -28,12 +28,18 @@ jobs:
 
       - name: Collect site files
         run: |
-          mkdir _site
-          cp index.html design.md .nojekyll _site/
-          cp -r assets data _site/
+          set -e
+          mkdir -p _site
+          cp index.html _site/
+          cp design.md  _site/
+          touch _site/.nojekyll
+          cp -r assets _site/
+          cp -r data   _site/
           for d in academic-ai-prompts feedback seminar survey uploads; do
-            [ -d "$d" ] && cp -r "$d" _site/
+            [ -d "$d" ] && cp -r "$d" _site/ || true
           done
+          echo "Site files collected:"
+          ls _site/
 
       - uses: actions/configure-pages@v5
         with:
