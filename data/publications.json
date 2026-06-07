@@ -1,0 +1,375 @@
+{
+  "updated": "2026-06-07",
+  "items": [
+    {
+      "id": "52239941",
+      "type": "published_papers",
+      "title": "Zinc-induced ordering in L1 <sub>0</sub> -type platinum-based nanoalloys for the electrocatalytic oxygen reduction reaction",
+      "title_ja": "Zinc-induced ordering in L1 <sub>0</sub> -type platinum-based nanoalloys for the electrocatalytic oxygen reduction reaction",
+      "date": "2026-01-01",
+      "authors": "Wu Tian, Ryota Sato, Tomoki Uchiyama, Yasutomi Tatetsu, Kenshi Matsumoto, Yoshiharu Uchimoto et al.",
+      "journal": "Journal of Materials Chemistry A",
+      "doi": "10.1039/d5ta08256k"
+    },
+    {
+      "id": "51613533",
+      "type": "published_papers",
+      "title": "First-principles study of structural stability and magnetic properties in Fe–Pd–In alloys",
+      "title_ja": "First-principles study of structural stability and magnetic properties in Fe–Pd–In alloys",
+      "date": "2025-12-01",
+      "authors": "Yasutomi Tatetsu, Kenshi Matsumoto, Ryota Sato, Toshiharu Teranishi",
+      "journal": "Journal of Magnetism and Magnetic Materials",
+      "doi": "10.1016/j.jmmm.2025.173649"
+    },
+    {
+      "id": "51226117",
+      "type": "published_papers",
+      "title": "High frequency, high power magnetic techniques for electromagnetic actuator systems",
+      "title_ja": "電磁アクチュエータシステムのための高周波大電力の磁気技術",
+      "date": "2025-09-19",
+      "authors": "Committee on High-Frequency, High-Power Magnetic Technology for Electromagnetic Actuator Systems",
+      "journal": "電気学会技術報告書",
+      "doi": null
+    },
+    {
+      "id": "51226094",
+      "type": "published_papers",
+      "title": "Atomic diffusion barriers and inter-element miscibility guide the development of unexplored crystal phases.",
+      "title_ja": "Atomic diffusion barriers and inter-element miscibility guide the development of unexplored crystal phases.",
+      "date": "2025-09-10",
+      "authors": "Kenshi Matsumoto, Masaki Kudo, Yasutomi Tatetsu, Ryota Sato, Ryo Takahata, Toshiharu Teranishi",
+      "journal": "Chemical science",
+      "doi": "10.1039/d5sc01754h"
+    },
+    {
+      "id": "36731667",
+      "type": "published_papers",
+      "title": "トピックス 電子論で探るNd–Fe–B磁石主相における軽元素の役割",
+      "title_ja": "トピックス 電子論で探るNd–Fe–B磁石主相における軽元素の役割",
+      "date": "2022-04-01",
+      "authors": "立津 慶幸, 原嶋 庸介, 三宅 隆, 合田 義弘",
+      "journal": "日本磁気学会 会報「まぐね」",
+      "doi": null
+    },
+    {
+      "id": "36491979",
+      "type": "published_papers",
+      "title": "Inter-element miscibility driven stabilization of ordered pseudo-binary alloy",
+      "title_ja": "Inter-element miscibility driven stabilization of ordered pseudo-binary alloy",
+      "date": "2022-02-24",
+      "authors": "Kenshi Matsumoto, Ryota Sato, Yasutomi Tatetsu, Ryo Takahata, Seiji Yamazoe, Miho Yamauchi et al.",
+      "journal": "Nature Communications",
+      "doi": "10.1038/s41467-022-28710-0"
+    },
+    {
+      "id": "33122275",
+      "type": "published_papers",
+      "title": "Determinants of crystal structure transformation of ionic nanocrystals in cation exchange reactions",
+      "title_ja": "Determinants of crystal structure transformation of ionic nanocrystals in cation exchange reactions",
+      "date": "2021-07-16",
+      "authors": "Zhanzhao Li, Masaki Saruyama, Toru Asaka, Yasutomi Tatetsu, Toshiharu Teranishi",
+      "journal": "Science",
+      "doi": "10.1126/science.abh2741"
+    },
+    {
+      "id": "50138018",
+      "type": "misc",
+      "title": "計算科学的手法を用いたネオジム焼結磁石界面近傍の副相に関する微視的研究",
+      "title_ja": "計算科学的手法を用いたネオジム焼結磁石界面近傍の副相に関する微視的研究",
+      "date": "2021-01-01",
+      "authors": "立津慶幸",
+      "journal": "倉田奨励金研究報告書(Web)",
+      "doi": null
+    },
+    {
+      "id": "30212167",
+      "type": "published_papers",
+      "title": "First-principles study on magnetism of a crystalline grain-boundary phase in Nd–Fe–B permanent magnets",
+      "title_ja": "First-principles study on magnetism of a crystalline grain-boundary phase in Nd–Fe–B permanent magnets",
+      "date": "2020-06-01",
+      "authors": "Yuta Ainai, Sonju Kou, Yasutomi Tatetsu, Yoshihiro Gohda",
+      "journal": "Japanese Journal of Applied Physics",
+      "doi": "10.35848/1347-4065/ab9402"
+    },
+    {
+      "id": "30212168",
+      "type": "published_papers",
+      "title": "First-principles study on surface stability and interface magnetic properties of SmFe<sub>12</sub>",
+      "title_ja": "First-principles study on surface stability and interface magnetic properties of SmFe<sub>12</sub>",
+      "date": "2020-03-13",
+      "authors": "Yuta Ainai, Tomoharu Shiozawa, Yasutomi Tatetsu, Yoshihiro Gohda",
+      "journal": "Applied Physics Express",
+      "doi": "10.35848/1882-0786/ab7bca"
+    },
+    {
+      "id": "30212169",
+      "type": "published_papers",
+      "title": "First-principles study of crystalline Nd–Fe alloys",
+      "title_ja": "First-principles study of crystalline Nd–Fe alloys",
+      "date": "2020-01-01",
+      "authors": "Yuta Ainai, Yasutomi Tatetsu, Asako Terasawa, Yoshihiro Gohda",
+      "journal": "Applied Physics Express",
+      "doi": "10.7567/1882-0786/ab626e"
+    },
+    {
+      "id": "50583766",
+      "type": "published_papers",
+      "title": "Computational science for permanent magnets",
+      "title_ja": "永久磁石に対する計算科学的アプローチ",
+      "date": "2019-03-01",
+      "authors": "立津慶幸",
+      "journal": "電気学会全国大会講演論文",
+      "doi": null
+    },
+    {
+      "id": "30212164",
+      "type": "published_papers",
+      "title": "De Haas–van Alphen Oscillations for Small Electron Pocket Fermi Surfaces and Huge <i>H</i>-linear Magnetoresistances in Degenerate Semiconductors PbTe and PbS",
+      "title_ja": "De Haas–van Alphen Oscillations for Small Electron Pocket Fermi Surfaces and Huge <i>H</i>-linear Magnetoresistances in Degenerate Semiconductors PbTe and PbS",
+      "date": "2019-01-15",
+      "authors": "Shoya Kawakatsu, Kenri Nakaima, Masashi Kakihana, Yui Yamakawa, Hayato Miyazato, Takanori Kida et al.",
+      "journal": "Journal of the Physical Society of Japan",
+      "doi": "10.7566/jpsj.88.013704"
+    },
+    {
+      "id": "30212147",
+      "type": "published_papers",
+      "title": "First-principles study on substitution effects in Nd<sub>2</sub>(Fe, X)<sub>14</sub>B",
+      "title_ja": "First-principles study on substitution effects in Nd<sub>2</sub>(Fe, X)<sub>14</sub>B",
+      "date": "2018-12-01",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda",
+      "journal": "Materialia",
+      "doi": "10.1016/j.mtla.2018.10.018"
+    },
+    {
+      "id": "30212155",
+      "type": "published_papers",
+      "title": "Dynamic Interface Formation in Magnetic Thin Film Heterostructures",
+      "title_ja": "Dynamic Interface Formation in Magnetic Thin Film Heterostructures",
+      "date": "2018-11-23",
+      "authors": "Shuhei Nakashima, Toshio Miyamachi, Yasutomi Tatetsu, Yukio Takahashi, Yasumasa Takagi, Yoshihiro Gohda et al.",
+      "journal": "Advanced Functional Materials",
+      "doi": "10.1002/adfm.201804594"
+    },
+    {
+      "id": "30212148",
+      "type": "published_papers",
+      "title": "Role of typical elements in Nd<sub>2</sub>Fe<sub>14</sub>X (X = B , C, N, O, F)",
+      "title_ja": "Role of typical elements in Nd<sub>2</sub>Fe<sub>14</sub>X (X = B , C, N, O, F)",
+      "date": "2018-07-31",
+      "authors": "Yasutomi Tatetsu, Yosuke Harashima, Takashi Miyake, Yoshihiro Gohda",
+      "journal": "Physical Review Materials",
+      "doi": "10.1103/physrevmaterials.2.074410"
+    },
+    {
+      "id": "30212165",
+      "type": "published_papers",
+      "title": "Electron Theory on Grain-Boundary Structures and Local Magnetic Properties of Neodymium Magnets",
+      "title_ja": "Electron Theory on Grain-Boundary Structures and Local Magnetic Properties of Neodymium Magnets",
+      "date": "2018-01-01",
+      "authors": "Yoshihiro Gohda, Yasutomi Tatetsu, Shinji Tsuneyuki",
+      "journal": "MATERIALS TRANSACTIONS",
+      "doi": "10.2320/matertrans.m2017258"
+    },
+    {
+      "id": "50144737",
+      "type": "published_papers",
+      "title": "Electron Theory on Grain-Boundary Structures and Local Magnetic Properties of Neodymium Magnets",
+      "title_ja": "ネオジム磁石の粒界構造と局所磁性の電子論",
+      "date": "2017-01-01",
+      "authors": "Yoshihiro Gohda, Yasutomi Tatetsu, Shinji Tsuneyuki",
+      "journal": "Journal of the Japan Institute of Metals",
+      "doi": "10.2320/jinstmet.ja201601"
+    },
+    {
+      "id": "33122292",
+      "type": "published_papers",
+      "title": "First-Principles Study of the Role of Cu in Improving the Coercivity of Nd-Fe-B Permanent Magnets",
+      "title_ja": "First-Principles Study of the Role of Cu in Improving the Coercivity of Nd-Fe-B Permanent Magnets",
+      "date": "2016-12-30",
+      "authors": "Y. Tatetsu, S. Tsuneyuki, Y. Gohda",
+      "journal": "Physical Review Applied",
+      "doi": "10.1103/physrevapplied.6.064029"
+    },
+    {
+      "id": "30212156",
+      "type": "published_papers",
+      "title": "Magnetic and Fermi Surface Properties of Ferromagnets EuPd<sub>2</sub> and EuPt<sub>2</sub>",
+      "title_ja": "Magnetic and Fermi Surface Properties of Ferromagnets EuPd<sub>2</sub> and EuPt<sub>2</sub>",
+      "date": "2016-08-15",
+      "authors": "Ai Nakamura, Hiromu Akamine, Yousuke Ashitomi, Fuminori Honda, Dai Aoki, Tetsuya Takeuchi et al.",
+      "journal": "Journal of the Physical Society of Japan",
+      "doi": "10.7566/jpsj.85.084705"
+    },
+    {
+      "id": "33122297",
+      "type": "published_papers",
+      "title": "Epitaxially stabilized iron thin films via effective strain relief from steps",
+      "title_ja": "Epitaxially stabilized iron thin films via effective strain relief from steps",
+      "date": "2016-07-29",
+      "authors": "T. Miyamachi, S. Nakashima, S. Kim, N. Kawamura, Y. Tatetsu, Y. Gohda et al.",
+      "journal": "Physical Review B",
+      "doi": "10.1103/physrevb.94.045439"
+    },
+    {
+      "id": "50138041",
+      "type": "published_papers",
+      "title": "Electoronic structure and Fermi surface of EuX<sub>2</sub> (X=Rh, Ir)",
+      "title_ja": "EuX<sub>2</sub>(X=Rh,Ir)の電子構造とフェルミ面",
+      "date": "2015-04-01",
+      "authors": "渡部紘幸, 立津慶幸, 眞榮平孝裕",
+      "journal": "琉球大学理学部紀要",
+      "doi": null
+    },
+    {
+      "id": "30212157",
+      "type": "published_papers",
+      "title": "Fermi Surface Properties of Eu-Divalent and Eu-Trivalent Electronic States with the AuCu<sub>3</sub>-type Cubic Structure",
+      "title_ja": "Fermi Surface Properties of Eu-Divalent and Eu-Trivalent Electronic States with the AuCu<sub>3</sub>-type Cubic Structure",
+      "date": "2015-03-18",
+      "authors": "Ai Nakamura, Tetsuya Takeuchi, Yasutomi Tatetsu, Takahiro Maehira, Hisatomo Harima, Masato Hedo et al.",
+      "journal": "Journal of Physics: Conference Series",
+      "doi": "10.1088/1742-6596/592/1/012048"
+    },
+    {
+      "id": "33122415",
+      "type": "published_papers",
+      "title": "Fermi Surfaces of Eu Compounds",
+      "title_ja": "Fermi Surfaces of Eu Compounds",
+      "date": "2014-06-16",
+      "authors": "Yasutomi Tatetsu, Hiroyuki Watanabe, Eijiro Sakai, Takahiro Maehira",
+      "journal": "Proceedings of the International Conference on Strongly Correlated Electron Systems (SCES2013)",
+      "doi": "10.7566/jpscp.3.011078"
+    },
+    {
+      "id": "30212158",
+      "type": "published_papers",
+      "title": "Fermi Surface and Magnetic Properties of Antiferromagnet EuBi<sub>3</sub>",
+      "title_ja": "Fermi Surface and Magnetic Properties of Antiferromagnet EuBi<sub>3</sub>",
+      "date": "2013-12-15",
+      "authors": "Ai Nakamura, Yuichi Hiranaka, Masato Hedo, Takao Nakama, Yasutomi Tatetsu, Takahiro Maehira et al.",
+      "journal": "Journal of the Physical Society of Japan",
+      "doi": "10.7566/jpsj.82.124708"
+    },
+    {
+      "id": "30212160",
+      "type": "published_papers",
+      "title": "Electronic structures of of PuX (X=S, Se, Te)",
+      "title_ja": "Electronic structures of of PuX (X=S, Se, Te)",
+      "date": "2013-08-21",
+      "authors": "Takahiro Maehira, Eijiro Sakai, Yasutomi Tatetsu",
+      "journal": "Journal of the Korean Physical Society",
+      "doi": "10.3938/jkps.63.809"
+    },
+    {
+      "id": "30212150",
+      "type": "published_papers",
+      "title": "Electronic properties of AnSn3 (An = Th, U, Np, and Pu)",
+      "title_ja": "Electronic properties of AnSn3 (An = Th, U, Np, and Pu)",
+      "date": "2013-08-21",
+      "authors": "Yasutomi Tatetsu, Eijiro Sakai, Takahiro Maehira",
+      "journal": "Journal of the Korean Physical Society",
+      "doi": "10.3938/jkps.63.356"
+    },
+    {
+      "id": "30212152",
+      "type": "published_papers",
+      "title": "The Electronic Structure and Theoretical Analysis of the de Haas–van Alphen Effect in YbSn<sub>3</sub>",
+      "title_ja": "The Electronic Structure and Theoretical Analysis of the de Haas–van Alphen Effect in YbSn<sub>3</sub>",
+      "date": "2013-03-15",
+      "authors": "Yasutomi Tatetsu, Takahiro Maehira",
+      "journal": "Journal of the Physical Society of Japan",
+      "doi": "10.7566/jpsj.82.034709"
+    },
+    {
+      "id": "52392084",
+      "type": "misc",
+      "title": "EuPb<sub>3</sub>とCaPb<sub>3</sub>の電子構造",
+      "title_ja": "EuPb<sub>3</sub>とCaPb<sub>3</sub>の電子構造",
+      "date": "2013-01-01",
+      "authors": "渡部紘幸, 立津慶幸, 眞榮平孝裕",
+      "journal": "日本物理学会講演概要集",
+      "doi": null
+    },
+    {
+      "id": "30212163",
+      "type": "published_papers",
+      "title": "Electronic structures of Plutonium compounds with the NaCl-type monochalcogenides structure",
+      "title_ja": "Electronic structures of Plutonium compounds with the NaCl-type monochalcogenides structure",
+      "date": "2012-12-17",
+      "authors": "Takahiro Maehira, Yasutomi Tatetsu",
+      "journal": "Journal of Physics: Conference Series",
+      "doi": "10.1088/1742-6596/400/4/042042"
+    },
+    {
+      "id": "30212154",
+      "type": "published_papers",
+      "title": "Electronic property of ThSn<sub>3</sub>in comparison with uranium and transuranium compounds",
+      "title_ja": "Electronic property of ThSn<sub>3</sub>in comparison with uranium and transuranium compounds",
+      "date": "2012-12-17",
+      "authors": "Yasutomi Tatetsu, Takahiro Maehira",
+      "journal": "Journal of Physics: Conference Series",
+      "doi": "10.1088/1742-6596/400/4/042061"
+    },
+    {
+      "id": "30212162",
+      "type": "published_papers",
+      "title": "Electronic properties of Plutonium compounds with the cubic Laves phase structure",
+      "title_ja": "Electronic properties of Plutonium compounds with the cubic Laves phase structure",
+      "date": "2012-12-14",
+      "authors": "Takahiro Maehira, Yasutomi Tatetsu",
+      "journal": "Journal of Physics: Conference Series",
+      "doi": "10.1088/1742-6596/391/1/012037"
+    },
+    {
+      "id": "30212153",
+      "type": "published_papers",
+      "title": "First-principle calculations for electronic properties of PuX<sub>3</sub>(X=Rh, Pd, Pt)",
+      "title_ja": "First-principle calculations for electronic properties of PuX<sub>3</sub>(X=Rh, Pd, Pt)",
+      "date": "2012-12-14",
+      "authors": "Yasutomi Tatetsu, Takahiro Maehira",
+      "journal": "Journal of Physics: Conference Series",
+      "doi": "10.1088/1742-6596/391/1/012073"
+    },
+    {
+      "id": "30212159",
+      "type": "published_papers",
+      "title": "Origin of the Frequency Branch of the de Haas–van Alphen Effect in CeIr<sub>2</sub>",
+      "title_ja": "Origin of the Frequency Branch of the de Haas–van Alphen Effect in CeIr<sub>2</sub>",
+      "date": "2012-01-01",
+      "authors": "Takahiro Maehira, Yasutomi Tatetsu, Hirochika Teruya, Eijiro Sakai",
+      "journal": "Journal of the Physical Society of Japan",
+      "doi": "10.1143/jpsjs.81sb.sb012"
+    },
+    {
+      "id": "30212149",
+      "type": "published_papers",
+      "title": "Electronic Structure of Plutonium Compounds with the Cubic Laves Phase Structure",
+      "title_ja": "Electronic Structure of Plutonium Compounds with the Cubic Laves Phase Structure",
+      "date": "2012-01-01",
+      "authors": "Yasutomi Tatetsu, Hirochika Teruya, Eijiro Sakai, Takahiro Maehira",
+      "journal": "Journal of the Physical Society of Japan",
+      "doi": "10.1143/jpsjs.81sb.sb025"
+    },
+    {
+      "id": "30212161",
+      "type": "published_papers",
+      "title": "The Fermi Surface of Itinerant 4<i>f</i> Electrons in α-Ce",
+      "title_ja": "The Fermi Surface of Itinerant 4<i>f</i> Electrons in α-Ce",
+      "date": "2011-01-02",
+      "authors": "Takahiro Maehira, Yasutomi Tatetsu",
+      "journal": "Journal of the Physical Society of Japan",
+      "doi": "10.1143/jpsjs.80sa.sa124"
+    },
+    {
+      "id": "30212151",
+      "type": "published_papers",
+      "title": "Origin of the Frequency Branch ε of the de Haas–van Alphen Effect in UAl<sub>3</sub>",
+      "title_ja": "Origin of the Frequency Branch ε of the de Haas–van Alphen Effect in UAl<sub>3</sub>",
+      "date": "2011-01-02",
+      "authors": "Yasutomi Tatetsu, Hirochika Teruya, Shou Shirono, Takahiro Maehira",
+      "journal": "Journal of the Physical Society of Japan",
+      "doi": "10.1143/jpsjs.80sa.sa126"
+    }
+  ]
+}
