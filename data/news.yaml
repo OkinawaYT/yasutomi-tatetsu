@@ -1,16 +1,26 @@
-# ニュース・お知らせ
-# 新しいものを上に追加してください
-# draft: true にすると非公開になります
+# ============================================================
+# お知らせ（手動追加分）
+# ============================================================
+# Researchmapからの直近5件は自動取得されます。
+# ここには手動で追加したいお知らせを記載します。
 #
-# 使い方:
-#   - date: 2026-06-01
+# オプション:
+#   pinned: true   → 期限なく常に表示（デフォルト: false）
+#   expires: YYYY-MM-DD → その日まで表示（省略時は date から2か月）
+#   draft: true    → 非公開
+#
+# 例:
+# items:
+#   - date: 2026-06-07
 #     title:
-#       en: Paper accepted
-#       ja: 論文が採択されました
+#       en: "Paper accepted in Nature"
+#       ja: "Natureに論文が採択されました"
 #     body:
-#       en: Our paper was accepted to Journal X.
-#       ja: 雑誌Xに論文が掲載されます。
-#     url: https://doi.org/...   # リンク（省略可）
+#       en: "Our paper on X was accepted."
+#       ja: "Xに関する論文が採択されました。"
+#     url: https://doi.org/...
+#     pinned: false
+#     expires: 2026-08-31   # 省略時は date から2か月後に自動期限切れ
 #     draft: false
 
 items:

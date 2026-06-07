@@ -1,14 +1,16 @@
+brand: "Tatetsu Lab."
+
 name:
   en: Yasutomi Tatetsu
   ja: 立津 慶幸
 
 role:
   en: Senior Associate Professor
-  ja: 准教授
+  ja: 上級准教授
 
 organization:
   en: Meio University, Okinawa, Japan
-  ja: 名桜大学（沖縄県）
+  ja: 公立大学法人 名桜大学（沖縄県）
 
 bio:
   en: >
@@ -29,15 +31,43 @@ bio:
     高等教育の質向上にも取り組んでいます。
     研究・教育に関するご協力・ご相談をお気軽にどうぞ。
 
-certifications:
-  - name: Google for Education Certified Innovator
-    url: https://edu.google.com/intl/ALL_us/for-educators/certification-programs/certified-innovators/
-  - name: Apple Distinguished Educator
-    url: https://www.apple.com/education/k12/apple-distinguished-educator/
+# ハイライト：資格・研究テーマ・関心など。自由に追加・編集してください。
+highlights:
+  - category:
+      en: Certifications
+      ja: 認定・資格
+    items:
+      - name: Google for Education Certified Innovator
+        url: https://edu.google.com/intl/ALL_us/for-educators/certification-programs/certified-innovators/
+      - name: Apple Distinguished Educator
+        url: https://www.apple.com/education/k12/apple-distinguished-educator/
+
+  - category:
+      en: Research
+      ja: 研究テーマ
+    items:
+      - name: First-principles electronic structure
+        name_ja: 第一原理電子状態計算
+      - name: Hard magnets (Nd-Fe-B)
+        name_ja: 硬磁石（Nd-Fe-B系）
+      - name: Surfaces & Interfaces
+        name_ja: 表面・界面物性
+
+  - category:
+      en: Education & Society
+      ja: 教育・社会
+    items:
+      - name: Institutional Research (IR)
+        name_ja: インスティテューショナル・リサーチ
+      - name: EdTech
+        name_ja: 教育工学
+      - name: Higher Education Quality
+        name_ja: 高等教育の質向上
 
 links:
-  researchmap: https://researchmap.jp/yasutomi_tatetsu
-  github: https://github.com/OkinawaYT
-  email: mailto:y.tatetsu@meio-u.ac.jp
-
-cv: uploads/resume.pdf
+  github:         https://github.com/OkinawaYT
+  email:          mailto:y.tatetsu@meio-u.ac.jp
+  orcid:          https://orcid.org/0000-0002-8977-0487
+  linkedin:       https://www.linkedin.com/in/yasutomi-tatetsu-24245796
+  google-scholar: https://scholar.google.com/citations?user=XGSSmUgAAAAJ&hl=en
+  researchmap:    https://researchmap.jp/yasutomi_tatetsu
