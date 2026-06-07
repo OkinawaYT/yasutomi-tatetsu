@@ -97,21 +97,33 @@ function renderBio(profile, areas) {
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\n/g, '<br>');
 
-  const certs = (profile.certifications || []).map(c =>
-    `<a href="${c.url}" class="cert-badge" target="_blank" rel="noopener">${esc(c.name)}</a>`
-  ).join('');
+  // ハイライト（資格・研究・関心など）
+  const highlights = (profile.highlights || []).map(group => {
+    const cat = t(group.category);
+    const chips = (group.items || []).map(item => {
+      const name = (lang === 'ja' && item.name_ja) ? item.name_ja : item.name;
+      return item.url
+        ? `<a href="${item.url}" class="hl-chip hl-chip--link" target="_blank" rel="noopener">${esc(name)}</a>`
+        : `<span class="hl-chip">${esc(name)}</span>`;
+    }).join('');
+    return `<div class="hl-group"><span class="hl-cat">${esc(cat)}</span><div class="hl-chips">${chips}</div></div>`;
+  }).join('');
 
+  // ソーシャルリンク（アイコン or テキストボタン）
   const socials = Object.entries(profile.links || {}).map(([key, url]) => {
     const icon = ICONS[key];
     const isEmail = url.startsWith('mailto:');
     const label = key.replace(/-/g, ' ');
+    const target = isEmail ? '' : 'target="_blank" rel="noopener"';
     if (icon) {
-      return `<a href="${url}" class="icon-link" title="${esc(label)}" aria-label="${esc(label)}"
-                ${isEmail ? '' : 'target="_blank" rel="noopener"'}>${icon}</a>`;
+      return `<a href="${url}" class="icon-link" title="${esc(label)}" aria-label="${esc(label)}" ${target}>${icon}</a>`;
     }
-    return `<a href="${url}" class="bio-link" ${isEmail ? '' : 'target="_blank" rel="noopener"'}>${esc(key)}</a>`;
+    // アイコンなし → テキストボタン（Researchmap など）
+    const displayName = key === 'researchmap' ? 'Researchmap' : esc(label);
+    return `<a href="${url}" class="text-link-btn" ${target}>${displayName}</a>`;
   }).join('');
 
+  // Researchmap の研究分野タグ（sync後に表示）
   const areaItems = (areas?.items || []);
   const tags = areaItems.map(a => {
     const field = (lang === 'ja' && a.field_ja) ? a.field_ja : a.field;
@@ -128,8 +140,8 @@ function renderBio(profile, areas) {
         <p class="bio-role">${esc(t(profile.role))}</p>
         <p class="bio-org">${esc(t(profile.organization))}</p>
         <div class="bio-desc">${bio}</div>
-        ${tags ? `<div class="bio-areas">${tags}</div>` : ''}
-        ${certs ? `<div class="bio-certs">${certs}</div>` : ''}
+        ${tags ? `<div class="bio-areas" style="margin-bottom:var(--spacing-sm)">${tags}</div>` : ''}
+        ${highlights ? `<div class="bio-highlights">${highlights}</div>` : ''}
         <div class="bio-social">${socials}</div>
       </div>
     </div>`;
