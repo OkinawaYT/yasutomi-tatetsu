@@ -228,47 +228,75 @@ function renderPublications(data) {
 // ── Talks 地図（座標は JSON に事前格納済み）──────────────────────────────
 let _talkMap = null;
 
-function renderTalksMap(pres) {
+async function geocodeLocation(place) {
+  if (!place) return null;
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(place)}&format=json&limit=1`;
+    const r = await fetch(url, { headers: { 'User-Agent': 'TatetsuLab/1.0' } });
+    const data = await r.json();
+    return data[0] ? { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) } : null;
+  } catch { return null; }
+}
+
+function addTalkMarker(map, lat, lon, name, items) {
+  const popup = `<strong>${esc(name)}</strong><br>${items.length} ${lang === 'ja' ? '件の発表' : 'presentation(s)'}`;
+  L.circleMarker([lat, lon], {
+    radius: 6 + Math.min(items.length, 10),
+    fillColor: '#00A3C4', color: '#fff',
+    weight: 2, opacity: 1, fillOpacity: 0.8,
+  }).bindPopup(popup).addTo(map);
+}
+
+async function renderTalksMap(pres) {
   const mapEl = document.getElementById('talks-map');
   if (!mapEl || !window.L) return;
   if (_talkMap) { _talkMap.remove(); _talkMap = null; }
 
-  // 座標付きの発表のみ絞り込み
-  const withCoords = pres.filter(p => p.lat && p.lon);
-  if (!withCoords.length) { mapEl.style.display = 'none'; return; }
-
-  // 場所でグループ化
-  const locMap = {};
-  withCoords.forEach(p => {
-    const key = `${p.lat},${p.lon}`;
-    if (!locMap[key]) locMap[key] = { lat: p.lat, lon: p.lon, name: p.location, items: [] };
-    locMap[key].items.push(p);
-  });
-
-  // 全座標の中心を計算して地図の初期表示を決定
-  const lats = Object.values(locMap).map(v => v.lat);
-  const lons = Object.values(locMap).map(v => v.lon);
-  const centerLat = (Math.min(...lats) + Math.max(...lats)) / 2;
-  const centerLon = (Math.min(...lons) + Math.max(...lons)) / 2;
-
-  _talkMap = L.map('talks-map').setView([centerLat, centerLon], 3);
+  _talkMap = L.map('talks-map').setView([35.68, 139.69], 4);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 18,
   }).addTo(_talkMap);
 
-  Object.values(locMap).forEach(({ lat, lon, name, items }) => {
-    const popup = `<strong>${esc(name)}</strong><br>${items.length} ${lang === 'ja' ? '件の発表' : 'presentation(s)'}`;
-    L.circleMarker([lat, lon], {
-      radius: 6 + Math.min(items.length, 10),
-      fillColor: '#2563eb', color: '#fff',
-      weight: 2, opacity: 1, fillOpacity: 0.8,
-    }).bindPopup(popup).addTo(_talkMap);
+  // 場所でグループ化
+  const locMap = {};
+  pres.forEach(p => {
+    if (!p.location || p.location === 'オンライン') return;
+    if (!locMap[p.location]) locMap[p.location] = [];
+    locMap[p.location].push(p);
   });
 
-  // 全マーカーが見えるようにズーム調整
-  const bounds = L.latLngBounds(Object.values(locMap).map(v => [v.lat, v.lon]));
-  _talkMap.fitBounds(bounds, { padding: [20, 20] });
+  // キャッシュ読み込み
+  let cache = {};
+  try {
+    const r = await fetch('data/location_cache.json');
+    if (r.ok) cache = await r.json();
+  } catch {}
+
+  const allCoords = [];
+  const uncached = [];
+
+  for (const [loc, items] of Object.entries(locMap)) {
+    if (cache[loc]) {
+      const { lat, lon } = cache[loc];
+      addTalkMarker(_talkMap, lat, lon, loc, items);
+      allCoords.push([lat, lon]);
+    } else {
+      uncached.push(loc);
+    }
+  }
+
+  if (allCoords.length > 1) _talkMap.fitBounds(allCoords, { padding: [20, 20] });
+  else if (allCoords.length === 1) _talkMap.setView(allCoords[0], 8);
+
+  // キャッシュにない場所は非同期でジオコーディング
+  for (let i = 0; i < uncached.length; i++) {
+    if (i > 0) await new Promise(r => setTimeout(r, 1100));
+    const loc = uncached[i];
+    const coords = await geocodeLocation(loc);
+    if (!coords) continue;
+    addTalkMarker(_talkMap, coords.lat, coords.lon, loc, locMap[loc]);
+  }
 }
 
 function renderTalks(presData, mediaData) {

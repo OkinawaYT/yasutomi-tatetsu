@@ -9,12 +9,14 @@
     {
       "id": "prep_sample",
       "title": "説得力のある提案・報告のための PREP 構成術セミナー（サンプル）",
-      "date": ""
+      "date": "",
+      "draft": true
     },
     {
       "id": "scqa_sample",
       "title": "課題発見・解決型プレゼンのための SCQA 構成術セミナー（サンプル）",
-      "date": ""
+      "date": "",
+      "draft": true
     }
   ]
 }
