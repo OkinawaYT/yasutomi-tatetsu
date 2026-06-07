@@ -15,7 +15,7 @@ organization:
 bio:
   en: >
     My research focuses on **first-principles electronic structure calculations**
-    of surfaces, interfaces, and magnetic materials (hard magnets and superconductors).
+    of surfaces, interfaces, and magnetic materials (hard magnets).
     I investigate the physical properties of these systems from first principles to
     understand and design novel functional materials.
 
@@ -23,13 +23,9 @@ bio:
     the quality of higher education.
     Please feel free to reach out for collaboration.
   ja: >
-    **第一原理電子状態計算**を用いて、表面・界面・磁性材料（硬磁石・超伝導体）の
-    物性解明に取り組んでいます。計算科学的アプローチから機能性材料の設計・理解を
-    目指しています。
+    **第一原理電子状態計算**を用いて、表面・界面・磁性材料(ハード磁石)の物性解明に取り組んでいます。計算科学的アプローチから機能性材料の設計・理解を目指しています。
 
-    また、**インスティテューショナル・リサーチ（IR）** および **EdTech** を通じた
-    高等教育の質向上にも取り組んでいます。
-    研究・教育に関するご協力・ご相談をお気軽にどうぞ。
+    また、**インスティテューショナル・リサーチ（IR）** および **EdTech** を通じた高等教育の質向上にも取り組んでいます。研究・教育に関するご協力・ご相談をお気軽にどうぞ。
 
 # ハイライト：資格・研究テーマ・関心など。自由に追加・編集してください。
 highlights:
@@ -76,4 +72,5 @@ links:
   orcid:          https://orcid.org/0000-0002-8977-0487
   linkedin:       https://www.linkedin.com/in/yasutomi-tatetsu-24245796
   google-scholar: https://scholar.google.com/citations?user=XGSSmUgAAAAJ&hl=en
+  youtube:        https://www.youtube.com/channel/UCU6nnUSAhkLbtqTuW6tvLjQ
   researchmap:    https://researchmap.jp/yasutomi_tatetsu

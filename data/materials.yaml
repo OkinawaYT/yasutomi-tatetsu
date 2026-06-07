@@ -25,11 +25,8 @@ items:
     description:
       en: >
         A digital response form for seminars and workshops.
-        Participants answer structured questions (PREP / SCQA framework);
-        facilitators see a live dashboard.
       ja: >
         ゼミ・研究会向けの回答フォームシステム。
-        PREP・SCQA形式の準備シート、ファシリテーター用リアルタイムダッシュボード付き。
     icon: "📋"
     url: seminar/
     draft: false
