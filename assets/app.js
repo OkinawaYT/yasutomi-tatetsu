@@ -453,24 +453,92 @@ function renderOthers(data) {
 }
 
 // ── News ──────────────────────────────────────────────────────────────────────
-function renderNews(data) {
-  const el = document.getElementById('news');
-  const items = (data.items || []).filter(n => !n.draft);
-  if (!items.length) { el.classList.add('no-data'); el.style.display = 'none'; return; }
+
+// Researchmap の直近5件を自動ニュースとして生成
+function buildAutoNews(pubs, pres, awards) {
   const label = lang === 'ja';
+  const TYPE = {
+    publication:  label ? '論文'   : 'Paper',
+    presentation: label ? '発表'   : 'Talk',
+    award:        label ? '受賞'   : 'Award',
+  };
+  const all = [];
+  (pubs.items   || []).forEach(p => all.push({ date: p.date, type: 'publication',
+    title: (label && p.title_ja) ? p.title_ja : p.title,
+    sub: p.journal || '', url: p.doi ? `https://doi.org/${p.doi}` : null }));
+  (pres.items   || []).forEach(p => all.push({ date: p.date, type: 'presentation',
+    title: (label && p.title_ja) ? p.title_ja : p.title,
+    sub: p.event || '', url: null }));
+  (awards.items || []).forEach(a => all.push({ date: a.date, type: 'award',
+    title: (label && a.title_ja) ? a.title_ja : a.title,
+    sub: a.organization || '', url: null }));
+  return all
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+    .slice(0, 5)
+    .map(item => ({ ...item, typeLabel: TYPE[item.type], auto: true }));
+}
+
+// 手動ニュースの表示可否判定（pinned / expires / 2か月デフォルト）
+function isNewsVisible(item) {
+  if (item.draft) return false;
+  if (item.pinned) return true;
+  if (!item.date) return true;
+  const today = new Date();
+  const base = new Date(item.date);
+  const expires = item.expires
+    ? new Date(item.expires)
+    : new Date(base.getFullYear(), base.getMonth() + 2, base.getDate());
+  return today <= expires;
+}
+
+function renderNews(data, pubs, pres, awards) {
+  const el = document.getElementById('news');
+  const label = lang === 'ja';
+
+  // 手動項目
+  const manualVisible = (data.items || []).filter(isNewsVisible);
+  const pinned    = manualVisible.filter(i => i.pinned);
+  const nonPinned = manualVisible.filter(i => !i.pinned);
+
+  // Researchmap 自動ニュース
+  const autoNews = buildAutoNews(pubs, pres, awards);
+
+  // 表示するものがなければ非表示
+  if (!pinned.length && !autoNews.length && !nonPinned.length) {
+    el.classList.add('no-data'); el.style.display = 'none'; return;
+  }
+
+  // 順序: ピン留め → 自動＋手動を日付順にマージ
+  const merged = [...autoNews, ...nonPinned]
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  const allItems = [...pinned, ...merged];
+
+  const renderItem = item => {
+    if (item.auto) {
+      return `<div class="news-item">
+        <span class="news-date">${dateYM(item.date)}</span>
+        <div>
+          <span class="news-tag">${esc(item.typeLabel)}</span>
+          <div class="news-title">${esc(item.title)}</div>
+          ${item.sub ? `<div class="news-body">${esc(item.sub)}</div>` : ''}
+          ${item.url ? `<a class="news-link" href="${item.url}" target="_blank" rel="noopener">${label ? '詳細 →' : 'View →'}</a>` : ''}
+        </div>
+      </div>`;
+    }
+    return `<div class="news-item">
+      <span class="news-date">${item.date || ''}</span>
+      <div>
+        ${item.pinned ? '<span class="news-pin">📌</span> ' : ''}
+        <div class="news-title">${esc(t(item.title))}</div>
+        ${item.body ? `<div class="news-body">${esc(t(item.body))}</div>` : ''}
+        ${item.url ? `<a class="news-link" href="${item.url}" target="_blank" rel="noopener">${label ? '詳細 →' : 'Read more →'}</a>` : ''}
+      </div>
+    </div>`;
+  };
+
   el.innerHTML = `
     <h2 class="section-title">${label ? 'ニュース' : 'News'}</h2>
-    <div class="news-list">
-      ${items.map(n => `
-        <div class="news-item">
-          <span class="news-date">${n.date || ''}</span>
-          <div>
-            <div class="news-title">${esc(t(n.title))}</div>
-            ${n.body ? `<div class="news-body">${esc(t(n.body))}</div>` : ''}
-            ${n.url ? `<a class="news-link" href="${n.url}" target="_blank" rel="noopener">${label ? '詳細 →' : 'Read more →'}</a>` : ''}
-          </div>
-        </div>`).join('')}
-    </div>`;
+    <div class="news-list">${allItems.map(renderItem).join('')}</div>`;
 }
 
 // ── Materials ─────────────────────────────────────────────────────────────────
@@ -552,7 +620,7 @@ async function main() {
   renderProjects(projects);
   renderActivities(soc);
   renderOthers(others);
-  renderNews(newsData);
+  renderNews(newsData, pubs, pres, awards);
   renderMaterials(matsData);
   renderFooter(profile);
 

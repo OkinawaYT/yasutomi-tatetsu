@@ -259,10 +259,16 @@ a:hover { text-decoration: underline; }
   grid-template-columns: 90px 1fr;
   gap: var(--spacing-sm); align-items: start;
 }
-.news-date  { font-size: 12px; color: var(--color-text-muted); padding-top: 2px; }
+.news-date  { font-size: 12px; color: var(--color-text-muted); padding-top: 2px; white-space: nowrap; }
 .news-title { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
 .news-body  { font-size: 13px; color: var(--color-text-muted); line-height: 1.6; }
 .news-link  { font-size: 13px; color: var(--color-accent); margin-top: 4px; display: inline-block; }
+.news-tag {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--color-accent); margin-bottom: 3px;
+}
+.news-pin { font-size: 12px; }
 
 /* ===== Materials / Tools ===== */
 .materials-grid {

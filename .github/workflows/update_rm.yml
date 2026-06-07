@@ -2,8 +2,8 @@ name: Sync Researchmap Data
 
 on:
   schedule:
-    - cron: '0 2 * * 1'   # 毎週月曜 AM2:00 JST (UTC+9)
-  workflow_dispatch:        # 手動実行可
+    - cron: '0 16 * * *'   # 毎日 AM1:00 JST (= UTC 16:00)
+  workflow_dispatch:         # 手動実行可
 
 permissions:
   contents: write
