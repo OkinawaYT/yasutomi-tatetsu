@@ -1,0 +1,40 @@
+{
+  "updated": "2026-06-07",
+  "items": [
+    {
+      "id": "32209637",
+      "name": "Japan Association for Institutional Research",
+      "name_ja": "日本IR協会",
+      "from_date": "2021-04-01",
+      "to_date": null
+    },
+    {
+      "id": "33163119",
+      "name": "Japanese consortium of Accreditation coordinators for higher education",
+      "name_ja": "大学評価コンソーシアム",
+      "from_date": "2019-07-01",
+      "to_date": null
+    },
+    {
+      "id": "30214091",
+      "name": "The Japan Institute of Metals and Materials",
+      "name_ja": "日本金属学会",
+      "from_date": "2019-02-01",
+      "to_date": null
+    },
+    {
+      "id": "30274597",
+      "name": "The Magnetics Society of Japan",
+      "name_ja": "日本磁気学会",
+      "from_date": "2018-12-01",
+      "to_date": "2026-03-01"
+    },
+    {
+      "id": "30212849",
+      "name": "The Physical Society of Japan",
+      "name_ja": "日本物理学会",
+      "from_date": "2008-04-01",
+      "to_date": null
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "updated": "2026-06-07",
+  "items": [
+    {
+      "id": "52975050",
+      "subject": "Introduction to Mathematics, data science, and AI",
+      "subject_ja": "数理・データサイエンス・AI応用",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "from_date": "2026-04-01",
+      "to_date": null
+    },
+    {
+      "id": "51226166",
+      "subject": "Statistical Mechanics",
+      "subject_ja": "統計力学",
+      "institution": "University of the Ryukyus",
+      "institution_ja": "琉球大学",
+      "from_date": "2025-09-01",
+      "to_date": "2026-02-01"
+    },
+    {
+      "id": "51226162",
+      "subject": "Solid State Physics",
+      "subject_ja": "物性論",
+      "institution": "University of the Ryukyus",
+      "institution_ja": "琉球大学",
+      "from_date": "2025-05-01",
+      "to_date": "2025-08-01"
+    },
+    {
+      "id": "51226159",
+      "subject": "Advanced Statistical Mechanics",
+      "subject_ja": "統計力学特論",
+      "institution": "University of the Ryukyus",
+      "institution_ja": "琉球大学",
+      "from_date": "2025-05-01",
+      "to_date": "2025-08-01"
+    },
+    {
+      "id": "49762061",
+      "subject": "アカデミックスキル特別講義〜データ処理入門〜",
+      "subject_ja": "アカデミックスキル特別講義〜データ処理入門〜",
+      "institution": null,
+      "institution_ja": null,
+      "from_date": "2025-04-01",
+      "to_date": "2025-06-01"
+    },
+    {
+      "id": "43006126",
+      "subject": "Introduction to data science",
+      "subject_ja": "データサイエンス概論",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "from_date": "2023-09-01",
+      "to_date": "2026-03-01"
+    },
+    {
+      "id": "41765326",
+      "subject": "Introduction to Mathematics, data science, and AI",
+      "subject_ja": "数理・データサイエンス・AI入門",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "from_date": "2023-04-01",
+      "to_date": null
+    },
+    {
+      "id": "41338071",
+      "subject": "Special Lecture of Academic Skills",
+      "subject_ja": "アカデミックスキル特別講義~データ活用のためのアプリ開発~",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "from_date": "2023-02-01",
+      "to_date": null
+    },
+    {
+      "id": "33163111",
+      "subject": "Physics",
+      "subject_ja": "物理学",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "from_date": "2019-04-01",
+      "to_date": null
+    },
+    {
+      "id": "33163110",
+      "subject": "Introduction to science",
+      "subject_ja": "科学入門",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "from_date": "2018-10-01",
+      "to_date": null
+    },
+    {
+      "id": "33163116",
+      "subject": "Topics of physics (II)",
+      "subject_ja": "物理学トピックスII",
+      "institution": "University of the Ryukyus",
+      "institution_ja": "琉球大学",
+      "from_date": "2016-11-01",
+      "to_date": null
+    }
+  ]
+}

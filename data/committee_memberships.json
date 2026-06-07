@@ -1,0 +1,32 @@
+{
+  "updated": "2026-06-07",
+  "items": [
+    {
+      "id": "50799354",
+      "name": "ナノスケール磁性体の高機能化・新物性調査専門委員会",
+      "name_ja": "ナノスケール磁性体の高機能化・新物性調査専門委員会",
+      "organization": null,
+      "from_date": "2025-07-01",
+      "to_date": null,
+      "role": null
+    },
+    {
+      "id": "48094260",
+      "name": "アジア磁気学会連合国際会議(IcAUMS2025) 現地実行委員",
+      "name_ja": "アジア磁気学会連合国際会議(IcAUMS2025) 現地実行委員",
+      "organization": null,
+      "from_date": "2024-04-01",
+      "to_date": "2025-04-01",
+      "role": null
+    },
+    {
+      "id": "41338086",
+      "name": "教学マネジメントに関するワーキンググループ",
+      "name_ja": "教学マネジメントに関するワーキンググループ",
+      "organization": null,
+      "from_date": "2022-04-01",
+      "to_date": "2023-05-01",
+      "role": null
+    }
+  ]
+}

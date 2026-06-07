@@ -1,0 +1,1505 @@
+{
+  "updated": "2026-06-07",
+  "items": [
+    {
+      "id": "53753914",
+      "title": "Discovery and mechanistic study of Pd-based ordered alloy nanoparticles with A13-type structure",
+      "title_ja": "Discovery and mechanistic study of Pd-based ordered alloy nanoparticles with A13-type structure",
+      "date": "2026-04-30",
+      "event": "The 24th Annual Meeting of the Society of Nano Science and Technology",
+      "location": "Yamaguchi University",
+      "type": "oral_presentation",
+      "authors": "Dingchen WEN, Kenshi MATSUMOTO, Yasutomi TATETSU, Toshiharu TERANISHI"
+    },
+    {
+      "id": "53536239",
+      "title": "磁性物質研究における機械学習ポテンシャルの実用性検証",
+      "title_ja": "磁性物質研究における機械学習ポテンシャルの実用性検証",
+      "date": "2026-04-26",
+      "event": "九州・沖縄・山口磁気セミナー",
+      "location": "波照間島(沖縄県)",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "51559916",
+      "title": "Exploring the Potential and Challenges of Computational Science in Hard Magnetic Materials",
+      "title_ja": "Exploring the Potential and Challenges of Computational Science in Hard Magnetic Materials",
+      "date": "2025-11-26",
+      "event": "The Korean Magnetic Society 2025 Winter Conference",
+      "location": "Busan, Korea",
+      "type": "invited_oral_presentation",
+      "authors": "Yasutomi Tatetsu"
+    },
+    {
+      "id": "51559926",
+      "title": "キャンパスプログラム実践報告〜PBLで生まれた受講生の課題解決アプリケーション〜",
+      "title_ja": "キャンパスプログラム実践報告〜PBLで生まれた受講生の課題解決アプリケーション〜",
+      "date": "2025-11-07",
+      "event": null,
+      "location": "虎ノ門ヒルズフォーラム",
+      "type": "nominated_symposium",
+      "authors": null
+    },
+    {
+      "id": "51559910",
+      "title": "Exploring stable sites and compositional ranges in Sm2Fe17Mx (M = H, C, N) using neural network potentials",
+      "title_ja": "Exploring stable sites and compositional ranges in Sm2Fe17Mx (M = H, C, N) using neural network potentials",
+      "date": "2025-10-28",
+      "event": "The 70th Annual Conference on Magnetism and Magnetic Materials",
+      "location": "Palm Beach, Florida",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu"
+    },
+    {
+      "id": "51559912",
+      "title": "Exploring the Efficacy of Neural Network Potentials for Stability Prediction in Magnetic Materials",
+      "title_ja": "Exploring the Efficacy of Neural Network Potentials for Stability Prediction in Magnetic Materials",
+      "date": "2025-10-20",
+      "event": "12th International Conference on Fine Particle Magnetism",
+      "location": "Bariloche, Patagonia",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Kenshi Matsumoto, Ryota Sato, Toshiharu Teranishi"
+    },
+    {
+      "id": "51189043",
+      "title": "AI活用を見据えたIR",
+      "title_ja": "AI活用を見据えたIR",
+      "date": "2025-09-11",
+      "event": "沖縄県立看護大学FD研修会",
+      "location": "オンライン",
+      "type": "public_discourse",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "50728686",
+      "title": "教学IRについて",
+      "title_ja": "教学IRについて",
+      "date": "2025-08-09",
+      "event": "京都府立医科大学 令和７年度夏季課題集中検討会",
+      "location": "京都府立医科大学",
+      "type": "keynote_oral_presentation",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "50349510",
+      "title": "Using no-code platforms within Google Workspace to bridge and empower educators",
+      "title_ja": "Using no-code platforms within Google Workspace to bridge and empower educators",
+      "date": "2025-07-01",
+      "event": "ISTE LIVE 25",
+      "location": "サンアントニオ",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu"
+    },
+    {
+      "id": "50349521",
+      "title": "学生独自の問題解決につなげる自作モバイルアプリケーション開発",
+      "title_ja": "学生独自の問題解決につなげる自作モバイルアプリケーション開発",
+      "date": "2025-06-11",
+      "event": "Interop25",
+      "location": "幕張メッセ",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 有賀 啓之"
+    },
+    {
+      "id": "49762026",
+      "title": "人材育成現場から考えるDX",
+      "title_ja": "人材育成現場から考えるDX",
+      "date": "2025-05-23",
+      "event": "北海道ビジネス ITフェス'25",
+      "location": "札幌",
+      "type": "public_discourse",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "49151011",
+      "title": "変化を楽しむ大学へ 〜Google Workspace ✕ AI〜",
+      "title_ja": "変化を楽しむ大学へ 〜Google Workspace ✕ AI〜",
+      "date": "2025-03-19",
+      "event": "「Google Cloud と目指す、大学 DX の未来」",
+      "location": "オンライン",
+      "type": "public_discourse",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "49762016",
+      "title": "ITツールから生成系AI時代の仕事を考える",
+      "title_ja": "ITツールから生成系AI時代の仕事を考える",
+      "date": "2024-10-18",
+      "event": "沖縄ビジネスIT フェス'24",
+      "location": "沖縄",
+      "type": "public_discourse",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "48093577",
+      "title": "Applying neural network potentials for magnetic compounds and verification of their precision",
+      "title_ja": "磁性物質へのNeural Network Potentialの適用と精度検証",
+      "date": "2024-09-25",
+      "event": "第48回日本磁気学会学術講演会",
+      "location": "秋田大学",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Kenshi Matsumoto, Ryota Sato, Toshiharu Teranishi"
+    },
+    {
+      "id": "48093544",
+      "title": "Verification of a versatile atom-level simulator for exploring magnetic materials",
+      "title_ja": "磁性物質探索に向けた汎用原子レベルシミュレータの検証",
+      "date": "2024-09-19",
+      "event": "日本金属学会2024年秋季講演(第175回)大会",
+      "location": "大阪大学",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Kenshi Matsumoto, Ryota Sato, Toshiharu Teranishi"
+    },
+    {
+      "id": "53754059",
+      "title": "Inter-Element Miscibility Driven Stabilization of Unprecedented Ordered Alloy",
+      "title_ja": "元素間相溶性を駆動力とした前例のない規則合金相の安定化",
+      "date": "2024-09-16",
+      "event": "The 85th JSAP Autumn Meeting2024",
+      "location": "TOKI MESSE",
+      "type": "oral_presentation",
+      "authors": "Kenshi Matsumoto, Ryota Sato, Yasutomi Tatetsu, Masaki Kudo, Toshiharu Teranishi"
+    },
+    {
+      "id": "47553190",
+      "title": "永久磁石材料に対する計算科学的研究",
+      "title_ja": "永久磁石材料に対する計算科学的研究",
+      "date": "2024-08-28",
+      "event": "日本電気学会産業応用部門大会",
+      "location": "水戸",
+      "type": "nominated_symposium",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "47021420",
+      "title": "Theoretical analysis for the stability of magnetic ternary alloys",
+      "title_ja": "Theoretical analysis for the stability of magnetic ternary alloys",
+      "date": "2024-07-05",
+      "event": "International Conference on Magnetism 2024",
+      "location": "ボローニャ",
+      "type": "invited_oral_presentation",
+      "authors": "Yasutomi Tatetsu, Kenshi Matsumoto, Ryota Sato, Toshiharu Teranishi"
+    },
+    {
+      "id": "46692820",
+      "title": "Google謹製ノーコードツールAppSheetから読み解く時代予想",
+      "title_ja": "Google謹製ノーコードツールAppSheetから読み解く時代予想",
+      "date": "2024-05-25",
+      "event": "フロンティアーズカンファレンス2024",
+      "location": "北海道",
+      "type": "invited_oral_presentation",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "46799869",
+      "title": "元素間相溶性により安定化された前例のない規則合金相ナノ粒子",
+      "title_ja": "元素間相溶性により安定化された前例のない規則合金相ナノ粒子",
+      "date": "2024-05-22",
+      "event": "ナノ学会第22回大会",
+      "location": "東北大学",
+      "type": "oral_presentation",
+      "authors": "松本 憲志, 佐藤 良太, 立津 慶幸, 工藤 昌輝, 寺西 利治"
+    },
+    {
+      "id": "46692825",
+      "title": "機械学習を効果的に利用して Claris FileMaker カスタム App に反映させる",
+      "title_ja": "機械学習を効果的に利用して Claris FileMaker カスタム App に反映させる",
+      "date": "2023-11-08",
+      "event": "Claris Engage Japan 2023",
+      "location": "東京",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 有賀 啓之"
+    },
+    {
+      "id": "46692824",
+      "title": "キャンパスプログラム採用で実現した学生主体の問題解決講義（PBL）の実践 〜沖縄県 名桜大学〜",
+      "title_ja": "キャンパスプログラム採用で実現した学生主体の問題解決講義（PBL）の実践 〜沖縄県 名桜大学〜",
+      "date": "2023-11-08",
+      "event": "Claris Engage Japan 2023",
+      "location": "東京",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 有賀 啓之"
+    },
+    {
+      "id": "43005758",
+      "title": "Create innovative environments in education fields using AppSheet",
+      "title_ja": "AppSheet を使った校務・業務改善",
+      "date": "2023-08-30",
+      "event": "Teach with Chrome 2023〜クラウド時代を生き抜くための Google for Education 講座〜",
+      "location": "オンライン",
+      "type": "invited_oral_presentation",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "50583876",
+      "title": "データを活用した自律的な学習支援センターの仕組み作りについて",
+      "title_ja": "データを活用した自律的な学習支援センターの仕組み作りについて",
+      "date": "2023-08-22",
+      "event": "第18回日本リメディアル教育学会全国大会",
+      "location": "江戸川大学",
+      "type": "invited_oral_presentation",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "43006110",
+      "title": "Using data in education fields",
+      "title_ja": "データ利活用",
+      "date": "2023-07-18",
+      "event": "沖縄県データ利活用ワークショップ",
+      "location": "沖縄市青少年センター",
+      "type": "invited_oral_presentation",
+      "authors": "Yasutomi Tatetsu"
+    },
+    {
+      "id": "43005749",
+      "title": "Probably you can do it with Google tools",
+      "title_ja": "それ、Googleならできるかも〜教育機関の活用事例〜",
+      "date": "2023-06-15",
+      "event": "EDIX関西2023",
+      "location": "インテックス大阪",
+      "type": "invited_oral_presentation",
+      "authors": "Yasutomi Tatetsu"
+    },
+    {
+      "id": "43005717",
+      "title": "Security and promotional activities of Google Workspace",
+      "title_ja": "Google Workspaceのセキュリティと普及活動",
+      "date": "2023-04-11",
+      "event": "Google Workspace Japan Users Group",
+      "location": "オンライン",
+      "type": "others",
+      "authors": "Yasutomi Tatetsu"
+    },
+    {
+      "id": "43005662",
+      "title": "学生健診における結果返却予約システムの導入",
+      "title_ja": "学生健診における結果返却予約システムの導入",
+      "date": "2022-10-01",
+      "event": "第60回全国大学保健管理研究集会",
+      "location": "神奈川",
+      "type": "poster_presentation",
+      "authors": "大城 真理子, 古波津 香織, 永嶺 弓子, 壬生 えみり, 垣花 啓太, 中里 収 et al."
+    },
+    {
+      "id": "43005972",
+      "title": "Startup program for institutional research in education",
+      "title_ja": "教学IRスタートアッププログラム",
+      "date": "2022-08-17",
+      "event": "教学IRスタートアッププログラム",
+      "location": "オンライン",
+      "type": "public_discourse",
+      "authors": "Yasutomi Tatetsu"
+    },
+    {
+      "id": "43005956",
+      "title": "Case study of using Google Workspace for institutional research",
+      "title_ja": "教学IRにおけるGoogle Workspaceの利用事例",
+      "date": "2022-07-29",
+      "event": "教学IRスタートアッププログラム",
+      "location": "オンライン",
+      "type": "invited_oral_presentation",
+      "authors": "Yasutomi Tatetsu"
+    },
+    {
+      "id": "43005736",
+      "title": "Challenge for digital transformation using data in the education fields with Google Workspace",
+      "title_ja": "Google Workspaceを活用した教育現場におけるデータ利活用とDXへのチャレンジ",
+      "date": "2021-12-08",
+      "event": "Google Workspace Japan Users Group",
+      "location": "オンライン",
+      "type": "others",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "43005915",
+      "title": "Make your bonds stronger using Google Workspace",
+      "title_ja": "GWS推進を通じた沖縄県商工会青年部連合会の組織強化について",
+      "date": "2021-07-24",
+      "event": "第44回若い経営者の主張発表県大会",
+      "location": "沖縄",
+      "type": "invited_oral_presentation",
+      "authors": "Yasutomi Tatetsu"
+    },
+    {
+      "id": "36778349",
+      "title": "Creation of New-Type FePd<sub>3</sub> Layered Alloy Derived from Elemental Miscibility of Third Element",
+      "title_ja": "第三元素の固溶性を駆動力とした新規FePd<sub>3</sub>層状合金の形成",
+      "date": "2021-05-22",
+      "event": "ナノ学会第19回大会",
+      "location": "名古屋工業大学",
+      "type": "oral_presentation",
+      "authors": "松本 憲志, 佐藤 良太, 立津 慶幸, 寺西 利治"
+    },
+    {
+      "id": "43005803",
+      "title": "Case study and challenges of using Google Workspace in a small scale public university",
+      "title_ja": "小規模公立大学におけるGoogle Workspaceの活用事例と課題",
+      "date": "2021-05-14",
+      "event": "大学の DX（デジタルトランスフォーメーション）をスマートに実現する Google Workspace for Education ご紹介セミナー",
+      "location": "オンライン",
+      "type": "invited_oral_presentation",
+      "authors": "Yasutomi Tatetsu"
+    },
+    {
+      "id": "43005721",
+      "title": "Case study of using Google Workspace in a study support center",
+      "title_ja": "学習支援現場におけるGoogle Workspaceの利用事例紹介",
+      "date": "2020-12-17",
+      "event": "Google Workspace Japan Users Group",
+      "location": "オンライン",
+      "type": "public_discourse",
+      "authors": "Yasutomi Tatetsu"
+    },
+    {
+      "id": "50145611",
+      "title": "相対論効果を考慮したバンド計算による白金族元素Pd及び希土類水素化物LaH<sub>2</sub>, LaH<sub>3</sub>の電子状態の理論的研究",
+      "title_ja": "相対論効果を考慮したバンド計算による白金族元素Pd及び希土類水素化物LaH<sub>2</sub>, LaH<sub>3</sub>の電子状態の理論的研究",
+      "date": "2020-12-01",
+      "event": "第20回琉球物性研究会",
+      "location": "琉球大学",
+      "type": "oral_presentation",
+      "authors": "土田 龍太郎, 山川 結衣, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "33163088",
+      "title": "Googleフォームを利用した在校生健診予約システムの作成と運用",
+      "title_ja": "Googleフォームを利用した在校生健診予約システムの作成と運用",
+      "date": "2020-11-01",
+      "event": "第58回全国大学保健管理研究集会",
+      "location": "オンライン",
+      "type": "poster_presentation",
+      "authors": "大城真理子, 長嶺育史, 島袋ちあき, 新里利香, 立津慶幸"
+    },
+    {
+      "id": "33163089",
+      "title": "Band diagram and Fermi surface of Pd",
+      "title_ja": "Pdのバンド構造とフェルミ面",
+      "date": "2020-09-01",
+      "event": "日本物理学会2020年秋季大会",
+      "location": "オンライン",
+      "type": "poster_presentation",
+      "authors": "土田 龍太郎, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50145685",
+      "title": "Contribution of the 5f electronic component of the Fermi surface of Ac and Th",
+      "title_ja": "Contribution of the 5f electronic component of the Fermi surface of Ac and Th",
+      "date": "2020-03-22",
+      "event": "The 3rd Univ. Ryukyus International Symposium of Theoretical and Computational Science (RIS-TCS 2020) -Frontier of Physics and Chemistry-",
+      "location": "琉球大学",
+      "type": "poster_presentation",
+      "authors": "R. Tsuchida, Y. Yamakawa, Y. Tatetsu, T. Maehira"
+    },
+    {
+      "id": "33163090",
+      "title": "Synthesis and Magnetic Properties of Ternary Fe-Ni-Pd Alloy Nanoparticles",
+      "title_ja": "Fe-Ni-Pd三元系合金ナノ粒子の合成と磁気特性",
+      "date": "2020-03-22",
+      "event": "日本化学会第100春季年会",
+      "location": "東京理科大学",
+      "type": "oral_presentation",
+      "authors": "金子 諒太, 佐藤 良太, 立津 慶幸, 寺西 利治"
+    },
+    {
+      "id": "33163091",
+      "title": "Contribution of the 5f electronic component in the formation of the Fermi surgace of Ac and Th",
+      "title_ja": "AcとThのフェルミ面における5f電子系の寄与",
+      "date": "2020-03-17",
+      "event": "日本物理学会第75回年次大会",
+      "location": "名古屋大学",
+      "type": "poster_presentation",
+      "authors": "土田 龍太郎, 山川 結衣, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50146776",
+      "title": "第一原理計算によるSmFe<sub>12</sub>の表面の安定性と界面の磁気特性の解明",
+      "title_ja": "第一原理計算によるSmFe<sub>12</sub>の表面の安定性と界面の磁気特性の解明",
+      "date": "2020-03-01",
+      "event": "2020年春季(第166回)日本金属学会",
+      "location": "東工大",
+      "type": "oral_presentation",
+      "authors": "塩沢 知春, 相内 優太, 立津 慶幸, 合田 義弘"
+    },
+    {
+      "id": "50146774",
+      "title": "第一原理計算によるNd-Fe合金の構造同定",
+      "title_ja": "第一原理計算によるNd-Fe合金の構造同定",
+      "date": "2020-03-01",
+      "event": "2020年春季(第166回)日本金属学会",
+      "location": "東工大",
+      "type": "oral_presentation",
+      "authors": "相内 優太, 立津 慶幸, 寺澤 麻子, 合田 義弘"
+    },
+    {
+      "id": "50146770",
+      "title": "First-principles study for material science",
+      "title_ja": "First-principles study for material science",
+      "date": "2020-03-01",
+      "event": "OISTセミナー",
+      "location": "OIST",
+      "type": "invited_oral_presentation",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "53754308",
+      "title": "First Synthesis of Mille-Feuille FePd3 Framework by the Introduction of a Third Element",
+      "title_ja": "First Synthesis of Mille-Feuille FePd3 Framework by the Introduction of a Third Element",
+      "date": "2019-11-06",
+      "event": "OKINAWA COLLOIDS 2019",
+      "location": "万国津梁館",
+      "type": "poster_presentation",
+      "authors": "Kenshi Matsumoto, Ryota Sato, Yasutomi Tatetsu, Toshiharu Teranishi"
+    },
+    {
+      "id": "50146766",
+      "title": "Fe-Pd-In新奇化合物の構造安定性に関する理論的研究",
+      "title_ja": "Fe-Pd-In新奇化合物の構造安定性に関する理論的研究",
+      "date": "2019-11-01",
+      "event": "第19回琉球大学物性研究会",
+      "location": "琉球大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 松本 憲志, 佐藤 良太, 寺西 利治"
+    },
+    {
+      "id": "50146765",
+      "title": "Th化合物の電子構造 -フェルミ面への5f電子の寄与について-",
+      "title_ja": "Th化合物の電子構造 -フェルミ面への5f電子の寄与について-",
+      "date": "2019-11-01",
+      "event": "第19回琉球大学物性研究会",
+      "location": "琉球大学",
+      "type": "poster_presentation",
+      "authors": "土田 龍太郎, 山川 結衣, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "33163092",
+      "title": "微量第三元素の固溶性を駆動力とした新奇規則合金ナノ粒子の形成",
+      "title_ja": "微量第三元素の固溶性を駆動力とした新奇規則合金ナノ粒子の形成",
+      "date": "2019-05-09",
+      "event": "ナノ学会第17回大会",
+      "location": "鹿児島県",
+      "type": "oral_presentation",
+      "authors": "松本 憲志, 佐藤 良太, 立津 慶幸, 寺西 利治"
+    },
+    {
+      "id": "50146758",
+      "title": "磁性物質内における添加物の計算科学的評価",
+      "title_ja": "磁性物質内における添加物の計算科学的評価",
+      "date": "2019-05-01",
+      "event": "第20回九州・山口・沖縄磁気セミナー",
+      "location": "上天草市",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 松本 憲志, 佐藤 良太, 寺西 利治"
+    },
+    {
+      "id": "33163095",
+      "title": "永久磁石に対する計算科学的アプローチ",
+      "title_ja": "永久磁石に対する計算科学的アプローチ",
+      "date": "2019-03-01",
+      "event": "平成31年電気学会全国大会",
+      "location": "北海道科学大学",
+      "type": "invited_oral_presentation",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "33163094",
+      "title": "トリゴナル化合物の電子構造",
+      "title_ja": "トリゴナル化合物の電子構造",
+      "date": "2019-03-01",
+      "event": "日本物理学会2019春季大会",
+      "location": "九州大学",
+      "type": "poster_presentation",
+      "authors": "宮里 隼人, 山川 結衣, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "33163093",
+      "title": "Th化合物の電子構造",
+      "title_ja": "Th化合物の電子構造",
+      "date": "2019-03-01",
+      "event": "日本物理学会2019春季大会",
+      "location": "九州大学",
+      "type": "poster_presentation",
+      "authors": "山川 結衣, 宮里 隼人, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50146628",
+      "title": "ネオジム永久磁石の電子論的研究",
+      "title_ja": "ネオジム永久磁石の電子論的研究",
+      "date": "2018-11-01",
+      "event": "第18回琉球大学物性研究会",
+      "location": "琉球大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "50146614",
+      "title": "First-principles study on searching for the stable subphase structures in Ga-doped Nd-Fe-B sintered magnets",
+      "title_ja": "First-principles study on searching for the stable subphase structures in Ga-doped Nd-Fe-B sintered magnets",
+      "date": "2018-10-01",
+      "event": "NIMS Week 2018",
+      "location": "茨城",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146611",
+      "title": "Role of typical elements in Nd<sub>2</sub>Fe<sub>14</sub>X (X = B, C, N, O, F)",
+      "title_ja": "Role of typical elements in Nd<sub>2</sub>Fe<sub>14</sub>X (X = B, C, N, O, F)",
+      "date": "2018-10-01",
+      "event": "NIMS Week 2018",
+      "location": "茨城",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Yosuke Harashima, Takashi Miyake, Yoshihiro Gohda"
+    },
+    {
+      "id": "33163100",
+      "title": "PbX(X:S, Se, Te)のドハース・ファンアルフェン効果と磁気抵抗",
+      "title_ja": "PbX(X:S, Se, Te)のドハース・ファンアルフェン効果と磁気抵抗",
+      "date": "2018-09-01",
+      "event": "日本物理学会2018年秋季大会",
+      "location": "同志社大学",
+      "type": "oral_presentation",
+      "authors": "仲井間 憲李, 川勝 祥矢, 垣花 将司, 宮里 隼人, 山川 結衣, 立津 慶幸 et al."
+    },
+    {
+      "id": "30216498",
+      "title": "de Haas–van Alphen Effect and Magnetoresistance of PbTe",
+      "title_ja": "PbTeのドハース・ファンアルフェン効果と磁気抵抗",
+      "date": "2018-09-01",
+      "event": "Meeting Abstracts of the Physical Society of Japan",
+      "location": "同志社大学",
+      "type": "oral_presentation",
+      "authors": "Kawakatsu S., Hagiwara M., Takeuchi T., Aoki D., Nakamura A., Hedo M. et al."
+    },
+    {
+      "id": "30216497",
+      "title": "Electronic structure of Narrow-Gap Semiconductors : InP,InAs, and InSb",
+      "title_ja": "Narrow-Gap半導体(InP, InAs, InSb)の電子構造",
+      "date": "2018-09-01",
+      "event": "Meeting Abstracts of the Physical Society of Japan",
+      "location": "同志社大学",
+      "type": "poster_presentation",
+      "authors": "Miyazato H., Yamakawa Y., Tatetsu Y., Maehira T."
+    },
+    {
+      "id": "30216496",
+      "title": "Electronic structure of minority carrier compound PbX(X: S, Se, Te)",
+      "title_ja": "少数キャリア系化合物PbX(X:S, Se, Te)の電子構造",
+      "date": "2018-09-01",
+      "event": "Meeting Abstracts of the Physical Society of Japan",
+      "location": "同志社大学",
+      "type": "poster_presentation",
+      "authors": "Yamakawa Y., Miyazato H., Kawakatsu S., Nakaima K., Tatetsu Y., Hedo M. et al."
+    },
+    {
+      "id": "50146277",
+      "title": "Ab-initio study on Ga-added Nd-Fe-B sintered magnets",
+      "title_ja": "Ab-initio study on Ga-added Nd-Fe-B sintered magnets",
+      "date": "2018-08-01",
+      "event": "REPM 2018",
+      "location": "北京",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146274",
+      "title": "First-principles study on typical elements in Nd<sub>2</sub>Fe<sub>14</sub>X (X = B, C, N, O, F)",
+      "title_ja": "First-principles study on typical elements in Nd<sub>2</sub>Fe<sub>14</sub>X (X = B, C, N, O, F)",
+      "date": "2018-07-01",
+      "event": "ICM 2018",
+      "location": "サンフランシスコ",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Yosuke Harashima, Takashi Miyake, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146267",
+      "title": "Ab-initio simulation of Ga-doped Nd-Fe-B magnets",
+      "title_ja": "Ab-initio simulation of Ga-doped Nd-Fe-B magnets",
+      "date": "2018-06-01",
+      "event": "IcAUMS 2018",
+      "location": "チェジュ",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146264",
+      "title": "Electronic states and magnetic properties on Nd-Fe-B sintered magnets studied by first-principles calculations",
+      "title_ja": "Electronic states and magnetic properties on Nd-Fe-B sintered magnets studied by first-principles calculations",
+      "date": "2018-04-01",
+      "event": "Intermag 2018",
+      "location": "シンガポール",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146261",
+      "title": "Ga添加型Nd焼結磁石界面に対する第一原理的研究",
+      "title_ja": "Ga添加型Nd焼結磁石界面に対する第一原理的研究",
+      "date": "2018-04-01",
+      "event": "物性研究所スパコン共同利用・CCMS合同研究会",
+      "location": "東大物性研",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 合田 義弘"
+    },
+    {
+      "id": "33163102",
+      "title": "Nd-Fe-B焼結磁石の二粒子粒界相に関する第一原理計算",
+      "title_ja": "Nd-Fe-B焼結磁石の二粒子粒界相に関する第一原理計算",
+      "date": "2018-03-18",
+      "event": "第65回応用物理学会春季学術講演会",
+      "location": "早稲田大学",
+      "type": "oral_presentation",
+      "authors": "相内 優太, 立津 慶幸, 合田 義弘"
+    },
+    {
+      "id": "50146258",
+      "title": "Computational approach to the magnetic properties of Ga-added Nd-Fe-B sintered magnets",
+      "title_ja": "Computational approach to the magnetic properties of Ga-added Nd-Fe-B sintered magnets",
+      "date": "2018-03-01",
+      "event": "TMS 2018",
+      "location": "フェニックス",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146257",
+      "title": "First-principles study on the role of Nd<sub>2</sub>Fe<sub>14</sub>B",
+      "title_ja": "First-principles study on the role of Nd<sub>2</sub>Fe<sub>14</sub>B",
+      "date": "2018-03-01",
+      "event": "APS March Meeting 2018",
+      "location": "ロサンゼルス",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Yosuke Harashima, Takashi Miyake, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146253",
+      "title": "「京」によるネオジム磁石組織界面の第一原理計算",
+      "title_ja": "「京」によるネオジム磁石組織界面の第一原理計算",
+      "date": "2018-03-01",
+      "event": "第3回元素戦略プロジェクト <研究拠点形成型>/大型研究施設連携シンポジウム〜局所構造制御で物質から材料へ〜",
+      "location": "東京大学",
+      "type": "poster_presentation",
+      "authors": "合田 義弘, 立津 慶幸, 常行 真司"
+    },
+    {
+      "id": "33163101",
+      "title": "YAl<sub>2</sub>の電子構造",
+      "title_ja": "YAl<sub>2</sub>の電子構造",
+      "date": "2018-03-01",
+      "event": "日本物理学会2018年春季大会",
+      "location": "東京理科大学",
+      "type": "poster_presentation",
+      "authors": "山川 結衣, 宮里 隼人, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "30216495",
+      "title": "Electronic structure of LaAl<sub>2</sub>",
+      "title_ja": "LaAl<sub>2</sub>の電子構造",
+      "date": "2018-03-01",
+      "event": "Meeting Abstracts of the Physical Society of Japan",
+      "location": "東京理科大学",
+      "type": "poster_presentation",
+      "authors": "Miyazato Hayato, Yamakawa Yui, Tatetsu Yasutomi, Maehira Takahiro"
+    },
+    {
+      "id": "50146236",
+      "title": "First-principles study on the magnetic anisotropy around the grain boundaries of Nd-Fe-B magnets",
+      "title_ja": "First-principles study on the magnetic anisotropy around the grain boundaries of Nd-Fe-B magnets",
+      "date": "2017-12-01",
+      "event": "ISAMMA 2017",
+      "location": "フーコック",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146235",
+      "title": "First-principles study on the role Nd<sub>6</sub>Fe<sub>13</sub>Ga in Nd-Fe-B magnets",
+      "title_ja": "First-principles study on the role Nd<sub>6</sub>Fe<sub>13</sub>Ga in Nd-Fe-B magnets",
+      "date": "2017-11-01",
+      "event": "MMM 2017",
+      "location": "ピッツバーグ",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "30216494",
+      "title": "Magnetic anisotropy analysis around the grain boundaries on Ga-doped Nd-Fe-B magnets by first-principles calculations",
+      "title_ja": "第一原理計算によるGa添加型Nd-Fe-B磁石の界面磁気異方性解析",
+      "date": "2017-09-22",
+      "event": "Meeting Abstracts of the Physical Society of Japan",
+      "location": "岩手大学",
+      "type": "oral_presentation",
+      "authors": "Tatetsu Yasutomi, Tsuneyuki Shinji, Gohda Yoshihiro"
+    },
+    {
+      "id": "50146230",
+      "title": "First-principles approach to the magnetic anisotropy at the grain boundaries of Nd-Fe-B magnets",
+      "title_ja": "First-principles approach to the magnetic anisotropy at the grain boundaries of Nd-Fe-B magnets",
+      "date": "2017-09-01",
+      "event": "Junjiro Kanamori Memorial International Symposium",
+      "location": "東京大学",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146228",
+      "title": "First-principles study on the magnetic anisotropy of Ga-added Nd-Fe-B magnets",
+      "title_ja": "First-principles study on the magnetic anisotropy of Ga-added Nd-Fe-B magnets",
+      "date": "2017-09-01",
+      "event": "Frontiers In Materials Science 2017",
+      "location": "グライフスヴァルト",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146221",
+      "title": "Nd-Fe-B磁石の元素添加効果に関する第一原理計算",
+      "title_ja": "Nd-Fe-B磁石の元素添加効果に関する第一原理計算",
+      "date": "2017-07-01",
+      "event": "第2回CDMSI(ポスト「京」重点課題（7）)研究会",
+      "location": "東京大学",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 常行 真司, 合田 義弘"
+    },
+    {
+      "id": "50146218",
+      "title": "First-principles study on element-doping effects in Nd-Fe-B sintered magnets",
+      "title_ja": "First-principles study on element-doping effects in Nd-Fe-B sintered magnets",
+      "date": "2017-05-01",
+      "event": "第75回ナノマグネティクス専門研究会",
+      "location": "東京大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 常行 真司, 合田 義弘"
+    },
+    {
+      "id": "50146217",
+      "title": "First-principles study on element-doping effects in Nd-Fe-B sintered magnets",
+      "title_ja": "First-principles study on element-doping effects in Nd-Fe-B sintered magnets",
+      "date": "2017-04-01",
+      "event": "Intermag 2017",
+      "location": "ダブリン",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "30216493",
+      "title": "First-principles study on Ga-doped Nd-Fe-B magnets",
+      "title_ja": "Ga添加型Nd-Fe-Bの第一原理的研究",
+      "date": "2017-03-17",
+      "event": "Meeting Abstracts of the Physical Society of Japan",
+      "location": "大阪大学",
+      "type": "oral_presentation",
+      "authors": "Tatetsu Yasutomi, Tsuneyuki Shinji, Gohda Yoshihiro"
+    },
+    {
+      "id": "50146213",
+      "title": "Ab-initio study of transition-metal-doping effects on magnetic anisotropy in Nd-Fe-B sintered magnets",
+      "title_ja": "Ab-initio study of transition-metal-doping effects on magnetic anisotropy in Nd-Fe-B sintered magnets",
+      "date": "2017-02-01",
+      "event": "TMS 2017 146th Annual Meeting & Exhibition",
+      "location": "サンディエゴ",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146210",
+      "title": "Nd-Fe-B磁石における微量元素添加の効果と界面電子状態",
+      "title_ja": "Nd-Fe-B磁石における微量元素添加の効果と界面電子状態",
+      "date": "2016-12-01",
+      "event": "第2回ポスト「京」重点課題（7）研究会 「次世代の産業を支える新機能デバイス・高性能材料の創成」",
+      "location": "東京大学",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 常行 真司, 合田 義弘"
+    },
+    {
+      "id": "50146209",
+      "title": "第一原理計算によるNd-Fe-B磁石へのアプローチ",
+      "title_ja": "第一原理計算によるNd-Fe-B磁石へのアプローチ",
+      "date": "2016-11-01",
+      "event": "第16回 琉球大学物性研究会",
+      "location": "琉球大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 常行 真司, 合田 義弘"
+    },
+    {
+      "id": "50146207",
+      "title": "永久磁石の微細構造特性解析と新化合物探索",
+      "title_ja": "永久磁石の微細構造特性解析と新化合物探索",
+      "date": "2016-10-01",
+      "event": "第3回「京」を中核とするHPCIシステム利用研究課題 成果報告会",
+      "location": "東京",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 常行 真司, 合田 義弘"
+    },
+    {
+      "id": "30216492",
+      "title": "Magnetic anisotropy analyses in trace-elements-doped Nd<sub>2</sub>Fe<sub>14</sub>B from first-principles calculations",
+      "title_ja": "第一原理計算による微量元素添加型Nd<sub>2</sub>Fe<sub>14</sub>Bの磁気異方性解析",
+      "date": "2016-09-01",
+      "event": "Meeting Abstracts of the Physical Society of Japan",
+      "location": "金沢大学",
+      "type": "oral_presentation",
+      "authors": "Tatetsu Yasutomi, Tsuneyuki Shinji, Gohda Yoshihiro"
+    },
+    {
+      "id": "50146201",
+      "title": "Ab-initio calculations of magnetic properties in Nd-Fe-B magnets with Cu existing around the interface",
+      "title_ja": "Ab-initio calculations of magnetic properties in Nd-Fe-B magnets with Cu existing around the interface",
+      "date": "2016-08-01",
+      "event": "The 24th International Workshop on Rare-Earth and Future Permanent Magnets and Their Applications",
+      "location": "ダルムシュタット",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146199",
+      "title": "Theoretical analysis of Cu addition effects in Nd-Fe-B magnets",
+      "title_ja": "Theoretical analysis of Cu addition effects in Nd-Fe-B magnets",
+      "date": "2016-08-01",
+      "event": "8th joint European Magnetics Symposia",
+      "location": "グラスゴー",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146198",
+      "title": "磁性材料の高性能化－大規模電子状態計算による探索",
+      "title_ja": "磁性材料の高性能化－大規模電子状態計算による探索",
+      "date": "2016-07-01",
+      "event": "第１回ポスト「京」重点課題(7)研究会",
+      "location": "東京大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 常行 真司, 合田 義弘"
+    },
+    {
+      "id": "50146197",
+      "title": "Ab-initio study on transition-metal-doped Nd-Fe-B magnets",
+      "title_ja": "Ab-initio study on transition-metal-doped Nd-Fe-B magnets",
+      "date": "2016-06-01",
+      "event": "International Symposium on New Horizons in Condensed Matter Physics",
+      "location": "東京大学",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146187",
+      "title": "First-principles study of Cu-doped Nd-Fe-B micrustructure interfaces",
+      "title_ja": "First-principles study of Cu-doped Nd-Fe-B micrustructure interfaces",
+      "date": "2016-05-01",
+      "event": "E-MRS 2016 Spring Meeting",
+      "location": "リール",
+      "type": "oral_presentation",
+      "authors": "Yoshihiro Gohda, Yasutomi Tatetsu, Shinji Tsuneyuki"
+    },
+    {
+      "id": "50146185",
+      "title": "First-principles study of magnetic anisotropy in Cu-doped Nd-Fe-B magnets",
+      "title_ja": "First-principles study of magnetic anisotropy in Cu-doped Nd-Fe-B magnets",
+      "date": "2016-03-01",
+      "event": "2016 MRS Spring Meeting",
+      "location": "フェニックス",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "33163098",
+      "title": "第一原理計算からみたNd-Fe-B磁石界面近傍のCuの役割",
+      "title_ja": "第一原理計算からみたNd-Fe-B磁石界面近傍のCuの役割",
+      "date": "2016-03-01",
+      "event": "日本金属学会2016年春季講演大会",
+      "location": "東京理科大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 常行 真司, 合田 義弘"
+    },
+    {
+      "id": "50146174",
+      "title": "Structural and magnetic properties of Cu-doped Nd-Fe-B magnets studied by first-principles calculations",
+      "title_ja": "Structural and magnetic properties of Cu-doped Nd-Fe-B magnets studied by first-principles calculations",
+      "date": "2016-01-01",
+      "event": "MMM-Intermag 2016",
+      "location": "サンディエゴ",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146168",
+      "title": "ネオジム磁石材料組織副相の第一原理計算",
+      "title_ja": "ネオジム磁石材料組織副相の第一原理計算",
+      "date": "2016-01-01",
+      "event": "第2回元素戦略プロジェクト <研究拠点形成型>/大型研究施設連携シンポジウム",
+      "location": "東京大学",
+      "type": "poster_presentation",
+      "authors": "合田 義弘, 立津 慶幸, 常行 真司"
+    },
+    {
+      "id": "50146166",
+      "title": "First-principles study of Cu-doped Nd-Fe-B magnets",
+      "title_ja": "First-principles study of Cu-doped Nd-Fe-B magnets",
+      "date": "2015-12-01",
+      "event": "The 18th Asian Workshop on First-Principles Electronic Structure Calculations",
+      "location": "東京大学",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "30216470",
+      "title": "Evaluation of Cu existing at the grain boundaries in Nd-Fe-B magnets from first-principles calculations",
+      "title_ja": "第一原理計算によるNd-Fe-B磁石界面近傍のCuの評価",
+      "date": "2015-09-01",
+      "event": "Meeting Abstracts of the Physical Society of Japan",
+      "location": "関西大学",
+      "type": "oral_presentation",
+      "authors": "Tatetsu Yasutomi, Tsuneyuki Shinji, Gohda Yoshihiro"
+    },
+    {
+      "id": "50146164",
+      "title": "First-principles study of the effect of Cu and NdO<sub>x</sub> in Nd<sub>2</sub>Fe<sub>14</sub>B magnets",
+      "title_ja": "First-principles study of the effect of Cu and NdO<sub>x</sub> in Nd<sub>2</sub>Fe<sub>14</sub>B magnets",
+      "date": "2015-07-01",
+      "event": "20th International Conference on Magnetism",
+      "location": "バルセロナ",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146161",
+      "title": "Effects of Cu doping in Nd<sub>2</sub>Fe<sub>14</sub>B/NdO<sub>x</sub> interfaces studied from first principles",
+      "title_ja": "Effects of Cu doping in Nd<sub>2</sub>Fe<sub>14</sub>B/NdO<sub>x</sub> interfaces studied from first principles",
+      "date": "2015-06-01",
+      "event": "ESICMM-G8 Symposium on Next Generation Permanent Magnets",
+      "location": "筑波",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Taisuke Ozaki, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146156",
+      "title": "Theoretical analysis of magnetic structures in the fcc-Fe/Cu(001) system",
+      "title_ja": "Theoretical analysis of magnetic structures in the fcc-Fe/Cu(001) system",
+      "date": "2015-03-01",
+      "event": "APS March Meeting 2015",
+      "location": "テキサス州",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146154",
+      "title": "Theoretical analysis of Fe/Cu(001) ultrathin films by density functional theory",
+      "title_ja": "Theoretical analysis of Fe/Cu(001) ultrathin films by density functional theory",
+      "date": "2014-12-01",
+      "event": "The 2nd International Symposium on Computics: Quantum Simulation and Design",
+      "location": "東京",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146153",
+      "title": "First-principles study of Fe/Cu",
+      "title_ja": "First-principles study of Fe/Cu",
+      "date": "2014-11-01",
+      "event": "The 7th International Symposium on Surface Science",
+      "location": "島根",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50138054",
+      "title": "Euラーベス相構造の電子構造とフェルミ面",
+      "title_ja": "Euラーベス相構造の電子構造とフェルミ面",
+      "date": "2014-09-07",
+      "event": "日本物理学会2014年秋季大会",
+      "location": "中部大学",
+      "type": "poster_presentation",
+      "authors": "渡部 紘幸, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50138053",
+      "title": "強磁性体EuPd<sub>2</sub>の純良単結晶育成とフェルミ面",
+      "title_ja": "強磁性体EuPd<sub>2</sub>の純良単結晶育成とフェルミ面",
+      "date": "2014-09-01",
+      "event": "日本物理学会2014年秋季大会",
+      "location": "中部大学",
+      "type": "oral_presentation",
+      "authors": "大貫 惇睦, 仲村 愛, 赤嶺 拡, 竹内 徹也, 立津 慶幸, 眞榮平 孝裕 et al."
+    },
+    {
+      "id": "50138009",
+      "title": "第一原理計算によるFe/Cu薄膜の電子状態解析",
+      "title_ja": "第一原理計算によるFe/Cu薄膜の電子状態解析",
+      "date": "2014-09-01",
+      "event": "第75回応用物理学会秋季学術講演会",
+      "location": "北海道大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 常行 真司, 合田 義弘"
+    },
+    {
+      "id": "30216473",
+      "title": "Electronic structure calculation of fct-Fe/Cu(001)",
+      "title_ja": "fct-Fe/Cu(001)の電子状態計算",
+      "date": "2014-09-01",
+      "event": "Meeting Abstracts of the Physical Society of Japan",
+      "location": "中部大学",
+      "type": "oral_presentation",
+      "authors": "Tatetsu Yasutomi, Tsuneyuki Shinji, Gohda Yoshihiro"
+    },
+    {
+      "id": "50146143",
+      "title": "First-principles calculation of Fe/Cu(001) magnetic thin films",
+      "title_ja": "First-principles calculation of Fe/Cu(001) magnetic thin films",
+      "date": "2014-06-01",
+      "event": "Physics of Magnetism 2014",
+      "location": "Poznań",
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Shinji Tsuneyuki, Yoshihiro Gohda"
+    },
+    {
+      "id": "50146141",
+      "title": "Fe/Cu(001)磁性薄膜の第一原理計算",
+      "title_ja": "Fe/Cu(001)磁性薄膜の第一原理計算",
+      "date": "2014-03-01",
+      "event": "文部科学省科学研究費新学術領域研究「コンピューティクスによる物質デザイン：複合相関と非平衡ダイナミクス」",
+      "location": "東京大学",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 合田 義弘, 常行 真司"
+    },
+    {
+      "id": "50146139",
+      "title": "First-Principles Simulation of Nd<sub>2</sub>Fe<sub>14</sub>B/Nd-Rich Phases",
+      "title_ja": "First-Principles Simulation of Nd<sub>2</sub>Fe<sub>14</sub>B/Nd-Rich Phases",
+      "date": "2014-03-01",
+      "event": "元素戦略プロジェクト<研究拠点形成型>・大型研究施設連携シンポジウム",
+      "location": "東京大学",
+      "type": "poster_presentation",
+      "authors": "平井 大介, 立津 慶幸, 見澤 英樹, 合田 義弘, 常行 真司, 尾崎 泰助"
+    },
+    {
+      "id": "30216474",
+      "title": "Electronic structure and Fermi surface of YbAl<sub>2</sub>",
+      "title_ja": "YbAl<sub>2</sub>の電子構造とフェルミ面",
+      "date": "2014-03-01",
+      "event": "Meeting Abstracts of the Physical Society of Japan",
+      "location": "東海大学",
+      "type": "poster_presentation",
+      "authors": "Watanabe H., Sato R., Ikeda W., Tatetsu Y., Maehira T."
+    },
+    {
+      "id": "30216475",
+      "title": "Electronic structure of EuPb<sub>3</sub> and CaPb<sub>3</sub>",
+      "title_ja": "EuPb<sub>3</sub>とCaPb<sub>3</sub>の電子構造",
+      "date": "2013-09-01",
+      "event": "Meeting Abstracts of the Physical Society of Japan",
+      "location": "徳島大学",
+      "type": "poster_presentation",
+      "authors": "Watanabe H., Tatetsu Y., Maehira T."
+    },
+    {
+      "id": "50146107",
+      "title": "Nd<sub>2</sub>Fe<sub>14</sub>B焼結磁石における主相-Nd酸化物相界面構造の第一原理計算",
+      "title_ja": "Nd<sub>2</sub>Fe<sub>14</sub>B焼結磁石における主相-Nd酸化物相界面構造の第一原理計算",
+      "date": "2013-08-01",
+      "event": "元素戦略プロジェクト<研究拠点形成型>研究報告会",
+      "location": "東京都",
+      "type": "poster_presentation",
+      "authors": "見澤 英樹, 平井 大介, 立津 慶幸, 合田 義弘, 土浦 宏紀, 常行真司"
+    },
+    {
+      "id": "50146097",
+      "title": "Fermi surfaces of Eu compounds",
+      "title_ja": "Fermi surfaces of Eu compounds",
+      "date": "2013-08-01",
+      "event": "Strongly Correlated Electron Systems 2013",
+      "location": "東京大学",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Takahiro Maehira"
+    },
+    {
+      "id": "50146094",
+      "title": "アクチナイド化合物の電子構造",
+      "title_ja": "アクチナイド化合物の電子構造",
+      "date": "2013-06-01",
+      "event": "強相関f電子系研究会",
+      "location": "琉球大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸"
+    },
+    {
+      "id": "50138060",
+      "title": "EuBi<sub>3</sub>の純良単結晶育成と磁性",
+      "title_ja": "EuBi<sub>3</sub>の純良単結晶育成と磁性",
+      "date": "2013-03-01",
+      "event": "日本物理学会第67回年次大会",
+      "location": "横浜国立大学",
+      "type": "oral_presentation",
+      "authors": "大貫 惇睦, 仲村 愛, 平仲 裕一, 辺土 正人, 仲間 隆男, 立津 慶幸 et al."
+    },
+    {
+      "id": "50138059",
+      "title": "立方晶系Yb化合物の電子構造",
+      "title_ja": "立方晶系Yb化合物の電子構造",
+      "date": "2013-03-01",
+      "event": "日本物理学会第67回年次大会",
+      "location": "広島大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50138057",
+      "title": "EuGa<sub>4</sub>の輸送特性に対する圧力効果",
+      "title_ja": "EuGa<sub>4</sub>の輸送特性に対する圧力効果",
+      "date": "2012-11-01",
+      "event": "第53回高圧討論会",
+      "location": "大阪大学",
+      "type": "oral_presentation",
+      "authors": "仲村 愛, 平仲 裕一, 立津 慶幸, 眞榮平 孝裕, 辺土 正人, 仲間 隆男 et al."
+    },
+    {
+      "id": "50146036",
+      "title": "SmSn<sub>3</sub>とLaSn<sub>3</sub>の電子構造",
+      "title_ja": "SmSn<sub>3</sub>とLaSn<sub>3</sub>の電子構造",
+      "date": "2012-09-01",
+      "event": "日本物理学会2012年秋季大会",
+      "location": "横浜国立大学",
+      "type": "poster_presentation",
+      "authors": "眞榮平 孝裕, 立津 慶幸"
+    },
+    {
+      "id": "50138062",
+      "title": "Eu化合物の電子構造",
+      "title_ja": "Eu化合物の電子構造",
+      "date": "2012-09-01",
+      "event": "日本物理学会2012年秋季大会",
+      "location": "横浜国立大学",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50138061",
+      "title": "EuGa<sub>4</sub>の電子状態と圧力効果",
+      "title_ja": "EuGa<sub>4</sub>の電子状態と圧力効果",
+      "date": "2012-09-01",
+      "event": "日本物理学会2012年秋季大会",
+      "location": "横浜国立大学",
+      "type": "oral_presentation",
+      "authors": "仲村 愛, 平仲 裕一, 立津 慶幸, 眞榮平 孝裕, 辺土 正人, 仲間 隆男 et al."
+    },
+    {
+      "id": "50146030",
+      "title": "Electronic Structure of Plutonium Compounds with the Cubic Laves Phase Structure",
+      "title_ja": "Electronic Structure of Plutonium Compounds with the Cubic Laves Phase Structure",
+      "date": "2012-07-01",
+      "event": "Pu Futures 2012",
+      "location": "ケンブリッジ",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Takahiro Maehira"
+    },
+    {
+      "id": "50146025",
+      "title": "Electronic structures of Plutonium compounds with the NaCl-type monochalcogenides structure",
+      "title_ja": "Electronic structures of Plutonium compounds with the NaCl-type monochalcogenides structure",
+      "date": "2012-07-01",
+      "event": "The 19th International Conference on Magnetism 2012",
+      "location": "釜山",
+      "type": "poster_presentation",
+      "authors": "Takahiro Maehira, Eijiro Sakai, Yasutomi Tatetsu"
+    },
+    {
+      "id": "50146023",
+      "title": "Electronic property of ThSn<sub>3</sub> in comparison with uranium and transuranium compounds",
+      "title_ja": "Electronic property of ThSn<sub>3</sub> in comparison with uranium and transuranium compounds",
+      "date": "2012-07-01",
+      "event": "The 19th International Conference on Magnetism 2012",
+      "location": "釜山",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Eijiro Sakai, Takahiro Maehira"
+    },
+    {
+      "id": "50138063",
+      "title": "URh<sub>3</sub>の電子構造",
+      "title_ja": "URh<sub>3</sub>の電子構造",
+      "date": "2012-03-01",
+      "event": "日本物理学会2012年春季大会",
+      "location": "関西学院大学",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50146061",
+      "title": "AnSn<sub>3</sub>(An=Th, U, Np, Pu)の電子構造",
+      "title_ja": "AnSn<sub>3</sub>(An=Th, U, Np, Pu)の電子構造",
+      "date": "2011-11-01",
+      "event": "第11回琉球大学物性研究会",
+      "location": "琉球大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50146017",
+      "title": "Electronic Structure of PuIr<sub>2</sub> and CeIr<sub>2</sub>",
+      "title_ja": "Electronic Structure of PuIr<sub>2</sub> and CeIr<sub>2</sub>",
+      "date": "2011-11-01",
+      "event": "TOKIMEKI2011(International workshop on heavy fermions)",
+      "location": "大阪大学",
+      "type": "poster_presentation",
+      "authors": "Hirochika Teruya, Yasutomi Tatetsu, Takahiro Maehira"
+    },
+    {
+      "id": "50146014",
+      "title": "Origin of the Frequency Branch of the de Haas-van Alphen Effect in CeIr<sub>2</sub>",
+      "title_ja": "Origin of the Frequency Branch of the de Haas-van Alphen Effect in CeIr<sub>2</sub>",
+      "date": "2011-11-01",
+      "event": "TOKIMEKI2011(International workshop on heavy fermions)",
+      "location": "大阪大学",
+      "type": "poster_presentation",
+      "authors": "Takahiro Maehira, Yasutomi Tatetsu"
+    },
+    {
+      "id": "50146011",
+      "title": "Electronic Structure of Plutonium Compounds with the Cubic Laves Phase Structure",
+      "title_ja": "Electronic Structure of Plutonium Compounds with the Cubic Laves Phase Structure",
+      "date": "2011-11-01",
+      "event": "TOKIMEKI2011(International workshop on heavy fermions)",
+      "location": "大阪大学",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Takahiro Maehira"
+    },
+    {
+      "id": "50138045",
+      "title": "PuX(X=S, Se, Te)の電子構造",
+      "title_ja": "PuX(X=S, Se, Te)の電子構造",
+      "date": "2011-09-01",
+      "event": "日本物理学会2011年秋季大会",
+      "location": "富山大学",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 照屋 寛親, 眞榮平 孝裕"
+    },
+    {
+      "id": "50138044",
+      "title": "PuIr<sub>2</sub>とCeIr<sub>2</sub>の電子構造",
+      "title_ja": "PuIr<sub>2</sub>とCeIr<sub>2</sub>の電子構造",
+      "date": "2011-09-01",
+      "event": "日本物理学会2011年秋季大会",
+      "location": "大阪府大",
+      "type": "poster_presentation",
+      "authors": "眞榮平 孝裕, 立津 慶幸, 照屋 寛親"
+    },
+    {
+      "id": "50138043",
+      "title": "Puラーベス相(PuRu<sub>2</sub>,PuRh<sub>2</sub>)の電子構造",
+      "title_ja": "Puラーベス相(PuRu<sub>2</sub>,PuRh<sub>2</sub>)の電子構造",
+      "date": "2011-09-01",
+      "event": "日本物理学会2011年秋季大会",
+      "location": "大阪府大",
+      "type": "poster_presentation",
+      "authors": "照屋 寛親, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50146005",
+      "title": "Electronic properties of Plutonium compounds with cubic Laves phase structure",
+      "title_ja": "Electronic properties of Plutonium compounds with cubic Laves phase structure",
+      "date": "2011-08-01",
+      "event": "Strongly Correlated Electron Systems 2011",
+      "location": "ケンブリッジ",
+      "type": "poster_presentation",
+      "authors": "Takahiro Maehira, Yasutomi Tatetsu"
+    },
+    {
+      "id": "50146004",
+      "title": "First-Principle Calculation for Electronic Properties of PuX<sub>3</sub> (X=Rh, Pd, Pt)",
+      "title_ja": "First-Principle Calculation for Electronic Properties of PuX<sub>3</sub> (X=Rh, Pd, Pt)",
+      "date": "2011-08-01",
+      "event": "Strongly Correlated Electron Systems 2011",
+      "location": "ケンブリッジ",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Takahiro Maehira"
+    },
+    {
+      "id": "50146002",
+      "title": "Electronic structures of Plutonium compounds with the NaCl-type monochalcogenides structure",
+      "title_ja": "Electronic structures of Plutonium compounds with the NaCl-type monochalcogenides structure",
+      "date": "2011-08-01",
+      "event": "26th International Conference on Low Temperature Physics",
+      "location": "北京",
+      "type": "poster_presentation",
+      "authors": "Takahiro Maehira, Yasutomi Tatetsu"
+    },
+    {
+      "id": "50146000",
+      "title": "Electronic property of ThSn<sub>3</sub> in comparison with uranium and transuranium compounds",
+      "title_ja": "Electronic property of ThSn<sub>3</sub> in comparison with uranium and transuranium compounds",
+      "date": "2011-08-01",
+      "event": "26th International Conference on Low Temperature Physics",
+      "location": "北京",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Takahiro Maehira"
+    },
+    {
+      "id": "50138042",
+      "title": "Th化合物の電子構造",
+      "title_ja": "Th化合物の電子構造",
+      "date": "2011-03-01",
+      "event": "日本物理学会2011年春季大会",
+      "location": "新潟大学",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50146059",
+      "title": "Thの電子構造とフェルミ面",
+      "title_ja": "Thの電子構造とフェルミ面",
+      "date": "2010-12-01",
+      "event": "第10回琉球大学物性研究会",
+      "location": "琉球大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "38382559",
+      "title": "The fermi surface of itinerant 4f electrons in α-Ce",
+      "title_ja": "The fermi surface of itinerant 4f electrons in α-Ce",
+      "date": "2010-09-01",
+      "event": "International Conference on Heavy Electrons 2010",
+      "location": "東京",
+      "type": "poster_presentation",
+      "authors": "Takahiro Maehira, Yasutomi Tatetsu"
+    },
+    {
+      "id": "50145996",
+      "title": "Origin of the frequency branch ε of the de Haas-van Alphen effect in UAl<sub>3</sub>",
+      "title_ja": "Origin of the frequency branch ε of the de Haas-van Alphen effect in UAl<sub>3</sub>",
+      "date": "2010-09-01",
+      "event": "International Conference on Heavy Electrons 2010",
+      "location": "東京",
+      "type": "poster_presentation",
+      "authors": "Yasutomi Tatetsu, Hirochika Teruya, Sho Shirono, Takahiro Maehira"
+    },
+    {
+      "id": "50138064",
+      "title": "Ceラーベス相のフェルミ面における電子成分分布",
+      "title_ja": "Ceラーベス相のフェルミ面における電子成分分布",
+      "date": "2010-09-01",
+      "event": "日本物理学会2010年秋季大会",
+      "location": "大阪府大",
+      "type": "poster_presentation",
+      "authors": "城野 将, 照屋 寛親, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50138048",
+      "title": "UAl<sub>3</sub>の開軌道",
+      "title_ja": "UAl<sub>3</sub>の開軌道",
+      "date": "2010-09-01",
+      "event": "日本物理学会2010年秋季大会",
+      "location": "大阪府大",
+      "type": "poster_presentation",
+      "authors": "照屋 寛親, 城野 将, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50138046",
+      "title": "f電子系における遍歴性と局在性",
+      "title_ja": "f電子系における遍歴性と局在性",
+      "date": "2010-09-01",
+      "event": "日本物理学会2010年秋季大会",
+      "location": "大阪大学",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50138047",
+      "title": "UAl<sub>3</sub>におけるεブランチの起源",
+      "title_ja": "UAl<sub>3</sub>におけるεブランチの起源",
+      "date": "2010-03-01",
+      "event": "日本物理学会2010年春季大会",
+      "location": "岡山大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平 孝裕"
+    },
+    {
+      "id": "50146049",
+      "title": "UAl<sub>3</sub>の電子構造とフェルミオロジー",
+      "title_ja": "UAl<sub>3</sub>の電子構造とフェルミオロジー",
+      "date": "2009-11-01",
+      "event": "第9回琉球大学物性研究会",
+      "location": "琉球大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平 孝裕"
+    },
+    {
+      "id": "50146045",
+      "title": "強相関電子系における電子構造とフェルミ面に関する理論的研究",
+      "title_ja": "強相関電子系における電子構造とフェルミ面に関する理論的研究",
+      "date": "2009-11-01",
+      "event": "重い電子系若手秋の学校",
+      "location": "京都",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平 孝裕"
+    },
+    {
+      "id": "50146040",
+      "title": "UAl<sub>3</sub>の電子構造とフェルミ面",
+      "title_ja": "UAl<sub>3</sub>の電子構造とフェルミ面",
+      "date": "2009-10-01",
+      "event": "基盤研究(S)「価数不安定性をもつアクチナイド化合物に特有の新奇量子状態の研究」第2回研究会",
+      "location": "琉球大学",
+      "type": "oral_presentation",
+      "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平 孝裕"
+    },
+    {
+      "id": "50138052",
+      "title": "アクチノイド化合物の電子構造とフェルミ面-UX<sub>3</sub>の電子構造-",
+      "title_ja": "アクチノイド化合物の電子構造とフェルミ面-UX<sub>3</sub>の電子構造-",
+      "date": "2009-09-01",
+      "event": "日本物理学会2009年秋季大会",
+      "location": "熊本大学",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平 孝裕"
+    },
+    {
+      "id": "50138051",
+      "title": "α-Ceおよびγ-Ceの電子構造",
+      "title_ja": "α-Ceおよびγ-Ceの電子構造",
+      "date": "2009-03-01",
+      "event": "日本物理学会2009年春季大会",
+      "location": "立教大学",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平 孝裕"
+    },
+    {
+      "id": "50138049",
+      "title": "ThO<sub>2</sub>の電子構造",
+      "title_ja": "ThO<sub>2</sub>の電子構造",
+      "date": "2009-03-01",
+      "event": "日本物理学会2009年春季大会",
+      "location": "熊本大学",
+      "type": "poster_presentation",
+      "authors": "名嘉眞 英之, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50145986",
+      "title": "Alの電子構造",
+      "title_ja": "Alの電子構造",
+      "date": "2008-11-01",
+      "event": "第8回琉球大学物性研究会",
+      "location": "琉球大学",
+      "type": "poster_presentation",
+      "authors": "名嘉眞 英之, 立津 慶幸, 眞榮平 孝裕"
+    },
+    {
+      "id": "50145981",
+      "title": "貴金属における相対論的効果",
+      "title_ja": "貴金属における相対論的効果",
+      "date": "2008-11-01",
+      "event": "第8回琉球大学物性研究会",
+      "location": "琉球大学",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 名嘉眞 英之, 眞榮平孝裕"
+    },
+    {
+      "id": "50138050",
+      "title": "α-Ceの電子構造",
+      "title_ja": "α-Ceの電子構造",
+      "date": "2008-09-01",
+      "event": "日本物理学会2008年秋季大会",
+      "location": "岩手大学",
+      "type": "poster_presentation",
+      "authors": "立津 慶幸, 名嘉眞 英之, 西山 雄一郎, 眞榮平 孝裕"
+    }
+  ]
+}

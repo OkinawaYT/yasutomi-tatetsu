@@ -1,0 +1,71 @@
+{
+  "updated": "2026-06-07",
+  "items": [
+    {
+      "id": "52975109",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "department": null,
+      "department_ja": null,
+      "position": null,
+      "position_ja": null,
+      "from_date": "2026-04-01",
+      "to_date": null
+    },
+    {
+      "id": "41983873",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "department": null,
+      "department_ja": null,
+      "position": null,
+      "position_ja": null,
+      "from_date": "2023-04-01",
+      "to_date": "2026-03-01"
+    },
+    {
+      "id": "36633936",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "department": null,
+      "department_ja": null,
+      "position": null,
+      "position_ja": null,
+      "from_date": "2022-04-01",
+      "to_date": "2023-03-01"
+    },
+    {
+      "id": "30275508",
+      "institution": "名桜大学",
+      "institution_ja": "名桜大学",
+      "department": null,
+      "department_ja": null,
+      "position": null,
+      "position_ja": null,
+      "from_date": "2018-08-01",
+      "to_date": "2022-03-01"
+    },
+    {
+      "id": "30275503",
+      "institution": "東京工業大学 物質理工学院",
+      "institution_ja": "東京工業大学 物質理工学院",
+      "department": null,
+      "department_ja": null,
+      "position": null,
+      "position_ja": null,
+      "from_date": "2017-03-01",
+      "to_date": "2018-07-01"
+    },
+    {
+      "id": "30275498",
+      "institution": "東京大学大学院 理学系研究科",
+      "institution_ja": "東京大学大学院 理学系研究科",
+      "department": null,
+      "department_ja": null,
+      "position": null,
+      "position_ja": null,
+      "from_date": "2013-04-01",
+      "to_date": "2017-03-01"
+    }
+  ]
+}

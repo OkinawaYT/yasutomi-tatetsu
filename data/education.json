@@ -1,0 +1,38 @@
+{
+  "updated": "2026-06-07",
+  "items": [
+    {
+      "id": "30214318",
+      "institution": "University of the Ryukyus",
+      "institution_ja": "琉球大学",
+      "department": "Graduate School of Engineering and Science",
+      "department_ja": "理工学研究科",
+      "degree": null,
+      "degree_ja": null,
+      "from_date": "2010-04-01",
+      "to_date": "2013-03-01"
+    },
+    {
+      "id": "30214288",
+      "institution": "University of the Ryukyus",
+      "institution_ja": "琉球大学",
+      "department": "Graduate School of Engineering and Science",
+      "department_ja": "理工学研究科",
+      "degree": null,
+      "degree_ja": null,
+      "from_date": "2008-04-01",
+      "to_date": "2010-03-01"
+    },
+    {
+      "id": "30214254",
+      "institution": "University of the Ryukyus",
+      "institution_ja": "琉球大学",
+      "department": "Faculty of Science",
+      "department_ja": "理学部",
+      "degree": null,
+      "degree_ja": null,
+      "from_date": "2004-04-01",
+      "to_date": "2008-03-01"
+    }
+  ]
+}
