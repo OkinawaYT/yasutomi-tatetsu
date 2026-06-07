@@ -466,7 +466,42 @@ function renderProjects(data) {
     </div>`;
 }
 
-// ── Activities ───────────────────────────────────────────────────────────────
+// ── Activities（地図 + テーブル）────────────────────────────────────────────
+let _actMap = null;
+
+async function renderActivitiesMap(items) {
+  const mapEl = document.getElementById('activities-map');
+  if (!mapEl || !window.L) return;
+  if (_actMap) { _actMap.remove(); _actMap = null; }
+  _actMap = L.map('activities-map').setView([26.5, 128.0], 8); // 沖縄中心
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18,
+  }).addTo(_actMap);
+
+  const locMap = {};
+  items.forEach(a => {
+    if (!a.location) return;
+    if (!locMap[a.location]) locMap[a.location] = [];
+    locMap[a.location].push(a);
+  });
+
+  const locations = Object.keys(locMap);
+  for (let i = 0; i < locations.length; i++) {
+    const loc = locations[i];
+    if (i > 0) await new Promise(r => setTimeout(r, 1100));
+    const coords = await geocodeLocation(loc);
+    if (!coords) continue;
+    const list = locMap[loc];
+    const popupHtml = `<strong>${esc(loc)}</strong><br>${list.length}件`;
+    L.circleMarker([coords.lat, coords.lon], {
+      radius: 6 + Math.min(list.length, 8),
+      fillColor: '#2563eb', color: '#fff',
+      weight: 2, opacity: 1, fillOpacity: 0.8,
+    }).bindPopup(popupHtml).addTo(_actMap);
+  }
+}
+
 function renderActivities(data) {
   const el = document.getElementById('activities');
   const items = (data.items || []).filter(a => !a.draft);
@@ -475,23 +510,38 @@ function renderActivities(data) {
     el.innerHTML = `<h2 class="section-title">${label ? '社会貢献活動' : 'Activities'}</h2><p class="empty-state">—</p>`;
     return;
   }
+
+  const hasLocation = items.some(a => a.location);
+  const mapSection = hasLocation ? `
+    <div id="activities-map" class="talks-map"></div>
+    <p class="map-note">${label ? '活動場所（ピンの大きさ = 件数）' : 'Activity locations — circle size = count'}</p>` : '';
+
   el.innerHTML = `
     <h2 class="section-title">${label ? '社会貢献活動' : 'Activities'}</h2>
+    ${mapSection}
     <div class="table-wrap">
       <table class="data-table">
         <thead><tr>
           <th style="width:70px">${label ? '年月' : 'Date'}</th>
           <th>${label ? 'タイトル' : 'Title'}</th>
           <th>${label ? '組織' : 'Organization'}</th>
+          <th style="width:100px">${label ? '場所' : 'Location'}</th>
         </tr></thead>
         <tbody>
           ${items.map(a => {
             const title = (lang === 'ja' && a.title_ja) ? a.title_ja : a.title;
-            return `<tr><td class="col-year">${dateYM(a.date)}</td><td class="col-title">${esc(title)}</td><td>${esc(a.organization || '')}</td></tr>`;
+            return `<tr>
+              <td class="col-year">${dateYM(a.date)}</td>
+              <td class="col-title">${esc(title)}</td>
+              <td>${esc(a.organization || '')}</td>
+              <td>${esc(a.location || '')}</td>
+            </tr>`;
           }).join('')}
         </tbody>
       </table>
     </div>`;
+
+  if (hasLocation) renderActivitiesMap(items);
 }
 
 // ── Others ────────────────────────────────────────────────────────────────────
@@ -624,43 +674,22 @@ function renderMaterials(data) {
 }
 
 // ── Contact ───────────────────────────────────────────────────────────────────
+const CONTACT_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScumams6cqV1iuSXMizzo6TML9iJKT5cXXX8FZKnuAz_EAQTw/viewform';
+
 function renderContact(profile) {
   const el = document.getElementById('contact');
-  if (!profile) { el.classList.add('no-data'); el.style.display = 'none'; return; }
   const label = lang === 'ja';
-
-  const LINK_LABELS = {
-    github:         { en: 'GitHub',         ja: 'GitHub' },
-    email:          { en: 'Email',           ja: 'メール' },
-    orcid:          { en: 'ORCID',           ja: 'ORCID' },
-    linkedin:       { en: 'LinkedIn',        ja: 'LinkedIn' },
-    'google-scholar':{ en: 'Google Scholar', ja: 'Google Scholar' },
-    researchmap:    { en: 'Researchmap',     ja: 'Researchmap' },
-  };
-
-  const linkItems = Object.entries(profile.links || {}).map(([key, url]) => {
-    const icon = ICONS[key];
-    const lbl  = (LINK_LABELS[key] || {})[lang] || key;
-    const isEmail = url.startsWith('mailto:');
-    const addr = isEmail ? url.replace('mailto:', '') : null;
-    return `<div class="contact-item">
-      <div class="contact-icon">${icon || '<span style="font-size:14px;font-weight:700">→</span>'}</div>
-      <div>
-        <div class="contact-label">${esc(lbl)}</div>
-        <a href="${url}" class="contact-value" ${isEmail ? '' : 'target="_blank" rel="noopener"'}>
-          ${addr ? esc(addr) : esc(url.replace(/^https?:\/\//, ''))}
-        </a>
-      </div>
-    </div>`;
-  }).join('');
-
   el.innerHTML = `
     <h2 class="section-title">${label ? 'お問い合わせ' : 'Contact'}</h2>
-    <div class="contact-grid">${linkItems}</div>
-    <div class="contact-org">
-      <p>${esc(t(profile.name))}</p>
-      <p>${esc(t(profile.role))}</p>
-      <p>${esc(t(profile.organization))}</p>
+    <div class="contact-form-wrap">
+      <iframe src="${CONTACT_FORM_URL}?embedded=true"
+              class="contact-iframe"
+              frameborder="0"
+              marginheight="0"
+              marginwidth="0"
+              loading="lazy">
+        ${label ? '読み込み中…' : 'Loading…'}
+      </iframe>
     </div>`;
 }
 
@@ -719,6 +748,7 @@ async function main() {
   renderExperience(exp, edu, teach, comm, assoc, awards);
   renderProjects(projects);
   renderActivities(soc);
+  renderMaterials(matsData);
   renderOthers(others);
   renderNews(newsData, pubs, pres, awards);
   renderContact(profile);

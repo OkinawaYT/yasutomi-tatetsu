@@ -236,8 +236,8 @@ def fetch_all():
             "title_ja": mltext(item, "social_contribution_title", "ja") or None,
             "date": normalize_date(item.get("from_event_date"), "2000-01-01"),
             "to_date": normalize_date(item.get("to_event_date"), "") or None,
-            # promoter が主催者。associated_organization は別フィールド
             "organization": mltext(item, "promoter") or mltext(item, "associated_organization") or None,
+            "location": mltext(item, "location") or None,
         })
     soc_items.sort(key=lambda x: x["date"], reverse=True)
     _write_json("social_contribution", soc_items)
