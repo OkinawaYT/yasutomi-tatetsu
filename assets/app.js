@@ -570,7 +570,7 @@ function renderOthers(data) {
     <div class="card-grid">
       ${items.map(o => {
         const title = (lang === 'ja' && o.title_ja) ? o.title_ja : o.title;
-//        const desc  = (lang === 'ja' && o.description_ja) ? o.description_ja : (o.description || '');
+        const desc  = (lang === 'ja' && o.description_ja) ? o.description_ja : (o.description || '');
         return `<div class="exp-card"><div class="exp-card-title">${esc(title)}</div>${desc ? `<div class="exp-card-sub">${esc(desc)}</div>` : ''}<div class="exp-card-date">${dateYM(o.date)}</div></div>`;
       }).join('')}
     </div>`;
