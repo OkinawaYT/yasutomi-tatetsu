@@ -1,0 +1,123 @@
+{
+  "seminar_id": "prep_sample",
+  "seminar_title": "説得力のある提案・報告のための PREP 構成術セミナー（サンプル）",
+  "program": [
+    {
+      "day": 1,
+      "tool": "Gemini",
+      "focus": "PREP フレームワークを使った提案・報告書作成",
+      "cases": [
+        {
+          "id": "case1",
+          "title": "Case 1：予算・施策提案書をAIで作成する",
+          "ui_type": "prompt_generator_mode",
+          "learning_objective": "PREP構成（結論→理由→事例→再結論）を使い、上位者を説得する提案書のプロンプトを組み立てる",
+          "situation": "学部長や事務局長など意思決定者に対して、新しい施策や予算申請を短時間で説得しなければならない場面。論理的な構成なしに口頭や文章で伝えると、「で、何が言いたいの？」と返されてしまう。",
+          "goal": "PREP フレームワークを使ってAIに説得力のある提案書ドラフトを生成させ、承認率を上げる",
+          "questions": [
+            {
+              "field_id": "q_prep1_topic",
+              "label": "今回提案したいテーマ・施策を一言で書いてください。",
+              "type": "text",
+              "placeholder": "例：新入生向けオリエンテーションの全面オンライン化"
+            },
+            {
+              "field_id": "q_prep1_parts",
+              "label": "提案内容を「PREP」で構造化してください",
+              "type": "matrix_parts",
+              "fields": [
+                {
+                  "key": "Point",
+                  "label": "P (Point)：伝えたい結論・主張（最初に言い切る）",
+                  "placeholder": "例：来年度から新入生向けオリエンテーションを全面オンライン化すべきである"
+                },
+                {
+                  "key": "Reason",
+                  "label": "R (Reason)：その理由・根拠（なぜそう言えるか）",
+                  "placeholder": "例：移動コストの削減、遠隔地学生への公平なアクセス確保、運営人員の効率化が見込まれるため"
+                },
+                {
+                  "key": "Example",
+                  "label": "E (Example)：具体的な事例・データ・エビデンス",
+                  "placeholder": "例：他大学の導入事例では満足度89%、運営コスト30%削減を実現（〇〇大学、2024年）"
+                },
+                {
+                  "key": "Point2",
+                  "label": "P (Point)：結論の再強調（締めの一言）",
+                  "placeholder": "例：以上より、来年度からの全面オンライン化を強く推奨します"
+                }
+              ]
+            },
+            {
+              "field_id": "q_prep1_target",
+              "label": "この提案書を読む相手（意思決定者）は誰ですか？",
+              "type": "text",
+              "placeholder": "例：学部長、事務局長、DX推進委員会"
+            },
+            {
+              "field_id": "q_prep1_format",
+              "label": "出力形式の希望を書いてください。",
+              "type": "text",
+              "placeholder": "例：A4用紙1枚・箇条書き・見出しあり・2000字以内"
+            },
+            {
+              "field_id": "q_prep1_final_prompt",
+              "label": "上記をもとに、AIへ渡す完成プロンプトを記述してください。",
+              "type": "textarea",
+              "placeholder": "PREPの4要素を組み込んだ指示文をここに記入"
+            }
+          ]
+        },
+        {
+          "id": "case2",
+          "title": "Case 2：会議・委員会向け報告書をAIで作成する",
+          "ui_type": "prompt_generator_mode",
+          "learning_objective": "口頭発表のメモや粗削りな情報をPREP構成でAIに整形させ、会議資料を短時間で仕上げる",
+          "situation": "毎月・毎学期の委員会や教授会で報告を求められる場面。手元にある資料や数字はあるが、どう整理して話せばいいか迷う。",
+          "goal": "箇条書きのメモや数字をAIに渡し、PREP構成の報告書ドラフトを一発生成する",
+          "questions": [
+            {
+              "field_id": "q_prep2_memo",
+              "label": "報告したい内容の粗いメモや箇条書きを入力してください。",
+              "type": "textarea",
+              "placeholder": "例：・4月入学者数 312名（前年比+8%）\n・奨学金利用者 45名\n・留学生 22名（過去最高）\n・欠席者の理由: 経済的困難が最多"
+            },
+            {
+              "field_id": "q_prep2_parts",
+              "label": "報告内容を「PREP」で整理してください",
+              "type": "matrix_parts",
+              "fields": [
+                {
+                  "key": "Point",
+                  "label": "P (Point)：報告の核心（一番伝えたいこと）",
+                  "placeholder": "例：今年度入学者数は過去5年で最高を記録したが、経済的困難を抱える学生が増加している"
+                },
+                {
+                  "key": "Reason",
+                  "label": "R (Reason)：その背景・要因分析",
+                  "placeholder": "例：奨学金利用者数・欠席理由のデータが裏付けとなっている"
+                },
+                {
+                  "key": "Example",
+                  "label": "E (Example)：具体的な数値・事実",
+                  "placeholder": "例：入学者312名（前年比+8%）、うち奨学金利用45名、欠席理由の最多は経済的困難"
+                },
+                {
+                  "key": "Point2",
+                  "label": "P (Point)：委員会へのアクション提言",
+                  "placeholder": "例：経済支援制度の拡充と早期把握の仕組み整備を検討いただきたい"
+                }
+              ]
+            },
+            {
+              "field_id": "q_prep2_applied",
+              "label": "このPREP報告テクニックは、他にどんな業務報告場面に使えそうですか？",
+              "type": "textarea",
+              "placeholder": "例：就職状況報告、科研費執行状況報告、学生相談件数報告など"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

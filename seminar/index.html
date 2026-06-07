@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>セミナー 回答フォーム</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen">
+<div id="app" class="max-w-2xl mx-auto px-4 py-8 space-y-4">
+
+  <!-- Loading -->
+  <div id="s-loading" class="text-center py-24">
+    <div class="inline-block w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+    <p class="text-slate-500 text-sm">読み込み中...</p>
+  </div>
+
+  <!-- Error -->
+  <div id="s-error" class="hidden bg-red-50 border border-red-200 rounded-2xl p-6">
+    <p class="font-bold text-red-700 mb-1">エラー</p>
+    <p id="error-msg" class="text-red-600 text-sm"></p>
+  </div>
+
+  <!-- Main -->
+  <div id="s-main" class="hidden space-y-4">
+
+    <!-- Header -->
+    <div>
+      <h1 id="el-title" class="text-lg font-bold text-slate-800 leading-snug"></h1>
+    </div>
+
+    <!-- GAS未設定の警告 -->
+    <div id="gas-warn" class="hidden bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-xs text-amber-800">
+      ⚠ <strong>config.json の gas_url が未設定です。</strong>
+      回答の閲覧・確認はできますが、送信はGASをデプロイして設定してから行ってください。
+    </div>
+
+    <!-- 回答者情報 -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+      <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">回答者情報</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">氏名 <span class="text-red-400">*</span></label>
+          <input id="r-name" type="text" placeholder="山田 太郎"
+            class="w-full text-sm border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition">
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">所属</label>
+          <input id="r-affiliation" type="text" placeholder="〇〇大学 教務課"
+            class="w-full text-sm border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition">
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">役職</label>
+          <input id="r-role" type="text" placeholder="課長補佐"
+            class="w-full text-sm border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition">
+        </div>
+      </div>
+    </div>
+
+    <!-- Day タブ -->
+    <div id="el-day-tabs" class="flex gap-2 flex-wrap"></div>
+
+    <!-- Case タブ -->
+    <div id="el-case-tabs" class="flex gap-2 flex-wrap"></div>
+
+    <!-- Case コンテンツ -->
+    <div id="el-case"></div>
+
+  </div>
+</div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+let GAS_URL    = '';
+let seminarData = null;
+let seminarId   = '';
+let activeDay   = 1;
+let activeCaseIdx = 0;
+
+// ============================================================
+// INIT
+// ============================================================
+async function init() {
+  const params = new URLSearchParams(location.search);
+  seminarId = params.get('id') || '';
+
+  if (!seminarId) {
+    showError('URLに ?id= パラメータが必要です。例：?id=kodaikyo_202607');
+    return;
+  }
+
+  // GAS URL を config.json から読み込む
+  try {
+    const r = await fetch('config.json');
+    if (r.ok) {
+      const cfg = await r.json();
+      if (cfg.gas_url && cfg.gas_url !== 'YOUR_GAS_URL_HERE') {
+        GAS_URL = cfg.gas_url;
+      }
+    }
+  } catch (_) {}
+
+  if (!GAS_URL) el('gas-warn').classList.remove('hidden');
+
+  // セミナーJSONを読み込む
+  try {
+    const r = await fetch(`data/${seminarId}.json`);
+    if (!r.ok) throw new Error(`data/${seminarId}.json が見つかりません`);
+    seminarData = await r.json();
+  } catch (e) {
+    showError(e.message);
+    return;
+  }
+
+  // 回答者情報をlocalStorageから復元
+  const saved = JSON.parse(localStorage.getItem('respondent') || '{}');
+  if (saved.name)        el('r-name').value        = saved.name;
+  if (saved.affiliation) el('r-affiliation').value = saved.affiliation;
+  if (saved.role)        el('r-role').value         = saved.role;
+
+  activeDay     = seminarData.program[0].day;
+  activeCaseIdx = 0;
+
+  el('el-title').textContent = seminarData.seminar_title;
+  document.title = seminarData.seminar_title;
+
+  show('s-main');
+  hide('s-loading');
+
+  renderDayTabs();
+  renderCaseTabs();
+  renderCase();
+}
+
+// ============================================================
+// TABS
+// ============================================================
+function renderDayTabs() {
+  el('el-day-tabs').innerHTML = seminarData.program.map(day => `
+    <button onclick="switchDay(${day.day})"
+      class="px-5 py-2 rounded-full text-sm font-semibold border transition-all ${
+        activeDay === day.day
+          ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
+          : 'bg-white text-slate-600 border-slate-300 hover:border-indigo-400'
+      }">
+      Day ${day.day}
+      <span class="ml-1 text-xs font-normal opacity-70">${day.tool}</span>
+    </button>`).join('');
+}
+
+function renderCaseTabs() {
+  const day = getDay();
+  el('el-case-tabs').innerHTML = day.cases.map((c, i) => {
+    const done   = isSubmitted(day.day, c.id);
+    const active = activeCaseIdx === i;
+    return `
+      <button onclick="switchCase(${i})"
+        class="px-4 py-2 rounded-xl text-xs font-semibold border transition-all flex items-center gap-1 ${
+          active
+            ? 'bg-indigo-50 text-indigo-700 border-indigo-300 shadow-sm'
+            : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400'
+        }">
+        ${c.title.split('：')[0]}
+        ${done ? '<span class="text-green-500 ml-0.5">✓</span>' : ''}
+      </button>`;
+  }).join('');
+}
+
+function switchDay(day) {
+  activeDay = day;
+  activeCaseIdx = 0;
+  renderDayTabs();
+  renderCaseTabs();
+  renderCase();
+}
+
+function switchCase(idx) {
+  activeCaseIdx = idx;
+  renderCaseTabs();
+  renderCase();
+}
+
+// ============================================================
+// CASE RENDER
+// ============================================================
+function renderCase() {
+  const day      = getDay();
+  const c        = day.cases[activeCaseIdx];
+  const isPG     = c.ui_type === 'prompt_generator_mode';
+  const done     = isSubmitted(day.day, c.id);
+
+  const headerBg  = isPG ? 'bg-indigo-50 border-indigo-100' : 'bg-teal-50 border-teal-100';
+  const labelCol  = isPG ? 'text-indigo-600'                 : 'text-teal-600';
+  const titleCol  = isPG ? 'text-indigo-900'                 : 'text-teal-900';
+  const btnClass  = isPG ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-teal-600 hover:bg-teal-700';
+
+  const questionsHtml = isPG
+    ? c.questions.map(q => renderQuestion(q)).join('')
+    : c.questions.map((q, i) => renderStepQuestion(q, i)).join('');
+
+  el('el-case').innerHTML = `
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+
+      <div class="${headerBg} border-b p-5 space-y-3">
+        <h2 class="font-bold ${titleCol} text-base">${c.title}</h2>
+        ${c.learning_objective ? `
+          <div>
+            <span class="text-xs font-bold ${labelCol} uppercase tracking-widest">学習目標</span>
+            <p class="text-sm text-slate-600 mt-1">${c.learning_objective}</p>
+          </div>` : ''}
+        ${c.situation ? `
+          <div>
+            <span class="text-xs font-bold ${labelCol} uppercase tracking-widest">状況</span>
+            <p class="text-sm text-slate-700 mt-1">${c.situation}</p>
+          </div>` : ''}
+        ${c.goal ? `
+          <div>
+            <span class="text-xs font-bold ${labelCol} uppercase tracking-widest">ゴール</span>
+            <p class="text-sm text-slate-700 mt-1">${c.goal}</p>
+          </div>` : ''}
+      </div>
+
+      <div class="p-5 space-y-7">${questionsHtml}</div>
+
+      <div class="border-t border-slate-100 p-5">
+        ${done
+          ? `<div class="flex items-center gap-2 text-green-600 font-semibold text-sm">
+               <span class="text-xl">✓</span><span>この回答は送信済みです</span>
+             </div>`
+          : `<button id="btn-submit" onclick="submitCase(${day.day}, '${c.id}')"
+               class="${btnClass} text-white font-semibold text-sm py-3 px-6 rounded-xl w-full transition-colors">
+               回答を送信する
+             </button>`
+        }
+        <p id="submit-status" class="text-center text-xs mt-2 min-h-[1rem]"></p>
+      </div>
+    </div>`;
+
+  restoreAnswers(day.day, c.id, c.questions);
+}
+
+// ============================================================
+// QUESTION RENDERING
+// ============================================================
+function renderQuestion(q) {
+  return `
+    <div class="space-y-2">
+      <label class="block text-sm font-semibold text-slate-700">${q.label}</label>
+      ${renderField(q)}
+    </div>`;
+}
+
+function renderStepQuestion(q, idx) {
+  return `
+    <div class="flex gap-3">
+      <div class="flex-shrink-0 mt-0.5">
+        <div class="w-7 h-7 rounded-full bg-teal-100 text-teal-700 text-xs font-bold flex items-center justify-center">${idx + 1}</div>
+      </div>
+      <div class="flex-1 space-y-2">
+        <label class="block text-sm font-semibold text-slate-700">${q.label}</label>
+        ${renderField(q)}
+      </div>
+    </div>`;
+}
+
+function renderField(q) {
+  const baseCls = 'w-full text-sm border border-slate-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300 transition';
+
+  switch (q.type) {
+    case 'radio':
+      return `<div class="flex flex-wrap gap-x-6 gap-y-2">
+        ${q.options.map(opt => `
+          <label class="flex items-center gap-2 cursor-pointer select-none">
+            <input type="radio" name="${q.field_id}" value="${opt}" class="accent-indigo-600 w-4 h-4">
+            <span class="text-sm text-slate-700">${opt}</span>
+          </label>`).join('')}
+      </div>`;
+
+    case 'textarea':
+      return `<textarea name="${q.field_id}" rows="4"
+        placeholder="${q.placeholder || ''}"
+        class="${baseCls} resize-y"></textarea>`;
+
+    case 'text':
+      return `<input type="text" name="${q.field_id}"
+        placeholder="${q.placeholder || ''}"
+        class="${baseCls}">`;
+
+    case 'matrix_parts':
+      return renderPartsMatrix(q);
+
+    default:
+      return `<input type="text" name="${q.field_id}" class="${baseCls}">`;
+  }
+}
+
+// ============================================================
+// PARTS MATRIX
+// ============================================================
+function renderPartsMatrix(q) {
+  const tableRows = q.fields.map(f => `
+    <tr class="border-b border-slate-100 last:border-0">
+      <td class="bg-slate-50 px-3 py-2.5 align-top w-40 border-r border-slate-100">
+        <p class="text-xs font-bold text-indigo-700">${f.label.split('：')[0]}</p>
+        <p class="text-xs text-slate-500 mt-0.5 leading-snug">${f.label.split('：')[1] || ''}</p>
+      </td>
+      <td class="p-1.5">
+        <textarea
+          name="${q.field_id}__${f.key}"
+          rows="2"
+          placeholder="${f.placeholder || ''}"
+          data-parts-id="${q.field_id}"
+          data-parts-key="${f.key}"
+          data-parts-label="${f.label.split('：')[0]}"
+          oninput="updatePreview('${q.field_id}')"
+          class="w-full text-sm border-0 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-300 rounded-lg p-1.5 leading-relaxed"
+        ></textarea>
+      </td>
+    </tr>`).join('');
+
+  return `
+    <div class="border border-slate-200 rounded-xl overflow-hidden">
+      <table class="w-full"><tbody>${tableRows}</tbody></table>
+    </div>
+    <div class="mt-4">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">自動プレビュー（プロンプト組み立て結果）</span>
+        <button type="button" onclick="copyPreview('${q.field_id}')"
+          class="text-xs text-slate-400 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-2.5 py-1 transition">
+          コピー
+        </button>
+      </div>
+      <pre id="preview-${q.field_id}"
+        class="bg-indigo-50 border border-indigo-100 rounded-xl p-4 text-xs font-mono leading-relaxed whitespace-pre-wrap min-h-[72px] text-slate-400 italic transition-colors">PARTSを入力すると、ここにプロンプトが自動組み立てされます。</pre>
+    </div>`;
+}
+
+function updatePreview(fieldId) {
+  const entries = [];
+  document.querySelectorAll(`[data-parts-id="${fieldId}"]`).forEach(el => {
+    const val = el.value.trim();
+    if (val) entries.push({ label: el.dataset.partsLabel, val });
+  });
+
+  const preview = document.getElementById(`preview-${fieldId}`);
+  if (!preview) return;
+
+  if (entries.length) {
+    preview.textContent = entries.map(e => `【${e.label}】\n${e.val}`).join('\n\n');
+    preview.classList.remove('text-slate-400', 'italic');
+    preview.classList.add('text-slate-800');
+  } else {
+    preview.textContent = 'フィールドを入力すると、ここにプロンプトが自動組み立てされます。';
+    preview.classList.add('text-slate-400', 'italic');
+    preview.classList.remove('text-slate-800');
+  }
+}
+
+function copyPreview(fieldId) {
+  const preview = document.getElementById(`preview-${fieldId}`);
+  if (!preview) return;
+  navigator.clipboard.writeText(preview.textContent).then(() => {
+    preview.style.outline = '2px solid #6366f1';
+    setTimeout(() => { preview.style.outline = ''; }, 900);
+  });
+}
+
+// ============================================================
+// AUTO-SAVE (localStorage)
+// ============================================================
+function answerKey(day, caseId) {
+  return `ans_${seminarId}_d${day}_${caseId}`;
+}
+
+function saveCurrentAnswers() {
+  const day = getDay();
+  const c   = day.cases[activeCaseIdx];
+  localStorage.setItem(answerKey(day.day, c.id), JSON.stringify(collectAnswers()));
+}
+
+function restoreAnswers(day, caseId, questions) {
+  const saved = JSON.parse(localStorage.getItem(answerKey(day, caseId)) || '{}');
+
+  Object.entries(saved).forEach(([name, val]) => {
+    document.querySelectorAll(`[name="${name}"]`).forEach(inp => {
+      if (inp.type === 'radio') { if (inp.value === val) inp.checked = true; }
+      else inp.value = val;
+    });
+  });
+
+  // PARTSプレビューを再計算
+  questions.filter(q => q.type === 'matrix_parts').forEach(q => updatePreview(q.field_id));
+}
+
+function collectAnswers() {
+  const answers = {};
+  el('el-case').querySelectorAll('[name]').forEach(inp => {
+    if (inp.type === 'radio') { if (inp.checked) answers[inp.name] = inp.value; }
+    else answers[inp.name] = inp.value;
+  });
+  return answers;
+}
+
+// ケースエリア内の任意入力で自動保存
+document.addEventListener('input',  e => { if (e.target.closest('#el-case')) saveCurrentAnswers(); });
+document.addEventListener('change', e => { if (e.target.closest('#el-case')) saveCurrentAnswers(); });
+
+// ============================================================
+// SUBMIT
+// ============================================================
+function isSubmitted(day, caseId) {
+  return localStorage.getItem(`done_${seminarId}_d${day}_${caseId}`) === '1';
+}
+
+function markDone(day, caseId) {
+  localStorage.setItem(`done_${seminarId}_d${day}_${caseId}`, '1');
+}
+
+async function submitCase(day, caseId) {
+  const name = el('r-name').value.trim();
+  if (!name) {
+    el('r-name').focus();
+    el('r-name').classList.add('ring-2', 'ring-red-400', 'border-red-400');
+    setTimeout(() => el('r-name').classList.remove('ring-2', 'ring-red-400', 'border-red-400'), 2500);
+    setStatus('氏名を入力してください。', 'text-red-500');
+    return;
+  }
+
+  // 回答者情報をlocalStorageに保存
+  localStorage.setItem('respondent', JSON.stringify({
+    name:        el('r-name').value,
+    affiliation: el('r-affiliation').value,
+    role:        el('r-role').value,
+  }));
+
+  const payload = {
+    action:      'submitAnswers',
+    seminar_id:  seminarId,
+    day,
+    case_id:     caseId,
+    name:        el('r-name').value,
+    affiliation: el('r-affiliation').value,
+    role:        el('r-role').value,
+    answers:     collectAnswers(),
+  };
+
+  const btn = document.getElementById('btn-submit');
+  if (btn) { btn.disabled = true; btn.textContent = '送信中...'; }
+
+  try {
+    if (!GAS_URL) throw new Error('config.json の gas_url が設定されていません。');
+
+    await fetch(GAS_URL, {
+      method: 'POST',
+      mode:   'no-cors',
+      body:   JSON.stringify(payload),
+    });
+
+    markDone(day, caseId);
+    renderCaseTabs();
+    renderCase();
+
+  } catch (e) {
+    setStatus(e.message || '送信に失敗しました。再度お試しください。', 'text-red-500');
+    if (btn) { btn.disabled = false; btn.textContent = '回答を送信する'; }
+  }
+}
+
+function setStatus(msg, cls) {
+  const s = document.getElementById('submit-status');
+  if (!s) return;
+  s.textContent = msg;
+  s.className = `text-center text-xs mt-2 ${cls}`;
+}
+
+// ============================================================
+// UTILITIES
+// ============================================================
+function el(id)   { return document.getElementById(id); }
+function show(id) { el(id).classList.remove('hidden'); }
+function hide(id) { el(id).classList.add('hidden'); }
+function getDay() { return seminarData.program.find(d => d.day === activeDay); }
+function showError(msg) {
+  hide('s-loading');
+  show('s-error');
+  el('error-msg').textContent = msg;
+}
+
+// ============================================================
+// START
+// ============================================================
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+# 資料・ツール一覧
+# draft: true にすると非公開になります
+# download: でGoogle DriveなどのURLを指定するとダウンロードボタンが表示されます
+
+items:
+  - title:
+      en: Academic AI Prompts
+      ja: 学術AIプロンプト集
+    description:
+      en: >
+        A curated collection of AI prompts for university faculty and students.
+        Covers teaching, research, student support, and academic writing.
+      ja: >
+        大学教職員・学生向けのAIプロンプト集。
+        教育・研究・学習・学術文章など多様なシーンに対応。
+        いいね・共有・リクエスト機能付き。
+    icon: "🤖"
+    url: academic-ai-prompts/
+    github: https://github.com/OkinawaYT/academic-ai-prompts
+    draft: false
+
+  - title:
+      en: Seminar Support System
+      ja: セミナーサポートシステム
+    description:
+      en: >
+        A digital response form for seminars and workshops.
+        Participants answer structured questions (PREP / SCQA framework);
+        facilitators see a live dashboard.
+      ja: >
+        ゼミ・研究会向けの回答フォームシステム。
+        PREP・SCQA形式の準備シート、ファシリテーター用リアルタイムダッシュボード付き。
+    icon: "📋"
+    url: seminar/
+    draft: false
+
+  - title:
+      en: Feedback Form
+      ja: フィードバックフォーム
+    description:
+      en: Anonymous feedback collection form with Google Apps Script backend.
+      ja: Google Apps Script連携の匿名フィードバック収集フォーム。
+    icon: "📝"
+    url: feedback/
+    draft: false

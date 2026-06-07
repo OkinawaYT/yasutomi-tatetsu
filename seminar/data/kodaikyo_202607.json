@@ -1,0 +1,269 @@
+{
+  "seminar_id": "kodaikyo_202607",
+  "seminar_title": "令和8年度 大学業務における生成AIの活用に関するセミナー",
+  "program": [
+    {
+      "day": 1,
+      "tool": "Gemini",
+      "focus": "プロンプトエンジニアリング・データ利活用",
+      "cases": [
+        {
+          "id": "case0",
+          "title": "Case 0：コミュニケーションの罠（いい感じに）",
+          "ui_type": "prompt_generator_mode",
+          "learning_objective": "指示の曖昧さがもたらす不都合を理解し、PARTSフレームワークの必要性を体感する",
+          "situation": "上司から「来週の教授会までに、学生アンケートの集計報告書を『いい感じに』まとめておいて」とだけ頼まれた場面。",
+          "goal": "「いい感じに」の課題を言語化し、明確な依頼文（プロンプトの原型）へ変換する",
+          "questions": [
+            {
+              "field_id": "q_case0_appropriate",
+              "label": "この上司の依頼方法は適切ですか？",
+              "type": "radio",
+              "options": ["はい", "いいえ"]
+            },
+            {
+              "field_id": "q_case0_bad_point",
+              "label": "不適切（困る）と思う部分を具体的に記載してください。",
+              "type": "textarea",
+              "placeholder": "例：何を強調すべきか分からない、A4なのかパワポなのか形式が不明、など"
+            },
+            {
+              "field_id": "q_case0_your_request",
+              "label": "あなたなら同僚（または部下）にどう具体的に依頼しますか？",
+              "type": "textarea",
+              "placeholder": "自分が無意識に工夫している伝え方を書いてみましょう"
+            },
+            {
+              "field_id": "q_case0_parts",
+              "label": "上の依頼を「PARTS」で要素分解してみましょう（プロンプトの設計図）",
+              "type": "matrix_parts",
+              "fields": [
+                {"key": "Persona", "label": "P (Persona)：あなたの立場、相手への見せ方", "placeholder": "例：教務課長、データ分析の専門家"},
+                {"key": "Aim", "label": "A (Aim)：この依頼で達成したい明確なゴール", "placeholder": "例：教授会での一発承認、課題の洗い出し"},
+                {"key": "Recipients", "label": "R (Recipients)：最終的にこの成果物を読む人・ターゲット", "placeholder": "例：大学の教授陣、学長・理事"},
+                {"key": "Theme", "label": "T (Theme)：扱う題材、対象データ、背景情報", "placeholder": "例：2026年度学生アンケート結果、過去3年分の推移データ"},
+                {"key": "Structure", "label": "S (Structure)：出力形式、文字数、トーン、ルール", "placeholder": "例：A4用紙1枚、要点を箇条書きで、グラフを必ず含む"}
+              ]
+            },
+            {
+              "field_id": "q_case0_final_prompt",
+              "label": "要素分解した内容を参考に、AI（または人間）にそのまま渡せる「完成した依頼文」を記述してください。",
+              "type": "textarea",
+              "placeholder": "PARTSを繋ぎ合わせた、解像度の高い指示文をここに記入"
+            }
+          ]
+        },
+        {
+          "id": "case1",
+          "title": "Case 1：Geminiを使ったメール案作成",
+          "ui_type": "prompt_generator_mode",
+          "learning_objective": "PARTSの実践と、相手の役職（文脈）に応じたトーン＆マナーの調整手法を学ぶ",
+          "situation": "学内の教員（教授陣等）に対して、期限が過ぎている提出物を催促しなければならない場面。関係性を良好に保ちつつ、確実に提出してもらうためのメール文章をAIに作成させます。",
+          "goal": "角が立たず、かつ締め切りを厳守させるプロンプトを組み立て、Geminiから最適なメール文を引き出す",
+          "questions": [
+            {
+              "field_id": "q_case1_parts",
+              "label": "このタスクの「PARTS」を設計してください",
+              "type": "matrix_parts",
+              "fields": [
+                {"key": "Persona", "label": "P (Persona)", "placeholder": "例：総務課のベテラン職員"},
+                {"key": "Aim", "label": "A (Aim)", "placeholder": "例：研究費執行計画書の未提出者への催促"},
+                {"key": "Recipients", "label": "R (Recipients)", "placeholder": "例：学内のベテラン教授、および若手教員"},
+                {"key": "Theme", "label": "T (Theme)", "placeholder": "例：最終締切は今週金曜17時、これ以上の遅延は不可"},
+                {"key": "Structure", "label": "S (Structure)", "placeholder": "例：丁寧かつ敬意を払う、役職別に2パターン出力"}
+              ]
+            },
+            {
+              "field_id": "q_case1_prompt",
+              "label": "Geminiに入力するために組み立てた実際のプロンプト全文を記述してください。",
+              "type": "textarea",
+              "placeholder": "上記のPARTSを落とし込んだ指示文"
+            },
+            {
+              "field_id": "q_case1_output",
+              "label": "Geminiが実際に出力したメール文章（気に入ったパターン）を貼り付けてください。",
+              "type": "textarea",
+              "placeholder": "AIの回答結果をコピペ"
+            },
+            {
+              "field_id": "q_case1_applied",
+              "label": "このメール作成・調整テクニックは、他に学内のどんな業務（応用例）に使えそうですか？",
+              "type": "textarea",
+              "placeholder": "例：非常勤講師へのシラバス提出催促、学生への学費未納案内など"
+            }
+          ]
+        },
+        {
+          "id": "case2",
+          "title": "Case 2：先進校リサーチ（事例調査・比較分析）",
+          "ui_type": "prompt_generator_mode",
+          "learning_objective": "GeminiのWeb検索連携（Grounded in Google Search）の活用と、リサーチ情報の表形式への構造化",
+          "situation": "自学において「生成AIの利活用ガイドライン」または「地域共創型インターンシップ」の新しい企画を立ち上げるにあたり、他大学（先進校）の公開事例をリサーチして比較分析を行いたい状況。",
+          "goal": "短時間で正確なWebリサーチを行い、会議資料のたたき台となる比較表（テーブル）を自動生成する",
+          "questions": [
+            {
+              "field_id": "q_case2_parts",
+              "label": "事例リサーチのための「PARTS」を設計してください",
+              "type": "matrix_parts",
+              "fields": [
+                {"key": "Persona", "label": "P (Persona)", "placeholder": "例：経営企画課のデータアナリスト"},
+                {"key": "Aim", "label": "A (Aim)", "placeholder": "例：他大学の生成AI学生向け利用ガイドラインの調査"},
+                {"key": "Recipients", "label": "R (Recipients)", "placeholder": "例：学内のDX推進委員会、事務局長"},
+                {"key": "Theme", "label": "T (Theme)", "placeholder": "例：日本の国公立大学における最新の公開事例3選"},
+                {"key": "Structure", "label": "S (Structure)", "placeholder": "例：大学名・特徴・自学が参考にすべき点の3項目を含む一覧表形式"}
+              ]
+            },
+            {
+              "field_id": "q_case2_prompt",
+              "label": "実際にGeminiに入力したリサーチ用プロンプトを記述してください。",
+              "type": "textarea"
+            },
+            {
+              "field_id": "q_case2_applied",
+              "label": "Web検索・表作成機能は、他に学内のどんな調査（応用例）に使えそうですか？",
+              "type": "textarea",
+              "placeholder": "例：他大学の学費免除制度の比較、文科省の補助金採択校の傾向リサーチなど"
+            }
+          ]
+        },
+        {
+          "id": "case3",
+          "title": "Case 3：データ分析（CSV/Excelデータの利活用）",
+          "ui_type": "prompt_generator_mode",
+          "learning_objective": "Geminiの高度なデータ分析機能（Advanced Data Analysis）を用いた、大量のテキストからの課題抽出",
+          "situation": "オープンキャンパスや学生アンケートの「自由記述欄（大量のテキストデータ）」の分析業務。人間が1行ずつ読むと数日かかる膨大なデータを、Geminiに一瞬で構造化させたい場面。",
+          "goal": "CSVやExcelデータをGeminiに読み込ませ、不満度の高い順のランキングと、次回に向けた具体的な改善策のドラフトを出力させる",
+          "questions": [
+            {
+              "field_id": "q_case3_parts",
+              "label": "データ分析を依頼するための「PARTS」を設計してください",
+              "type": "matrix_parts",
+              "fields": [
+                {"key": "Persona", "label": "P (Persona)", "placeholder": "例：大学改革推進室のシニアリサーチャー"},
+                {"key": "Aim", "label": "A (Aim)", "placeholder": "例：自由記述アンケートのテキストマイニングと優先課題の特定"},
+                {"key": "Recipients", "label": "R (Recipients)", "placeholder": "例：学部長、教務委員会"},
+                {"key": "Theme", "label": "T (Theme)", "placeholder": "例：事前配布された「オープンキャンパス来場者アンケート.csv」"},
+                {"key": "Structure", "label": "S (Structure)", "placeholder": "例：不満要素トップ5のランキング、および原因と具体的な対応策の比較表"}
+              ]
+            },
+            {
+              "field_id": "q_case3_prompt",
+              "label": "ファイルと一緒にGeminiへ投入した実際のプロンプトを記述してください。",
+              "type": "textarea"
+            },
+            {
+              "field_id": "q_case3_result",
+              "label": "Geminiが出力した「分析結果・不満度ランキング」の要約を貼り付けてください。",
+              "type": "textarea"
+            },
+            {
+              "field_id": "q_case3_applied",
+              "label": "学内にあるどのようなデータ（例：志願者推移、就職実績、学籍データ等）の分析に応用できそうですか？",
+              "type": "textarea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "tool": "NotebookLM",
+      "focus": "資料特化型AIによる業務検索・組織内ナレッジ共有",
+      "cases": [
+        {
+          "id": "case1",
+          "title": "Case 1：学内規程のチャットボット化",
+          "ui_type": "checklist_report_mode",
+          "learning_objective": "NotebookLMへのソースインポート、正確な回答の検索、および引用元（ソース）の確認プロセスをマスターする",
+          "situation": "総務課や人事課、教務課の窓口・電話において、教職員や学生から「就業規則」や「旅費規程」に関する複雑な問い合わせが日常的に発生し、調べるのに時間がかかっている場面。",
+          "goal": "配布されたサンプル規程から「日当はいくらか」「手続きに必要な書類は何か」を一瞬で導き出し、回答の根拠を即座に目視確認する",
+          "questions": [
+            {
+              "field_id": "q_nb1_step1",
+              "label": "【STEP 1】事前配布された「サンプル規程PDF」をノートブックにアップロードできましたか？",
+              "type": "radio",
+              "options": ["はい、アップロードしました", "いいえ、まだです"]
+            },
+            {
+              "field_id": "q_nb1_step2",
+              "label": "【STEP 2】チャット欄で次の質問を投げてみてください。「日帰り出張（片道100km以上）をした場合、日当はいくら支給されますか？」➔ AIが回答した支給金額を以下に正しく記入してください。",
+              "type": "text",
+              "placeholder": "例：〇〇円（または規程に記載がない、など）"
+            },
+            {
+              "field_id": "q_nb1_step3",
+              "label": "【STEP 3】AIの回答の右下にある「数字のリンク（ソース引用）」をクリックすると、PDFの該当箇所へ自動ジャンプすることを確認しましたか？体験して気づいたことを教えてください。",
+              "type": "textarea",
+              "placeholder": "例：該当する条文がハイライトされて視覚的に分かりやすい、等"
+            },
+            {
+              "field_id": "q_nb1_step4",
+              "label": "【STEP 4】今度は自分で自由に規程への質問（例：精算の締切日、必要な添付書類など）を投げてみてください。あなたが入力して成功した「質問文（クエリ）」を共有してください。",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "case2",
+          "title": "Case 2：高等教育の政策動向と自学の比較分析（経営・企画の壁打ち）",
+          "ui_type": "checklist_report_mode",
+          "learning_objective": "複数資料のクロス分析を用いて、マクロ方針（中教審答申）とミクロ戦略（自学の中期計画）の「ギャップ（足りない要素）」を自動抽出する",
+          "situation": "文部科学省・中央教育審議会（中教審）の最新の政策動向資料を踏まえ、自学の「中期計画書」にどのような不足点があるかを分析し、大学経営や新規事業（地域連携等）のアイデアのタネを見つけ出す場面。",
+          "goal": "AIにアイデアを丸投げするのではなく、「2つの膨大な資料のズレ」を特定させ、教職員が企画立案するための高度な「経営分析報告書のたたき台」を作成する",
+          "questions": [
+            {
+              "field_id": "q_nb2_step1",
+              "label": "【STEP 1】「中教審資料PDF」と「自学の中期計画PDF」の2つのソースを正しく読み込ませましたか？",
+              "type": "radio",
+              "options": ["はい、2つのソースを選択しました", "いいえ、まだです"]
+            },
+            {
+              "field_id": "q_nb2_step2",
+              "label": "【STEP 2】チャット欄で「中教審の方針に対して、我が大学の計画で不足しているギャップを3つ教えて」と指示を出してください。AIが指摘したギャップの中で、あなたが最も重要（または自学として耳が痛い）と感じたものはどれですか？",
+              "type": "textarea",
+              "placeholder": "AIが指摘した特定の不足点や、それに対する感想を記入"
+            },
+            {
+              "field_id": "q_nb2_step3",
+              "label": "【STEP 3】そのギャップを埋めるために、NotebookLMが提案してきた新規プロジェクトや公開講座などの「アイデアのたたき台（コピペ、または要約）」を記述してください。",
+              "type": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "case3",
+          "title": "Case 3：業務研修・引き継ぎの自動化（Studio機能の活用）",
+          "ui_type": "checklist_report_mode",
+          "learning_objective": "NotebookLMの独自機能「Studio（ノートブックガイド）」を活用した、未整理の資料からの資料（FAQ・学習ガイド）一括自動生成",
+          "situation": "異動期において、前任者が残した粗い引継ぎメモや年間スケジュール帳はあるものの、新任職員に渡すための「ちゃんとした教務マニュアル」をイチから作る時間が全くない場面。",
+          "goal": "引き継ぎドキュメントを読み込ませ、標準のシステム機能を使って新任職員向けの「超実践的Q&A集」を一瞬で自動生成させる",
+          "questions": [
+            {
+              "field_id": "q_nb3_step1",
+              "label": "【STEP 1】事前配布された「サンプル引継ぎメモPDF」をソースに追加しましたか？",
+              "type": "radio",
+              "options": ["はい、追加しました", "いいえ、まだです"]
+            },
+            {
+              "field_id": "q_nb3_step2",
+              "label": "【STEP 2】画面右側の「Studio（またはノートブックガイド）」パネルから、「FAQ」または「学習ガイド」のボタンをクリックしてドキュメントを作成しましたか？",
+              "type": "radio",
+              "options": ["はい、自動生成しました", "いいえ、まだです"]
+            },
+            {
+              "field_id": "q_nb3_step3",
+              "label": "【STEP 3】自動生成された新任向けQ&Aのクオリティはどうでしたか？「これは実務の引き継ぎで使えそうだ」と感じた点や感想を教えてください。",
+              "type": "textarea"
+            },
+            {
+              "field_id": "q_nb3_step4",
+              "label": "【STEP 4】あなたの現在の部署にある資料で、この機能を使って一発でマニュアル化（Q&A化）してみたいドキュメントは何ですか？",
+              "type": "textarea",
+              "placeholder": "例：新システムの操作手順書、過去のイベント運営マニュアル、過去の議事録集など"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

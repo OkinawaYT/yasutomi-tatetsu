@@ -1,0 +1,16 @@
+# ニュース・お知らせ
+# 新しいものを上に追加してください
+# draft: true にすると非公開になります
+#
+# 使い方:
+#   - date: 2026-06-01
+#     title:
+#       en: Paper accepted
+#       ja: 論文が採択されました
+#     body:
+#       en: Our paper was accepted to Journal X.
+#       ja: 雑誌Xに論文が掲載されます。
+#     url: https://doi.org/...   # リンク（省略可）
+#     draft: false
+
+items:

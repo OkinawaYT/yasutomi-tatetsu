@@ -1,0 +1,43 @@
+name:
+  en: Yasutomi Tatetsu
+  ja: 立津 慶幸
+
+role:
+  en: Senior Associate Professor
+  ja: 准教授
+
+organization:
+  en: Meio University, Okinawa, Japan
+  ja: 名桜大学（沖縄県）
+
+bio:
+  en: >
+    My research focuses on **first-principles electronic structure calculations**
+    of surfaces, interfaces, and magnetic materials (hard magnets and superconductors).
+    I investigate the physical properties of these systems from first principles to
+    understand and design novel functional materials.
+
+    In parallel, I work on **Institutional Research (IR)** and **EdTech** to improve
+    the quality of higher education.
+    Please feel free to reach out for collaboration.
+  ja: >
+    **第一原理電子状態計算**を用いて、表面・界面・磁性材料（硬磁石・超伝導体）の
+    物性解明に取り組んでいます。計算科学的アプローチから機能性材料の設計・理解を
+    目指しています。
+
+    また、**インスティテューショナル・リサーチ（IR）** および **EdTech** を通じた
+    高等教育の質向上にも取り組んでいます。
+    研究・教育に関するご協力・ご相談をお気軽にどうぞ。
+
+certifications:
+  - name: Google for Education Certified Innovator
+    url: https://edu.google.com/intl/ALL_us/for-educators/certification-programs/certified-innovators/
+  - name: Apple Distinguished Educator
+    url: https://www.apple.com/education/k12/apple-distinguished-educator/
+
+links:
+  researchmap: https://researchmap.jp/yasutomi_tatetsu
+  github: https://github.com/OkinawaYT
+  email: mailto:y.tatetsu@meio-u.ac.jp
+
+cv: uploads/resume.pdf

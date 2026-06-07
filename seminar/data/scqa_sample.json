@@ -1,0 +1,170 @@
+{
+  "seminar_id": "scqa_sample",
+  "seminar_title": "課題発見・解決型プレゼンのための SCQA 構成術セミナー（サンプル）",
+  "program": [
+    {
+      "day": 1,
+      "tool": "Gemini",
+      "focus": "SCQA フレームワークを使った問題提起と解決策の構造化",
+      "cases": [
+        {
+          "id": "case1",
+          "title": "Case 1：学内課題の問題提起スライドをAIで作成する",
+          "ui_type": "prompt_generator_mode",
+          "learning_objective": "SCQA構成（状況→問題→問い→答え）で課題を論理的に構造化し、聴衆を「なるほど」と納得させるプレゼン資料のプロンプトを組み立てる",
+          "situation": "学内で慢性的な問題（離職率・参加率低下・手続きの非効率など）があるのに、上位者や委員会がなかなか動いてくれない場面。問題の深刻さと解決策を、感情的にではなく論理的なストーリーとして伝える必要がある。",
+          "goal": "SCQAフレームワークを使い、AIに「問題提起→解決策提案」のプレゼン構成を論理的に組み立てさせる",
+          "questions": [
+            {
+              "field_id": "q_scqa1_issue",
+              "label": "取り上げたい課題・問題を一言で書いてください。",
+              "type": "text",
+              "placeholder": "例：若手職員の早期離職、研修参加率の低下、紙書類の処理遅延"
+            },
+            {
+              "field_id": "q_scqa1_parts",
+              "label": "課題を「SCQA」で構造化してください",
+              "type": "matrix_parts",
+              "fields": [
+                {
+                  "key": "Situation",
+                  "label": "S (Situation)：誰もが同意できる現状・前提",
+                  "placeholder": "例：本学では毎年4月に全職員対象の新任研修を2日間実施している"
+                },
+                {
+                  "key": "Complication",
+                  "label": "C (Complication)：その状況に生じた問題・変化・ズレ",
+                  "placeholder": "例：しかし直近3年間で参加率が85%→52%に低下し、研修後アンケートの満足度も下がり続けている"
+                },
+                {
+                  "key": "Question",
+                  "label": "Q (Question)：問題から生まれる自然な問い",
+                  "placeholder": "例：なぜ参加率と満足度が同時に下がっているのか？このままにしてよいのか？"
+                },
+                {
+                  "key": "Answer",
+                  "label": "A (Answer)：その問いへの答え・提案する解決策",
+                  "placeholder": "例：開催時期を繁忙期から移動し、テーマを実務直結型に再設計することで改善できる"
+                }
+              ]
+            },
+            {
+              "field_id": "q_scqa1_audience",
+              "label": "このプレゼンを聞く相手は誰ですか？",
+              "type": "text",
+              "placeholder": "例：副学長・人事委員会・経営企画部門"
+            },
+            {
+              "field_id": "q_scqa1_output",
+              "label": "希望する出力形式を書いてください。",
+              "type": "text",
+              "placeholder": "例：パワーポイント3枚分の構成案・各スライドの見出しと本文箇条書き"
+            },
+            {
+              "field_id": "q_scqa1_final_prompt",
+              "label": "上記をもとに、AIへ渡す完成プロンプトを記述してください。",
+              "type": "textarea",
+              "placeholder": "SCQAの4要素を組み込んだ指示文をここに記入"
+            }
+          ]
+        },
+        {
+          "id": "case2",
+          "title": "Case 2：地域連携・外部向け企画提案をAIで構成する",
+          "ui_type": "prompt_generator_mode",
+          "learning_objective": "外部ステークホルダー（自治体・企業・地域団体）向けに、大学の取り組みや協力依頼をSCQAで論理展開し、共感を引き出す",
+          "situation": "地域連携や産学協働の文脈で、外部の自治体・企業・地域団体に対して大学の取り組みを説明し、協力や資金援助を引き出さなければならない場面。相手は大学の内情を知らないため、ゼロから状況を理解させる必要がある。",
+          "goal": "外部向けのSCQAストーリーをAIに構成させ、説明資料・提案書のたたき台を短時間で作る",
+          "questions": [
+            {
+              "field_id": "q_scqa2_project",
+              "label": "外部に提案・説明したいプロジェクトや取り組みを書いてください。",
+              "type": "text",
+              "placeholder": "例：地元高校生向けキャリア教育プログラムへの企業参画依頼"
+            },
+            {
+              "field_id": "q_scqa2_parts",
+              "label": "提案内容を「SCQA」で構造化してください",
+              "type": "matrix_parts",
+              "fields": [
+                {
+                  "key": "Situation",
+                  "label": "S (Situation)：相手も知っている共通の現状・背景",
+                  "placeholder": "例：沖縄県では若者の県外流出が続き、地元就職率の向上が地域の重要課題となっている"
+                },
+                {
+                  "key": "Complication",
+                  "label": "C (Complication)：その状況で起きている問題・ギャップ",
+                  "placeholder": "例：しかし高校生が地元企業の実態を知る機会が乏しく、進路選択時に県外を選ぶ傾向が強い"
+                },
+                {
+                  "key": "Question",
+                  "label": "Q (Question)：問題から浮かび上がる問い",
+                  "placeholder": "例：高校生が地元企業・産業をリアルに体験できる機会を、誰がどう作るのか？"
+                },
+                {
+                  "key": "Answer",
+                  "label": "A (Answer)：本学が提案する解決策と相手に期待する役割",
+                  "placeholder": "例：本学が主催するキャリア教育プログラムに企業講師として参画いただくことで、双方にメリットが生まれる"
+                }
+              ]
+            },
+            {
+              "field_id": "q_scqa2_partner",
+              "label": "連携・協力を求めたい相手（外部機関）を書いてください。",
+              "type": "text",
+              "placeholder": "例：地元製造業の中小企業、市役所産業振興課、商工会議所"
+            },
+            {
+              "field_id": "q_scqa2_applied",
+              "label": "SCQAストーリー構成は、他にどんな外部連携・説明場面に使えそうですか？",
+              "type": "textarea",
+              "placeholder": "例：文科省への事業申請説明、地域自治体への共同研究提案、企業へのインターンシップ協力依頼など"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "tool": "NotebookLM",
+      "focus": "SCQAで構造化した課題をNotebookLMで深掘り・文献補強する",
+      "cases": [
+        {
+          "id": "case1",
+          "title": "Case 1：課題の根拠資料をNotebookLMで収集・整理する",
+          "ui_type": "checklist_report_mode",
+          "learning_objective": "SCQA の C（問題）と A（解決策）を裏付けるための根拠資料を、NotebookLMを使って効率よく収集・整理する",
+          "situation": "SCQAで課題を構造化できたが、「なぜその問題が起きているか」「解決策の根拠はあるか」を示す資料が手薄な状態。説得力を上げるために、文献・統計・他大学事例で補強したい。",
+          "goal": "NotebookLMに関連資料を読み込ませ、SCQA の各要素を裏付けるエビデンスをチャットで引き出す",
+          "questions": [
+            {
+              "field_id": "q_nb_scqa_step1",
+              "label": "【STEP 1】昨日作成したSCQA課題に関連する資料（PDF・URL）をNotebookLMに追加しましたか？",
+              "type": "radio",
+              "options": ["はい、追加しました", "いいえ、まだです"]
+            },
+            {
+              "field_id": "q_nb_scqa_step2",
+              "label": "【STEP 2】チャットで「C（問題）の根拠となるデータや事例を教えて」と質問してみてください。AIが返してきた有用な情報を要約して記入してください。",
+              "type": "textarea",
+              "placeholder": "例：〇〇の調査によると、参加率低下の主因は『開催時期と繁忙期の重複』と報告されている（出典：第〇章）"
+            },
+            {
+              "field_id": "q_nb_scqa_step3",
+              "label": "【STEP 3】「A（解決策）を支持する他機関の成功事例を挙げて」と質問してみてください。最も参考になった事例を記入してください。",
+              "type": "textarea",
+              "placeholder": "例：〇〇大学では時期変更と実務密着型テーマ導入により参加率を20ポイント改善（出典：〇〇章）"
+            },
+            {
+              "field_id": "q_nb_scqa_step4",
+              "label": "【STEP 4】NotebookLMで文献補強した結果、SCQAのどの要素（S/C/Q/A）が最も強化されましたか？感想を教えてください。",
+              "type": "textarea",
+              "placeholder": "例：C（問題）の数値的根拠が充実し、委員会での説得力が増したと感じた"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,287 @@
+import os
+import requests
+import json
+from datetime import date
+
+RM_PERMALINK = "yasutomi_tatetsu"
+BASE_API_URL = f"https://api.researchmap.jp/{RM_PERMALINK}"
+
+RAW_ROOT  = "researchmap/data"   # 生JSONキャッシュ（gitignore）
+SITE_DATA = "data"               # サイト表示用クリーンJSON
+
+
+def mltext(node, key, lang="en"):
+    if not node or key not in node:
+        return ""
+    v = node[key]
+    if isinstance(v, dict):
+        return v.get(lang) or v.get("ja" if lang == "en" else "en", "")
+    return str(v)
+
+
+def normalize_date(raw, fallback=""):
+    if not raw:
+        return fallback
+    raw = str(raw)
+    if raw in ("9999", "9999-12-31"):
+        return ""
+    if len(raw) == 4:
+        return raw + "-01-01"
+    if len(raw) == 7:
+        return raw + "-01"
+    return raw[:10]
+
+
+def extract_authors(item, key="authors", max_n=6):
+    data = item.get(key, {})
+    persons = data.get("en") or data.get("ja", []) if isinstance(data, dict) else data
+    names = [p.get("name", "") for p in (persons or []) if p.get("name")]
+    return ", ".join(names[:max_n]) + (" et al." if len(names) > max_n else "")
+
+
+def extract_doi(item):
+    for link in item.get("see_also", []):
+        if link.get("label") == "doi":
+            url = link.get("@id", "")
+            if url.startswith("https://doi.org/"):
+                return url[len("https://doi.org/"):]
+    return (item.get("identifiers", {}).get("doi") or [None])[0]
+
+
+def item_id(item):
+    return item.get("@id", "").split("/")[-1]
+
+
+def fetch_all():
+    os.makedirs(RAW_ROOT, exist_ok=True)
+    os.makedirs(SITE_DATA, exist_ok=True)
+
+    # --- 論文 ---
+    pub_items = []
+    for rm_type in ("published_papers", "misc", "books_etc"):
+        title_key = "book_title" if rm_type == "books_etc" else "paper_title"
+        for item in _fetch(rm_type).get("items", []):
+            pub_items.append({
+                "id": item_id(item),
+                "type": rm_type,
+                "title": mltext(item, title_key, "en") or mltext(item, title_key, "ja"),
+                "title_ja": mltext(item, title_key, "ja") or None,
+                "date": normalize_date(item.get("publication_date") or item.get("from_date"), "2000-01-01"),
+                "authors": extract_authors(item) or None,
+                "journal": mltext(item, "publication_name") or None,
+                "doi": extract_doi(item),
+            })
+    pub_items.sort(key=lambda x: x["date"], reverse=True)
+    _write_json("publications", pub_items)
+
+    # --- 発表 ---
+    pres_items = []
+    for item in _fetch("presentations").get("items", []):
+        pres_items.append({
+            "id": item_id(item),
+            "title": mltext(item, "presentation_title", "en") or mltext(item, "presentation_title", "ja"),
+            "title_ja": mltext(item, "presentation_title", "ja") or None,
+            "date": normalize_date(item.get("publication_date"), "2000-01-01"),
+            "event": mltext(item, "event") or None,
+            "location": mltext(item, "location") or None,
+            "type": item.get("presentation_type") or None,
+            "authors": extract_authors(item, "presenters") or None,
+        })
+    pres_items.sort(key=lambda x: x["date"], reverse=True)
+    _write_json("presentations", pres_items)
+
+    # --- メディア掲載 ---
+    media_items = []
+    for item in _fetch("media_coverage").get("items", []):
+        media_items.append({
+            "id": item_id(item),
+            "title": mltext(item, "media_coverage_title", "en") or mltext(item, "media_coverage_title", "ja"),
+            "title_ja": mltext(item, "media_coverage_title", "ja") or None,
+            "date": normalize_date(item.get("publication_date"), "2000-01-01"),
+            "publication": mltext(item, "publication_name") or None,
+        })
+    media_items.sort(key=lambda x: x["date"], reverse=True)
+    _write_json("media_coverage", media_items)
+
+    # --- 受賞 ---
+    award_items = []
+    for item in _fetch("awards").get("items", []):
+        award_items.append({
+            "id": item_id(item),
+            "title": mltext(item, "award_name", "en") or mltext(item, "award_name", "ja"),
+            "title_ja": mltext(item, "award_name", "ja") or None,
+            "date": normalize_date(item.get("award_date"), "2000-01-01"),
+            "organization": mltext(item, "associated_organization") or None,
+        })
+    award_items.sort(key=lambda x: x["date"], reverse=True)
+    _write_json("awards", award_items)
+
+    # --- 研究プロジェクト ---
+    proj_items = []
+    for item in _fetch("research_projects").get("items", []):
+        from_d = normalize_date(item.get("from_date"), "")
+        to_d   = normalize_date(item.get("to_date"), "")
+        kaken = next((l.get("@id","") for l in item.get("see_also",[]) if l.get("label")=="kaken"), None)
+        proj_items.append({
+            "id": item_id(item),
+            "title": mltext(item, "research_project_title", "en") or mltext(item, "research_project_title", "ja"),
+            "title_ja": mltext(item, "research_project_title", "ja") or None,
+            "from_date": from_d,
+            "to_date": to_d or None,
+            "investigators": extract_authors(item, "investigators") or None,
+            "system": mltext(item, "system_name") or None,
+            "offer_org": mltext(item, "offer_organization") or None,
+            "grant_number": ((item.get("identifiers",{}).get("grant_number") or [None])[0]),
+            "role": item.get("research_project_owner_role") or None,
+            "kaken_url": kaken or None,
+        })
+    proj_items.sort(key=lambda x: x["from_date"], reverse=True)
+    _write_json("projects", proj_items)
+
+    # --- 研究分野 ---
+    area_items = []
+    for item in _fetch("research_areas").get("items", []):
+        area_items.append({
+            "id": item_id(item),
+            "field": mltext(item, "research_field", "en") or mltext(item, "research_field", "ja"),
+            "field_ja": mltext(item, "research_field", "ja") or None,
+        })
+    _write_json("research_areas", area_items)
+
+    # --- 研究経歴 ---
+    exp_items = []
+    for item in _fetch("research_experience").get("items", []):
+        exp_items.append({
+            "id": item_id(item),
+            "institution": mltext(item, "affiliation", "en") or mltext(item, "affiliation", "ja"),
+            "institution_ja": mltext(item, "affiliation", "ja") or None,
+            "department": mltext(item, "department", "en") or None,
+            "department_ja": mltext(item, "department", "ja") or None,
+            "position": mltext(item, "job_title", "en") or mltext(item, "job_title", "ja") or None,
+            "position_ja": mltext(item, "job_title", "ja") or None,
+            "from_date": normalize_date(item.get("from_date"), ""),
+            "to_date": normalize_date(item.get("to_date"), "") or None,
+        })
+    exp_items.sort(key=lambda x: x["from_date"], reverse=True)
+    _write_json("research_experience", exp_items)
+
+    # --- 学歴 ---
+    edu_items = []
+    for item in _fetch("education").get("items", []):
+        edu_items.append({
+            "id": item_id(item),
+            "institution": mltext(item, "affiliation", "en") or mltext(item, "affiliation", "ja"),
+            "institution_ja": mltext(item, "affiliation", "ja") or None,
+            "department": mltext(item, "department", "en") or None,
+            "department_ja": mltext(item, "department", "ja") or None,
+            "degree": mltext(item, "job_title", "en") or mltext(item, "job_title", "ja") or None,
+            "degree_ja": mltext(item, "job_title", "ja") or None,
+            "from_date": normalize_date(item.get("from_date"), ""),
+            "to_date": normalize_date(item.get("to_date"), "") or None,
+        })
+    edu_items.sort(key=lambda x: x["from_date"], reverse=True)
+    _write_json("education", edu_items)
+
+    # --- 担当授業 ---
+    teach_items = []
+    for item in _fetch("teaching_experience").get("items", []):
+        teach_items.append({
+            "id": item_id(item),
+            "subject": mltext(item, "subject_name", "en") or mltext(item, "subject_name", "ja"),
+            "subject_ja": mltext(item, "subject_name", "ja") or None,
+            "institution": mltext(item, "institution_name", "en") or mltext(item, "institution_name", "ja") or None,
+            "institution_ja": mltext(item, "institution_name", "ja") or None,
+            "from_date": normalize_date(item.get("from_date"), ""),
+            "to_date": normalize_date(item.get("to_date"), "") or None,
+        })
+    teach_items.sort(key=lambda x: x["from_date"], reverse=True)
+    _write_json("teaching_experience", teach_items)
+
+    # --- 委員会・学会等 ---
+    comm_items = []
+    for item in _fetch("committee_memberships").get("items", []):
+        comm_items.append({
+            "id": item_id(item),
+            "name": mltext(item, "committee_name", "en") or mltext(item, "committee_name", "ja"),
+            "name_ja": mltext(item, "committee_name", "ja") or None,
+            "organization": mltext(item, "associated_organization") or None,
+            "from_date": normalize_date(item.get("from_date"), ""),
+            "to_date": normalize_date(item.get("to_date"), "") or None,
+            "role": mltext(item, "role") or None,
+        })
+    comm_items.sort(key=lambda x: x["from_date"], reverse=True)
+    _write_json("committee_memberships", comm_items)
+
+    assoc_items = []
+    for item in _fetch("association_memberships").get("items", []):
+        assoc_items.append({
+            "id": item_id(item),
+            "name": mltext(item, "academic_society_name", "en") or mltext(item, "academic_society_name", "ja"),
+            "name_ja": mltext(item, "academic_society_name", "ja") or None,
+            "from_date": normalize_date(item.get("from_date"), ""),
+            "to_date": normalize_date(item.get("to_date"), "") or None,
+        })
+    assoc_items.sort(key=lambda x: x["from_date"], reverse=True)
+    _write_json("association_memberships", assoc_items)
+
+    # --- 社会貢献 ---
+    soc_items = []
+    for item in _fetch("social_contribution").get("items", []):
+        soc_items.append({
+            "id": item_id(item),
+            "title": mltext(item, "social_contribution_title", "en") or mltext(item, "social_contribution_title", "ja"),
+            "title_ja": mltext(item, "social_contribution_title", "ja") or None,
+            "date": normalize_date(item.get("from_event_date"), "2000-01-01"),
+            "to_date": normalize_date(item.get("to_event_date"), "") or None,
+            "organization": mltext(item, "associated_organization") or None,
+        })
+    soc_items.sort(key=lambda x: x["date"], reverse=True)
+    _write_json("social_contribution", soc_items)
+
+    # --- その他 ---
+    others_items = []
+    for item in _fetch("others").get("items", []):
+        others_items.append({
+            "id": item_id(item),
+            "title": mltext(item, "other_title", "en") or mltext(item, "other_title", "ja"),
+            "title_ja": mltext(item, "other_title", "ja") or None,
+            "date": normalize_date(item.get("from_date"), "2000-01-01"),
+            "description": mltext(item, "description") or None,
+            "description_ja": mltext(item, "description", "ja") or None,
+        })
+    others_items.sort(key=lambda x: x["date"], reverse=True)
+    _write_json("others", others_items)
+
+    print(f"\nDone — {date.today()}")
+
+
+def _fetch(rm_type):
+    url = f"{BASE_API_URL}/{rm_type}?limit=1000"
+    print(f"Fetching {rm_type}…", end=" ")
+    try:
+        r = requests.get(url, timeout=30)
+        r.raise_for_status()
+        data = r.json()
+        with open(f"{RAW_ROOT}/{rm_type}.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        print(f"{len(data.get('items', []))} items")
+        return data
+    except Exception as e:
+        print(f"SKIP ({e})")
+        cache = f"{RAW_ROOT}/{rm_type}.json"
+        if os.path.exists(cache):
+            with open(cache, encoding="utf-8") as f:
+                return json.load(f)
+        return {}
+
+
+def _write_json(name, items):
+    path = f"{SITE_DATA}/{name}.json"
+    payload = {"updated": str(date.today()), "items": items}
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+    print(f"  -> {path} ({len(items)} items)")
+
+
+if __name__ == "__main__":
+    fetch_all()

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>集計ダッシュボード</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="bg-slate-100 min-h-screen">
+<div class="max-w-5xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Loading -->
+  <div id="s-loading" class="text-center py-24">
+    <div class="inline-block w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+    <p class="text-slate-500 text-sm">データを読み込み中...</p>
+  </div>
+
+  <!-- Error -->
+  <div id="s-error" class="hidden bg-red-50 border border-red-200 rounded-2xl p-6">
+    <p class="font-bold text-red-700 mb-1">エラー</p>
+    <p id="error-msg" class="text-red-600 text-sm"></p>
+    <p class="text-xs text-red-400 mt-3">
+      ※ GASのデプロイ設定を確認してください。「次のユーザーとして実行: 自分」「アクセスできるユーザー: 全員」が必要です。
+    </p>
+  </div>
+
+  <!-- Main -->
+  <div id="s-main" class="hidden space-y-6">
+
+    <!-- Header -->
+    <div class="flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <h1 id="el-title" class="text-xl font-bold text-slate-800"></h1>
+        <p class="text-sm text-slate-400 mt-1">集計ダッシュボード</p>
+      </div>
+      <div class="flex gap-2">
+        <a id="link-form" href="#" class="text-xs text-slate-500 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-3 py-2 transition">
+          回答フォームへ →
+        </a>
+        <button onclick="refreshData()" class="text-xs text-slate-500 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-3 py-2 transition">
+          ↻ 更新
+        </button>
+        <button onclick="exportCSV()" class="text-xs text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg px-3 py-2 transition">
+          CSV 出力
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats カード -->
+    <div id="el-stats" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+
+    <!-- 絞り込み -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-wrap gap-4 items-center shadow-sm">
+      <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest">絞り込み</span>
+      <div class="flex items-center gap-2">
+        <label class="text-xs text-slate-400">Day</label>
+        <select id="filter-day" onchange="applyFilter()"
+          class="text-sm border border-slate-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+          <option value="">全て</option>
+        </select>
+      </div>
+      <div class="flex items-center gap-2">
+        <label class="text-xs text-slate-400">Case</label>
+        <select id="filter-case" onchange="applyFilter()"
+          class="text-sm border border-slate-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+          <option value="">全て</option>
+        </select>
+      </div>
+      <span id="filter-count" class="text-xs text-slate-400 ml-auto"></span>
+    </div>
+
+    <!-- ラジオ集計グラフ -->
+    <div>
+      <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-widest mb-3">選択式の集計</h2>
+      <div id="el-charts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      <p id="el-charts-empty" class="hidden text-sm text-slate-400 text-center py-6">該当するデータがありません</p>
+    </div>
+
+    <!-- テキスト回答 -->
+    <div>
+      <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-widest mb-3">テキスト回答</h2>
+      <div id="el-texts" class="space-y-4"></div>
+      <p id="el-texts-empty" class="hidden text-sm text-slate-400 text-center py-6">該当するデータがありません</p>
+    </div>
+
+    <!-- 回答一覧テーブル -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div class="p-4 border-b border-slate-100">
+        <h2 class="font-semibold text-slate-700 text-sm">回答一覧</h2>
+        <p id="el-updated" class="text-xs text-slate-400 mt-0.5"></p>
+      </div>
+      <div class="overflow-x-auto">
+        <table id="el-table" class="w-full text-xs"></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+let GAS_URL    = '';
+let seminarData = null;
+let seminarId   = '';
+let allRows     = [];
+let allHeaders  = [];
+let fieldMap    = {};  // field_id → question object
+let charts      = [];
+
+// ============================================================
+// INIT
+// ============================================================
+async function init() {
+  const params = new URLSearchParams(location.search);
+  seminarId = params.get('id') || '';
+
+  if (!seminarId) {
+    showError('URLに ?id= パラメータが必要です。例：?id=kodaikyo_202607');
+    return;
+  }
+
+  // config.json から GAS URL を読み込む
+  try {
+    const r = await fetch('config.json');
+    if (r.ok) {
+      const cfg = await r.json();
+      if (cfg.gas_url && cfg.gas_url !== 'YOUR_GAS_URL_HERE') GAS_URL = cfg.gas_url;
+    }
+  } catch (_) {}
+
+  // セミナーJSON を読み込む（フィールド定義のために必要）
+  try {
+    const r = await fetch(`data/${seminarId}.json`);
+    if (!r.ok) throw new Error(`data/${seminarId}.json が見つかりません`);
+    seminarData = await r.json();
+  } catch (e) {
+    showError(e.message);
+    return;
+  }
+
+  // フィールドマップを構築
+  seminarData.program.forEach(day => {
+    day.cases.forEach(c => {
+      c.questions.forEach(q => {
+        fieldMap[q.field_id] = q;
+        // PARTS サブフィールドもマップに登録
+        if (q.type === 'matrix_parts') {
+          q.fields.forEach(f => {
+            fieldMap[`${q.field_id}__${f.key}`] = {
+              type: 'text',
+              label: `${q.label} › ${f.label.split('：')[0]}`,
+            };
+          });
+        }
+      });
+    });
+  });
+
+  // ページ設定
+  el('el-title').textContent = seminarData.seminar_title;
+  document.title = `${seminarData.seminar_title} - ダッシュボード`;
+  el('link-form').href = `index.html?id=${seminarId}`;
+
+  setupFilters();
+  await refreshData();
+}
+
+// ============================================================
+// データ取得（JSONP でCORSを回避）
+// ============================================================
+async function refreshData() {
+  if (!GAS_URL) {
+    showError('config.json の gas_url が設定されていません。GASをデプロイして設定してください。');
+    return;
+  }
+
+  try {
+    const result = await fetchJsonp(
+      `${GAS_URL}?action=getResults&seminar_id=${encodeURIComponent(seminarId)}`
+    );
+    allRows    = result.rows    || [];
+    allHeaders = result.headers || [];
+  } catch (e) {
+    showError(`データ取得失敗：${e.message}`);
+    return;
+  }
+
+  el('el-updated').textContent = `最終更新：${new Date().toLocaleString('ja-JP')}`;
+  show('s-main');
+  hide('s-loading');
+  applyFilter();
+}
+
+function fetchJsonp(url) {
+  return new Promise((resolve, reject) => {
+    const cb = `_jsonp_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    const timeout = setTimeout(() => {
+      delete window[cb];
+      reject(new Error('タイムアウト（10秒）'));
+    }, 10000);
+
+    window[cb] = data => {
+      clearTimeout(timeout);
+      delete window[cb];
+      document.head.removeChild(script);
+      resolve(data);
+    };
+
+    const script = document.createElement('script');
+    script.src = `${url}&callback=${cb}`;
+    script.onerror = () => {
+      clearTimeout(timeout);
+      delete window[cb];
+      reject(new Error('スクリプト読み込みエラー'));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+// ============================================================
+// フィルター
+// ============================================================
+function setupFilters() {
+  const daySel  = el('filter-day');
+  const caseSel = el('filter-case');
+
+  seminarData.program.forEach(day => {
+    const opt = new Option(`Day ${day.day}  ${day.tool}`, day.day);
+    daySel.appendChild(opt);
+  });
+
+  seminarData.program.forEach(day => {
+    day.cases.forEach(c => {
+      const opt = new Option(c.title.split('：')[0], c.id);
+      caseSel.appendChild(opt);
+    });
+  });
+}
+
+function applyFilter() {
+  const dayVal  = el('filter-day').value;
+  const caseVal = el('filter-case').value;
+
+  let rows = allRows;
+  if (dayVal)  rows = rows.filter(r => String(r.day) === String(dayVal));
+  if (caseVal) rows = rows.filter(r => r.case_id === caseVal);
+
+  el('filter-count').textContent = `${rows.length} 件表示中`;
+
+  renderStats(rows);
+  renderCharts(rows);
+  renderTexts(rows);
+  renderTable(rows);
+}
+
+// ============================================================
+// 統計カード
+// ============================================================
+function renderStats(rows) {
+  const dayCounts = {};
+  rows.forEach(r => {
+    const k = `Day ${r.day}`;
+    dayCounts[k] = (dayCounts[k] || 0) + 1;
+  });
+
+  const cards = [
+    { label: '総回答数', value: rows.length, color: 'bg-indigo-50 border-indigo-100 text-indigo-700' },
+    ...Object.entries(dayCounts).map(([k, v]) => ({
+      label: k, value: v,
+      color: 'bg-slate-50 border-slate-100 text-slate-700',
+    })),
+  ];
+
+  el('el-stats').innerHTML = cards.map(c => `
+    <div class="${c.color} rounded-2xl border p-4 shadow-sm">
+      <div class="text-3xl font-bold">${c.value}</div>
+      <div class="text-xs mt-1 opacity-60">${c.label}</div>
+    </div>`).join('');
+}
+
+// ============================================================
+// ラジオ集計グラフ（Chart.js Doughnut）
+// ============================================================
+const PALETTE = ['#6366f1','#14b8a6','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#84cc16'];
+
+function renderCharts(rows) {
+  charts.forEach(c => c.destroy());
+  charts = [];
+  el('el-charts').innerHTML = '';
+
+  const radioFields = Object.entries(fieldMap).filter(([, f]) => f.type === 'radio');
+  let hasData = false;
+
+  radioFields.forEach(([fieldId, field]) => {
+    const counts = {};
+    rows.forEach(r => {
+      const v = r[fieldId] || '(未回答)';
+      counts[v] = (counts[v] || 0) + 1;
+    });
+
+    const total = Object.values(counts).reduce((a, b) => a + b, 0);
+    if (total === 0) return;
+    hasData = true;
+
+    const div = document.createElement('div');
+    div.className = 'bg-white rounded-2xl border border-slate-200 p-4 shadow-sm';
+    div.innerHTML = `
+      <p class="text-xs font-semibold text-slate-600 mb-1 leading-snug">${field.label}</p>
+      <p class="text-xs text-slate-400 mb-3">${total} 件</p>
+      <div class="relative h-44"><canvas id="c-${fieldId.replace(/\W/g, '_')}"></canvas></div>`;
+    el('el-charts').appendChild(div);
+
+    const ctx = div.querySelector('canvas').getContext('2d');
+    charts.push(new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: Object.keys(counts),
+        datasets: [{
+          data: Object.values(counts),
+          backgroundColor: PALETTE,
+          borderWidth: 0,
+          hoverOffset: 4,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 12 } },
+          tooltip: {
+            callbacks: {
+              label: ctx => ` ${ctx.label}：${ctx.raw} 件 (${Math.round(ctx.raw / total * 100)}%)`,
+            },
+          },
+        },
+        cutout: '60%',
+      },
+    }));
+  });
+
+  el('el-charts-empty').classList.toggle('hidden', hasData || rows.length > 0);
+}
+
+// ============================================================
+// テキスト回答リスト
+// ============================================================
+function renderTexts(rows) {
+  el('el-texts').innerHTML = '';
+
+  const textFields = Object.entries(fieldMap)
+    .filter(([, f]) => f.type === 'textarea' || f.type === 'text');
+
+  let hasData = false;
+
+  textFields.forEach(([fieldId, field]) => {
+    const responses = rows
+      .map(r => ({ name: r.name, affiliation: r.affiliation, text: (r[fieldId] || '').trim() }))
+      .filter(r => r.text);
+
+    if (!responses.length) return;
+    hasData = true;
+
+    const div = document.createElement('div');
+    div.className = 'bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden';
+    div.innerHTML = `
+      <div class="bg-slate-50 border-b border-slate-100 px-4 py-3 flex items-center justify-between">
+        <p class="text-xs font-semibold text-slate-600 leading-snug">${field.label}</p>
+        <span class="text-xs text-slate-400">${responses.length} 件</span>
+      </div>
+      <div class="divide-y divide-slate-100 max-h-72 overflow-y-auto">
+        ${responses.map((r, i) => `
+          <div class="px-4 py-3 flex gap-3">
+            <span class="flex-shrink-0 text-xs text-slate-300 w-5 text-right mt-0.5">${i + 1}</span>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs text-slate-400 mb-1">${esc(r.name)}${r.affiliation ? ` · ${esc(r.affiliation)}` : ''}</p>
+              <p class="text-sm text-slate-700 whitespace-pre-wrap break-words">${esc(r.text)}</p>
+            </div>
+          </div>`).join('')}
+      </div>`;
+    el('el-texts').appendChild(div);
+  });
+
+  el('el-texts-empty').classList.toggle('hidden', hasData || rows.length > 0);
+}
+
+// ============================================================
+// 回答一覧テーブル
+// ============================================================
+const TABLE_COLS = ['timestamp', 'day', 'case_id', 'name', 'affiliation', 'role'];
+const COL_LABELS = {
+  timestamp: '日時', day: 'Day', case_id: 'Case',
+  name: '氏名', affiliation: '所属', role: '役職',
+};
+
+function renderTable(rows) {
+  const tbl = el('el-table');
+
+  if (!rows.length) {
+    tbl.innerHTML = '<tr><td class="p-10 text-center text-slate-400 text-sm">データがありません</td></tr>';
+    return;
+  }
+
+  // 回答フィールド数を右端に表示
+  const answerCols = allHeaders.filter(h => !TABLE_COLS.includes(h) && h !== 'seminar_id');
+
+  const thead = `
+    <thead class="bg-slate-50 border-b border-slate-200 sticky top-0">
+      <tr>
+        ${TABLE_COLS.map(c => `<th class="px-3 py-2 text-left text-xs font-semibold text-slate-500 whitespace-nowrap">${COL_LABELS[c] || c}</th>`).join('')}
+        <th class="px-3 py-2 text-left text-xs font-semibold text-slate-500">回答数</th>
+      </tr>
+    </thead>`;
+
+  const tbody = `
+    <tbody class="divide-y divide-slate-100">
+      ${rows.map(r => `
+        <tr class="hover:bg-slate-50 transition-colors">
+          ${TABLE_COLS.map(c => `<td class="px-3 py-2.5 text-slate-700 whitespace-nowrap">${formatCell(c, r[c])}</td>`).join('')}
+          <td class="px-3 py-2.5 text-slate-400">${answerCols.filter(k => r[k] && r[k].trim()).length} / ${answerCols.length}</td>
+        </tr>`).join('')}
+    </tbody>`;
+
+  tbl.innerHTML = thead + tbody;
+}
+
+function formatCell(col, val) {
+  if (!val || !String(val).trim()) return '<span class="text-slate-300">—</span>';
+  if (col === 'timestamp') {
+    try { return new Date(val).toLocaleString('ja-JP', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }); }
+    catch (_) { return esc(val); }
+  }
+  const s = String(val);
+  return esc(s.length > 30 ? s.slice(0, 30) + '…' : s);
+}
+
+// ============================================================
+// CSV エクスポート（BOM付きUTF-8）
+// ============================================================
+function exportCSV() {
+  if (!allRows.length) { alert('データがありません'); return; }
+
+  const dayVal  = el('filter-day').value;
+  const caseVal = el('filter-case').value;
+  let rows = allRows;
+  if (dayVal)  rows = rows.filter(r => String(r.day) === String(dayVal));
+  if (caseVal) rows = rows.filter(r => r.case_id === caseVal);
+
+  const csvRows = [
+    allHeaders.join(','),
+    ...rows.map(r => allHeaders.map(h => `"${(r[h] || '').replace(/"/g, '""')}"`).join(',')),
+  ];
+
+  const blob = new Blob(['﻿' + csvRows.join('\n')], { type: 'text/csv;charset=utf-8' });
+  const a    = document.createElement('a');
+  a.href     = URL.createObjectURL(blob);
+  a.download = `${seminarId}_${dayVal ? `day${dayVal}_` : ''}results.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// ============================================================
+// ユーティリティ
+// ============================================================
+function el(id)   { return document.getElementById(id); }
+function show(id) { el(id).classList.remove('hidden'); }
+function hide(id) { el(id).classList.add('hidden'); }
+function esc(s)   { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function showError(msg) {
+  hide('s-loading');
+  show('s-error');
+  el('error-msg').textContent = msg;
+}
+
+// ============================================================
+// START
+// ============================================================
+init();
+</script>
+</body>
+</html>
