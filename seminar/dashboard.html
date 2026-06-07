@@ -99,13 +99,14 @@
 // ============================================================
 // STATE
 // ============================================================
-let GAS_URL    = '';
-let seminarData = null;
-let seminarId   = '';
-let allRows     = [];
-let allHeaders  = [];
-let fieldMap    = {};  // field_id → question object
-let charts      = [];
+let GAS_URL      = '';
+let seminarData  = null;
+let seminarId    = '';
+let allRows      = [];
+let allHeaders   = [];
+let fieldMap     = {};  // field_id → question object
+let caseFieldMap = {};  // "d{day}_{case_id}" → [field_id, ...]
+let charts       = [];
 
 // ============================================================
 // INIT
@@ -138,18 +139,19 @@ async function init() {
     return;
   }
 
-  // フィールドマップを構築
+  // fieldMap（全フィールド）と caseFieldMap（case別フィールドID一覧）を構築
   seminarData.program.forEach(day => {
     day.cases.forEach(c => {
+      const key = `d${day.day}_${c.id}`;
+      caseFieldMap[key] = [];
       c.questions.forEach(q => {
         fieldMap[q.field_id] = q;
-        // PARTS サブフィールドもマップに登録
+        caseFieldMap[key].push(q.field_id);
         if (q.type === 'matrix_parts') {
           q.fields.forEach(f => {
-            fieldMap[`${q.field_id}__${f.key}`] = {
-              type: 'text',
-              label: `${q.label} › ${f.label.split('：')[0]}`,
-            };
+            const subId = `${q.field_id}__${f.key}`;
+            fieldMap[subId] = { type: 'text', label: `${q.label} › ${f.label.split('：')[0]}` };
+            caseFieldMap[key].push(subId);
           });
         }
       });
@@ -237,6 +239,17 @@ function setupFilters() {
   });
 }
 
+// 選択中の case に属するフィールドのみ返す（未選択時は全フィールド）
+function getActiveFields() {
+  const dayVal  = el('filter-day').value;
+  const caseVal = el('filter-case').value;
+  if (dayVal && caseVal) {
+    const ids = caseFieldMap[`d${dayVal}_${caseVal}`] || [];
+    return ids.map(id => [id, fieldMap[id]]).filter(([, f]) => f);
+  }
+  return Object.entries(fieldMap);
+}
+
 function applyFilter() {
   const dayVal  = el('filter-day').value;
   const caseVal = el('filter-case').value;
@@ -288,7 +301,7 @@ function renderCharts(rows) {
   charts = [];
   el('el-charts').innerHTML = '';
 
-  const radioFields = Object.entries(fieldMap).filter(([, f]) => f.type === 'radio');
+  const radioFields = getActiveFields().filter(([, f]) => f.type === 'radio');
   let hasData = false;
 
   radioFields.forEach(([fieldId, field]) => {
@@ -347,7 +360,7 @@ function renderCharts(rows) {
 function renderTexts(rows) {
   el('el-texts').innerHTML = '';
 
-  const textFields = Object.entries(fieldMap)
+  const textFields = getActiveFields()
     .filter(([, f]) => f.type === 'textarea' || f.type === 'text');
 
   let hasData = false;
