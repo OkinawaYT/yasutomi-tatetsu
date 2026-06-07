@@ -31,8 +31,8 @@
       "to_date": "2025-12-11",
       "organization": "宮古高校",
       "location": "宮古高校",
-      "lat": null,
-      "lon": null
+      "lat": 33.7835782,
+      "lon": 133.4128727
     },
     {
       "id": "51288538",
@@ -240,8 +240,8 @@
       "to_date": null,
       "organization": "興南学園",
       "location": "興南学園",
-      "lat": null,
-      "lon": null
+      "lat": 25.03132,
+      "lon": 121.6092882
     }
   ]
 }
