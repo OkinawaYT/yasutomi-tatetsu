@@ -34,8 +34,15 @@
   <div id="s-main" class="hidden space-y-4">
 
     <!-- Header -->
-    <div>
+    <div class="flex items-center justify-between gap-3">
       <h1 id="el-title" class="text-lg font-bold text-slate-800 leading-snug"></h1>
+      <a id="link-dashboard" href="#"
+        class="flex-shrink-0 flex items-center gap-1.5 text-xs text-slate-500 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-3 py-2 transition whitespace-nowrap">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        ダッシュボード
+      </a>
     </div>
 
     <!-- GAS未設定の警告 -->
@@ -150,6 +157,7 @@ async function init() {
 
   el('el-title').textContent = seminarData.seminar_title;
   document.title = seminarData.seminar_title;
+  el('link-dashboard').href = `dashboard.html?id=${seminarId}`;
 
   show('s-main');
   hide('s-loading');

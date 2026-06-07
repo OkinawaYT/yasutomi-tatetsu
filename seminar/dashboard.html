@@ -41,9 +41,6 @@
         <button onclick="refreshData()" class="text-xs text-slate-500 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-3 py-2 transition">
           ↻ 更新
         </button>
-        <button onclick="exportCSV()" class="text-xs text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg px-3 py-2 transition">
-          CSV 出力
-        </button>
       </div>
     </div>
 
@@ -357,7 +354,7 @@ function renderTexts(rows) {
 
   textFields.forEach(([fieldId, field]) => {
     const responses = rows
-      .map(r => ({ name: r.name, affiliation: r.affiliation, text: (r[fieldId] || '').trim() }))
+      .map(r => ({ text: (r[fieldId] || '').trim() }))
       .filter(r => r.text);
 
     if (!responses.length) return;
@@ -374,10 +371,7 @@ function renderTexts(rows) {
         ${responses.map((r, i) => `
           <div class="px-4 py-3 flex gap-3">
             <span class="flex-shrink-0 text-xs text-slate-300 w-5 text-right mt-0.5">${i + 1}</span>
-            <div class="flex-1 min-w-0">
-              <p class="text-xs text-slate-400 mb-1">${esc(r.name)}${r.affiliation ? ` · ${esc(r.affiliation)}` : ''}</p>
-              <p class="text-sm text-slate-700 whitespace-pre-wrap break-words">${esc(r.text)}</p>
-            </div>
+            <p class="flex-1 text-sm text-slate-700 whitespace-pre-wrap break-words">${esc(r.text)}</p>
           </div>`).join('')}
       </div>`;
     el('el-texts').appendChild(div);
@@ -389,10 +383,9 @@ function renderTexts(rows) {
 // ============================================================
 // 回答一覧テーブル
 // ============================================================
-const TABLE_COLS = ['timestamp', 'day', 'case_id', 'name', 'affiliation', 'role'];
+const TABLE_COLS = ['timestamp', 'day', 'case_id'];
 const COL_LABELS = {
   timestamp: '日時', day: 'Day', case_id: 'Case',
-  name: '氏名', affiliation: '所属', role: '役職',
 };
 
 function renderTable(rows) {
@@ -434,31 +427,6 @@ function formatCell(col, val) {
   }
   const s = String(val);
   return esc(s.length > 30 ? s.slice(0, 30) + '…' : s);
-}
-
-// ============================================================
-// CSV エクスポート（BOM付きUTF-8）
-// ============================================================
-function exportCSV() {
-  if (!allRows.length) { alert('データがありません'); return; }
-
-  const dayVal  = el('filter-day').value;
-  const caseVal = el('filter-case').value;
-  let rows = allRows;
-  if (dayVal)  rows = rows.filter(r => String(r.day) === String(dayVal));
-  if (caseVal) rows = rows.filter(r => r.case_id === caseVal);
-
-  const csvRows = [
-    allHeaders.join(','),
-    ...rows.map(r => allHeaders.map(h => `"${(r[h] || '').replace(/"/g, '""')}"`).join(',')),
-  ];
-
-  const blob = new Blob(['﻿' + csvRows.join('\n')], { type: 'text/csv;charset=utf-8' });
-  const a    = document.createElement('a');
-  a.href     = URL.createObjectURL(blob);
-  a.download = `${seminarId}_${dayVal ? `day${dayVal}_` : ''}results.csv`;
-  a.click();
-  URL.revokeObjectURL(a.href);
 }
 
 // ============================================================
