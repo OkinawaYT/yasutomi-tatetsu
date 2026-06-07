@@ -93,12 +93,15 @@ def fetch_all():
     # --- メディア掲載 ---
     media_items = []
     for item in _fetch("media_coverage").get("items", []):
+        # URL取得（see_also の label="url" から）
+        url = next((l.get("@id") for l in item.get("see_also", []) if l.get("label") == "url"), None)
         media_items.append({
             "id": item_id(item),
             "title": mltext(item, "media_coverage_title", "en") or mltext(item, "media_coverage_title", "ja"),
             "title_ja": mltext(item, "media_coverage_title", "ja") or None,
             "date": normalize_date(item.get("publication_date"), "2000-01-01"),
-            "publication": mltext(item, "publication_name") or None,
+            "publication": mltext(item, "publisher") or mltext(item, "event") or None,
+            "url": url,
         })
     media_items.sort(key=lambda x: x["date"], reverse=True)
     _write_json("media_coverage", media_items)
@@ -233,7 +236,8 @@ def fetch_all():
             "title_ja": mltext(item, "social_contribution_title", "ja") or None,
             "date": normalize_date(item.get("from_event_date"), "2000-01-01"),
             "to_date": normalize_date(item.get("to_event_date"), "") or None,
-            "organization": mltext(item, "associated_organization") or None,
+            # promoter が主催者。associated_organization は別フィールド
+            "organization": mltext(item, "promoter") or mltext(item, "associated_organization") or None,
         })
     soc_items.sort(key=lambda x: x["date"], reverse=True)
     _write_json("social_contribution", soc_items)

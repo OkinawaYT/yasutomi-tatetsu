@@ -10,16 +10,17 @@ const currentPage = params.get('page') || 'bio';
 
 // ページ名 → 表示するセクション ID のマッピング
 const PAGE_SECTIONS = {
-  bio:          ['bio', 'news'],      // About＋ニュース
+  bio:          ['bio', 'news'],
   publications: ['publications'],
   talks:        ['talks'],
   experience:   ['experience'],
   projects:     ['projects'],
   activities:   ['activities'],
-  materials:    ['materials', 'others'],
+  materials:    ['materials', 'others'],  // materials が先、others が後
+  contact:      ['contact'],
 };
 const ALL_SECTION_IDS = ['bio', 'publications', 'talks', 'experience',
-                          'projects', 'activities', 'others', 'news', 'materials'];
+                          'projects', 'activities', 'materials', 'others', 'news', 'contact'];
 
 // URL を生成（lang と page を保持）
 function makeUrl(page, langCode) {
@@ -111,6 +112,7 @@ const NAV_PAGES = [
   ['projects',     'Projects',    'プロジェクト'],
   ['activities',   'Activities',  '社会貢献'],
   ['materials',    'Tools',       'ツール'],
+  ['contact',      'Contact',     'Contact'],
 ];
 
 function renderNav(profile) {
@@ -133,7 +135,7 @@ function renderNav(profile) {
 }
 
 // ── Bio / Hero ──────────────────────────────────────────────────────────────
-function renderBio(profile, areas) {
+function renderBio(profile) {
   if (!profile) return;
   const el = document.getElementById('bio');
   const bio = t(profile.bio, '')
@@ -166,13 +168,6 @@ function renderBio(profile, areas) {
     return `<a href="${url}" class="text-link-btn" ${target}>${displayName}</a>`;
   }).join('');
 
-  // Researchmap の研究分野タグ（sync後に表示）
-  const areaItems = (areas?.items || []);
-  const tags = areaItems.map(a => {
-    const field = (lang === 'ja' && a.field_ja) ? a.field_ja : a.field;
-    return `<span class="area-tag">#${esc(field)}</span>`;
-  }).join('');
-
   el.innerHTML = `
     <div class="bio-inner">
       <div class="bio-photo">
@@ -183,7 +178,6 @@ function renderBio(profile, areas) {
         <p class="bio-role">${esc(t(profile.role))}</p>
         <p class="bio-org">${esc(t(profile.organization))}</p>
         <div class="bio-desc">${bio}</div>
-        ${tags ? `<div class="bio-areas" style="margin-bottom:var(--spacing-sm)">${tags}</div>` : ''}
         ${highlights ? `<div class="bio-highlights">${highlights}</div>` : ''}
         <div class="bio-social">${socials}</div>
       </div>
@@ -231,7 +225,56 @@ function renderPublications(data) {
     </a>`;
 }
 
-// ── Talks ────────────────────────────────────────────────────────────────────
+// ── Talks（地図 + テーブル）────────────────────────────────────────────────
+let _talkMap = null; // Leaflet map instance
+
+async function geocodeLocation(place) {
+  if (!place) return null;
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(place)}&format=json&limit=1&accept-language=${lang},en`;
+    const r = await fetch(url, { headers: { 'User-Agent': 'TatetsuLab/1.0' } });
+    const data = await r.json();
+    return data[0] ? { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon), name: data[0].display_name } : null;
+  } catch { return null; }
+}
+
+async function renderTalksMap(pres) {
+  const mapEl = document.getElementById('talks-map');
+  if (!mapEl || !window.L) return;
+
+  // 地図初期化（再初期化防止）
+  if (_talkMap) { _talkMap.remove(); _talkMap = null; }
+  _talkMap = L.map('talks-map').setView([35.68, 139.69], 4); // 日本中心
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18,
+  }).addTo(_talkMap);
+
+  // 場所でグループ化（ユニーク）
+  const locMap = {};
+  pres.forEach(p => {
+    if (!p.location) return;
+    if (!locMap[p.location]) locMap[p.location] = [];
+    locMap[p.location].push(p);
+  });
+
+  const locations = Object.keys(locMap);
+  for (let i = 0; i < locations.length; i++) {
+    const loc = locations[i];
+    // Nominatim rate limit: 1 req/s
+    if (i > 0) await new Promise(r => setTimeout(r, 1100));
+    const coords = await geocodeLocation(loc);
+    if (!coords) continue;
+    const items = locMap[loc];
+    const popupHtml = `<strong>${esc(loc)}</strong><br>${items.length} ${lang === 'ja' ? '件の発表' : 'presentation(s)'}`;
+    L.circleMarker([coords.lat, coords.lon], {
+      radius: 6 + Math.min(items.length, 10),
+      fillColor: '#2563eb', color: '#fff',
+      weight: 2, opacity: 1, fillOpacity: 0.8,
+    }).bindPopup(popupHtml).addTo(_talkMap);
+  }
+}
+
 function renderTalks(presData, mediaData) {
   const el = document.getElementById('talks');
   const pres  = (presData.items  || []).filter(p => !p.draft);
@@ -243,6 +286,12 @@ function renderTalks(presData, mediaData) {
     el.innerHTML = `<h2 class="section-title">${label ? '発表・メディア' : 'Talks & Media'}</h2><p class="empty-state">—</p>`;
     return;
   }
+
+  // 地図コンテナ
+  const mapSection = pres.some(p => p.location) ? `
+    <div id="talks-map" class="talks-map"></div>
+    <p class="map-note">${label ? '発表地点（ピンの大きさ = 件数）' : 'Presentation locations — circle size = number of talks'}</p>` : '';
+
   const presTable = pres.length ? `
     <h3 class="subsection-title">${label ? '学会発表' : 'Presentations'}</h3>
     <div class="table-wrap">
@@ -281,9 +330,12 @@ function renderTalks(presData, mediaData) {
         <tbody>
           ${media.map(m => {
             const title = (lang === 'ja' && m.title_ja) ? m.title_ja : m.title;
+            const titleCell = m.url
+              ? `<a href="${m.url}" target="_blank" rel="noopener">${esc(title)}</a>`
+              : esc(title);
             return `<tr>
               <td class="col-year">${dateYM(m.date)}</td>
-              <td class="col-title">${esc(title)}</td>
+              <td class="col-title">${titleCell}</td>
               <td>${esc(m.publication || '')}</td>
             </tr>`;
           }).join('')}
@@ -291,7 +343,14 @@ function renderTalks(presData, mediaData) {
       </table>
     </div>` : '';
 
-  el.innerHTML = `<h2 class="section-title">${label ? '発表・メディア' : 'Talks & Media'}</h2>${presTable}${mediaTable}`;
+  el.innerHTML = `
+    <h2 class="section-title">${label ? '発表・メディア' : 'Talks & Media'}</h2>
+    ${mapSection}${presTable}${mediaTable}`;
+
+  // 地図のジオコーディングは非同期で実行
+  if (pres.some(p => p.location)) {
+    renderTalksMap(pres);
+  }
 }
 
 // ── Experience ───────────────────────────────────────────────────────────────
@@ -564,6 +623,47 @@ function renderMaterials(data) {
     </div>`;
 }
 
+// ── Contact ───────────────────────────────────────────────────────────────────
+function renderContact(profile) {
+  const el = document.getElementById('contact');
+  if (!profile) { el.classList.add('no-data'); el.style.display = 'none'; return; }
+  const label = lang === 'ja';
+
+  const LINK_LABELS = {
+    github:         { en: 'GitHub',         ja: 'GitHub' },
+    email:          { en: 'Email',           ja: 'メール' },
+    orcid:          { en: 'ORCID',           ja: 'ORCID' },
+    linkedin:       { en: 'LinkedIn',        ja: 'LinkedIn' },
+    'google-scholar':{ en: 'Google Scholar', ja: 'Google Scholar' },
+    researchmap:    { en: 'Researchmap',     ja: 'Researchmap' },
+  };
+
+  const linkItems = Object.entries(profile.links || {}).map(([key, url]) => {
+    const icon = ICONS[key];
+    const lbl  = (LINK_LABELS[key] || {})[lang] || key;
+    const isEmail = url.startsWith('mailto:');
+    const addr = isEmail ? url.replace('mailto:', '') : null;
+    return `<div class="contact-item">
+      <div class="contact-icon">${icon || '<span style="font-size:14px;font-weight:700">→</span>'}</div>
+      <div>
+        <div class="contact-label">${esc(lbl)}</div>
+        <a href="${url}" class="contact-value" ${isEmail ? '' : 'target="_blank" rel="noopener"'}>
+          ${addr ? esc(addr) : esc(url.replace(/^https?:\/\//, ''))}
+        </a>
+      </div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <h2 class="section-title">${label ? 'お問い合わせ' : 'Contact'}</h2>
+    <div class="contact-grid">${linkItems}</div>
+    <div class="contact-org">
+      <p>${esc(t(profile.name))}</p>
+      <p>${esc(t(profile.role))}</p>
+      <p>${esc(t(profile.organization))}</p>
+    </div>`;
+}
+
 // ── Footer ────────────────────────────────────────────────────────────────────
 function renderFooter(profile) {
   const name = t(profile?.name, 'Yasutomi Tatetsu');
@@ -613,7 +713,7 @@ async function main() {
   document.documentElement.lang = lang;
 
   renderNav(profile);
-  renderBio(profile, areas);
+  renderBio(profile);
   renderPublications(pubs);
   renderTalks(pres, media);
   renderExperience(exp, edu, teach, comm, assoc, awards);
@@ -621,7 +721,7 @@ async function main() {
   renderActivities(soc);
   renderOthers(others);
   renderNews(newsData, pubs, pres, awards);
-  renderMaterials(matsData);
+  renderContact(profile);
   renderFooter(profile);
 
   // ページルーティングを最後に適用（render 後でないと el が存在しない）

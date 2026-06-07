@@ -38,9 +38,15 @@ highlights:
       ja: 認定・資格
     items:
       - name: Google for Education Certified Innovator
-        url: https://edu.google.com/intl/ALL_us/for-educators/certification-programs/certified-innovators/
+        url: https://edu.google.com/for-educators/certification-programs/professional-expertise/certified-innovator/?modal_active=none
+      - name: Google Education Leader Program (ELP) Facilitator
+        url: https://edu.google.com/for-educators/communities/ed-leadership-program/
+      - name: Google Educators Group Okinawa Leader
+      - url: https://www.facebook.com/groups/gegokinawa/
       - name: Apple Distinguished Educator
-        url: https://www.apple.com/education/k12/apple-distinguished-educator/
+        url: https://www.apple.com/jp/education/k12/apple-distinguished-educator/
+      - name: Apple Teacher
+        url: https://education.apple.com/learning-center
 
   - category:
       en: Research
@@ -48,7 +54,7 @@ highlights:
     items:
       - name: First-principles electronic structure
         name_ja: 第一原理電子状態計算
-      - name: Hard magnets (Nd-Fe-B)
+      - name: Hard magnets
         name_ja: 硬磁石（Nd-Fe-B系）
       - name: Surfaces & Interfaces
         name_ja: 表面・界面物性
