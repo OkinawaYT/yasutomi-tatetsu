@@ -739,15 +739,34 @@ function renderContact(profile) {
 }
 
 // ── Footer ────────────────────────────────────────────────────────────────────
-function renderFooter(profile) {
+async function renderFooter(profile) {
   const name = t(profile?.name, 'Yasutomi Tatetsu');
-  document.getElementById('footer').innerHTML = `
+  const el = document.getElementById('footer');
+
+  // GitHub API で最終コミット日を取得
+  let updatedStr = '';
+  try {
+    const r = await fetch(
+      'https://api.github.com/repos/OkinawaYT/yasutomi-tatetsu/commits/main?per_page=1',
+      { headers: { 'Accept': 'application/vnd.github+json' } }
+    );
+    if (r.ok) {
+      const data = await r.json();
+      const d = new Date(data.commit.committer.date);
+      updatedStr = lang === 'ja'
+        ? `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
+        : d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+  } catch {}
+
+  el.innerHTML = `
     <p>© ${new Date().getFullYear()} ${esc(name)}</p>
-    <p style="margin-top:6px">
+    <p style="margin-top:4px">
       ${lang === 'ja'
         ? '研究業績は <a href="https://researchmap.jp/yasutomi_tatetsu" target="_blank">Researchmap</a> から自動取得しています'
         : 'Research data auto-synced from <a href="https://researchmap.jp/yasutomi_tatetsu" target="_blank">Researchmap</a>'}
-    </p>`;
+    </p>
+    ${updatedStr ? `<p style="margin-top:4px;font-size:12px">${lang === 'ja' ? `最終更新：${updatedStr}` : `Last updated: ${updatedStr}`}</p>` : ''}`;
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
