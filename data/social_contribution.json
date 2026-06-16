@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15",
+  "updated": "2026-06-16",
   "items": [
     {
       "id": "52239952",
@@ -8,9 +8,9 @@
       "date": "2026-02-14",
       "to_date": "2026-02-14",
       "organization": "全国高校生マイプロジェクト沖縄県実行委員会",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "location": "沖縄国際大学",
+      "lat": 26.2620476,
+      "lon": 127.7536955
     },
     {
       "id": "51559923",
@@ -18,10 +18,10 @@
       "title_ja": "探求学習って何？",
       "date": "2026-01-21",
       "to_date": "2026-01-21",
-      "organization": "那覇高校",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "organization": "沖縄県立那覇高等学校",
+      "location": "沖縄県立那覇高等学校",
+      "lat": 26.2115736,
+      "lon": 127.6844371
     },
     {
       "id": "51559921",
@@ -29,10 +29,10 @@
       "title_ja": "データサイエンスって何？",
       "date": "2025-12-11",
       "to_date": "2025-12-11",
-      "organization": "宮古高校",
-      "location": "宮古高校",
-      "lat": 33.7835782,
-      "lon": 133.4128727
+      "organization": "沖縄県立宮古高等学校",
+      "location": "沖縄県立宮古高等学校",
+      "lat": 24.797218,
+      "lon": 125.287007
     },
     {
       "id": "51288538",
@@ -41,7 +41,7 @@
       "date": "2025-10-06",
       "to_date": "2025-10-06",
       "organization": "那覇市立教育研究所",
-      "location": null,
+      "location": "那覇市立教育研究所",
       "lat": null,
       "lon": null
     },
@@ -52,9 +52,9 @@
       "date": "2025-09-27",
       "to_date": "2025-09-27",
       "organization": "Google Educator Groups Okinawa",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "location": "琉球大学",
+      "lat": 26.24938,
+      "lon": 127.76416
     },
     {
       "id": "50476681",
@@ -63,9 +63,9 @@
       "date": "2025-07-05",
       "to_date": "2025-07-05",
       "organization": "Google Educator Groups Fukuoka",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "location": "東福岡高等学校",
+      "lat": 33.5940748,
+      "lon": 130.4314908
     },
     {
       "id": "50138421",
@@ -74,9 +74,9 @@
       "date": "2025-05-01",
       "to_date": "2025-05-01",
       "organization": "Google Educator Groups Okinawa、島尻教育研究所",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "location": "南部 総合福祉センター",
+      "lat": 41.7938019,
+      "lon": 140.8581652
     },
     {
       "id": "49761941",
@@ -84,7 +84,7 @@
       "title_ja": "沖縄県島尻教育研究所 教育研究員 指導講師",
       "date": "2025-04-01",
       "to_date": "2025-09-30",
-      "organization": "南部広域行政組合教育委員会",
+      "organization": "南部 総合福祉センター",
       "location": null,
       "lat": null,
       "lon": null
@@ -95,10 +95,10 @@
       "title_ja": "めんそーれ！GEG Okinawa",
       "date": "2025-03-21",
       "to_date": "2025-03-21",
-      "organization": "GEG Okinawa",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "organization": "Google Educator Groups Okinawa",
+      "location": "琉球大学",
+      "lat": 26.24938,
+      "lon": 127.76416
     },
     {
       "id": "49151048",
@@ -107,9 +107,9 @@
       "date": "2025-02-25",
       "to_date": "2025-02-25",
       "organization": "札幌国際大学",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "location": "オンライン",
+      "lat": 35.6780551,
+      "lon": 139.7668527
     },
     {
       "id": "47021471",
@@ -117,32 +117,32 @@
       "title_ja": "GEG Kansai Weekend",
       "date": "2024-09-16",
       "to_date": "2024-09-16",
-      "organization": "Google教育者グループ研究会",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "organization": "Google Educator Groups Kansai",
+      "location": "CANADIAN ACADEMY KOBE",
+      "lat": 34.6845338,
+      "lon": 135.2746271
     },
     {
       "id": "46692827",
       "title": "探求学習って何？(南風原高等学校対象)",
       "title_ja": "探求学習って何？(南風原高等学校対象)",
       "date": "2024-07-16",
-      "to_date": null,
+      "to_date": "2024-07-16",
       "organization": "名桜大学",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "location": "名桜大学",
+      "lat": 26.6244474,
+      "lon": 127.973613
     },
     {
       "id": "46692826",
       "title": "なぜ科学を学ぶのか？",
       "title_ja": "なぜ科学を学ぶのか？",
       "date": "2024-06-07",
-      "to_date": null,
-      "organization": "興南学園",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "to_date": "2024-06-07",
+      "organization": "学校法人 興南学園",
+      "location": "学校法人 興南学園",
+      "lat": 31.8796628,
+      "lon": 117.1428413
     },
     {
       "id": "45585208",
@@ -151,9 +151,9 @@
       "date": "2024-02-24",
       "to_date": "2024-02-24",
       "organization": "デジラボおきなわ実行委員会",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "location": "なは市民協働プラザ",
+      "lat": 26.2298943,
+      "lon": 127.6981124
     },
     {
       "id": "44438576",
@@ -162,9 +162,9 @@
       "date": "2024-01-06",
       "to_date": "2024-01-06",
       "organization": "全国高校生マイプロジェクト沖縄県実行委員会",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "location": "琉球新報ホール",
+      "lat": 26.2129473,
+      "lon": 127.6781502
     },
     {
       "id": "47021452",
@@ -173,7 +173,7 @@
       "date": "2023-10-13",
       "to_date": "2023-10-15",
       "organization": "Google教育者グループ研究会沖縄大会実行委委員会",
-      "location": null,
+      "location": "沖縄県名護市 城公民館",
       "lat": null,
       "lon": null
     },
@@ -184,9 +184,9 @@
       "date": "2023-02-05",
       "to_date": "2023-02-05",
       "organization": "全国高校生マイプロジェクト沖縄県実行委員会",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "location": "沖縄県男女共同参画センター てぃるる",
+      "lat": 26.216577,
+      "lon": 127.6664171
     },
     {
       "id": "41338204",
@@ -194,10 +194,10 @@
       "title_ja": "「探求って何で必要なの？」",
       "date": "2023-01-27",
       "to_date": "2023-01-27",
-      "organization": "八重山高等学校",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "organization": "沖縄県立八重山高等学校",
+      "location": "沖縄県立八重山高等学校",
+      "lat": 24.342043,
+      "lon": 124.164758
     },
     {
       "id": "41338113",
@@ -205,10 +205,10 @@
       "title_ja": "「なぜ科学を学ぶのか？」(出前講座)",
       "date": "2022-12-15",
       "to_date": "2022-12-15",
-      "organization": "八重山高等学校",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "organization": "沖縄県立八重山高等学校",
+      "location": "沖縄県立八重山高等学校",
+      "lat": 24.342043,
+      "lon": 124.164758
     },
     {
       "id": "41664635",
@@ -217,7 +217,18 @@
       "date": "2022-11-04",
       "to_date": "2022-11-06",
       "organization": "the U.S. Embassy Tokyo",
-      "location": null,
+      "location": "オンライン",
+      "lat": 35.6780551,
+      "lon": 139.7668527
+    },
+    {
+      "id": "54044060",
+      "title": "コンピューターで解き明かす物質内部の電子状態",
+      "title_ja": "コンピューターで解き明かす物質内部の電子状態",
+      "date": "2022-07-01",
+      "to_date": "2022-07-01",
+      "organization": "株式会社フロムページ",
+      "location": "夢ナビ",
       "lat": null,
       "lon": null
     },
@@ -228,20 +239,42 @@
       "date": "2022-01-30",
       "to_date": "2022-01-30",
       "organization": "全国高校生マイプロジェクト沖縄県実行委員会",
-      "location": null,
-      "lat": null,
-      "lon": null
+      "location": "オンライン",
+      "lat": 35.6780551,
+      "lon": 139.7668527
     },
     {
       "id": "43006091",
       "title": "Education using information and communications technology",
-      "title_ja": "ICT教育",
+      "title_ja": "教育現場におけるICT利活用と今後の対応",
       "date": "2021-08-02",
-      "to_date": null,
-      "organization": "興南学園",
-      "location": "興南学園",
-      "lat": 25.03132,
-      "lon": 121.6092882
+      "to_date": "2021-08-02",
+      "organization": "学校法人 興南学園",
+      "location": "学校法人 興南学園",
+      "lat": 31.8796628,
+      "lon": 117.1428413
+    },
+    {
+      "id": "54043693",
+      "title": "GWS推進を通じた沖縄県商工会青年部連合会の組織強化について",
+      "title_ja": "GWS推進を通じた沖縄県商工会青年部連合会の組織強化について",
+      "date": "2021-07-24",
+      "to_date": "2021-07-24",
+      "organization": "沖縄県商工会青年部連合会",
+      "location": "イオンモール沖縄ライカム",
+      "lat": 26.3142262,
+      "lon": 127.7959208
+    },
+    {
+      "id": "54043705",
+      "title": "沖縄県商工会青年部連合会リーダー研修",
+      "title_ja": "沖縄県商工会青年部連合会リーダー研修",
+      "date": "2021-07-02",
+      "to_date": "2021-07-02",
+      "organization": "沖縄県商工会青年部連合会",
+      "location": "沖縄産業支援センター",
+      "lat": 26.202431,
+      "lon": 127.661882
     }
   ]
 }

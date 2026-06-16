@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15",
+  "updated": "2026-06-16",
   "items": [
     {
       "id": "51695094",
@@ -23,7 +23,7 @@
       "title_ja": "みらいぶっく「最先端テクノロジーを支える永久磁石。その高性能化を目指して」",
       "date": "2024-03-01",
       "publication": "河合塾",
-      "url": null
+      "url": "https://miraibook.jp/researcher/k23093"
     },
     {
       "id": "43000499",
@@ -32,6 +32,22 @@
       "date": "2023-03-01",
       "publication": "Claris, Apple",
       "url": "https://www.claris.com/ja/blog/2023/meio-u"
+    },
+    {
+      "id": "54043579",
+      "title": "磁性超薄膜ヘテロ構造における界面形成ダイナミクス",
+      "title_ja": "磁性超薄膜ヘテロ構造における界面形成ダイナミクス",
+      "date": "2020-02-01",
+      "publication": "日本磁気学会",
+      "url": "https://www.magnetics.jp/tech-info/171-03/"
+    },
+    {
+      "id": "54043540",
+      "title": "反強磁性/強磁性超薄膜ヘテロ構造の磁気結合状態を原子スケールで解明 ―ヘテロ接合デバイスのさらなる性能向上へ―",
+      "title_ja": "反強磁性/強磁性超薄膜ヘテロ構造の磁気結合状態を原子スケールで解明 ―ヘテロ接合デバイスのさらなる性能向上へ―",
+      "date": "2018-12-01",
+      "publication": "東京大学物性研究所",
+      "url": "http://www.cms.materia.titech.ac.jp/2018_MnFe_pressrelease.pdf"
     }
   ]
 }

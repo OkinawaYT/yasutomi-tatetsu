@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15",
+  "updated": "2026-06-16",
   "items": [
     {
       "id": "53843787",
@@ -22,8 +22,8 @@
       "title": "Apple Distinguished Educator",
       "title_ja": "Apple Distinguished Educator",
       "date": "2025-12-01",
-      "description": "2025年12月19日、Appleは、Apple Distinguished Educator（ADE）Class of 2026のメンバーに立津 慶幸上級准教授 (健康情報学科)を選出しました。1995年、ADEプログラムは、初等・中等教育および高等教育で、Appleのテクノロジーを活用してこれまでにない教育や学びを実践している革新的な教育者の方々の功績をたたえるために創設されました。今年で30周年を迎えるこのプログラムは、ビジョンを持った教育者や革新的なリーダーが世界中から集うコミュニティに発展し、iPadやMacを使って何ができるのかを、教育者のみなさんが改めて考えられるよう後押ししています。世界各地のADEの功績について詳しくは、https://www.apple.com/jp/education/k12/apple-distinguished-educator/ をご覧ください。",
-      "description_ja": "2025年12月19日、Appleは、Apple Distinguished Educator（ADE）Class of 2026のメンバーに立津 慶幸上級准教授 (健康情報学科)を選出しました。1995年、ADEプログラムは、初等・中等教育および高等教育で、Appleのテクノロジーを活用してこれまでにない教育や学びを実践している革新的な教育者の方々の功績をたたえるために創設されました。今年で30周年を迎えるこのプログラムは、ビジョンを持った教育者や革新的なリーダーが世界中から集うコミュニティに発展し、iPadやMacを使って何ができるのかを、教育者のみなさんが改めて考えられるよう後押ししています。世界各地のADEの功績について詳しくは、https://www.apple.com/jp/education/k12/apple-distinguished-educator/ をご覧ください。"
+      "description": null,
+      "description_ja": null
     },
     {
       "id": "51177558",
@@ -78,6 +78,14 @@
       "title": "Apple Teacher",
       "title_ja": "Apple Teacher",
       "date": "2018-05-01",
+      "description": null,
+      "description_ja": null
+    },
+    {
+      "id": "54043453",
+      "title": "高等学校理科教諭専修免許",
+      "title_ja": "高等学校理科教諭専修免許",
+      "date": "2010-03-01",
       "description": null,
       "description_ja": null
     }
