@@ -188,6 +188,25 @@ function renderBio(profile) {
 
 // ── Publications ─────────────────────────────────────────────────────────────
 // ── Dashboard helpers ─────────────────────────────────────────────────────────
+function mkKpi(kpis) {
+  return kpis.map(k =>
+    `<div class="db-kpi"><span class="db-kpi-label">${k.lbl}</span><span class="db-kpi-val">${k.val}</span></div>`
+  ).join('');
+}
+
+function mkBar(yearCounts, maxC, BAR, GAP, H, color) {
+  const years = Object.keys(yearCounts).sort();
+  return years.map((y, i) => {
+    const c = yearCounts[y];
+    const bh = Math.max(Math.round((c / maxC) * H), 1);
+    const x = i * (BAR + GAP);
+    const cx = x + BAR / 2;
+    return `<rect x="${x}" y="${H - bh}" width="${BAR}" height="${bh}" fill="${color}" rx="2"/>
+      <text x="${cx}" y="${H - bh - 3}" text-anchor="middle" font-size="10" fill="#1a1a2e">${c}</text>
+      <text x="${cx}" y="${H + 15}" text-anchor="end" font-size="10" fill="#6b6b6b" transform="rotate(-45 ${cx} ${H + 15})">${y}</text>`;
+  }).join('');
+}
+
 function pubsDashboard(items) {
   const label = lang === 'ja';
   const total = items.length;
@@ -202,17 +221,9 @@ function pubsDashboard(items) {
   const years = Object.keys(yearCounts).sort();
   const maxC = Math.max(...Object.values(yearCounts), 1);
 
-  const BAR = 16, GAP = 3, H = 72;
+  const BAR = 40, GAP = 6, H = 80, LABEL_H = 28;
   const W = years.length * (BAR + GAP);
-  const bars = years.map((y, i) => {
-    const c = yearCounts[y];
-    const bh = Math.round((c / maxC) * H);
-    const x = i * (BAR + GAP);
-    const lx = x + BAR / 2, ly = H + 14;
-    return `<rect x="${x}" y="${H - bh}" width="${BAR}" height="${bh}" fill="#00A3C4" rx="2"/>
-      <text x="${x + BAR / 2}" y="${H - bh - 2}" text-anchor="middle" font-size="8" fill="#1a1a2e">${c}</text>
-      <text x="${lx}" y="${ly}" text-anchor="end" font-size="8" fill="#6b6b6b" transform="rotate(-45 ${lx} ${ly})">${y}</text>`;
-  }).join('');
+  const bars = mkBar(yearCounts, maxC, BAR, GAP, H, '#00A3C4');
 
   const kpis = [
     { val: total, lbl: label ? '総論文数' : 'Total' },
@@ -220,10 +231,10 @@ function pubsDashboard(items) {
     { val: years.length, lbl: label ? '発表年数' : 'Active years' },
   ];
   return `<div class="page-dashboard">
-    <div class="db-kpis">${kpis.map(k => `<div class="db-kpi"><span class="db-kpi-val">${k.val}</span><span class="db-kpi-label">${k.lbl}</span></div>`).join('')}</div>
+    <div class="db-kpis">${mkKpi(kpis)}</div>
     <div class="db-chart">
       <p class="db-chart-label">${label ? '年別発表数' : 'Publications per year'}</p>
-      <svg viewBox="0 0 ${W} ${H + 30}" width="100%" preserveAspectRatio="xMinYMax meet" style="max-height:120px">${bars}</svg>
+      <svg viewBox="0 0 ${W} ${H + LABEL_H}" width="${W}" height="${H + LABEL_H}" style="display:block;margin:0 auto">${bars}</svg>
     </div>
   </div>`;
 }
@@ -231,10 +242,9 @@ function pubsDashboard(items) {
 function talksDashboard(items) {
   const label = lang === 'ja';
   const total = items.length;
-  const invitedCount = items.filter(p =>
-    p.type === 'invited_oral_presentation' || p.type === 'keynote_oral_presentation'
-  ).length;
-  const posterCount = items.filter(p => p.type === 'poster_presentation').length;
+  const oralCount    = items.filter(p => p.type === 'oral_presentation' || p.type === 'nominated_symposium').length;
+  const invitedCount = items.filter(p => p.type === 'invited_oral_presentation' || p.type === 'keynote_oral_presentation').length;
+  const posterCount  = items.filter(p => p.type === 'poster_presentation').length;
 
   const TYPES = [
     { key: 'oral',    match: t => t === 'oral_presentation' || t === 'nominated_symposium',               color: '#00A3C4', label: label ? '口頭' : 'Oral' },
@@ -256,20 +266,20 @@ function talksDashboard(items) {
   const totals = years.map(y => TYPES.reduce((s, tp) => s + yearData[y][tp.key], 0));
   const maxT = Math.max(...totals, 1);
 
-  const BAR = 14, GAP = 2, H = 72;
+  const BAR = 28, GAP = 6, H = 80, LABEL_H = 28;
   const W = years.length * (BAR + GAP);
   const bars = years.map((y, i) => {
     const x = i * (BAR + GAP);
-    const lx = x + BAR / 2, ly = H + 14;
+    const cx = x + BAR / 2;
     let topY = H;
     const rects = TYPES.map(tp => {
       const c = yearData[y][tp.key];
       if (!c) return '';
-      const bh = Math.round((c / maxT) * H);
+      const bh = Math.max(Math.round((c / maxT) * H), 1);
       topY -= bh;
       return `<rect x="${x}" y="${topY}" width="${BAR}" height="${bh}" fill="${tp.color}" rx="1"/>`;
     }).join('');
-    return rects + `<text x="${lx}" y="${ly}" text-anchor="end" font-size="8" fill="#6b6b6b" transform="rotate(-45 ${lx} ${ly})">${y}</text>`;
+    return rects + `<text x="${cx}" y="${H + 15}" text-anchor="end" font-size="10" fill="#6b6b6b" transform="rotate(-45 ${cx} ${H + 15})">${y}</text>`;
   }).join('');
 
   const legend = TYPES.map(tp =>
@@ -277,15 +287,16 @@ function talksDashboard(items) {
   ).join('');
 
   const kpis = [
-    { val: total,       lbl: label ? '総件数' : 'Total' },
+    { val: total,        lbl: label ? '総件数' : 'Total' },
+    { val: oralCount,    lbl: label ? '口頭発表' : 'Oral' },
     { val: invitedCount, lbl: label ? '招待講演' : 'Invited' },
     { val: posterCount,  lbl: 'Poster' },
   ];
   return `<div class="page-dashboard">
-    <div class="db-kpis">${kpis.map(k => `<div class="db-kpi"><span class="db-kpi-val">${k.val}</span><span class="db-kpi-label">${k.lbl}</span></div>`).join('')}</div>
+    <div class="db-kpis">${mkKpi(kpis)}</div>
     <div class="db-chart">
       <p class="db-chart-label">${label ? '年別発表数（種別）' : 'Presentations per year by type'}</p>
-      <svg viewBox="0 0 ${W} ${H + 30}" width="100%" preserveAspectRatio="xMinYMax meet" style="max-height:120px">${bars}</svg>
+      <svg viewBox="0 0 ${W} ${H + LABEL_H}" width="${W}" height="${H + LABEL_H}" style="display:block;margin:0 auto">${bars}</svg>
       <div class="db-legend">${legend}</div>
     </div>
   </div>`;
@@ -304,26 +315,19 @@ function activitiesDashboard(items) {
   const years = Object.keys(yearCounts).sort();
   const maxC = Math.max(...Object.values(yearCounts), 1);
 
-  const BAR = 30, GAP = 6, H = 72;
+  const BAR = 60, GAP = 10, H = 80, LABEL_H = 24;
   const W = years.length * (BAR + GAP);
-  const bars = years.map((y, i) => {
-    const c = yearCounts[y];
-    const bh = Math.round((c / maxC) * H);
-    const x = i * (BAR + GAP);
-    return `<rect x="${x}" y="${H - bh}" width="${BAR}" height="${bh}" fill="#00A3C4" rx="2"/>
-      <text x="${x + BAR / 2}" y="${H - bh - 3}" text-anchor="middle" font-size="10" fill="#1a1a2e">${c}</text>
-      <text x="${x + BAR / 2}" y="${H + 14}" text-anchor="middle" font-size="10" fill="#6b6b6b">${y}</text>`;
-  }).join('');
+  const bars = mkBar(yearCounts, maxC, BAR, GAP, H, '#00A3C4');
 
   const kpis = [
     { val: total, lbl: label ? '総件数' : 'Total' },
     { val: locs,  lbl: label ? '活動拠点' : 'Locations' },
   ];
   return `<div class="page-dashboard">
-    <div class="db-kpis">${kpis.map(k => `<div class="db-kpi"><span class="db-kpi-val">${k.val}</span><span class="db-kpi-label">${k.lbl}</span></div>`).join('')}</div>
+    <div class="db-kpis">${mkKpi(kpis)}</div>
     <div class="db-chart">
       <p class="db-chart-label">${label ? '年別活動件数' : 'Activities per year'}</p>
-      <svg viewBox="0 0 ${W} ${H + 22}" width="100%" preserveAspectRatio="xMinYMax meet" style="max-height:110px">${bars}</svg>
+      <svg viewBox="0 0 ${W} ${H + LABEL_H}" width="${W}" height="${H + LABEL_H}" style="display:block;margin:0 auto">${bars}</svg>
     </div>
   </div>`;
 }
