@@ -187,6 +187,147 @@ function renderBio(profile) {
 }
 
 // ── Publications ─────────────────────────────────────────────────────────────
+// ── Dashboard helpers ─────────────────────────────────────────────────────────
+function pubsDashboard(items) {
+  const label = lang === 'ja';
+  const total = items.length;
+  const curY = new Date().getFullYear();
+  const recent = items.filter(p => parseInt(p.date) >= curY - 4).length;
+
+  const yearCounts = {};
+  items.forEach(p => {
+    const y = String(p.date || '').slice(0, 4);
+    if (y) yearCounts[y] = (yearCounts[y] || 0) + 1;
+  });
+  const years = Object.keys(yearCounts).sort();
+  const maxC = Math.max(...Object.values(yearCounts), 1);
+
+  const BAR = 16, GAP = 3, H = 72;
+  const W = years.length * (BAR + GAP);
+  const bars = years.map((y, i) => {
+    const c = yearCounts[y];
+    const bh = Math.round((c / maxC) * H);
+    const x = i * (BAR + GAP);
+    const lx = x + BAR / 2, ly = H + 14;
+    return `<rect x="${x}" y="${H - bh}" width="${BAR}" height="${bh}" fill="#00A3C4" rx="2"/>
+      <text x="${x + BAR / 2}" y="${H - bh - 2}" text-anchor="middle" font-size="8" fill="#1a1a2e">${c}</text>
+      <text x="${lx}" y="${ly}" text-anchor="end" font-size="8" fill="#6b6b6b" transform="rotate(-45 ${lx} ${ly})">${y}</text>`;
+  }).join('');
+
+  const kpis = [
+    { val: total, lbl: label ? '総論文数' : 'Total' },
+    { val: recent, lbl: label ? '直近5年' : 'Last 5y' },
+    { val: years.length, lbl: label ? '発表年数' : 'Active years' },
+  ];
+  return `<div class="page-dashboard">
+    <div class="db-kpis">${kpis.map(k => `<div class="db-kpi"><span class="db-kpi-val">${k.val}</span><span class="db-kpi-label">${k.lbl}</span></div>`).join('')}</div>
+    <div class="db-chart">
+      <p class="db-chart-label">${label ? '年別発表数' : 'Publications per year'}</p>
+      <svg viewBox="0 0 ${W} ${H + 30}" width="100%" preserveAspectRatio="xMinYMax meet" style="max-height:120px">${bars}</svg>
+    </div>
+  </div>`;
+}
+
+function talksDashboard(items) {
+  const label = lang === 'ja';
+  const total = items.length;
+  const invitedCount = items.filter(p =>
+    p.type === 'invited_oral_presentation' || p.type === 'keynote_oral_presentation'
+  ).length;
+  const posterCount = items.filter(p => p.type === 'poster_presentation').length;
+
+  const TYPES = [
+    { key: 'oral',    match: t => t === 'oral_presentation' || t === 'nominated_symposium',               color: '#00A3C4', label: label ? '口頭' : 'Oral' },
+    { key: 'poster',  match: t => t === 'poster_presentation',                                            color: '#4BBFD8', label: 'Poster' },
+    { key: 'invited', match: t => t === 'invited_oral_presentation' || t === 'keynote_oral_presentation', color: '#007EA3', label: label ? '招待' : 'Invited' },
+    { key: 'other',   match: () => true,                                                                  color: '#B0DFE8', label: label ? 'その他' : 'Other' },
+  ];
+
+  const yearData = {};
+  items.forEach(p => {
+    const y = String(p.date || '').slice(0, 4);
+    if (!y) return;
+    if (!yearData[y]) yearData[y] = { oral: 0, poster: 0, invited: 0, other: 0 };
+    for (const tp of TYPES) {
+      if (tp.match(p.type)) { yearData[y][tp.key]++; break; }
+    }
+  });
+  const years = Object.keys(yearData).sort();
+  const totals = years.map(y => TYPES.reduce((s, tp) => s + yearData[y][tp.key], 0));
+  const maxT = Math.max(...totals, 1);
+
+  const BAR = 14, GAP = 2, H = 72;
+  const W = years.length * (BAR + GAP);
+  const bars = years.map((y, i) => {
+    const x = i * (BAR + GAP);
+    const lx = x + BAR / 2, ly = H + 14;
+    let topY = H;
+    const rects = TYPES.map(tp => {
+      const c = yearData[y][tp.key];
+      if (!c) return '';
+      const bh = Math.round((c / maxT) * H);
+      topY -= bh;
+      return `<rect x="${x}" y="${topY}" width="${BAR}" height="${bh}" fill="${tp.color}" rx="1"/>`;
+    }).join('');
+    return rects + `<text x="${lx}" y="${ly}" text-anchor="end" font-size="8" fill="#6b6b6b" transform="rotate(-45 ${lx} ${ly})">${y}</text>`;
+  }).join('');
+
+  const legend = TYPES.map(tp =>
+    `<span class="db-legend-item"><span class="db-legend-dot" style="background:${tp.color}"></span>${tp.label}</span>`
+  ).join('');
+
+  const kpis = [
+    { val: total,       lbl: label ? '総件数' : 'Total' },
+    { val: invitedCount, lbl: label ? '招待講演' : 'Invited' },
+    { val: posterCount,  lbl: 'Poster' },
+  ];
+  return `<div class="page-dashboard">
+    <div class="db-kpis">${kpis.map(k => `<div class="db-kpi"><span class="db-kpi-val">${k.val}</span><span class="db-kpi-label">${k.lbl}</span></div>`).join('')}</div>
+    <div class="db-chart">
+      <p class="db-chart-label">${label ? '年別発表数（種別）' : 'Presentations per year by type'}</p>
+      <svg viewBox="0 0 ${W} ${H + 30}" width="100%" preserveAspectRatio="xMinYMax meet" style="max-height:120px">${bars}</svg>
+      <div class="db-legend">${legend}</div>
+    </div>
+  </div>`;
+}
+
+function activitiesDashboard(items) {
+  const label = lang === 'ja';
+  const total = items.length;
+  const locs = new Set(items.filter(a => a.location).map(a => a.location)).size;
+
+  const yearCounts = {};
+  items.forEach(a => {
+    const y = String(a.date || '').slice(0, 4);
+    if (y) yearCounts[y] = (yearCounts[y] || 0) + 1;
+  });
+  const years = Object.keys(yearCounts).sort();
+  const maxC = Math.max(...Object.values(yearCounts), 1);
+
+  const BAR = 30, GAP = 6, H = 72;
+  const W = years.length * (BAR + GAP);
+  const bars = years.map((y, i) => {
+    const c = yearCounts[y];
+    const bh = Math.round((c / maxC) * H);
+    const x = i * (BAR + GAP);
+    return `<rect x="${x}" y="${H - bh}" width="${BAR}" height="${bh}" fill="#00A3C4" rx="2"/>
+      <text x="${x + BAR / 2}" y="${H - bh - 3}" text-anchor="middle" font-size="10" fill="#1a1a2e">${c}</text>
+      <text x="${x + BAR / 2}" y="${H + 14}" text-anchor="middle" font-size="10" fill="#6b6b6b">${y}</text>`;
+  }).join('');
+
+  const kpis = [
+    { val: total, lbl: label ? '総件数' : 'Total' },
+    { val: locs,  lbl: label ? '活動拠点' : 'Locations' },
+  ];
+  return `<div class="page-dashboard">
+    <div class="db-kpis">${kpis.map(k => `<div class="db-kpi"><span class="db-kpi-val">${k.val}</span><span class="db-kpi-label">${k.lbl}</span></div>`).join('')}</div>
+    <div class="db-chart">
+      <p class="db-chart-label">${label ? '年別活動件数' : 'Activities per year'}</p>
+      <svg viewBox="0 0 ${W} ${H + 22}" width="100%" preserveAspectRatio="xMinYMax meet" style="max-height:110px">${bars}</svg>
+    </div>
+  </div>`;
+}
+
 function renderPublications(data) {
   const el = document.getElementById('publications');
   const items = (data.items || []).filter(p => !p.draft);
@@ -197,6 +338,7 @@ function renderPublications(data) {
   }
   el.innerHTML = `
     <h2 class="section-title">${label ? '論文・業績' : 'Publications'}</h2>
+    ${pubsDashboard(items)}
     <div class="table-wrap">
       <table class="data-table">
         <thead><tr>
@@ -371,6 +513,7 @@ function renderTalks(presData, mediaData) {
 
   el.innerHTML = `
     <h2 class="section-title">${label ? '発表・メディア' : 'Talks & Media'}</h2>
+    ${talksDashboard(pres)}
     ${mapSection}${presTable}${mediaTable}`;
 
   // 地図のジオコーディングは非同期で実行
@@ -492,25 +635,6 @@ function renderProjects(data) {
     </div>`;
 }
 
-// ── Geocoding（Nominatim）────────────────────────────────────────────────────
-const _geoCache = {};
-async function geocodeLocation(name) {
-  if (_geoCache[name] !== undefined) return _geoCache[name];
-  try {
-    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(name)}&format=json&limit=1`;
-    const r = await fetch(url, { headers: { 'Accept-Language': 'en' } });
-    const data = await r.json();
-    const result = (data && data[0])
-      ? { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) }
-      : null;
-    _geoCache[name] = result;
-    return result;
-  } catch {
-    _geoCache[name] = null;
-    return null;
-  }
-}
-
 // ── Activities（地図 + テーブル）────────────────────────────────────────────
 let _actMap = null;
 
@@ -518,7 +642,7 @@ async function renderActivitiesMap(items) {
   const mapEl = document.getElementById('activities-map');
   if (!mapEl || !window.L) return;
   if (_actMap) { _actMap.remove(); _actMap = null; }
-  _actMap = L.map('activities-map').setView([26.5, 128.0], 8); // 沖縄中心
+  _actMap = L.map('activities-map').setView([26.5, 128.0], 8);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 18,
@@ -531,19 +655,47 @@ async function renderActivitiesMap(items) {
     locMap[a.location].push(a);
   });
 
-  const locations = Object.keys(locMap);
-  for (let i = 0; i < locations.length; i++) {
-    const loc = locations[i];
+  let cache = {};
+  try {
+    const r = await fetch('data/location_cache.json');
+    if (r.ok) cache = await r.json();
+  } catch {}
+
+  const allCoords = [];
+  const uncached = [];
+
+  for (const [loc, acts] of Object.entries(locMap)) {
+    if (cache[loc]) {
+      const { lat, lon } = cache[loc];
+      const popup = `<strong>${esc(loc)}</strong><br>${acts.length}件`;
+      L.circleMarker([lat, lon], {
+        radius: 6 + Math.min(acts.length, 8),
+        fillColor: '#00A3C4', color: '#fff',
+        weight: 2, opacity: 1, fillOpacity: 0.8,
+      }).bindPopup(popup).addTo(_actMap);
+      allCoords.push([lat, lon]);
+    } else {
+      uncached.push(loc);
+    }
+  }
+
+  if (allCoords.length) {
+    const lat = allCoords.reduce((s, c) => s + c[0], 0) / allCoords.length;
+    const lon = allCoords.reduce((s, c) => s + c[1], 0) / allCoords.length;
+    setTimeout(() => { _actMap.invalidateSize(); _actMap.setView([lat, lon], allCoords.length > 1 ? 8 : 10); }, 50);
+  }
+
+  for (let i = 0; i < uncached.length; i++) {
     if (i > 0) await new Promise(r => setTimeout(r, 1100));
+    const loc = uncached[i];
     const coords = await geocodeLocation(loc);
     if (!coords) continue;
-    const list = locMap[loc];
-    const popupHtml = `<strong>${esc(loc)}</strong><br>${list.length}件`;
+    const popup = `<strong>${esc(loc)}</strong><br>${locMap[loc].length}件`;
     L.circleMarker([coords.lat, coords.lon], {
-      radius: 6 + Math.min(list.length, 8),
-      fillColor: '#2563eb', color: '#fff',
+      radius: 6 + Math.min(locMap[loc].length, 8),
+      fillColor: '#00A3C4', color: '#fff',
       weight: 2, opacity: 1, fillOpacity: 0.8,
-    }).bindPopup(popupHtml).addTo(_actMap);
+    }).bindPopup(popup).addTo(_actMap);
   }
 }
 
@@ -563,6 +715,7 @@ function renderActivities(data) {
 
   el.innerHTML = `
     <h2 class="section-title">${label ? '社会貢献活動' : 'Activities'}</h2>
+    ${activitiesDashboard(items)}
     ${mapSection}
     <div class="table-wrap">
       <table class="data-table">

@@ -32,6 +32,26 @@ items:
     draft: false
 
   - title:
+      en: NotebookLM Butler
+      ja: NotebookLM Butler
+    description:
+      en: A Google Apps Script tool to integrate with Google NotebookLM for enhanced note-taking and organization.
+      ja: Google NotebookLMと連携するアプリケーション。
+    icon: "📝"
+    url: notebooklm-butler/
+    draft: true
+
+  - title:
+      en: Research Output Tool
+      ja: 研究業績出力ツール
+    description:
+      en: A Google Apps Script tool to integrate with Google NotebookLM for enhanced note-taking and organization.
+      ja: Google NotebookLMと連携するアプリケーション。
+    icon: "📝"
+    url: research-output-tool/
+    draft: true
+
+  - title:
       en: Feedback Form
       ja: フィードバックフォーム
     description:

@@ -1,9 +1,9 @@
 {
-  "updated": "2026-06-16",
+  "updated": "2026-06-09",
   "items": [
     {
       "id": "52975050",
-      "subject": "Introduction to Mathematics, Data Science, and AI",
+      "subject": "Introduction to Mathematics, data science, and AI",
       "subject_ja": "数理・データサイエンス・AI応用",
       "institution": "Meio University",
       "institution_ja": "名桜大学",
@@ -39,16 +39,16 @@
     },
     {
       "id": "49762061",
-      "subject": "Special Lecture of Academic Skills~Introduction to Data Processing~",
+      "subject": "アカデミックスキル特別講義〜データ処理入門〜",
       "subject_ja": "アカデミックスキル特別講義〜データ処理入門〜",
-      "institution": "Meio University",
-      "institution_ja": "名桜大学",
+      "institution": null,
+      "institution_ja": null,
       "from_date": "2025-04-01",
       "to_date": "2025-06-01"
     },
     {
       "id": "43006126",
-      "subject": "Introduction to Data Science",
+      "subject": "Introduction to data science",
       "subject_ja": "データサイエンス概論",
       "institution": "Meio University",
       "institution_ja": "名桜大学",
@@ -57,7 +57,7 @@
     },
     {
       "id": "41765326",
-      "subject": "Introduction to Mathematics, Data Science, and AI",
+      "subject": "Introduction to Mathematics, data science, and AI",
       "subject_ja": "数理・データサイエンス・AI入門",
       "institution": "Meio University",
       "institution_ja": "名桜大学",
@@ -84,7 +84,7 @@
     },
     {
       "id": "33163110",
-      "subject": "Introduction to Science",
+      "subject": "Introduction to science",
       "subject_ja": "科学入門",
       "institution": "Meio University",
       "institution_ja": "名桜大学",
@@ -98,7 +98,7 @@
       "institution": "University of the Ryukyus",
       "institution_ja": "琉球大学",
       "from_date": "2016-11-01",
-      "to_date": "2016-11-01"
+      "to_date": null
     }
   ]
 }
