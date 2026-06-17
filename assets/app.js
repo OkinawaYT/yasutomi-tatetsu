@@ -196,6 +196,7 @@ function mkKpi(kpis) {
 
 const CHART_PAD_TOP = 16;
 const CHART_LABEL_H = 38;
+const CHART_PAD_LEFT = 20;
 
 function mkBar(yearCounts, maxC, BAR, GAP, H, color) {
   const years = Object.keys(yearCounts).sort();
@@ -240,7 +241,7 @@ function pubsDashboard(items) {
     <div class="db-kpis">${mkKpi(kpis)}</div>
     <div class="db-chart">
       <p class="db-chart-label">${label ? '年別発表数' : 'Publications per year'}</p>
-      <svg viewBox="0 0 ${W} ${SH}" width="${W}" height="${SH}" style="display:block;margin:0 auto">${bars}</svg>
+      <svg viewBox="${-CHART_PAD_LEFT} 0 ${W + CHART_PAD_LEFT} ${SH}" width="${W + CHART_PAD_LEFT}" height="${SH}" style="display:block;margin:0 auto">${bars}</svg>
     </div>
   </div>`;
 }
@@ -304,7 +305,7 @@ function talksDashboard(items) {
     <div class="db-kpis">${mkKpi(kpis)}</div>
     <div class="db-chart">
       <p class="db-chart-label">${label ? '年別発表数（種別）' : 'Presentations per year by type'}</p>
-      <svg viewBox="0 0 ${W} ${SH}" width="${W}" height="${SH}" style="display:block;margin:0 auto">${bars}</svg>
+      <svg viewBox="${-CHART_PAD_LEFT} 0 ${W + CHART_PAD_LEFT} ${SH}" width="${W + CHART_PAD_LEFT}" height="${SH}" style="display:block;margin:0 auto">${bars}</svg>
       <div class="db-legend">${legend}</div>
     </div>
   </div>`;
@@ -336,7 +337,7 @@ function activitiesDashboard(items) {
     <div class="db-kpis">${mkKpi(kpis)}</div>
     <div class="db-chart">
       <p class="db-chart-label">${label ? '年別活動件数' : 'Activities per year'}</p>
-      <svg viewBox="0 0 ${W} ${SH}" width="${W}" height="${SH}" style="display:block;margin:0 auto">${bars}</svg>
+      <svg viewBox="${-CHART_PAD_LEFT} 0 ${W + CHART_PAD_LEFT} ${SH}" width="${W + CHART_PAD_LEFT}" height="${SH}" style="display:block;margin:0 auto">${bars}</svg>
     </div>
   </div>`;
 }
