@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-09",
+  "updated": "2026-06-17",
   "items": [
     {
       "id": "52239941",
@@ -280,16 +280,6 @@
       "authors": "Yasutomi Tatetsu, Takahiro Maehira",
       "journal": "Journal of the Physical Society of Japan",
       "doi": "10.7566/jpsj.82.034709"
-    },
-    {
-      "id": "52392084",
-      "type": "misc",
-      "title": "EuPb<sub>3</sub>とCaPb<sub>3</sub>の電子構造",
-      "title_ja": "EuPb<sub>3</sub>とCaPb<sub>3</sub>の電子構造",
-      "date": "2013-01-01",
-      "authors": "渡部紘幸, 立津慶幸, 眞榮平孝裕",
-      "journal": "日本物理学会講演概要集",
-      "doi": null
     },
     {
       "id": "30212163",
