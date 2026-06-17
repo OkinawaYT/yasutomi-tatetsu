@@ -357,8 +357,8 @@ a:hover { text-decoration: underline; }
 .db-kpi-val { font-size: 26px; font-weight: 700; color: var(--color-accent); line-height: 1.1; }
 .db-kpi-label { font-size: 11px; color: var(--color-text-muted); text-align: center; margin-top: 3px; }
 .db-chart { width: 100%; overflow-x: auto; overflow-y: visible; }
-.db-chart-label { font-size: 11px; color: var(--color-text-muted); margin-bottom: 4px; }
-.db-legend { display: flex; flex-wrap: wrap; gap: 8px; font-size: 11px; color: var(--color-text-muted); margin-top: 4px; }
+.db-chart-label { font-size: 11px; color: var(--color-text-muted); margin-bottom: 4px; text-align: center; }
+.db-legend { display: flex; flex-wrap: wrap; gap: 8px; font-size: 11px; color: var(--color-text-muted); margin-top: 4px; justify-content: center; }
 .db-legend-item { display: flex; align-items: center; gap: 4px; }
 .db-legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 

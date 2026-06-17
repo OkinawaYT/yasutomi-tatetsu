@@ -194,16 +194,21 @@ function mkKpi(kpis) {
   ).join('');
 }
 
+const CHART_PAD_TOP = 16;
+const CHART_LABEL_H = 38;
+
 function mkBar(yearCounts, maxC, BAR, GAP, H, color) {
   const years = Object.keys(yearCounts).sort();
   return years.map((y, i) => {
     const c = yearCounts[y];
-    const bh = Math.max(Math.round((c / maxC) * H), 1);
+    const bh = Math.max(Math.round((c / maxC) * H), 2);
     const x = i * (BAR + GAP);
     const cx = x + BAR / 2;
-    return `<rect x="${x}" y="${H - bh}" width="${BAR}" height="${bh}" fill="${color}" rx="2"/>
-      <text x="${cx}" y="${H - bh - 3}" text-anchor="middle" font-size="10" fill="#1a1a2e">${c}</text>
-      <text x="${cx}" y="${H + 15}" text-anchor="end" font-size="10" fill="#6b6b6b" transform="rotate(-45 ${cx} ${H + 15})">${y}</text>`;
+    const barY = CHART_PAD_TOP + H - bh;
+    const ly = CHART_PAD_TOP + H + 15;
+    return `<rect x="${x}" y="${barY}" width="${BAR}" height="${bh}" fill="${color}" rx="2"/>
+      <text x="${cx}" y="${barY - 3}" text-anchor="middle" font-size="10" fill="#1a1a2e">${c}</text>
+      <text x="${cx}" y="${ly}" text-anchor="end" font-size="10" fill="#6b6b6b" transform="rotate(-45 ${cx} ${ly})">${y}</text>`;
   }).join('');
 }
 
@@ -221,8 +226,9 @@ function pubsDashboard(items) {
   const years = Object.keys(yearCounts).sort();
   const maxC = Math.max(...Object.values(yearCounts), 1);
 
-  const BAR = 40, GAP = 6, H = 80, LABEL_H = 28;
+  const BAR = 40, GAP = 6, H = 80;
   const W = years.length * (BAR + GAP);
+  const SH = CHART_PAD_TOP + H + CHART_LABEL_H;
   const bars = mkBar(yearCounts, maxC, BAR, GAP, H, '#00A3C4');
 
   const kpis = [
@@ -234,7 +240,7 @@ function pubsDashboard(items) {
     <div class="db-kpis">${mkKpi(kpis)}</div>
     <div class="db-chart">
       <p class="db-chart-label">${label ? '年別発表数' : 'Publications per year'}</p>
-      <svg viewBox="0 0 ${W} ${H + LABEL_H}" width="${W}" height="${H + LABEL_H}" style="display:block;margin:0 auto">${bars}</svg>
+      <svg viewBox="0 0 ${W} ${SH}" width="${W}" height="${SH}" style="display:block;margin:0 auto">${bars}</svg>
     </div>
   </div>`;
 }
@@ -266,12 +272,13 @@ function talksDashboard(items) {
   const totals = years.map(y => TYPES.reduce((s, tp) => s + yearData[y][tp.key], 0));
   const maxT = Math.max(...totals, 1);
 
-  const BAR = 28, GAP = 6, H = 80, LABEL_H = 28;
+  const BAR = 28, GAP = 6, H = 80;
   const W = years.length * (BAR + GAP);
+  const SH = CHART_PAD_TOP + H + CHART_LABEL_H;
   const bars = years.map((y, i) => {
     const x = i * (BAR + GAP);
     const cx = x + BAR / 2;
-    let topY = H;
+    let topY = CHART_PAD_TOP + H;
     const rects = TYPES.map(tp => {
       const c = yearData[y][tp.key];
       if (!c) return '';
@@ -279,7 +286,8 @@ function talksDashboard(items) {
       topY -= bh;
       return `<rect x="${x}" y="${topY}" width="${BAR}" height="${bh}" fill="${tp.color}" rx="1"/>`;
     }).join('');
-    return rects + `<text x="${cx}" y="${H + 15}" text-anchor="end" font-size="10" fill="#6b6b6b" transform="rotate(-45 ${cx} ${H + 15})">${y}</text>`;
+    const ly = CHART_PAD_TOP + H + 15;
+    return rects + `<text x="${cx}" y="${ly}" text-anchor="end" font-size="10" fill="#6b6b6b" transform="rotate(-45 ${cx} ${ly})">${y}</text>`;
   }).join('');
 
   const legend = TYPES.map(tp =>
@@ -296,7 +304,7 @@ function talksDashboard(items) {
     <div class="db-kpis">${mkKpi(kpis)}</div>
     <div class="db-chart">
       <p class="db-chart-label">${label ? '年別発表数（種別）' : 'Presentations per year by type'}</p>
-      <svg viewBox="0 0 ${W} ${H + LABEL_H}" width="${W}" height="${H + LABEL_H}" style="display:block;margin:0 auto">${bars}</svg>
+      <svg viewBox="0 0 ${W} ${SH}" width="${W}" height="${SH}" style="display:block;margin:0 auto">${bars}</svg>
       <div class="db-legend">${legend}</div>
     </div>
   </div>`;
@@ -315,8 +323,9 @@ function activitiesDashboard(items) {
   const years = Object.keys(yearCounts).sort();
   const maxC = Math.max(...Object.values(yearCounts), 1);
 
-  const BAR = 60, GAP = 10, H = 80, LABEL_H = 24;
+  const BAR = 60, GAP = 10, H = 80;
   const W = years.length * (BAR + GAP);
+  const SH = CHART_PAD_TOP + H + CHART_LABEL_H;
   const bars = mkBar(yearCounts, maxC, BAR, GAP, H, '#00A3C4');
 
   const kpis = [
@@ -327,7 +336,7 @@ function activitiesDashboard(items) {
     <div class="db-kpis">${mkKpi(kpis)}</div>
     <div class="db-chart">
       <p class="db-chart-label">${label ? '年別活動件数' : 'Activities per year'}</p>
-      <svg viewBox="0 0 ${W} ${H + LABEL_H}" width="${W}" height="${H + LABEL_H}" style="display:block;margin:0 auto">${bars}</svg>
+      <svg viewBox="0 0 ${W} ${SH}" width="${W}" height="${SH}" style="display:block;margin:0 auto">${bars}</svg>
     </div>
   </div>`;
 }
