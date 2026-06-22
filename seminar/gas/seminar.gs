@@ -109,6 +109,23 @@ function saveAnswers(data) {
   }
 
   const allHeaders = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  const nameIdx = allHeaders.indexOf('name');
+  const affIdx  = allHeaders.indexOf('affiliation');
+
+  // 同一人物の既存行を上書き（name + affiliation が一致する場合）
+  if (rowData.name && sheet.getLastRow() >= 2) {
+    const bodyValues = sheet.getRange(2, 1, sheet.getLastRow() - 1, allHeaders.length).getValues();
+    for (let i = 0; i < bodyValues.length; i++) {
+      const nameMatch = nameIdx >= 0 && String(bodyValues[i][nameIdx]) === rowData.name;
+      const affMatch  = affIdx  <  0 || String(bodyValues[i][affIdx])  === rowData.affiliation;
+      if (nameMatch && affMatch) {
+        const row = allHeaders.map(h => (rowData[h] !== undefined ? rowData[h] : ''));
+        sheet.getRange(i + 2, 1, 1, row.length).setValues([row]);
+        return;
+      }
+    }
+  }
+
   const row = allHeaders.map(h => (rowData[h] !== undefined ? rowData[h] : ''));
   sheet.appendRow(row);
 }

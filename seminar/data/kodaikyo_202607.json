@@ -8,7 +8,7 @@
       "focus": "プロンプトエンジニアリング・データ利活用",
       "cases": [
         {
-          "id": "case0",
+          "id": "case0-1",
           "title": "Case 0：コミュニケーションの罠（いい感じに）",
           "ui_type": "prompt_generator_mode",
           "learning_objective": "指示の曖昧さがもたらす不都合を理解し、PARTSフレームワークの必要性を体感する",
@@ -32,7 +32,17 @@
               "label": "あなたなら同僚（または部下）にどう具体的に依頼しますか？",
               "type": "textarea",
               "placeholder": "自分が無意識に工夫している伝え方を書いてみましょう"
-            },
+            }
+          ]
+        },
+        {
+          "id": "case0-2",
+          "title": "Case 0：コミュニケーションの罠（いい感じに）",
+          "ui_type": "prompt_generator_mode",
+          "learning_objective": "指示の曖昧さがもたらす不都合を理解し、PARTSフレームワークの必要性を体感する",
+          "situation": "上司から「来週の教授会までに、学生アンケートの集計報告書を『いい感じに』まとめておいて」とだけ頼まれた場面。",
+          "goal": "「いい感じに」の課題を言語化し、明確な依頼文（プロンプトの原型）へ変換する",
+          "questions": [
             {
               "field_id": "q_case0_parts",
               "label": "上の依頼を「PARTS」で要素分解してみましょう（プロンプトの設計図）",
@@ -54,7 +64,35 @@
           ]
         },
         {
-          "id": "case1",
+          "id": "case1-1",
+          "title": "Case 1：Geminiを使ったメール案作成",
+          "ui_type": "prompt_generator_mode",
+          "learning_objective": "PARTSの実践と、相手の役職（文脈）に応じたトーン＆マナーの調整手法を学ぶ",
+          "situation": "学内の教員（教授陣等）に対して、期限が過ぎている提出物を催促しなければならない場面。関係性を良好に保ちつつ、確実に提出してもらうためのメール文章をAIに作成させます。",
+          "goal": "角が立たず、かつ締め切りを厳守させるプロンプトを組み立て、Geminiから最適なメール文を引き出す",
+          "questions": [
+            {
+              "field_id": "q_case1_prompt",
+              "label": "まず、PARTSを特に考えず、Geminiにプロンプトを入力してみてください",
+              "type": "textarea",
+              "placeholder": "Geminiに渡す指示文"
+            },
+            {
+              "field_id": "q_case1_answer",
+              "label": "Geminiが実際に出力したメール文章を貼り付けてください。",
+              "type": "textarea",
+              "placeholder": "AIの回答結果をコピペ"
+            },
+            {
+              "field_id": "q_case1_review",
+              "label": "この出力結果のどこが問題（不適切）だと思いますか？具体的に記載してください。",
+              "type": "textarea",
+              "placeholder": "例：教授への敬称が不適切、表現が強すぎる、など"
+            }
+          ]
+        },
+        {
+          "id": "case1-2",
           "title": "Case 1：Geminiを使ったメール案作成",
           "ui_type": "prompt_generator_mode",
           "learning_objective": "PARTSの実践と、相手の役職（文脈）に応じたトーン＆マナーの調整手法を学ぶ",
@@ -98,7 +136,7 @@
           "title": "Case 2：先進校リサーチ（事例調査・比較分析）",
           "ui_type": "prompt_generator_mode",
           "learning_objective": "GeminiのWeb検索連携（Grounded in Google Search）の活用と、リサーチ情報の表形式への構造化",
-          "situation": "自学において「生成AIの利活用ガイドライン」または「地域共創型インターンシップ」の新しい企画を立ち上げるにあたり、他大学（先進校）の公開事例をリサーチして比較分析を行いたい状況。",
+          "situation": "自学において「生成AIの利活用ガイドライン」を作成するにあたり、他大学（先進校）の公開事例をリサーチし、会議資料として活用したい状況。",
           "goal": "短時間で正確なWebリサーチを行い、会議資料のたたき台となる比較表（テーブル）を自動生成する",
           "questions": [
             {
@@ -130,7 +168,7 @@
           "id": "case3",
           "title": "Case 3：データ分析（CSV/Excelデータの利活用）",
           "ui_type": "prompt_generator_mode",
-          "learning_objective": "Geminiの高度なデータ分析機能（Advanced Data Analysis）を用いた、大量のテキストからの課題抽出",
+          "learning_objective": "Geminiの高度なデータ分析機能を用いた、大量のテキストからの課題抽出",
           "situation": "オープンキャンパスや学生アンケートの「自由記述欄（大量のテキストデータ）」の分析業務。人間が1行ずつ読むと数日かかる膨大なデータを、Geminiに一瞬で構造化させたい場面。",
           "goal": "CSVやExcelデータをGeminiに読み込ませ、不満度の高い順のランキングと、次回に向けた具体的な改善策のドラフトを出力させる",
           "questions": [
@@ -182,7 +220,7 @@
               "field_id": "q_nb1_step1",
               "label": "【STEP 1】事前配布された「サンプル規程PDF」をノートブックにアップロードできましたか？",
               "type": "radio",
-              "options": ["はい、アップロードしました", "いいえ、まだです"]
+              "options": ["はい、できました", "いいえ、できませんでした"]
             },
             {
               "field_id": "q_nb1_step2",
@@ -200,6 +238,12 @@
               "field_id": "q_nb1_step4",
               "label": "【STEP 4】今度は自分で自由に規程への質問（例：精算の締切日、必要な添付書類など）を投げてみてください。あなたが入力して成功した「質問文（クエリ）」を共有してください。",
               "type": "textarea"
+            },
+            {
+              "field_id": "q_nb1_step5",
+              "label": "【STEP 5】この規程チャットボットは、学内のどのような問い合わせ対応に活用できそうですか？具体的な業務や質問例を挙げてください。",
+              "type": "textarea",
+              "placeholder": "例：学生からの奨学金に関する質問、教職員からの福利厚生に関する質問など"
             }
           ]
         },
@@ -213,9 +257,9 @@
           "questions": [
             {
               "field_id": "q_nb2_step1",
-              "label": "【STEP 1】「中教審資料PDF」と「自学の中期計画PDF」の2つのソースを正しく読み込ませましたか？",
+              "label": "【STEP 1】「中教審資料PDF」と「自学の中期計画PDF」のソースを正しく読み込ませることができましたか？",
               "type": "radio",
-              "options": ["はい、2つのソースを選択しました", "いいえ、まだです"]
+              "options": ["はい、できました", "いいえ、できませんでした"]
             },
             {
               "field_id": "q_nb2_step2",
@@ -227,6 +271,12 @@
               "field_id": "q_nb2_step3",
               "label": "【STEP 3】そのギャップを埋めるために、NotebookLMが提案してきた新規プロジェクトや公開講座などの「アイデアのたたき台（コピペ、または要約）」を記述してください。",
               "type": "textarea"
+            },
+            {
+              "field_id": "q_nb2_step4",
+              "label": "【STEP 4】この分析プロセスは、学内のどのような企画立案や戦略策定の場面で活用できそうですか？具体的な業務やテーマ例を挙げてください。",
+              "type": "textarea",
+              "placeholder": "例：新規学部・学科設置の企画、地域連携事業の戦略立案、など"
             }
           ]
         },
@@ -240,15 +290,15 @@
           "questions": [
             {
               "field_id": "q_nb3_step1",
-              "label": "【STEP 1】事前配布された「サンプル引継ぎメモPDF」をソースに追加しましたか？",
+              "label": "【STEP 1】事前配布された「サンプル引継ぎメモPDF」をソースに追加することができましたか？",
               "type": "radio",
-              "options": ["はい、追加しました", "いいえ、まだです"]
+              "options": ["はい、できました", "いいえ、できませんでした"]
             },
             {
               "field_id": "q_nb3_step2",
               "label": "【STEP 2】画面右側の「Studio（またはノートブックガイド）」パネルから、「FAQ」または「学習ガイド」のボタンをクリックしてドキュメントを作成しましたか？",
               "type": "radio",
-              "options": ["はい、自動生成しました", "いいえ、まだです"]
+              "options": ["はい、自動生成しました", "いいえ、できませんでした"]
             },
             {
               "field_id": "q_nb3_step3",
@@ -260,6 +310,46 @@
               "label": "【STEP 4】あなたの現在の部署にある資料で、この機能を使って一発でマニュアル化（Q&A化）してみたいドキュメントは何ですか？",
               "type": "textarea",
               "placeholder": "例：新システムの操作手順書、過去のイベント運営マニュアル、過去の議事録集など"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "tool": "Gems",
+      "focus": "生成AIコンシェルジュによる繰り返し業務の業務効率化",
+      "cases": [
+        {
+          "id": "case1",
+          "title": "Case 1：Gemsを活用した情報発信業務の効率化",
+          "ui_type": "checklist_report_mode",
+          "learning_objective": "Gemsを活用して、定型的な情報発信業務（例：イベント報告）を効率化するプロセスを体験する",
+          "situation": "学内の広報担当者が、定期的に行われるイベント（例：オープンキャンパス、研究発表会など）の報告記事を作成する業務。",
+          "goal": "Gemsで最新のイベント情報に関する報告記事のドラフトを自動生成し、内容の確認と修正を行うプロセスを体験する",
+          "questions": [
+            {
+              "field_id": "q_gems_step1",
+              "label": "【STEP 1】Gemsを開くことができましたか？",
+              "type": "radio",
+              "options": ["はい、できました", "いいえ、できませんでした"]
+            },
+            {
+              "field_id": "q_gems_step2",
+              "label": "【STEP 2】Gemsの画面でカスタム指示文を作成しましたか？",
+              "type": "radio",
+              "options": ["はい、生成しました", "いいえ、できませんでした"]
+            },
+            {
+              "field_id": "q_gems_step3",
+              "label": "【STEP 3】生成された報告記事のクオリティはどうでしたか？「これは実務で使えそうだ」と感じた点や感想を教えてください。",
+              "type": "textarea"
+            },
+            {
+              "field_id": "q_gems_step4",
+              "label": "【STEP 4】このGemsは、学内のどのような場面で活用できそうですか？具体的な業務やテーマ例を挙げてください。",
+              "type": "textarea",
+              "placeholder": "例：定期的なイベントの報告記事作成、学内ニュースの要約と配信、など"
             }
           ]
         }

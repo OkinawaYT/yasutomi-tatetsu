@@ -49,8 +49,8 @@
       <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">回答者情報</p>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div>
-          <label class="block text-xs text-slate-400 mb-1">氏名 <span class="text-red-400">*</span></label>
-          <input id="r-name" type="text" placeholder="山田 太郎"
+          <label class="block text-xs text-slate-400 mb-1">ニックネーム <span class="text-red-400">*</span></label>
+          <input id="r-name" type="text" placeholder="例：タロウ など"
             class="w-full text-sm border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition">
         </div>
         <div>
@@ -261,8 +261,14 @@ function renderCase() {
 
       <div class="border-t border-slate-100 p-5">
         ${done
-          ? `<div class="flex items-center gap-2 text-green-600 font-semibold text-sm">
-               <span class="text-xl">✓</span><span>この回答は送信済みです</span>
+          ? `<div class="flex items-center justify-between gap-2">
+               <div class="flex items-center gap-2 text-green-600 font-semibold text-sm">
+                 <span class="text-xl">✓</span><span>この回答は送信済みです</span>
+               </div>
+               <button onclick="resetAndEdit(${day.day}, '${c.id}')"
+                 class="text-xs text-slate-400 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-3 py-2 transition whitespace-nowrap">
+                 修正して再送信
+               </button>
              </div>`
           : `<button id="btn-submit" onclick="submitCase(${day.day}, '${c.id}')"
                class="${btnClass} text-white font-semibold text-sm py-3 px-6 rounded-xl w-full transition-colors">
@@ -501,6 +507,12 @@ async function submitCase(day, caseId) {
     setStatus(e.message || '送信に失敗しました。再度お試しください。', 'text-red-500');
     if (btn) { btn.disabled = false; btn.textContent = '回答を送信する'; }
   }
+}
+
+function resetAndEdit(day, caseId) {
+  localStorage.removeItem(`done_${seminarId}_d${day}_${caseId}`);
+  renderCaseTabs();
+  renderCase();
 }
 
 function setStatus(msg, cls) {

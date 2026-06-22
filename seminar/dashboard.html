@@ -48,23 +48,38 @@
     <div id="el-stats" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
 
     <!-- 絞り込み -->
-    <div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-wrap gap-4 items-center shadow-sm">
-      <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest">絞り込み</span>
-      <div class="flex items-center gap-2">
-        <label class="text-xs text-slate-400">Day</label>
-        <select id="filter-day" onchange="applyFilter()"
-          class="text-sm border border-slate-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-300">
-          <option value="">全て</option>
-        </select>
+    <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm space-y-3">
+      <div class="flex flex-wrap gap-3 items-center">
+        <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest">絞り込み</span>
+        <div class="flex items-center gap-2">
+          <label class="text-xs text-slate-400">Day</label>
+          <select id="filter-day" onchange="onDayChange()"
+            class="text-sm border border-slate-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+            <option value="">全て</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2">
+          <label class="text-xs text-slate-400">Case</label>
+          <select id="filter-case" onchange="onCaseChange()"
+            class="text-sm border border-slate-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+            <option value="">全て</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2">
+          <label class="text-xs text-slate-400">設問</label>
+          <select id="filter-question" onchange="applyFilter()"
+            class="text-sm border border-slate-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-300 max-w-[220px]">
+            <option value="">全設問</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2 ml-auto">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input id="search-input" type="text" placeholder="キーワード検索..."
+            oninput="onSearch()"
+            class="text-sm border border-slate-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-300 w-40">
+        </div>
+        <span id="filter-count" class="text-xs text-slate-400"></span>
       </div>
-      <div class="flex items-center gap-2">
-        <label class="text-xs text-slate-400">Case</label>
-        <select id="filter-case" onchange="applyFilter()"
-          class="text-sm border border-slate-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-300">
-          <option value="">全て</option>
-        </select>
-      </div>
-      <span id="filter-count" class="text-xs text-slate-400 ml-auto"></span>
     </div>
 
     <!-- ラジオ集計グラフ -->
@@ -107,6 +122,7 @@ let allHeaders   = [];
 let fieldMap     = {};  // field_id → question object
 let caseFieldMap = {};  // "d{day}_{case_id}" → [field_id, ...]
 let charts       = [];
+let searchQuery  = '';
 
 // ============================================================
 // INIT
@@ -223,23 +239,81 @@ function fetchJsonp(url) {
 // フィルター
 // ============================================================
 function setupFilters() {
-  const daySel  = el('filter-day');
-  const caseSel = el('filter-case');
-
+  const daySel = el('filter-day');
+  const seenDays = new Set();
   seminarData.program.forEach(day => {
-    const opt = new Option(`Day ${day.day}  ${day.tool}`, day.day);
-    daySel.appendChild(opt);
+    if (!seenDays.has(day.day)) {
+      seenDays.add(day.day);
+      const tools = seminarData.program
+        .filter(p => p.day === day.day).map(p => p.tool).join('・');
+      daySel.appendChild(new Option(`Day ${day.day}　${tools}`, day.day));
+    }
   });
+  updateCaseFilter('');
+}
 
-  // Case option の value = caseFieldMap のキー "d{day}_{case_id}"
-  // → Day をまたいで同一 case_id が存在しても一意に特定できる
-  seminarData.program.forEach(day => {
+function updateCaseFilter(dayVal) {
+  const caseSel = el('filter-case');
+  const prev = caseSel.value;
+  caseSel.innerHTML = '<option value="">全て</option>';
+
+  const days = dayVal
+    ? seminarData.program.filter(d => String(d.day) === String(dayVal))
+    : seminarData.program;
+
+  days.forEach(day => {
     day.cases.forEach(c => {
-      const label = `Day ${day.day}  ${c.title.split('：')[0]}`;
-      const value = `d${day.day}_${c.id}`;
-      caseSel.appendChild(new Option(label, value));
+      const label = `Day ${day.day}　${c.title.split('：')[0]}`;
+      const val   = `d${day.day}_${c.id}`;
+      caseSel.appendChild(new Option(label, val));
     });
   });
+
+  caseSel.value = [...caseSel.options].some(o => o.value === prev) ? prev : '';
+  updateQuestionFilter();
+}
+
+function updateQuestionFilter() {
+  const qSel = el('filter-question');
+  if (!qSel) return;
+  qSel.innerHTML = '<option value="">全設問</option>';
+
+  const fields = getActiveFields();
+  let qNum = 0;
+  fields.forEach(([fieldId, field]) => {
+    if (fieldId.includes('__')) return; // matrix サブフィールドはスキップ
+    if (!['radio','textarea','text','matrix_parts'].includes(field.type)) return;
+    qNum++;
+    const truncated = field.label.length > 30 ? field.label.slice(0, 30) + '…' : field.label;
+    qSel.appendChild(new Option(`Q${qNum}　${truncated}`, fieldId));
+  });
+}
+
+function getFilteredFields() {
+  const qVal = el('filter-question') ? el('filter-question').value : '';
+  const fields = getActiveFields();
+  if (!qVal) return fields;
+
+  const field = fieldMap[qVal];
+  if (field && field.type === 'matrix_parts') {
+    return fields.filter(([id]) => id === qVal || id.startsWith(qVal + '__'));
+  }
+  return fields.filter(([id]) => id === qVal);
+}
+
+function onDayChange() {
+  updateCaseFilter(el('filter-day').value);
+  applyFilter();
+}
+
+function onCaseChange() {
+  updateQuestionFilter();
+  applyFilter();
+}
+
+function onSearch() {
+  searchQuery = el('search-input').value.trim().toLowerCase();
+  applyFilter();
 }
 
 // 選択中の case に属するフィールドのみ返す
@@ -269,15 +343,20 @@ function getActiveFields() {
 
 function applyFilter() {
   const dayVal  = el('filter-day').value;
-  const caseKey = el('filter-case').value; // "d1_case1" or ""
+  const caseKey = el('filter-case').value;
 
   let rows = allRows;
   if (caseKey) {
-    // Case フィルタは day を内包 → "d1_case1" → day=1, case_id=case1
     const m = caseKey.match(/^d(\d+)_(.+)$/);
     if (m) rows = rows.filter(r => String(r.day) === m[1] && r.case_id === m[2]);
   } else if (dayVal) {
     rows = rows.filter(r => String(r.day) === String(dayVal));
+  }
+
+  if (searchQuery) {
+    rows = rows.filter(r =>
+      Object.values(r).some(v => String(v).toLowerCase().includes(searchQuery))
+    );
   }
 
   el('filter-count').textContent = `${rows.length} 件表示中`;
@@ -323,7 +402,7 @@ function renderCharts(rows) {
   charts = [];
   el('el-charts').innerHTML = '';
 
-  const radioFields = getActiveFields().filter(([, f]) => f.type === 'radio');
+  const radioFields = getFilteredFields().filter(([, f]) => f.type === 'radio');
   let hasData = false;
 
   radioFields.forEach(([fieldId, field]) => {
@@ -378,19 +457,38 @@ function renderCharts(rows) {
 }
 
 // ============================================================
-// テキスト回答リスト
+// テキスト回答テーブル
 // ============================================================
+function highlight(text) {
+  if (!searchQuery) return esc(text);
+  const lower = text.toLowerCase();
+  let result = '';
+  let pos = 0;
+  let idx;
+  while ((idx = lower.indexOf(searchQuery, pos)) >= 0) {
+    result += esc(text.slice(pos, idx));
+    result += `<mark class="bg-yellow-200 rounded">${esc(text.slice(idx, idx + searchQuery.length))}</mark>`;
+    pos = idx + searchQuery.length;
+  }
+  result += esc(text.slice(pos));
+  return result;
+}
+
 function renderTexts(rows) {
   el('el-texts').innerHTML = '';
 
-  const textFields = getActiveFields()
-    .filter(([, f]) => f.type === 'textarea' || f.type === 'text');
+  const textFields = getFilteredFields()
+    .filter(([id, f]) => !id.includes('__') && (f.type === 'textarea' || f.type === 'text'));
 
   let hasData = false;
 
   textFields.forEach(([fieldId, field]) => {
     const responses = rows
-      .map(r => ({ text: (r[fieldId] || '').trim() }))
+      .map(r => ({
+        name:        (r.name        || '').trim() || '—',
+        affiliation: (r.affiliation || '').trim(),
+        text:        (r[fieldId]    || '').trim(),
+      }))
       .filter(r => r.text);
 
     if (!responses.length) return;
@@ -400,15 +498,27 @@ function renderTexts(rows) {
     div.className = 'bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden';
     div.innerHTML = `
       <div class="bg-slate-50 border-b border-slate-100 px-4 py-3 flex items-center justify-between">
-        <p class="text-xs font-semibold text-slate-600 leading-snug">${field.label}</p>
+        <p class="text-xs font-semibold text-slate-600 leading-snug">${esc(field.label)}</p>
         <span class="text-xs text-slate-400">${responses.length} 件</span>
       </div>
-      <div class="divide-y divide-slate-100 max-h-72 overflow-y-auto">
-        ${responses.map((r, i) => `
-          <div class="px-4 py-3 flex gap-3">
-            <span class="flex-shrink-0 text-xs text-slate-300 w-5 text-right mt-0.5">${i + 1}</span>
-            <p class="flex-1 text-sm text-slate-700 whitespace-pre-wrap break-words">${esc(r.text)}</p>
-          </div>`).join('')}
+      <div class="overflow-x-auto max-h-96 overflow-y-auto">
+        <table class="w-full text-xs">
+          <thead class="bg-slate-50 border-b border-slate-100 sticky top-0">
+            <tr>
+              <th class="px-3 py-2 text-left font-semibold text-slate-500 whitespace-nowrap w-24">ニックネーム</th>
+              <th class="px-3 py-2 text-left font-semibold text-slate-500 whitespace-nowrap w-28">所属</th>
+              <th class="px-3 py-2 text-left font-semibold text-slate-500">回答</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            ${responses.map(r => `
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="px-3 py-2.5 font-medium text-slate-700 whitespace-nowrap">${highlight(r.name)}</td>
+                <td class="px-3 py-2.5 text-slate-400 whitespace-nowrap">${r.affiliation ? esc(r.affiliation) : '<span class="text-slate-300">—</span>'}</td>
+                <td class="px-3 py-2.5 text-slate-700 whitespace-pre-wrap break-words">${highlight(r.text)}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
       </div>`;
     el('el-texts').appendChild(div);
   });
@@ -419,9 +529,9 @@ function renderTexts(rows) {
 // ============================================================
 // 回答一覧テーブル
 // ============================================================
-const TABLE_COLS = ['timestamp', 'day', 'case_id'];
+const TABLE_COLS = ['timestamp', 'name', 'affiliation', 'day', 'case_id'];
 const COL_LABELS = {
-  timestamp: '日時', day: 'Day', case_id: 'Case',
+  timestamp: '日時', name: 'ニックネーム', affiliation: '所属', day: 'Day', case_id: 'Case',
 };
 
 function renderTable(rows) {
