@@ -194,23 +194,18 @@ function mkKpi(kpis) {
   ).join('');
 }
 
-const CHART_PAD_TOP = 16;
-const CHART_LABEL_H = 38;
-const CHART_PAD_LEFT = 20;
+const CHART_COLOR_PRIMARY  = '#00A3C4';
+const CHART_COLOR_POSTER   = '#4BBFD8';
+const CHART_COLOR_INVITED  = '#007EA3';
+const CHART_COLOR_OTHER    = '#B0DFE8';
 
-function mkBar(yearCounts, maxC, BAR, GAP, H, color) {
-  const years = Object.keys(yearCounts).sort();
-  return years.map((y, i) => {
-    const c = yearCounts[y];
-    const bh = Math.max(Math.round((c / maxC) * H), 2);
-    const x = i * (BAR + GAP);
-    const cx = x + BAR / 2;
-    const barY = CHART_PAD_TOP + H - bh;
-    const ly = CHART_PAD_TOP + H + 15;
-    return `<rect x="${x}" y="${barY}" width="${BAR}" height="${bh}" fill="${color}" rx="2"/>
-      <text x="${cx}" y="${barY - 3}" text-anchor="middle" font-size="10" fill="#1a1a2e">${c}</text>
-      <text x="${cx}" y="${ly}" text-anchor="end" font-size="10" fill="#6b6b6b" transform="rotate(-45 ${cx} ${ly})">${y}</text>`;
-  }).join('');
+function _mkChart(id, config) {
+  setTimeout(() => {
+    const canvas = document.getElementById(id);
+    if (!canvas || !window.Chart) return;
+    if (canvas._chart) canvas._chart.destroy();
+    canvas._chart = new Chart(canvas, config);
+  }, 0);
 }
 
 function pubsDashboard(items) {
@@ -225,23 +220,36 @@ function pubsDashboard(items) {
     if (y) yearCounts[y] = (yearCounts[y] || 0) + 1;
   });
   const years = Object.keys(yearCounts).sort();
-  const maxC = Math.max(...Object.values(yearCounts), 1);
 
-  const BAR = 40, GAP = 6, H = 80;
-  const W = years.length * (BAR + GAP);
-  const SH = CHART_PAD_TOP + H + CHART_LABEL_H;
-  const bars = mkBar(yearCounts, maxC, BAR, GAP, H, '#00A3C4');
+  _mkChart('chart-pubs', {
+    type: 'bar',
+    data: {
+      labels: years,
+      datasets: [{ data: years.map(y => yearCounts[y]), backgroundColor: CHART_COLOR_PRIMARY, borderRadius: 3 }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { title: c => c[0].label + (label ? '年' : ''), label: c => c.raw + (label ? '件' : '') } },
+      },
+      scales: {
+        x: { grid: { display: false } },
+        y: { beginAtZero: true, ticks: { precision: 0 } },
+      },
+    },
+  });
 
   const kpis = [
-    { val: total, lbl: label ? '総論文数' : 'Total' },
-    { val: recent, lbl: label ? '直近5年' : 'Last 5y' },
+    { val: total,        lbl: label ? '総論文数' : 'Total' },
+    { val: recent,       lbl: label ? '直近5年' : 'Last 5y' },
     { val: years.length, lbl: label ? '発表年数' : 'Active years' },
   ];
   return `<div class="page-dashboard">
     <div class="db-kpis">${mkKpi(kpis)}</div>
     <div class="db-chart">
       <p class="db-chart-label">${label ? '年別発表数' : 'Publications per year'}</p>
-      <svg viewBox="${-CHART_PAD_LEFT} 0 ${W + CHART_PAD_LEFT} ${SH}" width="${W + CHART_PAD_LEFT}" height="${SH}" style="display:block;margin:0 auto">${bars}</svg>
+      <div class="db-canvas-wrap"><canvas id="chart-pubs"></canvas></div>
     </div>
   </div>`;
 }
@@ -254,10 +262,10 @@ function talksDashboard(items) {
   const posterCount  = items.filter(p => p.type === 'poster_presentation').length;
 
   const TYPES = [
-    { key: 'oral',    match: t => t === 'oral_presentation' || t === 'nominated_symposium',               color: '#00A3C4', label: label ? '口頭' : 'Oral' },
-    { key: 'poster',  match: t => t === 'poster_presentation',                                            color: '#4BBFD8', label: 'Poster' },
-    { key: 'invited', match: t => t === 'invited_oral_presentation' || t === 'keynote_oral_presentation', color: '#007EA3', label: label ? '招待' : 'Invited' },
-    { key: 'other',   match: () => true,                                                                  color: '#B0DFE8', label: label ? 'その他' : 'Other' },
+    { key: 'oral',    match: t => t === 'oral_presentation' || t === 'nominated_symposium',               color: CHART_COLOR_PRIMARY,  label: label ? '口頭' : 'Oral' },
+    { key: 'poster',  match: t => t === 'poster_presentation',                                            color: CHART_COLOR_POSTER,   label: 'Poster' },
+    { key: 'invited', match: t => t === 'invited_oral_presentation' || t === 'keynote_oral_presentation', color: CHART_COLOR_INVITED,  label: label ? '招待' : 'Invited' },
+    { key: 'other',   match: () => true,                                                                  color: CHART_COLOR_OTHER,    label: label ? 'その他' : 'Other' },
   ];
 
   const yearData = {};
@@ -270,33 +278,29 @@ function talksDashboard(items) {
     }
   });
   const years = Object.keys(yearData).sort();
-  const totals = years.map(y => TYPES.reduce((s, tp) => s + yearData[y][tp.key], 0));
-  const maxT = Math.max(...totals, 1);
 
-  const BAR = 28, GAP = 6, H = 80;
-  const W = years.length * (BAR + GAP);
-  const SH = CHART_PAD_TOP + H + CHART_LABEL_H;
-  const bars = years.map((y, i) => {
-    const x = i * (BAR + GAP);
-    const cx = x + BAR / 2;
-    let topY = CHART_PAD_TOP + H;
-    const rects = TYPES.map(tp => {
-      const c = yearData[y][tp.key];
-      if (!c) return '';
-      const bh = Math.max(Math.round((c / maxT) * H), 1);
-      topY -= bh;
-      return `<rect x="${x}" y="${topY}" width="${BAR}" height="${bh}" fill="${tp.color}" rx="1"/>`;
-    }).join('');
-    const total = totals[i];
-    const ly = CHART_PAD_TOP + H + 15;
-    return rects
-      + `<text x="${cx}" y="${topY - 3}" text-anchor="middle" font-size="10" fill="#1a1a2e">${total}</text>`
-      + `<text x="${cx}" y="${ly}" text-anchor="end" font-size="10" fill="#6b6b6b" transform="rotate(-45 ${cx} ${ly})">${y}</text>`;
-  }).join('');
-
-  const legend = TYPES.map(tp =>
-    `<span class="db-legend-item"><span class="db-legend-dot" style="background:${tp.color}"></span>${tp.label}</span>`
-  ).join('');
+  _mkChart('chart-talks', {
+    type: 'bar',
+    data: {
+      labels: years,
+      datasets: TYPES.map(tp => ({
+        label: tp.label,
+        data: years.map(y => yearData[y][tp.key] || 0),
+        backgroundColor: tp.color,
+      })),
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
+        tooltip: { mode: 'index', callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.raw}` } },
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false } },
+        y: { stacked: true, beginAtZero: true, ticks: { precision: 0 } },
+      },
+    },
+  });
 
   const kpis = [
     { val: total,        lbl: label ? '総件数' : 'Total' },
@@ -308,8 +312,7 @@ function talksDashboard(items) {
     <div class="db-kpis">${mkKpi(kpis)}</div>
     <div class="db-chart">
       <p class="db-chart-label">${label ? '年別発表数（種別）' : 'Presentations per year by type'}</p>
-      <svg viewBox="${-CHART_PAD_LEFT} 0 ${W + CHART_PAD_LEFT} ${SH}" width="${W + CHART_PAD_LEFT}" height="${SH}" style="display:block;margin:0 auto">${bars}</svg>
-      <div class="db-legend">${legend}</div>
+      <div class="db-canvas-wrap"><canvas id="chart-talks"></canvas></div>
     </div>
   </div>`;
 }
@@ -325,12 +328,25 @@ function activitiesDashboard(items) {
     if (y) yearCounts[y] = (yearCounts[y] || 0) + 1;
   });
   const years = Object.keys(yearCounts).sort();
-  const maxC = Math.max(...Object.values(yearCounts), 1);
 
-  const BAR = 60, GAP = 10, H = 80;
-  const W = years.length * (BAR + GAP);
-  const SH = CHART_PAD_TOP + H + CHART_LABEL_H;
-  const bars = mkBar(yearCounts, maxC, BAR, GAP, H, '#00A3C4');
+  _mkChart('chart-acts', {
+    type: 'bar',
+    data: {
+      labels: years,
+      datasets: [{ data: years.map(y => yearCounts[y]), backgroundColor: CHART_COLOR_PRIMARY, borderRadius: 3 }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { title: c => c[0].label + (label ? '年' : ''), label: c => c.raw + (label ? '件' : '') } },
+      },
+      scales: {
+        x: { grid: { display: false } },
+        y: { beginAtZero: true, ticks: { precision: 0 } },
+      },
+    },
+  });
 
   const kpis = [
     { val: total, lbl: label ? '総件数' : 'Total' },
@@ -340,7 +356,7 @@ function activitiesDashboard(items) {
     <div class="db-kpis">${mkKpi(kpis)}</div>
     <div class="db-chart">
       <p class="db-chart-label">${label ? '年別活動件数' : 'Activities per year'}</p>
-      <svg viewBox="${-CHART_PAD_LEFT} 0 ${W + CHART_PAD_LEFT} ${SH}" width="${W + CHART_PAD_LEFT}" height="${SH}" style="display:block;margin:0 auto">${bars}</svg>
+      <div class="db-canvas-wrap"><canvas id="chart-acts"></canvas></div>
     </div>
   </div>`;
 }
