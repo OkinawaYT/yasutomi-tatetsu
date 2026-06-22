@@ -287,8 +287,11 @@ function talksDashboard(items) {
       topY -= bh;
       return `<rect x="${x}" y="${topY}" width="${BAR}" height="${bh}" fill="${tp.color}" rx="1"/>`;
     }).join('');
+    const total = totals[i];
     const ly = CHART_PAD_TOP + H + 15;
-    return rects + `<text x="${cx}" y="${ly}" text-anchor="end" font-size="10" fill="#6b6b6b" transform="rotate(-45 ${cx} ${ly})">${y}</text>`;
+    return rects
+      + `<text x="${cx}" y="${topY - 3}" text-anchor="middle" font-size="10" fill="#1a1a2e">${total}</text>`
+      + `<text x="${cx}" y="${ly}" text-anchor="end" font-size="10" fill="#6b6b6b" transform="rotate(-45 ${cx} ${ly})">${y}</text>`;
   }).join('');
 
   const legend = TYPES.map(tp =>
@@ -662,34 +665,34 @@ async function renderActivitiesMap(items) {
     maxZoom: 18,
   }).addTo(_actMap);
 
+  // Group by location, preferring lat/lon embedded in each item
   const locMap = {};
   items.forEach(a => {
-    if (!a.location) return;
-    if (!locMap[a.location]) locMap[a.location] = [];
-    locMap[a.location].push(a);
+    if (!a.location || a.location === 'オンライン') return;
+    if (!locMap[a.location]) locMap[a.location] = { lat: null, lon: null, acts: [] };
+    locMap[a.location].acts.push(a);
+    // Use item's own coords if valid Japan range (20-46°N, 123-154°E)
+    if (!locMap[a.location].lat && a.lat && a.lon
+        && a.lat >= 20 && a.lat <= 46 && a.lon >= 123 && a.lon <= 154) {
+      locMap[a.location].lat = a.lat;
+      locMap[a.location].lon = a.lon;
+    }
   });
 
-  let cache = {};
-  try {
-    const r = await fetch('data/location_cache.json');
-    if (r.ok) cache = await r.json();
-  } catch {}
-
   const allCoords = [];
-  const uncached = [];
+  const needGeocode = [];
 
-  for (const [loc, acts] of Object.entries(locMap)) {
-    if (cache[loc]) {
-      const { lat, lon } = cache[loc];
-      const popup = `<strong>${esc(loc)}</strong><br>${acts.length}件`;
-      L.circleMarker([lat, lon], {
-        radius: 6 + Math.min(acts.length, 8),
+  for (const [loc, info] of Object.entries(locMap)) {
+    if (info.lat && info.lon) {
+      const popup = `<strong>${esc(loc)}</strong><br>${info.acts.length}件`;
+      L.circleMarker([info.lat, info.lon], {
+        radius: 6 + Math.min(info.acts.length, 8),
         fillColor: '#00A3C4', color: '#fff',
         weight: 2, opacity: 1, fillOpacity: 0.8,
       }).bindPopup(popup).addTo(_actMap);
-      allCoords.push([lat, lon]);
+      allCoords.push([info.lat, info.lon]);
     } else {
-      uncached.push(loc);
+      needGeocode.push(loc);
     }
   }
 
@@ -699,14 +702,19 @@ async function renderActivitiesMap(items) {
     setTimeout(() => { _actMap.invalidateSize(); _actMap.setView([lat, lon], allCoords.length > 1 ? 8 : 10); }, 50);
   }
 
-  for (let i = 0; i < uncached.length; i++) {
+  // Fallback: geocode locations that still have no coords
+  let cache = {};
+  if (needGeocode.length) {
+    try { const r = await fetch('data/location_cache.json'); if (r.ok) cache = await r.json(); } catch {}
+  }
+  for (let i = 0; i < needGeocode.length; i++) {
     if (i > 0) await new Promise(r => setTimeout(r, 1100));
-    const loc = uncached[i];
-    const coords = await geocodeLocation(loc);
+    const loc = needGeocode[i];
+    const coords = cache[loc] || await geocodeLocation(loc);
     if (!coords) continue;
-    const popup = `<strong>${esc(loc)}</strong><br>${locMap[loc].length}件`;
+    const popup = `<strong>${esc(loc)}</strong><br>${locMap[loc].acts.length}件`;
     L.circleMarker([coords.lat, coords.lon], {
-      radius: 6 + Math.min(locMap[loc].length, 8),
+      radius: 6 + Math.min(locMap[loc].acts.length, 8),
       fillColor: '#00A3C4', color: '#fff',
       weight: 2, opacity: 1, fillOpacity: 0.8,
     }).bindPopup(popup).addTo(_actMap);
