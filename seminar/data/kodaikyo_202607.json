@@ -9,7 +9,7 @@
       "cases": [
         {
           "id": "case0-1",
-          "title": "Case 0：コミュニケーションの罠（いい感じに）",
+          "title": "Case 0①：コミュニケーションの罠（いい感じに）",
           "ui_type": "prompt_generator_mode",
           "learning_objective": "指示の曖昧さがもたらす不都合を理解し、PARTSフレームワークの必要性を体感する",
           "situation": "上司から「来週の教授会までに、学生アンケートの集計報告書を『いい感じに』まとめておいて」とだけ頼まれた場面。",
@@ -37,7 +37,7 @@
         },
         {
           "id": "case0-2",
-          "title": "Case 0：コミュニケーションの罠（いい感じに）",
+          "title": "Case 0②：コミュニケーションの罠（いい感じに）",
           "ui_type": "prompt_generator_mode",
           "learning_objective": "指示の曖昧さがもたらす不都合を理解し、PARTSフレームワークの必要性を体感する",
           "situation": "上司から「来週の教授会までに、学生アンケートの集計報告書を『いい感じに』まとめておいて」とだけ頼まれた場面。",
@@ -65,7 +65,7 @@
         },
         {
           "id": "case1-1",
-          "title": "Case 1：Geminiを使ったメール案作成",
+          "title": "Case 1①：Geminiを使ったメール案作成",
           "ui_type": "prompt_generator_mode",
           "learning_objective": "PARTSの実践と、相手の役職（文脈）に応じたトーン＆マナーの調整手法を学ぶ",
           "situation": "学内の教員（教授陣等）に対して、期限が過ぎている提出物を催促しなければならない場面。関係性を良好に保ちつつ、確実に提出してもらうためのメール文章をAIに作成させます。",
@@ -93,7 +93,7 @@
         },
         {
           "id": "case1-2",
-          "title": "Case 1：Geminiを使ったメール案作成",
+          "title": "Case 1②：Geminiを使ったメール案作成",
           "ui_type": "prompt_generator_mode",
           "learning_objective": "PARTSの実践と、相手の役職（文脈）に応じたトーン＆マナーの調整手法を学ぶ",
           "situation": "学内の教員（教授陣等）に対して、期限が過ぎている提出物を催促しなければならない場面。関係性を良好に保ちつつ、確実に提出してもらうためのメール文章をAIに作成させます。",
@@ -112,7 +112,7 @@
               ]
             },
             {
-              "field_id": "q_case1_prompt",
+              "field_id": "q_case1_prompt2",
               "label": "Geminiに入力するために組み立てた実際のプロンプト全文を記述してください。",
               "type": "textarea",
               "placeholder": "上記のPARTSを落とし込んだ指示文"
@@ -205,12 +205,12 @@
     },
     {
       "day": 2,
-      "tool": "NotebookLM",
-      "focus": "資料特化型AIによる業務検索・組織内ナレッジ共有",
+      "tool": "NotebookLM・Gems",
+      "focus": "資料特化型AIによる業務検索・ナレッジ共有 / 生成AIコンシェルジュによる業務効率化",
       "cases": [
         {
-          "id": "case1",
-          "title": "Case 1：学内規程のチャットボット化",
+          "id": "nb-case1",
+          "title": "NB Case 1：学内規程のチャットボット化",
           "ui_type": "checklist_report_mode",
           "learning_objective": "NotebookLMへのソースインポート、正確な回答の検索、および引用元（ソース）の確認プロセスをマスターする",
           "situation": "総務課や人事課、教務課の窓口・電話において、教職員や学生から「就業規則」や「旅費規程」に関する複雑な問い合わせが日常的に発生し、調べるのに時間がかかっている場面。",
@@ -248,8 +248,8 @@
           ]
         },
         {
-          "id": "case2",
-          "title": "Case 2：高等教育の政策動向と自学の比較分析（経営・企画の壁打ち）",
+          "id": "nb-case2",
+          "title": "NB Case 2：高等教育の政策動向と自学の比較分析（経営・企画の壁打ち）",
           "ui_type": "checklist_report_mode",
           "learning_objective": "複数資料のクロス分析を用いて、マクロ方針（中教審答申）とミクロ戦略（自学の中期計画）の「ギャップ（足りない要素）」を自動抽出する",
           "situation": "文部科学省・中央教育審議会（中教審）の最新の政策動向資料を踏まえ、自学の「中期計画書」にどのような不足点があるかを分析し、大学経営や新規事業（地域連携等）のアイデアのタネを見つけ出す場面。",
@@ -281,8 +281,8 @@
           ]
         },
         {
-          "id": "case3",
-          "title": "Case 3：業務研修・引き継ぎの自動化（Studio機能の活用）",
+          "id": "nb-case3",
+          "title": "NB Case 3：業務研修・引き継ぎの自動化（Studio機能の活用）",
           "ui_type": "checklist_report_mode",
           "learning_objective": "NotebookLMの独自機能「Studio（ノートブックガイド）」を活用した、未整理の資料からの資料（FAQ・学習ガイド）一括自動生成",
           "situation": "異動期において、前任者が残した粗い引継ぎメモや年間スケジュール帳はあるものの、新任職員に渡すための「ちゃんとした教務マニュアル」をイチから作る時間が全くない場面。",
@@ -312,17 +312,10 @@
               "placeholder": "例：新システムの操作手順書、過去のイベント運営マニュアル、過去の議事録集など"
             }
           ]
-        }
-      ]
-    },
-    {
-      "day": 2,
-      "tool": "Gems",
-      "focus": "生成AIコンシェルジュによる繰り返し業務の業務効率化",
-      "cases": [
+        },
         {
-          "id": "case1",
-          "title": "Case 1：Gemsを活用した情報発信業務の効率化",
+          "id": "gems-case1",
+          "title": "Gems Case 1：Gemsを活用した情報発信業務の効率化",
           "ui_type": "checklist_report_mode",
           "learning_objective": "Gemsを活用して、定型的な情報発信業務（例：イベント報告）を効率化するプロセスを体験する",
           "situation": "学内の広報担当者が、定期的に行われるイベント（例：オープンキャンパス、研究発表会など）の報告記事を作成する業務。",
