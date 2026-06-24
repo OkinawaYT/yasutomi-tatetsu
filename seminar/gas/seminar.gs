@@ -67,6 +67,9 @@ function doPost(e) {
 // 回答を保存（シート名 = {seminar_id}_d{day}_{case_id}）
 // ---------------------------------------------------------------------------
 function saveAnswers(data) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(30000);
+  try {
   const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   const sheetName = `${data.seminar_id}_d${data.day}_${data.case_id}`;
   let sheet = ss.getSheetByName(sheetName);
@@ -128,6 +131,9 @@ function saveAnswers(data) {
 
   const row = allHeaders.map(h => (rowData[h] !== undefined ? rowData[h] : ''));
   sheet.appendRow(row);
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 function flattenAnswers(answers) {
