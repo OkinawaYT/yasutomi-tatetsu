@@ -32,6 +32,8 @@ function doGet(e) {
   let result;
   if (action === 'getResults' && seminarId) {
     result = getResults(seminarId, day, caseId);
+  } else if (action === 'getRegistrations' && seminarId) {
+    result = getRegistrations(seminarId);
   } else {
     result = { status: 'ok', message: 'Seminar GAS is running' };
   }
@@ -175,6 +177,17 @@ function getResults(seminarId, day, caseId) {
 
   allRows.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
   return { headers: headerSet, rows: allRows };
+}
+
+// ---------------------------------------------------------------------------
+// 参加申込状況データ取得（シート名: {seminar_id}_registrations）
+// 列: No | 大学名 | 住所 | 緯度 | 経度 | 合計 | 区分 | 役職・職位 | 人数
+// ---------------------------------------------------------------------------
+function getRegistrations(seminarId) {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = ss.getSheetByName(`${seminarId}_registrations`);
+  if (!sheet || sheet.getLastRow() < 2) return { headers: [], rows: [] };
+  return readSheet(sheet);
 }
 
 function readSheet(sheet) {

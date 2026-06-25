@@ -35,6 +35,9 @@
         <p class="text-sm text-slate-400 mt-1">集計ダッシュボード</p>
       </div>
       <div class="flex gap-2">
+        <a id="link-registration" href="#" class="text-xs text-slate-500 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-3 py-2 transition">
+          申込状況へ →
+        </a>
         <a id="link-form" href="#" class="text-xs text-slate-500 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-3 py-2 transition">
           回答フォームへ →
         </a>
@@ -177,7 +180,8 @@ async function init() {
   // ページ設定
   el('el-title').textContent = seminarData.seminar_title;
   document.title = `${seminarData.seminar_title} - ダッシュボード`;
-  el('link-form').href = `index.html?id=${seminarId}`;
+  el('link-form').href         = `index.html?id=${seminarId}`;
+  el('link-registration').href = `registration.html?id=${seminarId}`;
 
   setupFilters();
   await refreshData();
