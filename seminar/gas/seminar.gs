@@ -162,7 +162,9 @@ function getResults(seminarId, day, caseId) {
 
   // 集約: seminarId_ で始まる全シート
   const prefix = `${seminarId}_`;
-  const sheets = ss.getSheets().filter(s => s.getName().startsWith(prefix));
+  const sheets = ss.getSheets().filter(s =>
+    s.getName().startsWith(prefix) && !s.getName().endsWith('_registrations')
+  );
   if (!sheets.length) return { headers: [], rows: [] };
 
   const headerSet = [];
