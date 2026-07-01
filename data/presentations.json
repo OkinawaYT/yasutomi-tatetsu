@@ -1,6 +1,18 @@
 {
-  "updated": "2026-06-30",
+  "updated": "2026-07-01",
   "items": [
+    {
+      "id": "54044555",
+      "title": "大学業務における生成AIの活用",
+      "title_ja": "大学業務における生成AIの活用",
+      "date": "2026-07-02",
+      "event": "令和８年度 大学業務における生成AIの活用に関するセミナー",
+      "location": "オンライン",
+      "lat": 35.6780551,
+      "lon": 139.7668527,
+      "type": "public_discourse",
+      "authors": "立津 慶幸"
+    },
     {
       "id": "54037151",
       "title": "Claris FileMaker Campus Program",
