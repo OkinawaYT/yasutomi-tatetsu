@@ -24,8 +24,16 @@
   <!-- Session picker (no ?id= given) -->
   <div id="s-picker" class="hidden space-y-4">
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-      <h1 class="text-xl font-bold text-slate-800 mb-1">セミナー 回答フォーム</h1>
-      <p class="text-sm text-slate-500 mb-6">参加するセミナーを選択してください。</p>
+      <div class="flex items-start justify-between gap-3 mb-6">
+        <div>
+          <h1 class="text-xl font-bold text-slate-800 mb-1">セミナー 回答フォーム</h1>
+          <p class="text-sm text-slate-500">参加するセミナーを選択してください。</p>
+        </div>
+        <a href="qa-dashboard.html"
+          class="flex-shrink-0 text-xs text-slate-500 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-3 py-2 transition whitespace-nowrap">
+          Q&amp;Aダッシュボードへ
+        </a>
+      </div>
       <div id="session-list" class="space-y-3"></div>
     </div>
   </div>
@@ -69,13 +77,19 @@
     <!-- Day タブ + ダッシュボードリンク -->
     <div class="flex items-center justify-between gap-2">
       <div id="el-day-tabs" class="flex gap-2 flex-wrap"></div>
-      <a id="link-dashboard" href="#"
-        class="flex-shrink-0 flex items-center gap-1.5 text-xs text-slate-500 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-3 py-2 transition whitespace-nowrap">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-        </svg>
-        ダッシュボード
-      </a>
+      <div class="flex items-center gap-2">
+        <a id="link-qa-dashboard" href="qa-dashboard.html"
+          class="flex-shrink-0 text-xs text-slate-500 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-3 py-2 transition whitespace-nowrap">
+          Q&amp;Aダッシュボードへ
+        </a>
+        <a id="link-dashboard" href="#"
+          class="flex-shrink-0 flex items-center gap-1.5 text-xs text-slate-500 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-3 py-2 transition whitespace-nowrap">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          ダッシュボード
+        </a>
+      </div>
     </div>
 
     <!-- Case タブ（均等配列） -->
@@ -160,6 +174,7 @@ async function init() {
   el('el-title').textContent = seminarData.seminar_title;
   document.title = seminarData.seminar_title;
   el('link-dashboard').href = `dashboard.html?id=${seminarId}`;
+  el('link-qa-dashboard').href = 'qa-dashboard.html';
 
   show('s-main');
   hide('s-loading');
