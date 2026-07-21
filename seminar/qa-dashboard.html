@@ -95,6 +95,9 @@ let searchQuery = '';
 // INIT
 // ============================================================
 async function init() {
+  const params = new URLSearchParams(location.search);
+  const preferredSheet = params.get('sheet') || '';
+
   try {
     const r = await fetch('config.json');
     if (r.ok) {
@@ -116,9 +119,13 @@ async function init() {
   const sel = el('filter-session');
   qaSessions.forEach(s => sel.appendChild(new Option(s.title, s.sheet)));
 
+  if (preferredSheet && qaSessions.some(s => s.sheet === preferredSheet)) {
+    sel.value = preferredSheet;
+  }
+
   hide('s-loading');
   show('s-main');
-  await loadSession(sel.value);
+  await loadSession(sel.value, true);
 }
 
 // ============================================================
@@ -128,7 +135,7 @@ async function onSessionChange() {
   await loadSession(el('filter-session').value);
 }
 
-async function loadSession(sheetName) {
+async function loadSession(sheetName, autoFallback = false) {
   allRows  = [];
   allPairs = [];
   el('el-qa').innerHTML    = '';
@@ -141,9 +148,21 @@ async function loadSession(sheetName) {
   if (!sheetName) return;
 
   try {
-    const result = await fetchJsonp(
-      `${GAS_URL}?action=getQaResults&sheet_name=${encodeURIComponent(sheetName)}`
-    );
+    let result = await fetchQaResults(sheetName);
+
+    if (autoFallback && !(result.rows || []).length) {
+      for (const s of qaSessions) {
+        if (s.sheet === sheetName) continue;
+        const alt = await fetchQaResults(s.sheet);
+        if ((alt.rows || []).length) {
+          sheetName = s.sheet;
+          el('filter-session').value = sheetName;
+          result = alt;
+          break;
+        }
+      }
+    }
+
     allRows  = result.rows  || [];
     allPairs = result.pairs || [];
   } catch (e) {
@@ -162,6 +181,12 @@ async function loadSession(sheetName) {
 
 async function refreshData() {
   await loadSession(el('filter-session').value);
+}
+
+async function fetchQaResults(sheetName) {
+  return await fetchJsonp(
+    `${GAS_URL}?action=getQaResults&sheet_name=${encodeURIComponent(sheetName)}`
+  );
 }
 
 // ============================================================
