@@ -1,0 +1,10 @@
+{
+  "name": "seminar-gas",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "rm -rf dist && bunx tsc -p tsconfig.json && cp src/appsscript.json dist/",
+    "deploy": "bun run build && bunx clasp push --force",
+    "pull": "bunx clasp pull",
+    "open": "bunx clasp open"
+  }
+}

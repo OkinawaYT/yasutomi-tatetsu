@@ -1,0 +1,86 @@
+brand: "Tatetsu Lab."
+
+name:
+  en: Yasutomi Tatetsu
+  ja: 立津 慶幸
+
+role:
+  en: Senior Associate Professor
+  ja: 上級准教授
+
+organization:
+  en: Meio University, Okinawa, Japan
+  ja: 公立大学法人 名桜大学（沖縄県）
+
+bio:
+  en: >
+    My research focuses on **first-principles electronic structure calculations**
+    of surfaces, interfaces, and magnetic materials (hard magnets).
+    I investigate the physical properties of these systems from first principles to
+    understand and design novel functional materials.
+
+    In parallel, I work on **Institutional Research (IR)** and **EdTech** to improve
+    the quality of higher education.
+    Please feel free to reach out for collaboration.
+  ja: >
+    **第一原理電子状態計算**を用いて、表面・界面・磁性材料(ハード磁石)の物性解明に取り組んでいます。計算科学的アプローチから機能性材料の設計・理解を目指しています。
+
+    また、**インスティテューショナル・リサーチ（IR）** および **EdTech** を通じた高等教育の質向上にも取り組んでいます。研究・教育に関するご協力・ご相談をお気軽にどうぞ。
+
+# ハイライト：資格・研究テーマ・関心など。自由に追加・編集してください。
+highlights:
+  - category:
+      en: Certifications
+      ja: 認定・資格
+    items:
+      - name: Google for Education Certified Innovator
+        url: https://edu.google.com/for-educators/certification-programs/professional-expertise/certified-innovator/?modal_active=none
+      - name: Google Education Leader Program (ELP) Facilitator
+        url: https://edu.google.com/for-educators/communities/ed-leadership-program/
+      - name: Google Educators Group Okinawa Leader
+        url: https://www.facebook.com/groups/gegokinawa/
+      - name: Google Certified Gemini Faculty member
+        url: https://edu.google.com/learning-center/certifications/
+      - name: Google Cloud Generative AI Leader
+        url: https://cloud.google.com/learn/certification/generative-ai-leader
+      - name: Gemini Certified Educator
+        url: https://edu.google.com/learning-center/certifications/
+      - name: Google Certified Educator Level2
+        url: https://edu.google.com/learning-center/certifications/
+      - name: Google Certified Educator Level1
+        url: https://edu.google.com/learning-center/certifications/
+      - name: Apple Distinguished Educator
+        url: https://www.apple.com/jp/education/k12/apple-distinguished-educator/
+      - name: Apple Teacher
+        url: https://education.apple.com/learning-center
+
+  - category:
+      en: Research
+      ja: 研究テーマ
+    items:
+      - name: First-principles electronic structure
+        name_ja: 第一原理電子状態計算
+      - name: Hard magnets
+        name_ja: 硬磁石（Nd-Fe-B系）
+      - name: Surfaces & Interfaces
+        name_ja: 表面・界面物性
+
+  - category:
+      en: Education & Society
+      ja: 教育・社会
+    items:
+      - name: Institutional Research (IR)
+        name_ja: インスティテューショナル・リサーチ
+      - name: EdTech
+        name_ja: 教育工学
+      - name: Higher Education Quality
+        name_ja: 高等教育の質向上
+
+links:
+  github:         https://github.com/OkinawaYT
+  email:          mailto:y.tatetsu@meio-u.ac.jp
+  orcid:          https://orcid.org/0000-0002-8977-0487
+  linkedin:       https://www.linkedin.com/in/yasutomi-tatetsu-24245796
+  google-scholar: https://scholar.google.com/citations?user=XGSSmUgAAAAJ&hl=en
+  youtube:        https://www.youtube.com/channel/UCU6nnUSAhkLbtqTuW6tvLjQ
+  researchmap:    https://researchmap.jp/yasutomi_tatetsu

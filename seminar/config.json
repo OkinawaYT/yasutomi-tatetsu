@@ -1,0 +1,27 @@
+{
+  "gas_url": "https://script.google.com/macros/s/AKfycbwr91Um1UYJQJEiiksGnk1dZhBKDgFtloiEqosLmc-4QD0vO3-8w99GIyM-Htz-EfHy/exec",
+  "qa_sessions": [
+    { "sheet": "質問",              "title": "質問フォーム" },
+    { "sheet": "20260702アンケート", "title": "2026/07/02 振り返りアンケート" },
+    { "sheet": "20260721アンケート", "title": "2026/07/21 振り返りアンケート" }
+  ],
+  "sessions": [
+    {
+      "id": "kodaikyo_202607",
+      "title": "大学業務における生成AIの活用に関するセミナー",
+      "date": "2026-07"
+    },
+    {
+      "id": "prep_sample",
+      "title": "説得力のある提案・報告のための PREP 構成術セミナー（サンプル）",
+      "date": "",
+      "draft": true
+    },
+    {
+      "id": "scqa_sample",
+      "title": "課題発見・解決型プレゼンのための SCQA 構成術セミナー（サンプル）",
+      "date": "",
+      "draft": true
+    }
+  ]
+}
