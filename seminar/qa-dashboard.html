@@ -30,7 +30,7 @@
         <h1 class="text-xl font-bold text-slate-800">Q&amp;A ダッシュボード</h1>
         <p class="text-sm text-slate-400 mt-1">質問・回答の集計</p>
       </div>
-      <button onclick="refreshData()"
+      <button id="btn-refresh" onclick="refreshData()"
         class="text-xs text-slate-500 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg px-3 py-2 transition">
         ↻ 更新
       </button>
@@ -90,6 +90,7 @@ let qaSessions = [];
 let allRows    = [];
 let allPairs   = [];
 let searchQuery = '';
+let isRefreshing = false;
 
 // ============================================================
 // INIT
@@ -132,10 +133,10 @@ async function init() {
 // DATA LOAD
 // ============================================================
 async function onSessionChange() {
-  await loadSession(el('filter-session').value);
+  await loadSession(el('filter-session').value, false, true);
 }
 
-async function loadSession(sheetName, autoFallback = false) {
+async function loadSession(sheetName, autoFallback = false, forceFetch = false) {
   allRows  = [];
   allPairs = [];
   el('el-qa').innerHTML    = '';
@@ -148,12 +149,12 @@ async function loadSession(sheetName, autoFallback = false) {
   if (!sheetName) return;
 
   try {
-    let result = await fetchQaResults(sheetName);
+    let result = await fetchQaResults(sheetName, forceFetch);
 
     if (autoFallback && !(result.rows || []).length) {
       for (const s of qaSessions) {
         if (s.sheet === sheetName) continue;
-        const alt = await fetchQaResults(s.sheet);
+        const alt = await fetchQaResults(s.sheet, forceFetch);
         if ((alt.rows || []).length) {
           sheetName = s.sheet;
           el('filter-session').value = sheetName;
@@ -180,13 +181,43 @@ async function loadSession(sheetName, autoFallback = false) {
 }
 
 async function refreshData() {
-  await loadSession(el('filter-session').value);
+  if (isRefreshing) return;
+
+  isRefreshing = true;
+  const btn = el('btn-refresh');
+  if (btn) {
+    btn.disabled = true;
+    btn.classList.add('opacity-60', 'cursor-not-allowed');
+    btn.textContent = '更新中...';
+  }
+
+  hide('s-error');
+  show('s-main');
+
+  try {
+    await loadSession(el('filter-session').value, true, true);
+  } finally {
+    isRefreshing = false;
+    if (btn) {
+      btn.disabled = false;
+      btn.classList.remove('opacity-60', 'cursor-not-allowed');
+      btn.textContent = '↻ 更新';
+    }
+  }
 }
 
-async function fetchQaResults(sheetName) {
-  return await fetchJsonp(
-    `${GAS_URL}?action=getQaResults&sheet_name=${encodeURIComponent(sheetName)}`
+async function fetchQaResults(sheetName, forceFetch = false) {
+  const nonce = forceFetch ? `&_ts=${Date.now()}` : '';
+  const result = await fetchJsonp(
+    `${GAS_URL}?action=getQaResults&sheet_name=${encodeURIComponent(sheetName)}${nonce}`
   );
+
+  // GAS 側で QA ルートが未反映だと status/message だけ返るため、明示的にエラー扱いにする。
+  if (!result || (!Array.isArray(result.rows) && !Array.isArray(result.pairs))) {
+    throw new Error('QAデータ形式の応答ではありません。GASのWebアプリURLまたはデプロイ内容を確認してください。');
+  }
+
+  return result;
 }
 
 // ============================================================

@@ -64,9 +64,10 @@ designs/
 
 # ============================================================
 # GAS (Google Apps Script)
-# ソースと認証情報はローカルのみ管理、GitHubには非公開
+# .clasp.json はスクリプトIDを含むため非公開
+# dist/ はビルド成果物のため非公開
+# src/ はシークレットを含まないため公開OK（PropertiesService移行済み）
 # ============================================================
-seminar/gas/src/
 seminar/gas/dist/
 seminar/gas/.clasp.json
 seminar/gas/node_modules/
