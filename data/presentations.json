@@ -1,6 +1,30 @@
 {
-  "updated": "2026-08-11",
+  "updated": "2026-08-12",
   "items": [
+    {
+      "id": "54044398",
+      "title": "Thermal decomposition temperature of Sm-Fe-(N, C) compounds",
+      "title_ja": "Thermal decomposition temperature of Sm-Fe-(N, C) compounds",
+      "date": "2026-08-01",
+      "event": "The 12th Pacific Rim International Conference on Advanced Materials and Processing",
+      "location": "Gold Coast, Australia",
+      "lat": -27.9778928,
+      "lon": 153.3276643,
+      "type": "oral_presentation",
+      "authors": "Yusuke Hirayama, Yasutomi Tatetsu"
+    },
+    {
+      "id": "54044379",
+      "title": "Theoretical analysis of structural and energetic stability in Sm2Fe17(N, C)x",
+      "title_ja": "Theoretical analysis of structural and energetic stability in Sm2Fe17(N, C)x",
+      "date": "2026-08-01",
+      "event": "The 12th Pacific Rim International Conference on Advanced Materials and Processing",
+      "location": "Gold Coast, Australia",
+      "lat": -27.9778928,
+      "lon": 153.3276643,
+      "type": "oral_presentation",
+      "authors": "Yasutomi Tatetsu, Yusuke Hirayama"
+    },
     {
       "id": "54271134",
       "title": "大学業務における生成AIの活用",
