@@ -1,4 +1,71 @@
 {
-  "updated": "2026-08-16",
-  "items": []
+  "updated": "2026-08-17",
+  "items": [
+    {
+      "id": "52975109",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "department": "University Center for Liberal Arts Education, Institutional Research Center",
+      "department_ja": "リベラルアーツ機構、IR室",
+      "position": "Senior Associate Professor",
+      "position_ja": "上級准教授",
+      "from_date": "2026-04-01",
+      "to_date": null
+    },
+    {
+      "id": "41983873",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "department": "Faculty of Human Health Sciences Department of Health Informatics",
+      "department_ja": "人間健康学部 健康情報学科",
+      "position": "Senior Associate Professor",
+      "position_ja": "上級准教授",
+      "from_date": "2023-04-01",
+      "to_date": "2026-03-01"
+    },
+    {
+      "id": "36633936",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "department": "University Center for Liberal Arts Education, Institutional Research Center",
+      "department_ja": "リベラルアーツ機構、IR室",
+      "position": "Senior Associate Professor",
+      "position_ja": "上級准教授",
+      "from_date": "2022-04-01",
+      "to_date": "2023-03-01"
+    },
+    {
+      "id": "30275508",
+      "institution": "Meio University",
+      "institution_ja": "名桜大学",
+      "department": "University Center for Liberal Arts Education, Institutional Research Center",
+      "department_ja": "リベラルアーツ機構、IR室",
+      "position": "Associate Professor",
+      "position_ja": "准教授",
+      "from_date": "2018-08-01",
+      "to_date": "2022-03-01"
+    },
+    {
+      "id": "30275503",
+      "institution": "Tokyo Institute of Technology, Department of Materials Science and Engineering",
+      "institution_ja": "東京工業大学 物質理工学院",
+      "department": "Gohda Lab",
+      "department_ja": "材料系 合田研究室",
+      "position": "Postdoctoral Researcher, The Elements Strategy Initiative Center for Magnetic Materials",
+      "position_ja": "ESICMM特任研究員",
+      "from_date": "2017-03-01",
+      "to_date": "2018-07-01"
+    },
+    {
+      "id": "30275498",
+      "institution": "Graduate School of Science, The University of Tokyo",
+      "institution_ja": "東京大学大学院 理学系研究科",
+      "department": "Tsuneyuki Research Group, Department of Physics",
+      "department_ja": "物理学専攻 常行研究室",
+      "position": "Postdoctoral Researcher, The Elements Strategy Initiative Center for Magnetic Materials",
+      "position_ja": "ESICMM特任研究員",
+      "from_date": "2013-04-01",
+      "to_date": "2017-03-01"
+    }
+  ]
 }

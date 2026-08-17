@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-16",
+  "updated": "2026-08-17",
   "items": [
     {
       "id": "52239941",
@@ -70,6 +70,16 @@
       "authors": "Zhanzhao Li, Masaki Saruyama, Toru Asaka, Yasutomi Tatetsu, Toshiharu Teranishi",
       "journal": "Science",
       "doi": "10.1126/science.abh2741"
+    },
+    {
+      "id": "50138018",
+      "type": "misc",
+      "title": "計算科学的手法を用いたネオジム焼結磁石界面近傍の副相に関する微視的研究",
+      "title_ja": "計算科学的手法を用いたネオジム焼結磁石界面近傍の副相に関する微視的研究",
+      "date": "2021-01-01",
+      "authors": "立津慶幸",
+      "journal": "倉田奨励金研究報告書(Web)",
+      "doi": null
     },
     {
       "id": "30212167",
