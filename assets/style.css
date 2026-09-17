@@ -108,6 +108,7 @@ a:hover { text-decoration: underline; }
 .bio-role { font-size: 14px; color: var(--color-text-muted); margin-bottom: 2px; }
 .bio-org  { font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm); }
 .bio-desc { font-size: 14px; line-height: 1.8; margin-bottom: var(--spacing-sm); }
+.bio-cta { margin-bottom: var(--spacing-sm); }
 
 .bio-areas { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--spacing-sm); }
 .area-tag {
@@ -309,86 +310,134 @@ a:hover { text-decoration: underline; }
 }
 .summary-text { font-size: 15px; color: var(--color-text); line-height: 1.8; }
 
-/* ===== Highlights: pillars + video carousel (below News) ===== */
-.pillar-grid {
+/* ===== Highlights: flat card grid + modal (below News) =====
+   研究・活動紹介: 柱(pillar)とその配下のトピックを、高さの揃った1つのグリッドに
+   フラット化して表示し、詳細はクリックでモーダルに表示する（3案のデザイン比較の
+   結果、これが一番「カードの高さがバラバラで崩れる」問題を解決したため採用）。 */
+.hl-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
 }
-.pillar-card {
+@media (max-width: 700px) {
+  .hl-grid { grid-template-columns: repeat(2, 1fr); gap: var(--spacing-xs); }
+}
+.hl-card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: 3px solid var(--color-primary);
   border-radius: var(--rounded-md);
-  padding: var(--spacing-md);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  overflow: hidden;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  padding: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
-.pillar-card:hover {
+.hl-card:hover, .hl-card:focus-visible {
   transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(26, 26, 46, 0.10);
+  border-color: var(--color-accent);
+  outline: none;
 }
-.pillar-icon  { font-size: 1.8rem; margin-bottom: 8px; }
-.pillar-image {
+.hl-card-media {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: var(--rounded-sm);
-  margin-bottom: 10px;
-  background: var(--color-border);
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg);
+  overflow: hidden;
+  display: block;
 }
-.pillar-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--color-primary); }
-.pillar-body  { font-size: 13px; color: var(--color-text-muted); line-height: 1.7; }
-
-/* pillar 内の個別研究トピック（横長の行として並べ、クリックで説明を展開） */
-.topic-grid {
+.hl-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hl-card-media .pillar-anim { aspect-ratio: auto; width: 100%; height: 100%; margin-bottom: 0; border-radius: 0; }
+.hl-icon-media {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+}
+.hl-card-body {
+  padding: 14px 16px 16px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-top: var(--spacing-sm);
+  flex: 1;
 }
-.topic-card {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: var(--color-bg, #fff);
-  border: 1px solid var(--color-border);
-  border-radius: var(--rounded-sm);
-  padding: 6px 8px;
-  cursor: pointer;
-  font: inherit;
+.hl-card-tag {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-accent);
+  background: rgba(37, 99, 235, 0.08);
+  border-radius: var(--rounded-full);
+  padding: 3px 10px;
 }
-.topic-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.topic-image {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 6px;
-  background: var(--color-border);
-  flex-shrink: 0;
-}
-.topic-title { flex: 1; font-size: 12.5px; font-weight: 600; color: var(--color-text); }
-.topic-caret {
-  font-size: 10px;
+.hl-card-title { font-size: 14px; font-weight: 700; color: var(--color-primary); line-height: 1.4; }
+.hl-card-title.is-large { font-size: 16px; }
+.hl-card-snippet {
+  font-size: 12.5px;
   color: var(--color-text-muted);
-  transition: transform 0.15s ease;
-  flex-shrink: 0;
-}
-.topic-card.is-open .topic-caret { transform: rotate(180deg); }
-.topic-body {
-  font-size: 12px;
-  color: var(--color-text-muted);
-  line-height: 1.6;
-  padding-left: 48px;
-  max-height: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  transition: max-height 0.2s ease;
 }
-.topic-card.is-open .topic-body { max-height: 300px; margin-top: 6px; }
+
+/* モーダル：カードクリックで開く詳細表示 */
+.hl-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(15, 15, 25, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm);
+  z-index: 1000;
+}
+.hl-modal-overlay.is-open { display: flex; }
+.hl-modal {
+  background: var(--color-bg);
+  border-radius: var(--rounded-md);
+  max-width: 640px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+.hl-modal-media { width: 100%; aspect-ratio: 4 / 3; background: var(--color-surface); overflow: hidden; }
+.hl-modal-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hl-modal-media .pillar-anim { aspect-ratio: auto; width: 100%; height: 100%; margin-bottom: 0; border-radius: 0; }
+.hl-modal-media .hl-icon-media { font-size: 64px; }
+.hl-modal-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 32px; height: 32px;
+  border-radius: var(--rounded-full);
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.hl-modal-close:hover { background: #fff; }
+.hl-modal-content { padding: 24px 28px 28px; }
+.hl-modal-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-accent);
+  background: rgba(37, 99, 235, 0.08);
+  border-radius: var(--rounded-full);
+  padding: 3px 10px;
+  margin-bottom: 10px;
+}
+.hl-modal-title { font-size: 19px; font-weight: 700; color: var(--color-primary); margin-bottom: 12px; }
+.hl-modal-body { font-size: 14.5px; color: var(--color-text); line-height: 1.8; white-space: pre-line; }
 
 /* 計算物質科学カード：原子がバラバラ→格子状に整列するミニアニメーション */
 .pillar-anim {
@@ -481,7 +530,60 @@ a:hover { text-decoration: underline; }
 }
 .video-embed-wrap iframe { width: 100%; height: 100%; border: 0; }
 .video-title { font-size: 13px; font-weight: 600; margin-top: 6px; }
-.highlights-cta { margin-top: var(--spacing-md); }
+
+/* プレイリスト一覧：動画カルーセルとは違い横スクロールにせず折り返しグリッドにする */
+.playlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--spacing-sm);
+}
+.playlist-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.playlist-thumb-stack {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: -6px;
+  bottom: 14px;
+  background: var(--color-border);
+  border-radius: var(--rounded-sm);
+  z-index: 0;
+}
+.playlist-thumb {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--rounded-sm);
+  border: 1px solid var(--color-border);
+  display: block;
+}
+.playlist-count {
+  position: absolute;
+  z-index: 2;
+  right: 12px;
+  bottom: 20px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--rounded-sm);
+}
+.playlist-title {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.playlist-card:hover .playlist-title { color: var(--color-accent); }
+.playlist-more { margin-top: var(--spacing-sm); font-size: 13px; }
 
 
 /* ===== Footer ===== */

@@ -180,6 +180,9 @@ function renderBio(profile) {
         <p class="bio-role">${esc(t(profile.role))}</p>
         <p class="bio-org">${esc(t(profile.organization))}</p>
         <div class="bio-desc">${bio}</div>
+        <p class="bio-cta">
+          <a href="${makeUrl('contact')}" class="btn-primary">${lang === 'ja' ? '共同研究・お問い合わせはこちら →' : 'Get in touch / Collaboration inquiries →'}</a>
+        </p>
         ${highlights ? `<div class="bio-highlights">${highlights}</div>` : ''}
         <div class="bio-social">${socials}</div>
       </div>
@@ -908,48 +911,85 @@ const PILLAR_ANIMATIONS = {
     </div>`,
 };
 
-// pillar 内にネストする具体的な研究トピックのミニカード（クリックで説明文をトグル）
-function renderTopics(topics, idx) {
-  if (!topics || !topics.length) return '';
-  return `
-    <div class="topic-grid">
-      ${topics.map((tp, i) => `
-        <button type="button" class="topic-card" data-topic="${idx}-${i}" aria-expanded="false">
-          <div class="topic-row">
-            ${tp.image ? `<img class="topic-image" src="${esc(tp.image)}" alt="${esc(t(tp.image_alt, t(tp.title)))}" loading="lazy">` : ''}
-            <span class="topic-title">${esc(t(tp.title))}</span>
-            <span class="topic-caret" aria-hidden="true">▾</span>
-          </div>
-          <p class="topic-body">${esc(t(tp.body)).replace(/\n/g, '<br>')}</p>
-        </button>`).join('')}
-    </div>`;
+// 柱（pillar）とそのネストされたトピックを、高さが揃った1つのフラットなグリッドに
+// 展開する。詳細はクリックでモーダル表示するので、カード自体は画像＋タイトル＋
+// 2行スニペットの同じ高さに保てる（トピック数が違っても崩れない）。
+let HIGHLIGHT_CARDS = [];
+
+function pillarMediaHtml(p) {
+  if (p.anim && PILLAR_ANIMATIONS[p.anim]) return PILLAR_ANIMATIONS[p.anim];
+  if (p.image) return `<img src="${esc(p.image)}" alt="${esc(t(p.image_alt, t(p.title)))}" loading="lazy">`;
+  return `<div class="hl-icon-media">${esc(p.icon || '')}</div>`;
 }
 
 function renderPillars(pillars) {
   if (!pillars.length) return '';
+  const label = lang === 'ja';
+
+  HIGHLIGHT_CARDS = [];
+  pillars.forEach(p => {
+    HIGHLIGHT_CARDS.push({ tag: null, pillar: p, large: true });
+    (p.topics || []).forEach(tp => HIGHLIGHT_CARDS.push({ tag: t(p.title), pillar: tp }));
+  });
+
+  const cards = HIGHLIGHT_CARDS.map((c, i) => {
+    const item = c.pillar;
+    const snippet = esc(t(item.body)).replace(/\n/g, ' ');
+    return `
+      <button type="button" class="hl-card" data-hl-index="${i}">
+        <span class="hl-card-media">${pillarMediaHtml(item)}</span>
+        <span class="hl-card-body">
+          ${c.tag ? `<span class="hl-card-tag">${esc(c.tag)}</span>` : ''}
+          <span class="hl-card-title${c.large ? ' is-large' : ''}">${esc(t(item.title))}</span>
+          <span class="hl-card-snippet">${snippet}</span>
+        </span>
+      </button>`;
+  }).join('');
+
   return `
-    <div class="pillar-grid">
-      ${pillars.map((p, idx) => `
-        <div class="pillar-card">
-          ${p.anim && PILLAR_ANIMATIONS[p.anim]
-            ? PILLAR_ANIMATIONS[p.anim]
-            : (p.image
-              ? `<img class="pillar-image" src="${esc(p.image)}" alt="${esc(t(p.image_alt, t(p.title)))}" loading="lazy">`
-              : (p.icon ? `<div class="pillar-icon">${esc(p.icon)}</div>` : ''))}
-          <h3 class="pillar-title">${esc(t(p.title))}</h3>
-          <p class="pillar-body">${esc(t(p.body)).replace(/\n/g, '<br>')}</p>
-          ${renderTopics(p.topics, idx)}
-        </div>`).join('')}
+    <div class="hl-grid">${cards}</div>
+    <div class="hl-modal-overlay" id="hl-modal-overlay">
+      <div class="hl-modal" role="dialog" aria-modal="true">
+        <button type="button" class="hl-modal-close" id="hl-modal-close" aria-label="${label ? '閉じる' : 'Close'}">✕</button>
+        <div class="hl-modal-media" id="hl-modal-media"></div>
+        <div class="hl-modal-content">
+          <span class="hl-modal-tag" id="hl-modal-tag" hidden></span>
+          <h3 class="hl-modal-title" id="hl-modal-title"></h3>
+          <p class="hl-modal-body" id="hl-modal-body"></p>
+        </div>
+      </div>
     </div>`;
 }
 
-function bindTopicCards() {
-  document.querySelectorAll('.topic-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const open = card.classList.toggle('is-open');
-      card.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
+function bindHighlightCards() {
+  const overlay = document.getElementById('hl-modal-overlay');
+  if (!overlay) return;
+  const mediaEl = document.getElementById('hl-modal-media');
+  const tagEl = document.getElementById('hl-modal-tag');
+  const titleEl = document.getElementById('hl-modal-title');
+  const bodyEl = document.getElementById('hl-modal-body');
+
+  function openModal(i) {
+    const c = HIGHLIGHT_CARDS[i];
+    const item = c.pillar;
+    mediaEl.innerHTML = pillarMediaHtml(item);
+    if (c.tag) { tagEl.hidden = false; tagEl.textContent = c.tag; } else { tagEl.hidden = true; }
+    titleEl.textContent = t(item.title);
+    bodyEl.textContent = t(item.body);
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.hl-card').forEach(card => {
+    card.addEventListener('click', () => openModal(Number(card.dataset.hlIndex)));
   });
+  document.getElementById('hl-modal-close').addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 }
 
 // テーマ名 → 表示ラベル（videos.json の各項目に "theme" があればテーマ別タブを表示）
@@ -1024,20 +1064,39 @@ function bindVideoCarousel() {
   });
 }
 
-function renderHighlights(story, videos) {
+// 動画の下に置く「プレイリスト」枠。動画カルーセルとは違い横スクロールにはせず、
+// 折り返しグリッドでYouTube側のプレイリストへリンクする独立した一覧にする
+// （1本ずつのカルーセルにこれ以上詰め込まず、まとまり単位で見せるため）。
+function renderPlaylistGrid(playlists) {
+  const items = playlists?.items || [];
+  if (!items.length) return '';
+  const label = lang === 'ja';
+  const cards = items.map(p => `
+    <a class="playlist-card" href="https://www.youtube.com/playlist?list=${esc(p.id)}" target="_blank" rel="noopener">
+      <span class="playlist-thumb-stack" aria-hidden="true"></span>
+      <img class="playlist-thumb" src="https://img.youtube.com/vi/${esc(p.thumb_video)}/hqdefault.jpg" alt="${esc(p.title)}" loading="lazy">
+      <span class="playlist-count">${esc(p.count)}${label ? '本' : ''}</span>
+      <span class="playlist-title">${esc(p.title)}</span>
+    </a>`).join('');
+  const channelUrl = playlists.channel_url;
+  return `
+    <div class="playlist-grid">${cards}</div>
+    ${channelUrl ? `<p class="playlist-more"><a href="${esc(channelUrl)}" target="_blank" rel="noopener">${label ? 'YouTubeですべてのプレイリストを見る →' : 'See all playlists on YouTube →'}</a></p>` : ''}`;
+}
+
+function renderHighlights(story, videos, playlists) {
   const el = document.getElementById('highlights');
   const pillars = story?.pillars || [];
   const videoHtml = renderVideoCarousel(videos);
-  if (!pillars.length && !videoHtml) { el.classList.add('no-data'); el.style.display = 'none'; return; }
+  const playlistHtml = renderPlaylistGrid(playlists);
+  if (!pillars.length && !videoHtml && !playlistHtml) { el.classList.add('no-data'); el.style.display = 'none'; return; }
   const label = lang === 'ja';
   el.innerHTML = `
     <h2 class="section-title">${label ? '研究・活動紹介' : 'Research & Activities'}</h2>
     ${renderPillars(pillars)}
     ${videoHtml ? `<h3 class="subsection-title">${label ? '動画' : 'Videos'}</h3>${videoHtml}` : ''}
-    <p class="highlights-cta">
-      <a href="${makeUrl('contact')}" class="btn-primary">${label ? '共同研究・お問い合わせはこちら →' : 'Get in touch / Collaboration inquiries →'}</a>
-    </p>`;
-  bindTopicCards();
+    ${playlistHtml ? `<h3 class="subsection-title">${label ? 'プレイリスト' : 'Playlists'}</h3>${playlistHtml}` : ''}`;
+  bindHighlightCards();
   if (videoHtml) { bindVideoCarousel(); bindVideoTabs(); }
 }
 
@@ -1118,7 +1177,7 @@ async function main() {
   const [
     profileYaml, newsYaml, materialsYaml, storyYaml,
     pubs, pres, media, awards,
-    projects, areas, videos,
+    projects, areas, videos, playlists,
     exp, edu, teach, comm, assoc,
     soc, others,
   ] = await Promise.all([
@@ -1133,6 +1192,7 @@ async function main() {
     getJSON('data/projects.json'),
     getJSON('data/research_areas.json'),
     getJSON('data/videos.json'),
+    getJSON('data/playlists.json'),
     getJSON('data/research_experience.json'),
     getJSON('data/education.json'),
     getJSON('data/teaching_experience.json'),
@@ -1171,7 +1231,7 @@ async function main() {
   renderMaterials(matsData);
   renderOthers(others);
   renderNews(newsData, pubs, pres, awards);
-  renderHighlights(storyData, videos);
+  renderHighlights(storyData, videos, playlists);
   renderContact(profile);
   renderFooter(profile);
 

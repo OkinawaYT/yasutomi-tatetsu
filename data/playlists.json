@@ -1,0 +1,15 @@
+{
+  "channel_url": "https://www.youtube.com/@tymewise/playlists",
+  "items": [
+    { "id": "PLbVkOcomHy9UL0waMGzxDYkax9h_YjfoV", "title": "Google Workspace", "count": 36, "thumb_video": "lSGhzBNOz3U" },
+    { "id": "PLbVkOcomHy9UaufZaR1DmEcikvnxl3i2z", "title": "Google Sites", "count": 10, "thumb_video": "Lf9E0fBgb6Q" },
+    { "id": "PLbVkOcomHy9XcLr12PFwnNs7r4mcDprWt", "title": "Google Drive", "count": 10, "thumb_video": "c9ywLU7KL-U" },
+    { "id": "PLbVkOcomHy9UBsRtNm0LAdTS4q7kctYMM", "title": "Google Meet", "count": 8, "thumb_video": "bWUqil85THY" },
+    { "id": "PLbVkOcomHy9Vly6oAUptQ5q_mmtSb4O-i", "title": "Google Documents", "count": 6, "thumb_video": "ycBKwBFv6yw" },
+    { "id": "PLbVkOcomHy9VCe4jUxP1IImv-Q5cek0WL", "title": "Google Calendar", "count": 5, "thumb_video": "gOGKXcnIzt4" },
+    { "id": "PLbVkOcomHy9X_KWiQ3IN8xwPLJcnNDTPb", "title": "Science", "count": 2, "thumb_video": "U3tRhUtc4Ik" },
+    { "id": "PLbVkOcomHy9W2ZiuKHGScQbsL-zXyiN0A", "title": "Google Classroom", "count": 2, "thumb_video": "bWUqil85THY" },
+    { "id": "PLbVkOcomHy9W8MG9ePVgtDHyS_fQIDLLU", "title": "Looker Studio", "count": 1, "thumb_video": "kCVWYtCjiOc" },
+    { "id": "PLbVkOcomHy9UAd9dwAZBXkuXMSIKE8gKE", "title": "AppSheet", "count": 1, "thumb_video": "XSZRzVHOpKg" }
+  ]
+}
