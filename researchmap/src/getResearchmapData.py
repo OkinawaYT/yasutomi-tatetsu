@@ -124,7 +124,17 @@ def item_id(item):
 # メイン処理
 # ──────────────────────────────────────────────
 
-def fetch_all():
+def fetch_all(get_items=None):
+    """researchmap の各カテゴリを処理して data/*.json を書き出す。
+
+    get_items: rm_type(str) -> list[dict] を返す関数。
+      省略時は researchmap API から取得する（従来の動作）。
+      手動エクスポート（JSONL）から反映する場合は loadFromExport.py 側で
+      別の get_items を渡す。
+    """
+    if get_items is None:
+        get_items = lambda rm_type: _fetch(rm_type).get("items", [])
+
     os.makedirs(RAW_ROOT, exist_ok=True)
     os.makedirs(SITE_DATA, exist_ok=True)
 
@@ -135,7 +145,7 @@ def fetch_all():
     pub_items = []
     for rm_type in ("published_papers", "misc", "books_etc"):
         title_key = "book_title" if rm_type == "books_etc" else "paper_title"
-        for item in _fetch(rm_type).get("items", []):
+        for item in get_items(rm_type):
             pub_items.append({
                 "id": item_id(item),
                 "type": rm_type,
@@ -152,7 +162,7 @@ def fetch_all():
     # --- 発表（ジオコーディング付き）---
     print("Geocoding presentation locations…")
     pres_items = []
-    for item in _fetch("presentations").get("items", []):
+    for item in get_items("presentations"):
         loc = mltext(item, "location") or None
         coords = geocode(loc, geo_cache) if loc else None
         pres_items.append({
@@ -172,7 +182,7 @@ def fetch_all():
 
     # --- メディア掲載 ---
     media_items = []
-    for item in _fetch("media_coverage").get("items", []):
+    for item in get_items("media_coverage"):
         url = next((l.get("@id") for l in item.get("see_also", []) if l.get("label") == "url"), None)
         media_items.append({
             "id": item_id(item),
@@ -187,7 +197,7 @@ def fetch_all():
 
     # --- 受賞 ---
     award_items = []
-    for item in _fetch("awards").get("items", []):
+    for item in get_items("awards"):
         award_items.append({
             "id": item_id(item),
             "title": mltext(item, "award_name", "en") or mltext(item, "award_name", "ja"),
@@ -200,7 +210,7 @@ def fetch_all():
 
     # --- 研究プロジェクト ---
     proj_items = []
-    for item in _fetch("research_projects").get("items", []):
+    for item in get_items("research_projects"):
         from_d = normalize_date(item.get("from_date"), "")
         to_d   = normalize_date(item.get("to_date"), "")
         kaken  = next((l.get("@id","") for l in item.get("see_also",[]) if l.get("label")=="kaken"), None)
@@ -222,7 +232,7 @@ def fetch_all():
 
     # --- 研究分野 ---
     area_items = []
-    for item in _fetch("research_areas").get("items", []):
+    for item in get_items("research_areas"):
         area_items.append({
             "id": item_id(item),
             "field": mltext(item, "research_field", "en") or mltext(item, "research_field", "ja"),
@@ -232,7 +242,7 @@ def fetch_all():
 
     # --- 研究経歴 ---
     exp_items = []
-    for item in _fetch("research_experience").get("items", []):
+    for item in get_items("research_experience"):
         exp_items.append({
             "id": item_id(item),
             "institution": mltext(item, "affiliation", "en") or mltext(item, "affiliation", "ja"),
@@ -249,7 +259,7 @@ def fetch_all():
 
     # --- 学歴 ---
     edu_items = []
-    for item in _fetch("education").get("items", []):
+    for item in get_items("education"):
         edu_items.append({
             "id": item_id(item),
             "institution": mltext(item, "affiliation", "en") or mltext(item, "affiliation", "ja"),
@@ -266,7 +276,7 @@ def fetch_all():
 
     # --- 担当授業 ---
     teach_items = []
-    for item in _fetch("teaching_experience").get("items", []):
+    for item in get_items("teaching_experience"):
         teach_items.append({
             "id": item_id(item),
             "subject": mltext(item, "subject_name", "en") or mltext(item, "subject_name", "ja"),
@@ -281,7 +291,7 @@ def fetch_all():
 
     # --- 委員会 ---
     comm_items = []
-    for item in _fetch("committee_memberships").get("items", []):
+    for item in get_items("committee_memberships"):
         comm_items.append({
             "id": item_id(item),
             "name": mltext(item, "committee_name", "en") or mltext(item, "committee_name", "ja"),
@@ -295,7 +305,7 @@ def fetch_all():
 
     # --- 学会 ---
     assoc_items = []
-    for item in _fetch("association_memberships").get("items", []):
+    for item in get_items("association_memberships"):
         assoc_items.append({
             "id": item_id(item),
             "name": mltext(item, "academic_society_name", "en") or mltext(item, "academic_society_name", "ja"),
@@ -309,7 +319,7 @@ def fetch_all():
     # --- 社会貢献（ジオコーディング付き）---
     print("Geocoding activity locations…")
     soc_items = []
-    for item in _fetch("social_contribution").get("items", []):
+    for item in get_items("social_contribution"):
         loc = mltext(item, "location") or None
         coords = geocode(loc, geo_cache) if loc else None
         soc_items.append({
@@ -328,7 +338,7 @@ def fetch_all():
 
     # --- その他 ---
     others_items = []
-    for item in _fetch("others").get("items", []):
+    for item in get_items("others"):
         others_items.append({
             "id": item_id(item),
             "title": mltext(item, "other_title", "en") or mltext(item, "other_title", "ja"),

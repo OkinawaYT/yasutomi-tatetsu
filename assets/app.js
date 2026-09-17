@@ -10,7 +10,7 @@ const currentPage = params.get('page') || 'bio';
 
 // ページ名 → 表示するセクション ID のマッピング
 const PAGE_SECTIONS = {
-  bio:          ['bio', 'news'],
+  bio:          ['bio', 'research-summary', 'highlights', 'news'],
   publications: ['publications'],
   talks:        ['talks'],
   experience:   ['experience'],
@@ -19,8 +19,8 @@ const PAGE_SECTIONS = {
   materials:    ['materials', 'others'],  // materials が先、others が後
   contact:      ['contact'],
 };
-const ALL_SECTION_IDS = ['bio', 'publications', 'talks', 'experience',
-                          'projects', 'activities', 'materials', 'others', 'news', 'contact'];
+const ALL_SECTION_IDS = ['bio', 'research-summary', 'publications', 'talks', 'experience',
+                          'projects', 'activities', 'materials', 'others', 'news', 'highlights', 'contact'];
 
 // URL を生成（lang と page を保持）
 function makeUrl(page, langCode) {
@@ -886,6 +886,161 @@ function renderNews(data, pubs, pres, awards) {
     <div class="news-list">${allItems.map(renderItem).join('')}</div>`;
 }
 
+// ── Research summary（ヒーロー直後・ニュースの上）────────────────────────────
+function renderResearchSummary(story) {
+  const el = document.getElementById('research-summary');
+  const summary = t(story?.summary, '');
+  if (!summary) { el.classList.add('no-data'); el.style.display = 'none'; return; }
+  el.innerHTML = `
+    <div class="summary-box">
+      <p class="summary-text">${esc(summary).replace(/\n/g, '<br>')}</p>
+    </div>`;
+}
+
+// ── Highlights（3本柱＋動画カルーセル・ニュースの下）────────────────────────
+// pillar.anim の値ごとに使う、CSS のみで動くミニアニメーション（画像/絵文字より優先）
+const PILLAR_ANIMATIONS = {
+  atoms: `
+    <div class="pillar-anim pillar-anim-atoms" aria-hidden="true">
+      <span class="atom" style="--i:0"></span><span class="atom" style="--i:1"></span>
+      <span class="atom" style="--i:2"></span><span class="atom" style="--i:3"></span>
+      <span class="atom" style="--i:4"></span><span class="atom" style="--i:5"></span>
+    </div>`,
+};
+
+// pillar 内にネストする具体的な研究トピックのミニカード（クリックで説明文をトグル）
+function renderTopics(topics, idx) {
+  if (!topics || !topics.length) return '';
+  return `
+    <div class="topic-grid">
+      ${topics.map((tp, i) => `
+        <button type="button" class="topic-card" data-topic="${idx}-${i}" aria-expanded="false">
+          <div class="topic-row">
+            ${tp.image ? `<img class="topic-image" src="${esc(tp.image)}" alt="${esc(t(tp.image_alt, t(tp.title)))}" loading="lazy">` : ''}
+            <span class="topic-title">${esc(t(tp.title))}</span>
+            <span class="topic-caret" aria-hidden="true">▾</span>
+          </div>
+          <p class="topic-body">${esc(t(tp.body)).replace(/\n/g, '<br>')}</p>
+        </button>`).join('')}
+    </div>`;
+}
+
+function renderPillars(pillars) {
+  if (!pillars.length) return '';
+  return `
+    <div class="pillar-grid">
+      ${pillars.map((p, idx) => `
+        <div class="pillar-card">
+          ${p.anim && PILLAR_ANIMATIONS[p.anim]
+            ? PILLAR_ANIMATIONS[p.anim]
+            : (p.image
+              ? `<img class="pillar-image" src="${esc(p.image)}" alt="${esc(t(p.image_alt, t(p.title)))}" loading="lazy">`
+              : (p.icon ? `<div class="pillar-icon">${esc(p.icon)}</div>` : ''))}
+          <h3 class="pillar-title">${esc(t(p.title))}</h3>
+          <p class="pillar-body">${esc(t(p.body)).replace(/\n/g, '<br>')}</p>
+          ${renderTopics(p.topics, idx)}
+        </div>`).join('')}
+    </div>`;
+}
+
+function bindTopicCards() {
+  document.querySelectorAll('.topic-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const open = card.classList.toggle('is-open');
+      card.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+}
+
+// テーマ名 → 表示ラベル（videos.json の各項目に "theme" があればテーマ別タブを表示）
+const VIDEO_THEME_LABELS = {
+  materials:      { en: 'Materials Science', ja: '計算物質科学' },
+  nanotechnology: { en: 'Nanotechnology (Kyoto Univ.)', ja: 'ナノテクノロジー（京大）' },
+  physics:        { en: 'Physics', ja: '物理' },
+  magnets:        { en: 'Magnets', ja: '磁石' },
+  'thin films':   { en: 'Thin Films', ja: '薄膜' },
+  education:      { en: 'AI x Education', ja: 'AI・教育' },
+  ir:             { en: 'University IR', ja: '大学IR' },
+};
+
+function renderVideoCarousel(videos) {
+  const items = (videos?.items || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  if (!items.length) return '';
+  const label = lang === 'ja';
+  const themes = [...new Set(items.map(v => v.theme).filter(Boolean))];
+
+  const cardHtml = v => `
+    <div class="video-card" data-theme="${esc(v.theme || '')}">
+      <button type="button" class="video-thumb-btn" data-yt="${esc(v.youtube_id)}" aria-label="${label ? '動画を再生' : 'Play video'}">
+        <img class="video-thumb" src="https://img.youtube.com/vi/${esc(v.youtube_id)}/hqdefault.jpg" alt="${esc(t(v.title))}" loading="lazy">
+        <span class="video-play">▶</span>
+      </button>
+      <p class="video-title">${esc(t(v.title))}</p>
+    </div>`;
+
+  // テーマが1種類以下ならタブなしのフラット表示のまま
+  if (themes.length < 2) {
+    return `<div class="video-carousel">${items.map(cardHtml).join('')}</div>`;
+  }
+
+  const tabsHtml = `
+    <div class="video-tabs" role="tablist">
+      <button type="button" class="video-tab is-active" data-theme-tab="">${label ? 'すべて' : 'All'}</button>
+      ${themes.map(th => `<button type="button" class="video-tab" data-theme-tab="${esc(th)}">${esc(t(VIDEO_THEME_LABELS[th]) || th)}</button>`).join('')}
+    </div>`;
+  return `${tabsHtml}<div class="video-carousel">${items.map(cardHtml).join('')}</div>`;
+}
+
+function bindVideoTabs() {
+  const tabs = document.querySelectorAll('.video-tab');
+  if (!tabs.length) return;
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      const theme = tab.dataset.themeTab;
+      document.querySelectorAll('.video-card').forEach(card => {
+        card.style.display = (!theme || card.dataset.theme === theme) ? '' : 'none';
+      });
+    });
+  });
+}
+
+// サムネイルクリックで同じ枠内に YouTube iframe を展開（ページ遷移なし）
+function bindVideoCarousel() {
+  document.querySelectorAll('.video-thumb-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.yt;
+      const card = btn.closest('.video-card');
+      const titleHtml = card.querySelector('.video-title')?.outerHTML || '';
+      card.innerHTML = `
+        <div class="video-embed-wrap">
+          <iframe src="https://www.youtube.com/embed/${id}?autoplay=1"
+                  title="YouTube video" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen loading="lazy"></iframe>
+        </div>${titleHtml}`;
+    }, { once: true });
+  });
+}
+
+function renderHighlights(story, videos) {
+  const el = document.getElementById('highlights');
+  const pillars = story?.pillars || [];
+  const videoHtml = renderVideoCarousel(videos);
+  if (!pillars.length && !videoHtml) { el.classList.add('no-data'); el.style.display = 'none'; return; }
+  const label = lang === 'ja';
+  el.innerHTML = `
+    <h2 class="section-title">${label ? '研究・活動紹介' : 'Research & Activities'}</h2>
+    ${renderPillars(pillars)}
+    ${videoHtml ? `<h3 class="subsection-title">${label ? '動画' : 'Videos'}</h3>${videoHtml}` : ''}
+    <p class="highlights-cta">
+      <a href="${makeUrl('contact')}" class="btn-primary">${label ? '共同研究・お問い合わせはこちら →' : 'Get in touch / Collaboration inquiries →'}</a>
+    </p>`;
+  bindTopicCards();
+  if (videoHtml) { bindVideoCarousel(); bindVideoTabs(); }
+}
+
 // ── Materials ─────────────────────────────────────────────────────────────────
 function renderMaterials(data) {
   const el = document.getElementById('materials');
@@ -952,11 +1107,6 @@ async function renderFooter(profile) {
 
   el.innerHTML = `
     <p>© ${new Date().getFullYear()} ${esc(name)}</p>
-    <p style="margin-top:4px">
-      ${lang === 'ja'
-        ? '研究業績は <a href="https://researchmap.jp/yasutomi_tatetsu" target="_blank">Researchmap</a> から自動取得しています'
-        : 'Research data auto-synced from <a href="https://researchmap.jp/yasutomi_tatetsu" target="_blank">Researchmap</a>'}
-    </p>
     ${updatedStr ? `<p style="margin-top:4px;font-size:12px">${lang === 'ja' ? `最終更新：${updatedStr}` : `Last updated: ${updatedStr}`}</p>` : ''}`;
 }
 
@@ -966,21 +1116,23 @@ async function main() {
   await applyDesign();
 
   const [
-    profileYaml, newsYaml, materialsYaml,
+    profileYaml, newsYaml, materialsYaml, storyYaml,
     pubs, pres, media, awards,
-    projects, areas,
+    projects, areas, videos,
     exp, edu, teach, comm, assoc,
     soc, others,
   ] = await Promise.all([
     getText('data/profile.yaml').catch(() => null),
     getText('data/news.yaml').catch(() => null),
     getText('data/materials.yaml').catch(() => null),
+    getText('data/story.yaml').catch(() => null),
     getJSON('data/publications.json'),
     getJSON('data/presentations.json'),
     getJSON('data/media_coverage.json'),
     getJSON('data/awards.json'),
     getJSON('data/projects.json'),
     getJSON('data/research_areas.json'),
+    getJSON('data/videos.json'),
     getJSON('data/research_experience.json'),
     getJSON('data/education.json'),
     getJSON('data/teaching_experience.json'),
@@ -990,9 +1142,10 @@ async function main() {
     getJSON('data/others.json'),
   ]);
 
-  const profile  = profileYaml   ? jsyaml.load(profileYaml)  : null;
-  const newsData = newsYaml      ? jsyaml.load(newsYaml)      : {};
-  const matsData = materialsYaml ? jsyaml.load(materialsYaml) : {};
+  const profile   = profileYaml   ? jsyaml.load(profileYaml)  : null;
+  const newsData  = newsYaml      ? jsyaml.load(newsYaml)      : {};
+  const matsData  = materialsYaml ? jsyaml.load(materialsYaml) : {};
+  const storyData = storyYaml     ? jsyaml.load(storyYaml)     : {};
 
   document.documentElement.lang = lang;
 
@@ -1009,6 +1162,7 @@ async function main() {
 
   renderNav(profile);
   renderBio(profile);
+  renderResearchSummary(storyData);
   renderPublications(pubs);
   renderTalks(pres, media);
   renderExperience(exp, edu, teach, comm, assoc, awards);
@@ -1017,6 +1171,7 @@ async function main() {
   renderMaterials(matsData);
   renderOthers(others);
   renderNews(newsData, pubs, pres, awards);
+  renderHighlights(storyData, videos);
   renderContact(profile);
   renderFooter(profile);
 

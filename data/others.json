@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20",
+  "updated": "2026-09-17",
   "items": [
     {
       "id": "53843787",
@@ -22,6 +22,14 @@
       "title": "Apple Distinguished Educator",
       "title_ja": "Apple Distinguished Educator",
       "date": "2025-12-01",
+      "description": null,
+      "description_ja": null
+    },
+    {
+      "id": "51177570",
+      "title": "Google Cloud Cloud Digital Leader",
+      "title_ja": "Google Cloud Cloud Digital Leader",
+      "date": "2025-09-01",
       "description": null,
       "description_ja": null
     },

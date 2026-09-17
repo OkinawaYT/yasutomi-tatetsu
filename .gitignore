@@ -61,6 +61,7 @@ ehthumbs.db
 npm-debug.log*
 
 designs/
+media/
 
 # ============================================================
 # GAS (Google Apps Script)

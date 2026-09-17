@@ -1,0 +1,119 @@
+# トップページの「研究紹介」まわりの文言を管理するファイル。
+# summary: ニュースの上に表示する短い要約
+# pillars: 研究・活動紹介セクションに表示する柱カード（現在3枚）
+#   anim: CSSアニメーション名（現状 "atoms" のみ）。指定すると image/icon より優先して表示される
+#   image: assets/img/ 配下の画像ファイル（png/jpg/gif/svg）への相対パス。anim が無い場合、指定するとアイコンより優先して表示される
+#   image_alt: 画像の代替テキスト（アクセシビリティ用。省略時は title を使用）
+#   icon: anim/image が無い場合のみ使う絵文字アイコン（従来通り）
+#   topics: カード内にまとめる具体的な研究トピック一覧（任意）。各要素は image/image_alt/title/body を持つ
+
+summary:
+  en: ""
+  ja: ""
+
+pillars:
+  - icon: "🧲"
+    anim: atoms
+    title:
+      en: "Computational Materials Science"
+      ja: "計算物質科学"
+    body:
+      en: >
+        First-principles simulations reveal how atoms and electrons behave
+        inside magnets, surfaces, and interfaces — without building a single
+        physical sample.
+      ja: >
+        第一原理計算を使い、磁石や表面・界面の中で原子・電子がどう振る舞うかを、
+        実際に試料を作らずコンピュータの中で明らかにします。
+    topics:
+      - image: assets/img/heavyfermion.png
+        image_alt:
+          en: "Fermi surface of a heavy-fermion compound"
+          ja: "重元素化合物のフェルミ面"
+        title:
+          en: "Fermi Surfaces of Heavy-Fermion Compounds"
+          ja: "重元素化合物のフェルミ面"
+        body:
+          en: >
+            Uranium and plutonium compounds host "heavy" electrons with
+            unusual behavior. I predict their Fermi surfaces by
+            first-principles calculation and compare them with
+            strong-field experiments.
+          ja: >
+            ウランやプルトニウムなど「重い電子」を持つ化合物の中で、電子が
+            どんな軌道を描くかを第一原理計算で予言し、強磁場実験の結果と
+            照らし合わせます。
+
+      - image: assets/img/nd-magnets.png
+        image_alt:
+          en: "Electronic structure of Nd-Fe-B magnets"
+          ja: "ネオジム磁石の電子構造"
+        title:
+          en: "Electron Theory of Nd-Fe-B Magnets"
+          ja: "ネオジム磁石の電子論"
+        body:
+          en: >
+            Motors rely on neodymium magnets. I study how grain-boundary
+            structure and element substitution can raise their coercivity
+            — how strongly they resist losing their magnetism.
+          ja: >
+            モーターに使われるネオジム磁石。粒界構造や元素置換によって、
+            磁力を失いにくくする「保磁力」をどう高められるかを研究しています。
+
+      - image: assets/img/surface.png
+        image_alt:
+          en: "Magnetic thin film and interface structure"
+          ja: "磁性薄膜・界面の構造"
+        title:
+          en: "Magnetic Thin Films & Interfaces"
+          ja: "磁性薄膜・表面/界面の物理"
+        body:
+          en: >
+            Stacking atoms layer by layer into a thin film — or joining
+            two different materials at an interface — can create new
+            magnetic properties not seen in the bulk material.
+          ja: >
+            原子を一層ずつ積み重ねた薄膜や、異なる物質をつなげた界面では、
+            バルクの物質にはない新しい磁気的性質が生まれます。
+
+      - image: assets/img/nano.png
+        image_alt:
+          en: "Nanocrystals in a simulation"
+          ja: "新しいナノ結晶構造とその安定性に関する研究"
+        title:
+          en: "Synthesis x Simulation (with Kyoto University)"
+          ja: "化学合成×計算科学（京都大学との共同研究）"
+        body:
+          en: >
+            Working with a synthesis chemistry group at Kyoto University,
+            I use first-principles calculations to explain why
+            nanocrystals and alloys settle into the crystal structures
+            they do.
+          ja: >
+            京都大学の化学合成グループと協力し、ナノ結晶や合金がなぜその
+            結晶構造に落ち着くのかを第一原理計算で明らかにする共同研究を
+            行っています。
+
+  - icon: "🤖"
+    title:
+      en: "AI x Education / ICT"
+      ja: "AI・ICTを活用した教育"
+    body:
+      en: >
+        I design learning activities and materials that combine AI tools
+        with classroom practice.
+      ja: >
+        AIツールと授業実践を組み合わせた学びの場づくりに取り組んでいます。
+
+  - icon: "📊"
+    title:
+      en: "University IR"
+      ja: "大学IRの高度化"
+    body:
+      en: >
+        Just as a health checkup helps you improve daily habits,
+        Institutional Research uses data to help universities improve
+        education and decision-making.
+      ja: >
+        健康診断のデータが生活習慣の見直しに役立つように、大学が持つデータを
+        活用して教育や意思決定を改善するのが、インスティテューショナル・リサーチ（IR）です。

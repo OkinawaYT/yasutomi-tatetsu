@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "youtube_id": "16he6ebFLMQ",
+      "title": {
+        "en": "Research introduction",
+        "ja": "研究紹介動画（夢ナビ）"
+      },
+      "date": "2026-09-17",
+      "theme": "materials"
+    },
+    {
+      "youtube_id": "3M2C8aY_4nA",
+      "title": {
+        "en": "Fusion of chemical synthesis experiments and computational materials science",
+        "ja": "化学合成実験と計算物質科学の融合"
+      },
+      "date": "2026-09-18",
+      "theme": "nanotechnology"
+    },
+    {
+      "youtube_id": "lOrIbymdj8w",
+      "title": {
+        "en": "Fermi surface",
+        "ja": "金属の顔、フェルミ面"
+      },
+      "date": "2026-09-19",
+      "theme": "physics"
+    },
+    {
+      "youtube_id": "dwHhoAWv7FE",
+      "title": {
+        "en": "The world's strongest magnet seen by computer simulation",
+        "ja": "ミクロで覗く世界最強磁石"
+      },
+      "date": "2026-09-20",
+      "theme": "magnets"
+    },
+    {
+      "youtube_id": "eIKLWkechOI",
+      "title": {
+        "en": "What is a magnetic thin film?",
+        "ja": "磁性薄膜って何？"
+      },
+      "date": "2026-09-21",
+      "theme": "thin films"
+    }
+  ]
+}
