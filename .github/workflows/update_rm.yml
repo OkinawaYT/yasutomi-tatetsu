@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '0 16 * * 6'   # 毎週日曜 AM1:00 JST (= 土曜 UTC 16:00)
   workflow_dispatch:         # 手動実行可
+  push:
+    paths:
+      - 'researchmap/imports/*.jsonl'   # 手動エクスポートを置いたら自動反映
 
 permissions:
   contents: write
@@ -24,8 +27,15 @@ jobs:
       - name: Install dependencies
         run: uv sync --no-dev
 
-      - name: Fetch from Researchmap API
-        run: uv run researchmap/src/getResearchmapData.py
+      - name: Rebuild researchmap data
+        run: |
+          if ls researchmap/imports/*.jsonl >/dev/null 2>&1; then
+            echo "Found manual export under researchmap/imports/ — using it."
+            uv run researchmap/src/loadFromExport.py
+          else
+            echo "No manual export found — fetching from Researchmap API."
+            uv run researchmap/src/getResearchmapData.py
+          fi
 
       - name: Commit updated data
         uses: stefanzweifel/git-auto-commit-action@v5

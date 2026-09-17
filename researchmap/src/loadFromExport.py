@@ -8,9 +8,13 @@ researchmap の REST API が利用制限などで使えないときに、手動�
 使い方:
     uv run researchmap/src/loadFromExport.py path/to/rm_researchers20260917.jsonl
 
-    引数を省略した場合は researchmap/data/rm_export.jsonl を読みに行く
-    （このパスは .gitignore 対象なので、ダウンロードしたファイルをそのまま
-    このパスにコピー/リネームして置いておける）。
+    引数を省略した場合は researchmap/imports/ 以下を見に行く
+    （rm_export.jsonl という名前があればそれを、無ければ *.jsonl のうち
+    最も新しいものを使う）。researchmap/imports/ は（researchmap/data/ と
+    違って）.gitignore 対象外なので、ダウンロードしたファイルをファイル名の
+    ままここに置いて push すると、GitHub Actions が自動でこのスクリプトを
+    実行し data/*.json を更新・コミットする
+    （.github/workflows/update_rm.yml 参照）。
 
 エクスポート内の各行は次の形式:
     {"insert": {"type": "published_papers", "id": "...", "user_id": "..."},
@@ -21,14 +25,32 @@ getResearchmapData.py 側の抽出ロジック（mltext / extract_authors 等）
 そのまま再利用できる。id だけ "@id" に詰め替えて item_id() と互換にする。
 """
 
+import glob
 import json
+import os
 import sys
 from collections import defaultdict
 
 from getResearchmapData import fetch_all
 
 
-DEFAULT_PATH = "researchmap/data/rm_export.jsonl"
+IMPORTS_DIR = "researchmap/imports"
+DEFAULT_PATH = f"{IMPORTS_DIR}/rm_export.jsonl"
+
+
+def find_default_path():
+    """引数なしで実行された場合に使うファイルを決める。
+
+    researchmap/imports/rm_export.jsonl という決め打ちの名前があればそれを、
+    無ければ researchmap/imports/ 直下の *.jsonl のうち最終更新が一番新しい
+    ものを使う（researchmap からダウンロードしたファイル名のまま置いてよい）。
+    """
+    if os.path.exists(DEFAULT_PATH):
+        return DEFAULT_PATH
+    candidates = glob.glob(f"{IMPORTS_DIR}/*.jsonl")
+    if not candidates:
+        return DEFAULT_PATH  # 存在しないが、呼び出し元でエラーにする
+    return max(candidates, key=os.path.getmtime)
 
 
 def load_export(path):
@@ -58,7 +80,10 @@ def load_export(path):
 
 
 def main():
-    path = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_PATH
+    path = sys.argv[1] if len(sys.argv) > 1 else find_default_path()
+    if not os.path.exists(path):
+        sys.exit(f"Export file not found: {path}\n"
+                  f"({IMPORTS_DIR}/ に researchmap からダウンロードした .jsonl を置いてください)")
     print(f"Loading researchmap export: {path}")
     by_type = load_export(path)
     fetch_all(get_items=lambda rm_type: by_type.get(rm_type, []))
