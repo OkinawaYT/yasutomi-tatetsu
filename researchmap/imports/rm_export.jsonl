@@ -287,4 +287,3 @@
 {"insert":{"type":"others","id":"33163180","user_id":"R000009877"},"merge":{"display":"disclosed","major_achievement":false,"other_title":{"ja":"Google認定教育者Level1","en":"Google Certified Educator Level1"},"from_date":"2021-01","to_date":"9999"}}
 {"insert":{"type":"others","id":"33163186","user_id":"R000009877"},"merge":{"display":"disclosed","major_achievement":false,"other_title":{"ja":"Apple Teacher","en":"Apple Teacher"},"from_date":"2018-05","to_date":"9999"}}
 {"insert":{"type":"others","id":"54043453","user_id":"R000009877"},"merge":{"display":"disclosed","major_achievement":false,"other_title":{"ja":"高等学校理科教諭専修免許"},"from_date":"2010-03"}}
-{"insert":{"type":"others","id":"99999999","user_id":"R000009877"},"merge":{"display":"disclosed","other_title":{"ja":"テストダミー項目"},"from_date":"2026-09-20"}}
