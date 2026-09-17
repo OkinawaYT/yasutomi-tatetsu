@@ -8,6 +8,50 @@ const lang = params.get('lang') ||
 // ?page=X で表示するセクションを切り替える。デフォルトは 'bio'（About）
 const currentPage = params.get('page') || 'bio';
 
+// ── ダークモード ──────────────────────────────────────────────────────────────
+// design.md はテーマに関わらず --color-* を documentElement に直接（インライン
+// スタイルとして）書き込むため、CSS 側で :root[data-theme="dark"] を用意しても
+// 詳細度で必ず負けてしまう。そのため配色の切り替えも同じ方法（JS で直接
+// setProperty）で行い、design.md 読み込み後に必ず再適用する。
+const THEME_KEY = 'tatetsu-theme';
+
+// design.md が読み込めない場合のフォールバック（:root の初期値と同じ）
+const DEFAULT_LIGHT_COLORS = {
+  bg: '#ffffff', surface: '#f8fafc', primary: '#1a1a2e', accent: '#2563eb',
+  text: '#1e293b', 'text-muted': '#64748b', border: '#e2e8f0', link: '#2563eb',
+};
+// ダークモード用パレット：文字がはっきり見えるよう、背景は十分暗く、
+// 文字・アクセントは十分明るいコントラストを確保する
+const DARK_COLORS = {
+  bg: '#0f1420', surface: '#171d2e', primary: '#e7ecf7', accent: '#5b9bf5',
+  text: '#e5e7eb', 'text-muted': '#9aa4b8', border: '#2d3548', link: '#7fb3ff',
+};
+let DESIGN_LIGHT_COLORS = null; // design.md 読み込み後、ライト側の正しい配色を保持
+
+function getTheme() {
+  return localStorage.getItem(THEME_KEY)
+    || (window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+}
+function applyTheme(theme) {
+  const root = document.documentElement;
+  const colors = theme === 'dark' ? DARK_COLORS : (DESIGN_LIGHT_COLORS || DEFAULT_LIGHT_COLORS);
+  for (const [k, v] of Object.entries(colors)) root.style.setProperty(`--color-${k}`, v);
+  root.setAttribute('data-theme', theme);
+  const btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+function bindThemeToggle() {
+  applyTheme(getTheme());
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+  });
+}
+
+// ページ描画前にテーマを適用し、ライト→ダークのちらつきを防ぐ
+applyTheme(getTheme());
+
 // ページ名 → 表示するセクション ID のマッピング
 const PAGE_SECTIONS = {
   bio:          ['bio', 'research-summary', 'highlights', 'news'],
@@ -64,18 +108,19 @@ async function getJSON(path) {
 }
 
 // ── Social icon SVGs ────────────────────────────────────────────────────────
+// 各サービスの公式ブランドカラーで塗った、正規のアイコンらしい配色
 const ICONS = {
-  github: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>`,
+  github: `<svg viewBox="0 0 24 24" fill="#181717" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>`,
 
-  email: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`,
+  email: `<svg viewBox="0 0 24 24" fill="#ea4335" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`,
 
-  orcid: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>`,
+  orcid: `<svg viewBox="0 0 24 24" fill="#a6ce39" aria-hidden="true"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>`,
 
-  linkedin: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`,
+  linkedin: `<svg viewBox="0 0 24 24" fill="#0a66c2" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`,
 
-  youtube: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a2.997 2.997 0 00-2.112-2.12C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.386.566A2.997 2.997 0 00.502 6.186C0 8.077 0 12 0 12s0 3.923.502 5.814a2.997 2.997 0 002.112 2.12C4.495 20.5 12 20.5 12 20.5s7.505 0 9.386-.566a2.997 2.997 0 002.112-2.12C24 15.923 24 12 24 12s0-3.923-.502-5.814zM9.6 15.568V8.432L15.818 12 9.6 15.568z"/></svg>`,
+  youtube: `<svg viewBox="0 0 24 24" fill="#ff0000" aria-hidden="true"><path d="M23.498 6.186a2.997 2.997 0 00-2.112-2.12C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.386.566A2.997 2.997 0 00.502 6.186C0 8.077 0 12 0 12s0 3.923.502 5.814a2.997 2.997 0 002.112 2.12C4.495 20.5 12 20.5 12 20.5s7.505 0 9.386-.566a2.997 2.997 0 002.112-2.12C24 15.923 24 12 24 12s0-3.923-.502-5.814zM9.6 15.568V8.432L15.818 12 9.6 15.568z"/></svg>`,
 
-  'google-scholar': `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>`,
+  'google-scholar': `<svg viewBox="0 0 24 24" fill="#4285f4" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>`,
 };
 
 // ── Design tokens → CSS ─────────────────────────────────────────────────────
@@ -92,7 +137,9 @@ async function applyDesign() {
         else root.style.setProperty(`--${prefix}-${k}`, v);
       }
     };
-    if (tokens.colors)    flat(tokens.colors,  'color');
+    // 色はここで直接書き込まず、DESIGN_LIGHT_COLORS に保持して applyTheme() に任せる
+    // （ダークモード中に design.md のライト配色で上書きされるのを防ぐため）
+    if (tokens.colors) DESIGN_LIGHT_COLORS = tokens.colors;
     if (tokens.rounded)   flat(tokens.rounded, 'rounded');
     if (tokens.spacing)   flat(tokens.spacing, 'spacing');
     if (tokens.typography) {
@@ -101,6 +148,7 @@ async function applyDesign() {
       if (ty['font-size-base']) root.style.setProperty('--font-size-base', ty['font-size-base']);
       if (ty['line-height'])    root.style.setProperty('--line-height', ty['line-height']);
     }
+    applyTheme(getTheme()); // ライト配色が確定したので、現在のテーマで再適用する
   } catch (e) { console.warn('design.md:', e.message); }
 }
 
@@ -123,7 +171,7 @@ function renderNav(profile) {
   const otherFlag = lang === 'en' ? '🇯🇵' : '🇬🇧';
   document.getElementById('nav').innerHTML = `
     <div class="nav-inner">
-      <a href="${makeUrl('bio')}" class="nav-brand">${esc(brand)}</a>
+      <a href="${makeUrl('bio')}" class="nav-brand"><img src="assets/me_icon.png" alt="" class="nav-brand-icon">${esc(brand)}</a>
       <div class="nav-links">
         ${NAV_PAGES.map(([page, enLabel, jaLabel]) => {
           const label  = lang === 'ja' ? jaLabel : enLabel;
@@ -132,8 +180,11 @@ function renderNav(profile) {
         }).join('')}
         <a href="${makeUrl(currentPage, otherLang)}" class="nav-lang"
            title="${otherLang === 'ja' ? '日本語に切り替え' : 'Switch to English'}">${otherFlag}</a>
+        <button type="button" id="theme-toggle" class="theme-toggle"
+           title="${lang === 'ja' ? 'ダークモード切替' : 'Toggle dark mode'}" aria-label="Toggle dark mode"></button>
       </div>
     </div>`;
+  bindThemeToggle();
 }
 
 // ── Bio / Hero ──────────────────────────────────────────────────────────────
@@ -900,60 +951,51 @@ function renderResearchSummary(story) {
     </div>`;
 }
 
-// ── Highlights（3本柱＋動画カルーセル・ニュースの下）────────────────────────
-// pillar.anim の値ごとに使う、CSS のみで動くミニアニメーション（画像/絵文字より優先）
-const PILLAR_ANIMATIONS = {
-  atoms: `
-    <div class="pillar-anim pillar-anim-atoms" aria-hidden="true">
-      <span class="atom" style="--i:0"></span><span class="atom" style="--i:1"></span>
-      <span class="atom" style="--i:2"></span><span class="atom" style="--i:3"></span>
-      <span class="atom" style="--i:4"></span><span class="atom" style="--i:5"></span>
-    </div>`,
-};
+// ── Highlights（研究セクション＋動画＋プレイリスト・ニュースの下）──────────────
+// 各 pillar は独立したセクション（見出し＋リード文）として表示し、その配下の
+// topics を、高さの揃ったカードグリッドとして並べる。詳細はクリックでモーダル
+// 表示するので、カード自体は画像＋タイトル＋2行スニペットの同じ高さに保てる。
+let HIGHLIGHT_TOPICS = [];
 
-// 柱（pillar）とそのネストされたトピックを、高さが揃った1つのフラットなグリッドに
-// 展開する。詳細はクリックでモーダル表示するので、カード自体は画像＋タイトル＋
-// 2行スニペットの同じ高さに保てる（トピック数が違っても崩れない）。
-let HIGHLIGHT_CARDS = [];
-
-function pillarMediaHtml(p) {
-  if (p.anim && PILLAR_ANIMATIONS[p.anim]) return PILLAR_ANIMATIONS[p.anim];
-  if (p.image) return `<img src="${esc(p.image)}" alt="${esc(t(p.image_alt, t(p.title)))}" loading="lazy">`;
-  return `<div class="hl-icon-media">${esc(p.icon || '')}</div>`;
+function topicMediaHtml(tp) {
+  if (tp.image) return `<img src="${esc(tp.image)}" alt="${esc(t(tp.image_alt, t(tp.title)))}" loading="lazy">`;
+  return `<div class="hl-icon-media">${esc(tp.icon || '')}</div>`;
 }
 
 function renderPillars(pillars) {
   if (!pillars.length) return '';
   const label = lang === 'ja';
 
-  HIGHLIGHT_CARDS = [];
-  pillars.forEach(p => {
-    HIGHLIGHT_CARDS.push({ tag: null, pillar: p, large: true });
-    (p.topics || []).forEach(tp => HIGHLIGHT_CARDS.push({ tag: t(p.title), pillar: tp }));
-  });
+  HIGHLIGHT_TOPICS = [];
+  pillars.forEach(p => (p.topics || []).forEach(tp => HIGHLIGHT_TOPICS.push(tp)));
 
-  const cards = HIGHLIGHT_CARDS.map((c, i) => {
-    const item = c.pillar;
-    const snippet = esc(t(item.body)).replace(/\n/g, ' ');
+  let cardIndex = -1;
+  const sections = pillars.map(p => {
+    const cards = (p.topics || []).map(tp => {
+      cardIndex += 1;
+      const snippet = esc(t(tp.body)).replace(/\n/g, ' ');
+      return `
+        <button type="button" class="hl-card" data-hl-index="${cardIndex}">
+          <span class="hl-card-media">${topicMediaHtml(tp)}</span>
+          <span class="hl-card-body">
+            <span class="hl-card-title">${esc(t(tp.title))}</span>
+            <span class="hl-card-snippet">${snippet}</span>
+          </span>
+        </button>`;
+    }).join('');
     return `
-      <button type="button" class="hl-card" data-hl-index="${i}">
-        <span class="hl-card-media">${pillarMediaHtml(item)}</span>
-        <span class="hl-card-body">
-          ${c.tag ? `<span class="hl-card-tag">${esc(c.tag)}</span>` : ''}
-          <span class="hl-card-title${c.large ? ' is-large' : ''}">${esc(t(item.title))}</span>
-          <span class="hl-card-snippet">${snippet}</span>
-        </span>
-      </button>`;
+      <h2 class="hl-heading">${esc(t(p.title))}</h2>
+      <p class="hl-lead">${esc(t(p.body)).replace(/\n/g, '<br>')}</p>
+      <div class="hl-grid">${cards}</div>`;
   }).join('');
 
   return `
-    <div class="hl-grid">${cards}</div>
+    ${sections}
     <div class="hl-modal-overlay" id="hl-modal-overlay">
       <div class="hl-modal" role="dialog" aria-modal="true">
         <button type="button" class="hl-modal-close" id="hl-modal-close" aria-label="${label ? '閉じる' : 'Close'}">✕</button>
         <div class="hl-modal-media" id="hl-modal-media"></div>
         <div class="hl-modal-content">
-          <span class="hl-modal-tag" id="hl-modal-tag" hidden></span>
           <h3 class="hl-modal-title" id="hl-modal-title"></h3>
           <p class="hl-modal-body" id="hl-modal-body"></p>
         </div>
@@ -965,17 +1007,14 @@ function bindHighlightCards() {
   const overlay = document.getElementById('hl-modal-overlay');
   if (!overlay) return;
   const mediaEl = document.getElementById('hl-modal-media');
-  const tagEl = document.getElementById('hl-modal-tag');
   const titleEl = document.getElementById('hl-modal-title');
   const bodyEl = document.getElementById('hl-modal-body');
 
   function openModal(i) {
-    const c = HIGHLIGHT_CARDS[i];
-    const item = c.pillar;
-    mediaEl.innerHTML = pillarMediaHtml(item);
-    if (c.tag) { tagEl.hidden = false; tagEl.textContent = c.tag; } else { tagEl.hidden = true; }
-    titleEl.textContent = t(item.title);
-    bodyEl.textContent = t(item.body);
+    const tp = HIGHLIGHT_TOPICS[i];
+    mediaEl.innerHTML = topicMediaHtml(tp);
+    titleEl.textContent = t(tp.title);
+    bodyEl.textContent = t(tp.body);
     overlay.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
@@ -1004,7 +1043,7 @@ const VIDEO_THEME_LABELS = {
 };
 
 function renderVideoCarousel(videos) {
-  const items = (videos?.items || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  const items = videos?.items || []; // data/videos.json に書かれた順番のまま表示する
   if (!items.length) return '';
   const label = lang === 'ja';
   const themes = [...new Set(items.map(v => v.theme).filter(Boolean))];
@@ -1092,10 +1131,9 @@ function renderHighlights(story, videos, playlists) {
   if (!pillars.length && !videoHtml && !playlistHtml) { el.classList.add('no-data'); el.style.display = 'none'; return; }
   const label = lang === 'ja';
   el.innerHTML = `
-    <h2 class="section-title">${label ? '研究・活動紹介' : 'Research & Activities'}</h2>
     ${renderPillars(pillars)}
-    ${videoHtml ? `<h3 class="subsection-title">${label ? '動画' : 'Videos'}</h3>${videoHtml}` : ''}
-    ${playlistHtml ? `<h3 class="subsection-title">${label ? 'プレイリスト' : 'Playlists'}</h3>${playlistHtml}` : ''}`;
+    ${videoHtml ? `<h2 class="hl-heading">${label ? '動画' : 'Videos'}</h2>${videoHtml}` : ''}
+    ${playlistHtml ? `<h2 class="hl-heading">${label ? 'YouTubeプレイリスト' : 'YouTube Playlists'}</h2>${playlistHtml}` : ''}`;
   bindHighlightCards();
   if (videoHtml) { bindVideoCarousel(); bindVideoTabs(); }
 }

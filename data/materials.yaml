@@ -20,13 +20,13 @@ items:
     draft: false
 
   - title:
-      en: Seminar Support System
-      ja: セミナーサポートシステム
+      en: Seminar
+      ja: セミナー
     description:
       en: >
         A digital response form for seminars and workshops.
       ja: >
-        ゼミ・研究会向けの回答フォームシステム。
+        ゼミ・研究会向けの回答フォーム等。
     icon: "📋"
     url: seminar/
     draft: false

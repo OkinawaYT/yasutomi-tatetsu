@@ -1,20 +1,17 @@
 # トップページの「研究紹介」まわりの文言を管理するファイル。
 # summary: ニュースの上に表示する短い要約
-# pillars: 研究・活動紹介セクションに表示する柱カード（現在3枚）
-#   anim: CSSアニメーション名（現状 "atoms" のみ）。指定すると image/icon より優先して表示される
-#   image: assets/img/ 配下の画像ファイル（png/jpg/gif/svg）への相対パス。anim が無い場合、指定するとアイコンより優先して表示される
-#   image_alt: 画像の代替テキスト（アクセシビリティ用。省略時は title を使用）
-#   icon: anim/image が無い場合のみ使う絵文字アイコン（従来通り）
-#   topics: カード内にまとめる具体的な研究トピック一覧（任意）。各要素は image/image_alt/title/body を持つ
+# pillars: 研究・活動紹介セクションに表示するセクション（現在2つ）
+#   title/body: セクション見出しとその下のリード文
+#   topics: セクション内のサブセクション一覧（カードとして並ぶ）。各要素は
+#     image / image_alt / icon / title / body を持つ
+#     （image が無ければ icon を絵文字として表示）
 
 summary:
   en: ""
   ja: ""
 
 pillars:
-  - icon: "🧲"
-    anim: atoms
-    title:
+  - title:
       en: "Computational Materials Science"
       ja: "計算物質科学"
     body:
@@ -49,8 +46,8 @@ pillars:
           en: "Electronic structure of Nd-Fe-B magnets"
           ja: "ネオジム磁石の電子構造"
         title:
-          en: "Electron Theory of Nd-Fe-B Magnets"
-          ja: "ネオジム磁石の電子論"
+          en: "Electron Theory of Magnetic Materials"
+          ja: "磁石材料の電子論"
         body:
           en: >
             Motors rely on neodymium magnets. I study how grain-boundary
@@ -66,7 +63,7 @@ pillars:
           ja: "磁性薄膜・界面の構造"
         title:
           en: "Magnetic Thin Films & Interfaces"
-          ja: "磁性薄膜・表面/界面の物理"
+          ja: "磁性薄膜/表面界面の物理"
         body:
           en: >
             Stacking atoms layer by layer into a thin film — or joining
@@ -81,8 +78,8 @@ pillars:
           en: "Nanocrystals in a simulation"
           ja: "新しいナノ結晶構造とその安定性に関する研究"
         title:
-          en: "Synthesis x Simulation (with Kyoto University)"
-          ja: "化学合成×計算科学（京都大学との共同研究）"
+          en: "Synthesis x Simulation"
+          ja: "化合物合成 × 計算科学"
         body:
           en: >
             Working with a synthesis chemistry group at Kyoto University,
@@ -94,26 +91,37 @@ pillars:
             結晶構造に落ち着くのかを第一原理計算で明らかにする共同研究を
             行っています。
 
-  - icon: "🤖"
-    title:
-      en: "AI x Education / ICT"
-      ja: "AI・ICTを活用した教育"
+  - title:
+      en: "AI x ICT"
+      ja: "AI・ICT"
     body:
       en: >
-        I design learning activities and materials that combine AI tools
-        with classroom practice.
+        I apply AI and ICT both in the classroom and behind the scenes of
+        university management.
       ja: >
-        AIツールと授業実践を組み合わせた学びの場づくりに取り組んでいます。
+        AI・ICTを、授業の現場だけでなく大学運営の裏側でも活用しています。
+    topics:
+      - icon: "🤖"
+        title:
+          en: "Education"
+          ja: "教育"
+        body:
+          en: >
+            I design learning activities and materials that combine AI
+            tools with classroom practice.
+          ja: >
+            AIツールと授業実践を組み合わせた学びの場づくりに取り組んでいます。
 
-  - icon: "📊"
-    title:
-      en: "University IR"
-      ja: "大学IRの高度化"
-    body:
-      en: >
-        Just as a health checkup helps you improve daily habits,
-        Institutional Research uses data to help universities improve
-        education and decision-making.
-      ja: >
-        健康診断のデータが生活習慣の見直しに役立つように、大学が持つデータを
-        活用して教育や意思決定を改善するのが、インスティテューショナル・リサーチ（IR）です。
+      - icon: "📊"
+        title:
+          en: "University Management / IR"
+          ja: "大学運営/IRの高度化"
+        body:
+          en: >
+            Just as a health checkup helps you improve daily habits,
+            Institutional Research uses data to help universities improve
+            education and decision-making.
+          ja: >
+            健康診断のデータが生活習慣の見直しに役立つように、大学が持つ
+            データを活用して教育や意思決定を改善するのが、
+            インスティテューショナル・リサーチ（IR）です。

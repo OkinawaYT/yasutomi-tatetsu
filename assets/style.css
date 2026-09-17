@@ -50,7 +50,8 @@ a:hover { text-decoration: underline; }
   height: 52px;
   display: flex; align-items: center; justify-content: space-between;
 }
-.nav-brand { font-weight: 700; font-size: 15px; color: var(--color-text); }
+.nav-brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; color: var(--color-text); }
+.nav-brand-icon { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
 .nav-links { display: flex; align-items: center; gap: var(--spacing-md); }
 .nav-links a { font-size: 13px; font-weight: 600; color: var(--color-text-muted); transition: color 0.15s; }
 .nav-links a:hover { color: var(--color-text); text-decoration: none; }
@@ -63,6 +64,18 @@ a:hover { text-decoration: underline; }
   color: var(--color-text-muted) !important;
 }
 .nav-lang:hover { background: var(--color-surface); }
+.theme-toggle {
+  width: 28px; height: 28px;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--rounded-full);
+  background: var(--color-bg);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+.theme-toggle:hover { background: var(--color-surface); }
 
 /* ===== Sections ===== */
 .section {
@@ -132,8 +145,8 @@ a:hover { text-decoration: underline; }
 .bio-highlights { margin-bottom: var(--spacing-sm); display: flex; flex-direction: column; gap: 6px; }
 .hl-group { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 6px; }
 .hl-cat {
-  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
-  color: var(--color-text-muted); padding-top: 3px; min-width: 100px; flex-shrink: 0;
+  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--color-text-muted); padding-top: 3px; min-width: 110px; flex-shrink: 0;
 }
 .hl-chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .hl-chip {
@@ -159,7 +172,7 @@ a:hover { text-decoration: underline; }
   color: var(--color-text-muted);
   transition: color 0.15s, background 0.15s, border-color 0.15s;
 }
-.icon-link:hover { color: var(--color-accent); border-color: var(--color-accent); background: var(--color-surface); text-decoration: none; }
+.icon-link:hover { border-color: var(--color-accent); background: var(--color-surface); text-decoration: none; transform: translateY(-1px); }
 .icon-link svg { width: 18px; height: 18px; }
 
 /* Text button for links without icons (e.g. Researchmap) */
@@ -310,10 +323,25 @@ a:hover { text-decoration: underline; }
 }
 .summary-text { font-size: 15px; color: var(--color-text); line-height: 1.8; }
 
-/* ===== Highlights: flat card grid + modal (below News) =====
-   研究・活動紹介: 柱(pillar)とその配下のトピックを、高さの揃った1つのグリッドに
-   フラット化して表示し、詳細はクリックでモーダルに表示する（3案のデザイン比較の
-   結果、これが一番「カードの高さがバラバラで崩れる」問題を解決したため採用）。 */
+/* ===== Highlights: sectioned card grid + modal (below News) =====
+   計算物質科学 / AI・ICT をそれぞれ独立したセクション（見出し＋リード文）とし、
+   配下のサブセクションを高さの揃ったカードグリッドで並べる。詳細はクリックで
+   モーダル表示するので、カード自体はサブセクション数が違っても崩れない。
+   動画・YouTubeプレイリストの見出しも hl-heading で統一し、フォントを揃える。 */
+.hl-heading {
+  font-size: 20px; font-weight: 700;
+  color: var(--color-primary);
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-xs);
+}
+.hl-heading:first-child { margin-top: 0; }
+.hl-lead {
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-sm);
+  max-width: 640px;
+}
 .hl-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -351,7 +379,6 @@ a:hover { text-decoration: underline; }
   display: block;
 }
 .hl-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.hl-card-media .pillar-anim { aspect-ratio: auto; width: 100%; height: 100%; margin-bottom: 0; border-radius: 0; }
 .hl-icon-media {
   width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
@@ -365,17 +392,7 @@ a:hover { text-decoration: underline; }
   gap: 6px;
   flex: 1;
 }
-.hl-card-tag {
-  align-self: flex-start;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--color-accent);
-  background: rgba(37, 99, 235, 0.08);
-  border-radius: var(--rounded-full);
-  padding: 3px 10px;
-}
 .hl-card-title { font-size: 14px; font-weight: 700; color: var(--color-primary); line-height: 1.4; }
-.hl-card-title.is-large { font-size: 16px; }
 .hl-card-snippet {
   font-size: 12.5px;
   color: var(--color-text-muted);
@@ -408,7 +425,6 @@ a:hover { text-decoration: underline; }
 }
 .hl-modal-media { width: 100%; aspect-ratio: 4 / 3; background: var(--color-surface); overflow: hidden; }
 .hl-modal-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.hl-modal-media .pillar-anim { aspect-ratio: auto; width: 100%; height: 100%; margin-bottom: 0; border-radius: 0; }
 .hl-modal-media .hl-icon-media { font-size: 64px; }
 .hl-modal-close {
   position: absolute;
@@ -426,48 +442,8 @@ a:hover { text-decoration: underline; }
 }
 .hl-modal-close:hover { background: #fff; }
 .hl-modal-content { padding: 24px 28px 28px; }
-.hl-modal-tag {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--color-accent);
-  background: rgba(37, 99, 235, 0.08);
-  border-radius: var(--rounded-full);
-  padding: 3px 10px;
-  margin-bottom: 10px;
-}
 .hl-modal-title { font-size: 19px; font-weight: 700; color: var(--color-primary); margin-bottom: 12px; }
 .hl-modal-body { font-size: 14.5px; color: var(--color-text); line-height: 1.8; white-space: pre-line; }
-
-/* 計算物質科学カード：原子がバラバラ→格子状に整列するミニアニメーション */
-.pillar-anim {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: var(--rounded-sm);
-  margin-bottom: 10px;
-  background: #2b3446;
-  position: relative;
-  overflow: hidden;
-}
-.pillar-anim-atoms .atom {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0 8px rgba(37, 99, 235, 0.7);
-  top: calc(20% + (var(--i) % 2) * 40%);
-  animation: atom-align 4s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 0.15s);
-}
-@keyframes atom-align {
-  0%   { left: calc(10% + (var(--i) * 13%)); opacity: 0.35; transform: scale(0.8); }
-  50%  { left: calc(10% + (var(--i) * 13%)); opacity: 1;    transform: scale(1); }
-  100% { left: calc(10% + (var(--i) * 13%)); opacity: 0.35; transform: scale(0.8); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .pillar-anim-atoms .atom { animation: none; opacity: 1; }
-}
 
 .video-tabs {
   display: flex;
